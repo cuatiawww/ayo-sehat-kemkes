@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import TopBar from "./TopBar";
 
 const imgLogo = "../assets/logo.png";
@@ -114,6 +115,7 @@ function DocumentIcon() {
 export default function HeroSection() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(0);
+  const [isSticky, setIsSticky] = useState(false);
 
   const menuItems = [
     { label: "MENU 1", icon: InfoCircleIcon },
@@ -126,32 +128,71 @@ export default function HeroSection() {
     { label: "MENU 8", icon: DocumentIcon },
   ];
 
+  // Sticky navbar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      // TopBar height is approximately 40-50px, so we check if scrolled past it
+      if (window.scrollY > 50) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="relative">
       {/* Top Bar - Social Media & Login */}
-      <TopBar />
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <TopBar />
+      </motion.div>
 
       {/* Navigation -   */}
-      <nav className="bg-white border-b border-[#bcbcbc]">
+      <motion.nav 
+        className={`bg-white border-b border-[#bcbcbc] transition-all duration-300 ${
+          isSticky 
+            ? "fixed top-0 left-0 right-0 z-50 shadow-lg" 
+            : "relative"
+        }`}
+        animate={{
+          y: isSticky ? 0 : 0,
+          boxShadow: isSticky 
+            ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" 
+            : "none"
+        }}
+        transition={{ duration: 0.3 }}
+      >
         <div className="w-full max-w-[1600px] mx-auto px-3 sm:px-4 lg:px-6">
           <div className="relative py-2 lg:py-3">
             {/* Desktop Layout */}
             <div className="hidden lg:flex gap-4 xl:gap-6 items-center justify-between">
               {/* Logo */}
-              <div className="shrink-0 w-[150px] xl:w-[180px] h-auto">
+              <motion.div 
+                className="shrink-0 w-[150px] xl:w-[180px] h-auto"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              >
                 <img
                   alt="Logo"
                   className="w-full h-auto object-contain"
                   src={imgLogo}
                 />
-              </div>
+              </motion.div>
 
               {/* Menu Items - no overflow scroll */}
               <div className="flex gap-2 xl:gap-3 2xl:gap-4 items-center justify-end flex-1">
                 {menuItems.map((item, index) => {
                   const isActive = activeMenu === index;
                   return (
-                    <div
+                    <motion.div
                       key={index}
                       onClick={() => setActiveMenu(index)}
                       className={`flex flex-col items-center justify-center gap-0.5 cursor-pointer shrink-0 rounded-[12px] w-[70px] h-[70px] xl:w-[80px] xl:h-[80px] transition-all duration-300 ${
@@ -159,6 +200,13 @@ export default function HeroSection() {
                           ? "bg-[#18b3ab] shadow-lg"
                           : "bg-transparent hover:bg-[#e9fffe] hover:shadow-md"
                       }`}
+                      initial={{ y: -30, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ 
+                        duration: 0.4, 
+                        delay: 0.3 + (index * 0.08),
+                        ease: "easeOut"
+                      }}
                     >
                       {/* Icon */}
                       <div
@@ -179,7 +227,7 @@ export default function HeroSection() {
                       >
                         {item.label}
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -305,12 +353,20 @@ export default function HeroSection() {
             </div>
           )}
         </div>
-      </nav>
+      </motion.nav>
+
+      {/* Placeholder to prevent content jump when navbar becomes fixed */}
+      {isSticky && <div className="h-[72px] lg:h-[88px]" />}
 
       {/* Hero Content -   Frame247 */}
       <div className="relative bg-[#18b3ab] h-[500px] sm:h-[650px] lg:h-[858px] overflow-hidden">
         {/* Background Image -   */}
-        <div className="absolute inset-0">
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <img
               alt=""
@@ -318,26 +374,41 @@ export default function HeroSection() {
               src={imgHeroBackground}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Content Container - exact positioning from   */}
         <div className="relative h-full">
           {/* Main Heading -  : top-231px with translate-y-[-50%] */}
-          <div className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[15%] sm:top-[20%] lg:top-[231px] lg:translate-y-[-50%]">
+          <motion.div 
+            className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[15%] sm:top-[20%] lg:top-[231px] lg:translate-y-[-50%]"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.8, ease: "easeOut" }}
+          >
             <h1 className="font-['Poppins:Bold',sans-serif] not-italic text-[36px] sm:text-[60px] lg:text-[100px] leading-[1.1] sm:leading-[1.1] lg:leading-[30px] text-white whitespace-nowrap">
               Lorem Ipsum
             </h1>
-          </div>
+          </motion.div>
 
           {/* Subheading -  : top-354px with translate-y-[-50%], w-510px */}
-          <div className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[28%] sm:top-[33%] lg:top-[354px] lg:translate-y-[-50%] w-[90%] sm:w-[450px] lg:w-[510px]">
+          <motion.div 
+            className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[28%] sm:top-[33%] lg:top-[354px] lg:translate-y-[-50%] w-[90%] sm:w-[450px] lg:w-[510px]"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 1.0, ease: "easeOut" }}
+          >
             <h2 className="font-['Poppins:Medium',sans-serif] not-italic text-[22px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.2] lg:leading-[60px] text-white">
               Lorem Ipsum Dolor Sit Amet
             </h2>
-          </div>
+          </motion.div>
 
           {/* Description -  : top-489px with translate-y-[-50%], w-640px */}
-          <div className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[45%] sm:top-[50%] lg:top-[489px] lg:translate-y-[-50%] w-[90%] sm:w-[550px] lg:w-[640px]">
+          <motion.div 
+            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[45%] sm:top-[50%] lg:top-[489px] lg:translate-y-[-50%] w-[90%] sm:w-[550px] lg:w-[640px]"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 1.2, ease: "easeOut" }}
+          >
             <p className="font-['Poppins:Regular',sans-serif] not-italic text-[13px] sm:text-[16px] lg:text-[20px] leading-[1.4] sm:leading-[1.5] lg:leading-[30px] text-white">
               Lorem ipsum dolor sit amet, consectetur adipiscing
               elit, sed do eiusmod tempor incididunt ut labore
@@ -345,10 +416,20 @@ export default function HeroSection() {
               quis nostrud exercitation ullamco laboris nisi ut
               aliquip ex ea commodo consequat.
             </p>
-          </div>
+          </motion.div>
 
           {/* Button -  : left-131px, top-583px, w-300px, h-80px */}
-          <div className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[72%] sm:top-[72%] lg:top-[583px]">
+          <motion.div 
+            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[72%] sm:top-[72%] lg:top-[583px]"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ 
+              duration: 0.5, 
+              delay: 1.4,
+              type: "spring",
+              stiffness: 200
+            }}
+          >
             <button className="bg-[#d5dd23] hover:bg-[#c5cd13] transition-all duration-300 hover:shadow-[0px_8px_20px_0px_rgba(0,0,0,0.25)] rounded-[100px] w-[220px] sm:w-[270px] lg:w-[300px] h-[55px] sm:h-[70px] lg:h-[80px] border-[0.5px] border-[#fcffbe] shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] flex items-center justify-center">
               <span
                 className="font-['Roboto:Medium',sans-serif] font-medium text-[20px] sm:text-[26px] lg:text-[30px] leading-[1.2] text-[#383838]"
@@ -357,7 +438,7 @@ export default function HeroSection() {
                 Lorem Ipsum
               </span>
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
