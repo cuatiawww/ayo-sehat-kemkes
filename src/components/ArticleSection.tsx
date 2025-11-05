@@ -6,39 +6,49 @@ export default function ArticleSection() {
 
   const articles = [
     {
-      image: "https://images.unsplash.com/photo-1631507623121-eaaba8d4e7dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwc2ljayUyMHBlcnNvbnxlbnwxfHx8fDE3NjIzMzU5Nzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      category: "Lorem Ipsum",
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
-      date: "11 Jul 2025",
-      readTime: "3 Menit",
+      image:
+        "https://images.unsplash.com/photo-1631507623121-eaaba8d4e7dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwc2ljayUyMHBlcnNvbnxlbnwxfHx8fDE3NjIzMzU5Nzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      category: "Kesehatan Umum",
+      title:
+        "Tips Menjaga Kesehatan di Musim Hujan: Hindari Penyakit Flu dan Demam",
+      date: "5 Nov 2024",
+      readTime: "5 Menit",
     },
     {
-      image: "https://images.unsplash.com/photo-1584362917165-526a968579e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2luZSUyMHBpbGxzfGVufDF8fHx8MTc2MjMzNjAyNXww&ixlib=rb-4.1.0&q=80&w=1080",
-      category: "Lorem Ipsum",
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
-      date: "11 Jul 2025",
-      readTime: "3 Menit",
+      image:
+        "https://images.unsplash.com/photo-1584362917165-526a968579e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2luZSUyMHBpbGxzfGVufDF8fHx8MTc2MjMzNjAyNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      category: "Nutrisi",
+      title:
+        "Panduan Lengkap Vitamin dan Suplemen untuk Meningkatkan Imunitas Tubuh",
+      date: "3 Nov 2024",
+      readTime: "4 Menit",
     },
     {
-      image: "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2YWNjaW5lJTIwaW5qZWN0aW9ufGVufDF8fHx8MTc2MjMzNjA3MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      category: "Lorem Ipsum",
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
-      date: "11 Jul 2025",
-      readTime: "3 Menit",
+      image:
+        "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2YWNjaW5lJTIwaW5qZWN0aW9ufGVufDF8fHx8MTc2MjMzNjA3MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      category: "Vaksinasi",
+      title:
+        "Pentingnya Vaksinasi untuk Anak: Jadwal dan Jenis Vaksin yang Wajib",
+      date: "1 Nov 2024",
+      readTime: "6 Menit",
     },
     {
-      image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBob3NwaXRhbHxlbnwxfHx8fDE3NjIzMzYxMDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      category: "Lorem Ipsum",
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
-      date: "11 Jul 2025",
-      readTime: "3 Menit",
+      image:
+        "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBob3NwaXRhbHxlbnwxfHx8fDE3NjIzMzYxMDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      category: "Konsultasi Dokter",
+      title:
+        "Kapan Harus ke Dokter? Kenali Gejala yang Memerlukan Perhatian Medis",
+      date: "30 Okt 2024",
+      readTime: "4 Menit",
     },
     {
-      image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwdGVzdHxlbnwxfHx8fDE3NjIzMzYxMzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      category: "Lorem Ipsum",
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
-      date: "11 Jul 2025",
-      readTime: "3 Menit",
+      image:
+        "https://images.unsplash.com/photo-1559757175-5700dde675bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwdGVzdHxlbnwxfHx8fDE3NjIzMzYxMzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      category: "Pemeriksaan Kesehatan",
+      title:
+        "Medical Check Up Rutin: Mengapa Penting dan Apa Saja yang Diperiksa?",
+      date: "28 Okt 2024",
+      readTime: "7 Menit",
     },
   ];
 
@@ -47,7 +57,9 @@ export default function ArticleSection() {
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + articles.length) % articles.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + articles.length) % articles.length,
+    );
   };
 
   const visibleArticles = [
@@ -85,27 +97,89 @@ export default function ArticleSection() {
             </div>
           </div>
 
-          {/* Tablet - 2 columns static */}
-          <div className="hidden md:grid lg:hidden grid-cols-2 gap-6">
-            {articles.slice(0, 2).map((article, index) => (
-              <ArticleCard key={index} article={article} />
-            ))}
+          {/* Tablet - 2 columns slider */}
+          <div className="hidden md:block lg:hidden relative">
+            <div className="grid grid-cols-2 gap-6">
+              {visibleArticles.slice(0, 2).map((article, index) => (
+                <ArticleCard key={index} article={article} />
+              ))}
+            </div>
+
+            {/* Tablet Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              className="absolute -left-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-[36px] h-[36px] bg-white rounded-full shadow-lg hover:bg-[#18b3ab] hover:text-white transition-all duration-300 z-10 active:scale-95"
+              aria-label="Previous articles"
+            >
+              <ChevronDown className="w-5 h-5 rotate-90" />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="absolute -right-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-[36px] h-[36px] bg-white rounded-full shadow-lg hover:bg-[#18b3ab] hover:text-white transition-all duration-300 z-10 active:scale-95"
+              aria-label="Next articles"
+            >
+              <ChevronDown className="w-5 h-5 -rotate-90" />
+            </button>
+
+            {/* Tablet dots indicator */}
+            <div className="flex justify-center gap-2 mt-8">
+              {articles.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`rounded-[4px] transition-all duration-300 ${
+                    currentIndex === index
+                      ? "bg-[#18b3ab] w-[8px] h-[8px]"
+                      : "bg-black opacity-20 hover:opacity-40 w-[8px] h-[8px]"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Mobile - 1 column slider */}
-          <div className="md:hidden">
+          <div className="md:hidden relative">
             <div className="overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                style={{
+                  transform: `translateX(-${currentIndex * 100}%)`,
+                }}
               >
                 {articles.map((article, index) => (
-                  <div key={index} className="w-full flex-shrink-0">
+                  <div
+                    key={index}
+                    className="w-full flex-shrink-0 px-2"
+                  >
                     <ArticleCard article={article} />
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Mobile Navigation Arrows (use same style/markup as FeatureSection for consistency) */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-[#18b3ab] rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Previous article"
+              disabled={currentIndex === 0}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-[#18b3ab] rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Next article"
+              disabled={currentIndex === articles.length - 1}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
 
             {/* Mobile dots */}
             <div className="flex justify-center gap-2 mt-6">
@@ -123,21 +197,21 @@ export default function ArticleSection() {
             </div>
           </div>
 
-          {/* Navigation Arrows - Desktop only */}
+          {/* Navigation Arrows - Desktop */}
           <button
             onClick={prevSlide}
-            className="hidden lg:flex absolute -left-8 xl:-left-12 top-1/2 -translate-y-1/2 items-center justify-center w-[36px] h-[36px] hover:scale-110 transition-transform duration-300 z-10 bg-white rounded-full shadow-md"
+            className="hidden lg:flex absolute -left-8 xl:-left-12 top-1/2 -translate-y-1/2 items-center justify-center w-[40px] h-[40px] xl:w-[44px] xl:h-[44px] bg-white rounded-full shadow-lg hover:bg-[#18b3ab] hover:text-white hover:scale-110 transition-all duration-300 z-10 active:scale-95"
             aria-label="Previous articles"
           >
-            <ChevronDown className="w-5 h-5 rotate-90" />
+            <ChevronDown className="w-5 h-5 xl:w-6 xl:h-6 rotate-90" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="hidden lg:flex absolute -right-8 xl:-right-12 top-1/2 -translate-y-1/2 items-center justify-center w-[36px] h-[36px] hover:scale-110 transition-transform duration-300 z-10 bg-white rounded-full shadow-md"
+            className="hidden lg:flex absolute -right-8 xl:-right-12 top-1/2 -translate-y-1/2 items-center justify-center w-[40px] h-[40px] xl:w-[44px] xl:h-[44px] bg-white rounded-full shadow-lg hover:bg-[#18b3ab] hover:text-white hover:scale-110 transition-all duration-300 z-10 active:scale-95"
             aria-label="Next articles"
           >
-            <ChevronDown className="w-5 h-5 -rotate-90" />
+            <ChevronDown className="w-5 h-5 xl:w-6 xl:h-6 -rotate-90" />
           </button>
         </div>
       </div>
