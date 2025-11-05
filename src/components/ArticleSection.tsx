@@ -88,7 +88,7 @@ export default function ArticleSection() {
 
         {/* Articles Container with Navigation */}
         <div className="relative">
-          {/* Desktop Slider - 3 columns */}
+          {/* Desktop Slider */}
           <div className="hidden lg:block">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 xl:gap-8">
               {visibleArticles.map((article, index) => (
@@ -97,7 +97,7 @@ export default function ArticleSection() {
             </div>
           </div>
 
-          {/* Tablet - 2 columns slider */}
+          {/* Tablet  */}
           <div className="hidden md:block lg:hidden relative">
             <div className="grid grid-cols-2 gap-6">
               {visibleArticles.slice(0, 2).map((article, index) => (
@@ -158,7 +158,7 @@ export default function ArticleSection() {
               </div>
             </div>
 
-            {/* Mobile Navigation Arrows (use same style/markup as FeatureSection for consistency) */}
+            {/* Mobile Navigation ) */}
             <button
               onClick={prevSlide}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-[#18b3ab] rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
