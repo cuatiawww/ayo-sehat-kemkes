@@ -132,9 +132,9 @@ export default function InfoSection() {
               ))}
             </div>
 
-            {/* Center Image */}
+            {/* Gambar tengah */}
             <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] flex-shrink-0 mx-8 xl:mx-12 animate-[scaleIn_1s_ease-out]">
-              {/* Animated Background Circle */}
+              {/* Lingkaran latar belakang animasi */}
               <div className="absolute inset-0 animate-pulse">
                 <svg
                   className="block size-full"
@@ -171,7 +171,7 @@ export default function InfoSection() {
                   />
                 </svg>
               </div>
-              {/* Main Image */}
+              {/* Gambar utama */}
               <div className="absolute inset-0 hover:scale-110 transition-transform duration-700 cursor-pointer flex items-center justify-center group">
                 <div className="absolute inset-0 bg-[#18b3ab] rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-all duration-700"></div>
                 {imgSwitch ? (

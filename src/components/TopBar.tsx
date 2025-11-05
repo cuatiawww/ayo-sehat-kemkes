@@ -1,5 +1,4 @@
-// Social Media Icons - Simple placeholders
-// TODO: Replace with your own icons or import from local files
+// Komponen ikon media sosial
 function InstagramIcon() {
   return (
     <svg className="w-[13px] h-[13px]" fill="#18B3AB" viewBox="0 0 24 24">

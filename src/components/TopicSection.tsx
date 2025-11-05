@@ -117,7 +117,7 @@ export default function TopicSection() {
               daftar topik kesehatan, penyakit, dan kondisi medis yang tersedia.
             </p>
 
-            {/* Alphabet Grid - Exact from   */}
+            {/* Grid alfabet */}
             <div className="grid grid-cols-7 gap-[12px] sm:gap-[18px] lg:gap-[25px] mb-5 sm:mb-6 lg:mb-8 max-w-full lg:max-w-[610px]">
               {alphabet.map((letter) => (
                 <button
@@ -134,7 +134,7 @@ export default function TopicSection() {
               ))}
             </div>
 
-            {/* Expandable Topics Section */}
+            {/* Bagian topik yang bisa diperluas */}
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out mb-5 sm:mb-6 lg:mb-8 max-w-full lg:max-w-[806px] ${
                 selectedLetter ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
@@ -184,7 +184,7 @@ export default function TopicSection() {
 
             <div className="h-px bg-[#d9d9d9] mb-5 sm:mb-6 lg:mb-12 max-w-full lg:max-w-[806px]"></div>
 
-            {/* Banner Slider - Auto Play */}
+            {/* Slider banner otomatis */}
             <div className="relative h-[90px] sm:h-[110px] lg:h-[145px] rounded-[12px] sm:rounded-[15px] overflow-hidden bg-[#18b3ab] cursor-pointer max-w-full lg:max-w-[786px]">
               <div className="relative h-full overflow-hidden">
                 <div

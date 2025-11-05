@@ -60,7 +60,7 @@ export default function CustomCalendar() {
 
   const calendarDays = [];
   
-  // Previous month days
+  // Isi tanggal bulan sebelumnya
   for (let i = firstDay - 1; i >= 0; i--) {
     calendarDays.push({
       day: daysInPrevMonth - i,
@@ -69,7 +69,7 @@ export default function CustomCalendar() {
     });
   }
 
-  // Current month days
+  // Isi tanggal bulan sekarang
   for (let i = 1; i <= daysInMonth; i++) {
     calendarDays.push({
       day: i,
@@ -78,7 +78,7 @@ export default function CustomCalendar() {
     });
   }
 
-  // Next month days to fill grid
+  // Isi tanggal bulan selanjutnya
   const remainingDays = 42 - calendarDays.length;
   for (let i = 1; i <= remainingDays; i++) {
     calendarDays.push({
@@ -91,7 +91,7 @@ export default function CustomCalendar() {
   return (
     <div className="bg-white relative rounded-[15px] w-full border border-[#cccccc] inline-block">
       <div className="relative rounded-[inherit] p-4 sm:p-5 lg:px-8 lg:py-6">
-        {/* Month/Year Header */}
+        {/* Header bulan dan tahun */}
         <div className="relative h-[45px] sm:h-[50px] flex items-center justify-center mb-3 sm:mb-4 lg:mb-5">
           <div className="font-['Work_Sans:Bold',sans-serif] text-[16px] sm:text-[17px] leading-[25.5px] text-black text-center">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}

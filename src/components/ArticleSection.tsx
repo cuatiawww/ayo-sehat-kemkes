@@ -86,9 +86,9 @@ export default function ArticleSection() {
         {/* Divider */}
         <div className="h-px bg-[#d9d9d9] mb-6 sm:mb-8 lg:mb-10 xl:mb-12"></div>
 
-        {/* Articles Container with Navigation */}
+        {/* Kontainer artikel dan navigasi */}
         <div className="relative">
-          {/* Desktop Slider */}
+          {/* Tampilan desktop */}
           <div className="hidden lg:block">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 xl:gap-8">
               {visibleArticles.map((article, index) => (
@@ -122,7 +122,7 @@ export default function ArticleSection() {
               <ChevronDown className="w-5 h-5 -rotate-90" />
             </button>
 
-            {/* Tablet dots indicator */}
+            {/* Indikator halaman tablet */}
             <div className="flex justify-center gap-2 mt-8">
               {articles.map((_, index) => (
                 <button
@@ -138,7 +138,7 @@ export default function ArticleSection() {
             </div>
           </div>
 
-          {/* Mobile - 1 column slider */}
+          {/* Tampilan mobile - slider 1 kolom */}
           <div className="md:hidden relative">
             <div className="overflow-hidden">
               <div

@@ -155,7 +155,7 @@ export default function HeroSection() {
         <TopBar />
       </motion.div>
 
-      {/* Navigation -   */}
+      {/* Navigasi utama */}
       <motion.nav
         className={`bg-white border-b border-[#bcbcbc] transition-all duration-300 ${
           isSticky
@@ -192,7 +192,7 @@ export default function HeroSection() {
                 />
               </motion.div>
 
-              {/* Menu Items - no overflow scroll */}
+              {/* Daftar menu navigasi */}
               <div className="flex gap-2 xl:gap-3 2xl:gap-4 items-center justify-end flex-1">
                 {menuItems.map((item, index) => {
                   const isActive = activeMenu === index;
@@ -363,9 +363,9 @@ export default function HeroSection() {
       {/* Placeholder to prevent content jump when navbar becomes fixed */}
       {isSticky && <div className="h-[72px] lg:h-[88px]" />}
 
-      {/* Hero Content -   Frame247 */}
+      {/* Konten bagian utama */}
       <div className="relative bg-[#18b3ab] h-[500px] sm:h-[650px] lg:h-[858px] overflow-hidden">
-        {/* Background Image -   */}
+        {/* Gambar latar belakang */}
         <motion.div
           className="absolute inset-0"
           initial={{ scale: 1.1, opacity: 0 }}
