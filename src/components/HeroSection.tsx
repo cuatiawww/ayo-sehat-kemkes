@@ -376,9 +376,9 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Content Container - exact positioning from   */}
+        {/* Content Container */}
         <div className="relative h-full">
-          {/* Main Heading -  : top-231px with translate-y-[-50%] */}
+          {/* Main Heading */}
           <motion.div 
             className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[15%] sm:top-[20%] lg:top-[231px] lg:translate-y-[-50%]"
             initial={{ x: -100, opacity: 0 }}
@@ -390,9 +390,9 @@ export default function HeroSection() {
             </h1>
           </motion.div>
 
-          {/* Subheading -  : top-354px with translate-y-[-50%], w-510px */}
+          {/* Subheading  */}
           <motion.div 
-            className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[28%] sm:top-[33%] lg:top-[354px] lg:translate-y-[-50%] w-[90%] sm:w-[450px] lg:w-[510px]"
+            className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[28%] sm:top-[33%] lg:top-[324px] lg:translate-y-[-50%] w-[90%] sm:w-[450px] lg:w-[510px]"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 1.0, ease: "easeOut" }}
@@ -402,7 +402,7 @@ export default function HeroSection() {
             </h2>
           </motion.div>
 
-          {/* Description -  : top-489px with translate-y-[-50%], w-640px */}
+          {/* Description  */}
           <motion.div 
             className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[45%] sm:top-[50%] lg:top-[489px] lg:translate-y-[-50%] w-[90%] sm:w-[550px] lg:w-[640px]"
             initial={{ y: 30, opacity: 0 }}
@@ -418,9 +418,9 @@ export default function HeroSection() {
             </p>
           </motion.div>
 
-          {/* Button -  : left-131px, top-583px, w-300px, h-80px */}
+          {/* Button  */}
           <motion.div 
-            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[72%] sm:top-[72%] lg:top-[583px]"
+            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[78%] sm:top-[78%] lg:top-[680px]"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ 

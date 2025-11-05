@@ -88,21 +88,22 @@ export default function InfoSection() {
             ))}
           </div>
 
-          {/* Desktop View */}
-          <div className="hidden lg:flex items-start justify-center gap-8 xl:gap-[90px]">
-            {/* Left Features */}
-            <div className="flex-1">
+          {/* Desktop View - Staggered Layout */}
+          <div className="hidden lg:flex items-start justify-between gap-0">
+            {/* Left Features - Staggered */}
+            <div className="w-[35%] pt-0">
               {features.slice(0, 3).map((feature, index) => (
                 <div 
                   key={index} 
-                  className="flex items-start gap-6 justify-end group animate-[slideInLeft_0.8s_ease-out] opacity-0"
+                  className="flex items-start gap-4 xl:gap-6 justify-end group animate-[slideInLeft_0.8s_ease-out] opacity-0"
                   style={{ 
                     marginBottom: index < 2 ? '100px' : '0',
+                    marginRight: index === 1 ? '40px' : '0',
                     animationDelay: `${index * 0.2}s`,
                     animationFillMode: 'forwards'
                   }}
                 >
-                  <div className="text-right max-w-[335px] transition-all duration-500 group-hover:translate-x-[-10px]">
+                  <div className="text-right max-w-[280px] xl:max-w-[335px] transition-all duration-500 group-hover:translate-x-[-10px]">
                     <h3 className="font-['Poppins:SemiBold',sans-serif] not-italic text-[20px] leading-[24px] text-[#18b3ab] mb-2 group-hover:text-[#16a199] transition-colors duration-300">
                       {feature.title}
                     </h3>
@@ -126,14 +127,14 @@ export default function InfoSection() {
             </div>
 
             {/* Center Image */}
-            <div className="relative w-[400px] h-[400px] xl:w-[522px] xl:h-[522px] flex-shrink-0 animate-[scaleIn_1s_ease-out]">
-           
+            <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] flex-shrink-0 mx-8 xl:mx-12 animate-[scaleIn_1s_ease-out]">
+              {/* Animated Background Circle */}
               <div className="absolute inset-0 animate-pulse">
                 <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 522 522">
                   <circle cx="261" cy="261" r="261" fill="#18B3AB" opacity="0.1" />
                 </svg>
               </div>
-             
+              {/* Rotating ring effect */}
               <div className="absolute inset-0 animate-[spin_20s_linear_infinite]">
                 <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 522 522">
                   <circle 
@@ -166,13 +167,14 @@ export default function InfoSection() {
             </div>
 
             {/* Right Features - Staggered */}
-            <div className="flex-1 ">
+            <div className="w-[35%] ">
               {features.slice(3, 6).map((feature, index) => (
                 <div 
                   key={index} 
-                  className="flex items-start gap-6 group animate-[slideInRight_0.8s_ease-out] opacity-0"
+                  className="flex items-start gap-4 xl:gap-6 group animate-[slideInRight_0.8s_ease-out] opacity-0"
                   style={{ 
                     marginBottom: index < 2 ? '100px' : '0',
+                    marginLeft: index === 1 ? '40px' : '0',
                     animationDelay: `${(index + 3) * 0.2}s`,
                     animationFillMode: 'forwards'
                   }}
@@ -188,7 +190,7 @@ export default function InfoSection() {
                       />
                     </div>
                   </div>
-                  <div className="max-w-[335px] transition-all duration-500 group-hover:translate-x-[10px]">
+                  <div className="max-w-[280px] xl:max-w-[335px] transition-all duration-500 group-hover:translate-x-[10px]">
                     <h3 className="font-['Poppins:SemiBold',sans-serif] not-italic text-[20px] leading-[24px] text-[#18b3ab] mb-2 group-hover:text-[#16a199] transition-colors duration-300">
                       {feature.title}
                     </h3>
