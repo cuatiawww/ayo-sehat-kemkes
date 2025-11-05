@@ -118,14 +118,14 @@ export default function HeroSection() {
   const [isSticky, setIsSticky] = useState(false);
 
   const menuItems = [
-    { label: "MENU 1", icon: InfoCircleIcon },
-    { label: "MENU 2", icon: CategoryIcon },
-    { label: "MENU 3", icon: UserIcon },
-    { label: "MENU 4", icon: HeartIcon },
-    { label: "MENU 5", icon: CalendarIcon },
-    { label: "MENU 6", icon: DownloadIcon },
-    { label: "MENU 7", icon: ActivityIcon },
-    { label: "MENU 8", icon: DocumentIcon },
+    { label: "INFORMASI", icon: InfoCircleIcon },
+    { label: "KATEGORI", icon: CategoryIcon },
+    { label: "PROFIL", icon: UserIcon },
+    { label: "LAYANAN", icon: HeartIcon },
+    { label: "JADWAL", icon: CalendarIcon },
+    { label: "DOKUMEN", icon: DownloadIcon },
+    { label: "AKTIVITAS", icon: ActivityIcon },
+    { label: "RIWAYAT", icon: DocumentIcon },
   ];
 
   // Sticky navbar on scroll
@@ -140,7 +140,8 @@ export default function HeroSection() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () =>
+      window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -155,17 +156,17 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Navigation -   */}
-      <motion.nav 
+      <motion.nav
         className={`bg-white border-b border-[#bcbcbc] transition-all duration-300 ${
-          isSticky 
-            ? "fixed top-0 left-0 right-0 z-50 shadow-lg" 
+          isSticky
+            ? "fixed top-0 left-0 right-0 z-50 shadow-lg"
             : "relative"
         }`}
         animate={{
           y: isSticky ? 0 : 0,
-          boxShadow: isSticky 
-            ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" 
-            : "none"
+          boxShadow: isSticky
+            ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+            : "none",
         }}
         transition={{ duration: 0.3 }}
       >
@@ -174,11 +175,15 @@ export default function HeroSection() {
             {/* Desktop Layout */}
             <div className="hidden lg:flex gap-4 xl:gap-6 items-center justify-between">
               {/* Logo */}
-              <motion.div 
+              <motion.div
                 className="shrink-0 w-[150px] xl:w-[180px] h-auto"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2,
+                  ease: "easeOut",
+                }}
               >
                 <img
                   alt="Logo"
@@ -202,10 +207,10 @@ export default function HeroSection() {
                       }`}
                       initial={{ y: -30, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      transition={{ 
-                        duration: 0.4, 
-                        delay: 0.3 + (index * 0.08),
-                        ease: "easeOut"
+                      transition={{
+                        duration: 0.4,
+                        delay: 0.3 + index * 0.08,
+                        ease: "easeOut",
                       }}
                     >
                       {/* Icon */}
@@ -361,7 +366,7 @@ export default function HeroSection() {
       {/* Hero Content -   Frame247 */}
       <div className="relative bg-[#18b3ab] h-[500px] sm:h-[650px] lg:h-[858px] overflow-hidden">
         {/* Background Image -   */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0"
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -379,55 +384,67 @@ export default function HeroSection() {
         {/* Content Container */}
         <div className="relative h-full">
           {/* Main Heading */}
-          <motion.div 
+          <motion.div
             className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[15%] sm:top-[20%] lg:top-[231px] lg:translate-y-[-50%]"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.8, ease: "easeOut" }}
+            transition={{
+              duration: 0.7,
+              delay: 0.8,
+              ease: "easeOut",
+            }}
           >
             <h1 className="font-['Poppins:Bold',sans-serif] not-italic text-[36px] sm:text-[60px] lg:text-[100px] leading-[1.1] sm:leading-[1.1] lg:leading-[30px] text-white whitespace-nowrap">
-              Lorem Ipsum
+              Kesehatan Anda
             </h1>
           </motion.div>
 
           {/* Subheading  */}
-          <motion.div 
+          <motion.div
             className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[28%] sm:top-[33%] lg:top-[324px] lg:translate-y-[-50%] w-[90%] sm:w-[450px] lg:w-[510px]"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 1.0, ease: "easeOut" }}
+            transition={{
+              duration: 0.7,
+              delay: 1.0,
+              ease: "easeOut",
+            }}
           >
             <h2 className="font-['Poppins:Medium',sans-serif] not-italic text-[22px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.2] lg:leading-[60px] text-white">
-              Lorem Ipsum Dolor Sit Amet
+              Prioritas Utama Kami
             </h2>
           </motion.div>
 
           {/* Description  */}
-          <motion.div 
-            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[45%] sm:top-[50%] lg:top-[489px] lg:translate-y-[-50%] w-[90%] sm:w-[550px] lg:w-[640px]"
+          <motion.div
+            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[45%] sm:top-[50%] lg:top-[429px] lg:translate-y-[-50%] w-[90%] sm:w-[550px] lg:w-[640px]"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 1.2, ease: "easeOut" }}
+            transition={{
+              duration: 0.7,
+              delay: 1.2,
+              ease: "easeOut",
+            }}
           >
             <p className="font-['Poppins:Regular',sans-serif] not-italic text-[13px] sm:text-[16px] lg:text-[20px] leading-[1.4] sm:leading-[1.5] lg:leading-[30px] text-white">
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore
-              et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.
+              Dapatkan akses mudah ke informasi kesehatan terpercaya,
+              konsultasi dengan dokter profesional, dan layanan medis
+              berkualitas. Kami hadir 24/7 untuk mendukung perjalanan
+              kesehatan Anda dan keluarga dengan pelayanan yang
+              personal dan terpercaya.
             </p>
           </motion.div>
 
           {/* Button  */}
-          <motion.div 
-            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[78%] sm:top-[78%] lg:top-[680px]"
+          <motion.div
+            className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[72%] sm:top-[72%] lg:top-[620px]"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ 
-              duration: 0.5, 
+            transition={{
+              duration: 0.5,
               delay: 1.4,
               type: "spring",
-              stiffness: 200
+              stiffness: 200,
             }}
           >
             <button className="bg-[#d5dd23] hover:bg-[#c5cd13] transition-all duration-300 hover:shadow-[0px_8px_20px_0px_rgba(0,0,0,0.25)] rounded-[100px] w-[220px] sm:w-[270px] lg:w-[300px] h-[55px] sm:h-[70px] lg:h-[80px] border-[0.5px] border-[#fcffbe] shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] flex items-center justify-center">
@@ -435,7 +452,7 @@ export default function HeroSection() {
                 className="font-['Roboto:Medium',sans-serif] font-medium text-[20px] sm:text-[26px] lg:text-[30px] leading-[1.2] text-[#383838]"
                 style={{ fontVariationSettings: "'wdth' 100" }}
               >
-                Lorem Ipsum
+                Mulai Konsultasi
               </span>
             </button>
           </motion.div>

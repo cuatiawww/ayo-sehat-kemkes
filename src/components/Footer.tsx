@@ -1,4 +1,9 @@
-import { Facebook, Instagram, Youtube, Twitter } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Youtube,
+  Twitter,
+} from "lucide-react";
 
 export default function Footer() {
   return (
@@ -9,16 +14,17 @@ export default function Footer() {
           <div>
             <div className="mb-6">
               <h3 className="font-['Inter'] font-bold not-italic text-[14px] sm:text-[15px] lg:text-[16px] text-[#212121] mb-3 sm:mb-4">
-                Lorem Ipsum
+                Kesehatan Plus
               </h3>
               <h4 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4">
-                Consectetur Adipiscing Elit Sed Eiusmod
+                Pelayanan Kesehatan Terpercaya
               </h4>
               <p className="font-['Roboto'] font-normal text-[12px] sm:text-[13px] lg:text-[14px] text-[#212121] mb-3 sm:mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                Jl. Kesehatan Raya No. 123
+                Jakarta Selatan 12345
               </p>
               <p className="font-['Inter'] font-normal not-italic text-[12px] sm:text-[13px] lg:text-[14px] text-[#18b3ab] mb-3 sm:mb-4">
-                Lorem ipsum dolor sit amet
+                info@Kesehatanplus.com
               </p>
             </div>
             <div>
@@ -57,7 +63,7 @@ export default function Footer() {
           {/* Column 2 */}
           <div>
             <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
-              Lorem Ipsum Dolor
+              Layanan Kami
             </h3>
             <ul className="space-y-2">
               <li>
@@ -65,7 +71,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Konsultasi Online
                 </a>
               </li>
               <li>
@@ -73,7 +79,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Medical Check-Up
                 </a>
               </li>
               <li>
@@ -81,13 +87,13 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Laboratorium
                 </a>
               </li>
             </ul>
 
             <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 mt-6 sm:mt-8 uppercase">
-              Lorem Ipsum Dolor
+              Spesialis
             </h3>
             <ul className="space-y-2">
               <li>
@@ -95,7 +101,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Dokter Umum
                 </a>
               </li>
               <li>
@@ -103,7 +109,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Dokter Gigi
                 </a>
               </li>
             </ul>
@@ -112,7 +118,7 @@ export default function Footer() {
           {/* Column 3 */}
           <div>
             <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
-              Lorem Ipsum Dolor
+              Informasi
             </h3>
             <ul className="space-y-2">
               <li>
@@ -120,7 +126,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Tentang Kami
                 </a>
               </li>
               <li>
@@ -128,7 +134,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Tim Medis
                 </a>
               </li>
               <li>
@@ -136,13 +142,13 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Karir
                 </a>
               </li>
             </ul>
 
             <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 mt-6 sm:mt-8 uppercase">
-              Lorem Ipsum Dolor
+              Artikel Kesehatan
             </h3>
             <ul className="space-y-2">
               <li>
@@ -150,7 +156,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Tips Kesehatan
                 </a>
               </li>
               <li>
@@ -158,7 +164,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Pencegahan Penyakit
                 </a>
               </li>
               <li>
@@ -166,7 +172,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Gaya Hidup Sehat
                 </a>
               </li>
               <li>
@@ -174,7 +180,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Nutrisi & Gizi
                 </a>
               </li>
               <li>
@@ -182,7 +188,7 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Kesehatan Mental
                 </a>
               </li>
             </ul>
@@ -191,7 +197,7 @@ export default function Footer() {
           {/* Column 4 */}
           <div>
             <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
-              Lorem Ipsum Dolor
+              Hubungi Kami
             </h3>
             <ul className="space-y-2">
               <li>
@@ -199,7 +205,23 @@ export default function Footer() {
                   href="#"
                   className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
-                  Duis aute irure dolor
+                  Customer Service
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                >
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                >
+                  FAQ
                 </a>
               </li>
             </ul>
@@ -212,7 +234,7 @@ export default function Footer() {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <p className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#212121] text-center sm:text-left">
-              © 2025 Lorem Ipsum. All rights reserved.
+              © 2025 Kesehatan Plus. All rights reserved.
             </p>
             <div className="flex gap-3 sm:gap-4">
               <a

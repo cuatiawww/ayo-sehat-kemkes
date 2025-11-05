@@ -108,7 +108,7 @@ export default function TopicSection() {
                     <div key={index} className="w-full flex-shrink-0 h-full relative group">
                       <img
                         src={image}
-                        alt={`Healthcare Banner ${index + 1}`}
+                        alt={`Kesehatan Banner ${index + 1}`}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>

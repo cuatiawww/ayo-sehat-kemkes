@@ -1,42 +1,48 @@
-const imgSwitch = "../assets/Switch.png"; 
+const imgSwitch = "../assets/Switch.png";
 
 export default function InfoSection() {
   const features = [
     {
-      title: "Lorem ipsum dolor",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
+      title: "Bebas Asap Rokok",
+      description:
+        "Lingkungan sehat bebas asap rokok untuk kenyamanan pasien dan keluarga",
       position: "left",
-      icon: "../assets/icon1.png", 
+      icon: "../assets/icon1.png",
     },
     {
-      title: "Lorem ipsum dolor",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      title: "Fasilitas Modern",
+      description:
+        "Peralatan medis terkini dengan teknologi kesehatan yang canggih",
       position: "left",
-      icon: "../assets/icon2.png", 
+      icon: "../assets/icon2.png",
     },
     {
-      title: "Lorem ipsum dolor",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
+      title: "Pelayanan Terpadu",
+      description:
+        "Layanan kesehatan komprehensif dari pencegahan hingga perawatan lanjutan",
       position: "left",
-      icon: "../assets/icon3.png", 
+      icon: "../assets/icon3.png",
     },
     {
-      title: "Lorem ipsum dolor",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
+      title: "Nutrisi Seimbang",
+      description:
+        "Program gizi dan konsultasi nutrisi untuk kesehatan optimal Anda",
       position: "right",
-      icon: "../assets/icon4.png", 
+      icon: "../assets/icon4.png",
     },
     {
-      title: "Lorem ipsum dolor",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, ",
+      title: "Kebersihan Terjamin",
+      description:
+        "Standar kebersihan tinggi dengan protokol sterilisasi ketat",
       position: "right",
-      icon: "../assets/icon5.png", 
+      icon: "../assets/icon5.png",
     },
     {
-      title: "Lorem ipsum dolor",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
+      title: "Ramah Keluarga",
+      description:
+        "Fasilitas ramah keluarga dengan area bermain dan ruang tunggu nyaman",
       position: "right",
-      icon: "../assets/icon6.png", 
+      icon: "../assets/icon6.png",
     },
   ];
 
@@ -46,12 +52,12 @@ export default function InfoSection() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 animate-[fadeIn_0.6s_ease-out]">
           <h2 className="font-['Poppins:Medium',sans-serif] not-italic text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px] xl:text-[50px] leading-[1.3] sm:leading-[1.2] lg:leading-[30px] mb-4 sm:mb-5 lg:mb-6">
-            Lorem Ipsum Dolor Sit Amet
+            Fasilitas Kesehatan Berkualitas
           </h2>
           <p className="font-['Poppins:Regular',sans-serif] not-italic text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[22px] leading-[22px] sm:leading-[26px] lg:leading-[28px] xl:leading-[30px] text-neutral-600 max-w-4xl mx-auto px-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-            laboris nisi ut aliquip ex ea commodo consequat.
+            Kami menyediakan lingkungan yang aman, nyaman, dan mendukung
+            untuk setiap anggota keluarga. Dengan fasilitas modern dan tim
+            profesional, kesehatan Anda adalah komitmen kami.
           </p>
         </div>
 
@@ -59,20 +65,20 @@ export default function InfoSection() {
           {/* Mobile and Tablet View */}
           <div className="lg:hidden space-y-5 sm:space-y-6">
             {features.map((feature, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="bg-white rounded-[15px] sm:rounded-[20px] p-4 sm:p-5 border border-gray-200 hover:border-[#18b3ab] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 animate-[slideInUp_0.6s_ease-out] opacity-0"
-                style={{ 
+                style={{
                   animationDelay: `${index * 0.1}s`,
-                  animationFillMode: 'forwards'
+                  animationFillMode: "forwards",
                 }}
               >
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="bg-[#18b3ab] rounded-[15px] sm:rounded-[20px] w-[70px] h-[70px] sm:w-[80px] sm:h-[80px] flex-shrink-0 hover:bg-[#16a199] hover:rotate-6 hover:scale-110 transition-all duration-500 flex items-center justify-center overflow-hidden shadow-lg">
-                    <img 
-                      alt="" 
-                      className="w-auto h-auto max-w-[45px] max-h-[45px] sm:max-w-[55px] sm:max-h-[55px] object-contain transition-transform duration-500 hover:scale-125" 
-                      src={feature.icon} 
+                    <img
+                      alt=""
+                      className="w-auto h-auto max-w-[45px] max-h-[45px] sm:max-w-[55px] sm:max-h-[55px] object-contain transition-transform duration-500 hover:scale-125"
+                      src={feature.icon}
                     />
                   </div>
                   <div className="flex-1">
@@ -93,14 +99,14 @@ export default function InfoSection() {
             {/* Left Features - Staggered */}
             <div className="w-[35%] pt-0">
               {features.slice(0, 3).map((feature, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="flex items-start gap-4 xl:gap-6 justify-end group animate-[slideInLeft_0.8s_ease-out] opacity-0"
-                  style={{ 
-                    marginBottom: index < 2 ? '100px' : '0',
-                    marginRight: index === 1 ? '40px' : '0',
+                  style={{
+                    marginBottom: index < 2 ? "100px" : "0",
+                    marginRight: index === 1 ? "40px" : "0",
                     animationDelay: `${index * 0.2}s`,
-                    animationFillMode: 'forwards'
+                    animationFillMode: "forwards",
                   }}
                 >
                   <div className="text-right max-w-[280px] xl:max-w-[335px] transition-all duration-500 group-hover:translate-x-[-10px]">
@@ -115,10 +121,10 @@ export default function InfoSection() {
                     {/* Glow effect on hover */}
                     <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                     <div className="relative bg-[#18b3ab] rounded-[20px] w-[88px] h-[88px] flex-shrink-0 group-hover:bg-[#16a199] group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 cursor-pointer flex items-center justify-center overflow-hidden shadow-lg group-hover:shadow-2xl">
-                      <img 
-                        alt="" 
-                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[-12deg]" 
-                        src={feature.icon} 
+                      <img
+                        alt=""
+                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[-12deg]"
+                        src={feature.icon}
                       />
                     </div>
                   </div>
@@ -130,21 +136,37 @@ export default function InfoSection() {
             <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] flex-shrink-0 mx-8 xl:mx-12 animate-[scaleIn_1s_ease-out]">
               {/* Animated Background Circle */}
               <div className="absolute inset-0 animate-pulse">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 522 522">
-                  <circle cx="261" cy="261" r="261" fill="#18B3AB" opacity="0.1" />
+                <svg
+                  className="block size-full"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  viewBox="0 0 522 522"
+                >
+                  <circle
+                    cx="261"
+                    cy="261"
+                    r="261"
+                    fill="#18B3AB"
+                    opacity="0.1"
+                  />
                 </svg>
               </div>
               {/* Rotating ring effect */}
               <div className="absolute inset-0 animate-[spin_20s_linear_infinite]">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 522 522">
-                  <circle 
-                    cx="261" 
-                    cy="261" 
-                    r="250" 
-                    stroke="#18B3AB" 
-                    strokeWidth="2" 
-                    strokeDasharray="10 20" 
-                    opacity="0.3" 
+                <svg
+                  className="block size-full"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  viewBox="0 0 522 522"
+                >
+                  <circle
+                    cx="261"
+                    cy="261"
+                    r="250"
+                    stroke="#18B3AB"
+                    strokeWidth="2"
+                    strokeDasharray="10 20"
+                    opacity="0.3"
                     fill="none"
                   />
                 </svg>
@@ -153,14 +175,16 @@ export default function InfoSection() {
               <div className="absolute inset-0 hover:scale-110 transition-transform duration-700 cursor-pointer flex items-center justify-center group">
                 <div className="absolute inset-0 bg-[#18b3ab] rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-all duration-700"></div>
                 {imgSwitch ? (
-                  <img 
-                    alt="" 
-                    className="relative block max-w-none size-full object-cover rounded-full shadow-2xl group-hover:shadow-[0_0_50px_rgba(24,179,171,0.5)] transition-all duration-700" 
-                    src={imgSwitch} 
+                  <img
+                    alt="Happy family representing health and wellness"
+                    className="relative block max-w-none size-full object-cover rounded-full shadow-2xl group-hover:shadow-[0_0_50px_rgba(24,179,171,0.5)] transition-all duration-700"
+                    src={imgSwitch}
                   />
                 ) : (
                   <div className="relative w-full h-full bg-[#18b3ab] rounded-full flex items-center justify-center shadow-2xl">
-                    <span className="text-white text-6xl">🏥</span>
+                    <span className="text-white text-6xl">
+                      🏥
+                    </span>
                   </div>
                 )}
               </div>
@@ -169,24 +193,24 @@ export default function InfoSection() {
             {/* Right Features - Staggered */}
             <div className="w-[35%] ">
               {features.slice(3, 6).map((feature, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="flex items-start gap-4 xl:gap-6 group animate-[slideInRight_0.8s_ease-out] opacity-0"
-                  style={{ 
-                    marginBottom: index < 2 ? '100px' : '0',
-                    marginLeft: index === 1 ? '40px' : '0',
+                  style={{
+                    marginBottom: index < 2 ? "100px" : "0",
+                    marginLeft: index === 1 ? "40px" : "0",
                     animationDelay: `${(index + 3) * 0.2}s`,
-                    animationFillMode: 'forwards'
+                    animationFillMode: "forwards",
                   }}
                 >
                   <div className="relative">
                     {/* Glow effect on hover */}
                     <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                     <div className="relative bg-[#18b3ab] rounded-[20px] w-[88px] h-[88px] flex-shrink-0 group-hover:bg-[#16a199] group-hover:scale-125 group-hover:rotate-[-12deg] transition-all duration-500 cursor-pointer flex items-center justify-center overflow-hidden shadow-lg group-hover:shadow-2xl">
-                      <img 
-                        alt="" 
-                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[12deg]" 
-                        src={feature.icon} 
+                      <img
+                        alt=""
+                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[12deg]"
+                        src={feature.icon}
                       />
                     </div>
                   </div>
@@ -205,10 +229,13 @@ export default function InfoSection() {
         </div>
 
         {/* Button */}
-        <div className="text-center mt-8 sm:mt-12 lg:mt-16 animate-[fadeIn_1s_ease-out_1.2s] opacity-0" style={{ animationFillMode: 'forwards' }}>
+        <div
+          className="text-center mt-8 sm:mt-12 lg:mt-16 animate-[fadeIn_1s_ease-out_1.2s] opacity-0"
+          style={{ animationFillMode: "forwards" }}
+        >
           <button className="bg-[#d5dd23] hover:bg-[#c5cd13] transition-all duration-500 hover:shadow-2xl hover:scale-110 hover:-translate-y-2 rounded-full px-8 sm:px-12 lg:px-16 xl:px-[85px] py-3 sm:py-4 lg:py-5 xl:py-[25px] border border-[#fcffbe] shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] group">
             <span className="font-['Roboto:Medium',sans-serif] font-medium text-[16px] sm:text-[20px] lg:text-[25px] xl:text-[30px] leading-[1.3] sm:leading-[30px] text-[#383838] group-hover:scale-105 inline-block transition-transform duration-300">
-              Lorem Ipsum Dolor Sit Amet
+              Lihat Semua Fasilitas
             </span>
           </button>
         </div>
