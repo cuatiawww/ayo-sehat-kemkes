@@ -18,7 +18,7 @@ const iconPaths = {
 
 function InfoCircleIcon() {
   return (
-    <div className="relative size-[46px] rounded-full flex items-center justify-center">
+    <div className="relative size-[42px] rounded-full flex items-center justify-center">
       <img
         src={iconPaths.info}
         alt="Info"
@@ -30,7 +30,7 @@ function InfoCircleIcon() {
 
 function CategoryIcon() {
   return (
-    <div className="relative size-[36px] rounded flex items-center justify-center">
+    <div className="relative size-[42px] rounded-full flex items-center justify-center">
       <img
         src={iconPaths.category}
         alt="Category"
@@ -42,7 +42,7 @@ function CategoryIcon() {
 
 function UserIcon() {
   return (
-    <div className="relative size-[48px] rounded-full flex items-center justify-center">
+    <div className="relative size-[42px] rounded-full flex items-center justify-center">
       <img
         src={iconPaths.user}
         alt="User"
@@ -66,7 +66,7 @@ function HeartIcon() {
 
 function CalendarIcon() {
   return (
-    <div className="relative size-[43px] rounded flex items-center justify-center">
+    <div className="relative size-[42px] rounded flex items-center justify-center">
       <img
         src={iconPaths.calendar}
         alt="Calendar"
@@ -102,7 +102,7 @@ function ActivityIcon() {
 
 function DocumentIcon() {
   return (
-    <div className="relative size-[41px] rounded flex items-center justify-center">
+    <div className="relative size-[42px] rounded flex items-center justify-center">
       <img
         src={iconPaths.document}
         alt="Document"
