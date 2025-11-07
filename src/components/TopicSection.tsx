@@ -216,12 +216,12 @@ export default function TopicSection() {
               <h3 className="not-italic text-[15px] sm:text-[17px] lg:text-[20px] leading-[1.3] text-[#18b3ab] mb-3 sm:mb-4 lg:mb-5">
               Kalendar Kesehatan
               </h3>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 mt-3 sm:mt-4 lg:mt-5 text-[13px] sm:text-[14px] lg:text-[15px] leading-[1.4] text-neutral-600">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 mt sm:mt-4 lg:mt-5 text-[13px] sm:text-[14px] lg:text-[15px] leading-[1.4] text-neutral-600">
     <p className="mb-1 sm:mb-0">
       Informasi terkait dengan hari besar dan agenda kesehatan satu tahun penuh
     </p>
     <button
-      className="text-[#18b3ab] hover:text-[#16a199] font-light underline underline-offset-4 transition-colors duration-200"
+      className="text-[#18b3ab] hover:text-[#16a199] font-light text-[10px] underline underline-offset-4 transition-colors duration-200"
     >
       Lihat detail →
     </button>
