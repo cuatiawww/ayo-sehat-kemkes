@@ -10,15 +10,24 @@ export default function Footer() {
     <footer className="bg-white border-t border-[#d2d2d2]">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
-          {/* Column 1 - About */}
+          {/* */}
           <div>
         <div className="mb-6">
-          <h3 className="font-bold not-italic text-[14px] sm:text-[15px] lg:text-[16px] text-[#212121] mb-3 sm:mb-4">
-                Kesehatan Plus
-              </h3>
-              <h4 className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4">
-                Pelayanan Kesehatan Terpercaya
-              </h4>
+         <div className="mb-3 sm:mb-4">
+    <img
+      src="../assets/logo.png"
+      alt="Ayo Sehat Logo"
+      className="w-[120px] sm:w-[140px] lg:w-[160px] object-contain"
+    />
+  </div>
+               <div className="leading-[1.2] mb-3 sm:mb-4">
+    <p className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121]">
+      Ayo Sehat
+    </p>
+    <p className="font-medium not-italic text-[12px] sm:text-[13px] lg:text-[14px] text-[#212121]">
+      Kementerian Kesehatan Republik Indonesia
+    </p>
+  </div>
               <p className="font-normal text-[12px] sm:text-[13px] lg:text-[14px] text-[#212121] mb-3 sm:mb-4">
                 Jl. Kesehatan Raya No. 123
                 Jakarta Selatan 12345

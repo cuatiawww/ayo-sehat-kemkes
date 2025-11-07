@@ -118,20 +118,19 @@ export default function HeroSection() {
   const [isSticky, setIsSticky] = useState(false);
 
   const menuItems = [
-    { label: "INFORMASI", icon: InfoCircleIcon },
-    { label: "KATEGORI", icon: CategoryIcon },
-    { label: "PROFIL", icon: UserIcon },
-    { label: "LAYANAN", icon: HeartIcon },
-    { label: "JADWAL", icon: CalendarIcon },
-    { label: "DOKUMEN", icon: DownloadIcon },
-    { label: "AKTIVITAS", icon: ActivityIcon },
-    { label: "RIWAYAT", icon: DocumentIcon },
+    { label: "TENTANG", icon: InfoCircleIcon },
+    { label: "TOPIK", icon: CategoryIcon },
+    { label: "SIKLUS HIDUP", icon: UserIcon },
+    { label: "PERILAKU HIDUP SEHAT", icon: HeartIcon },
+    { label: "KEGIATAN", icon: CalendarIcon },
+    { label: "DOWNLOAD", icon: DownloadIcon },
+    { label: "KAMPANYE", icon: ActivityIcon },
+    { label: "KEMITRAAN", icon: DocumentIcon },
   ];
 
   // Sticky navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
-      // TopBar height is approximately 40-50px, so we check if scrolled past it
       if (window.scrollY > 50) {
         setIsSticky(true);
       } else {
@@ -221,24 +220,23 @@ export default function HeroSection() {
                       </div>
                       {/* Label */}
                       <div
-                        className={`font-semibold text-[10px] xl:text-[11px] 2xl:text-[12px] leading-[14px] transition-colors duration-300 whitespace-nowrap ${
-                          isActive
-                            ? "text-white"
-                            : "text-[#00b6a3]"
-                        }`}
-                        style={{
-                          fontVariationSettings: "'wdth' 100",
-                        }}
-                      >
-                        {item.label}
-                      </div>
+  className={`font-semibold text-[10px] xl:text-[11px] 2xl:text-[12px] leading-tight text-center transition-colors duration-300 whitespace-normal break-words ${
+    isActive ? "text-white" : "text-[#00b6a3]"
+  }`}
+  style={{
+    fontVariationSettings: "'wdth' 100",
+  }}
+>
+  {item.label}
+</div>
+
                     </motion.div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Tablet Layout */}
+            {/* Tablet Layout*/}
             <div className="hidden md:flex lg:hidden items-center justify-between gap-3">
               <div className="shrink-0 w-[130px] h-auto">
                 <img
@@ -247,48 +245,17 @@ export default function HeroSection() {
                   src={imgLogo}
                 />
               </div>
-              <div className="flex gap-1.5 items-center">
-                {menuItems.slice(0, 4).map((item, index) => {
-                  const isActive = activeMenu === index;
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => setActiveMenu(index)}
-                      className={`flex flex-col items-center justify-center gap-0.5 cursor-pointer shrink-0 rounded-[12px] w-[65px] h-[65px] transition-all duration-300 ${
-                        isActive
-                          ? "bg-[#18b3ab] shadow-lg"
-                          : "bg-transparent hover:bg-[#e9fffe]"
-                      }`}
-                    >
-                      <div
-                        className={`scale-[0.6] ${isActive ? "brightness-0 invert" : ""}`}
-                      >
-                        <item.icon />
-                      </div>
-                      <div
-                        className={`font-semibold text-[9px] leading-[12px] whitespace-nowrap transition-colors duration-300 ${
-                          isActive
-                            ? "text-white"
-                            : "text-[#00b6a3]"
-                        }`}
-                        style={{
-                          fontVariationSettings: "'wdth' 100",
-                        }}
-                      >
-                        {item.label}
-                      </div>
-                    </div>
-                  );
-                })}
+
+              {/* overvload */}
+              <div className="flex items-center">
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="text-[#00b6a3] p-1.5 hover:bg-gray-100 rounded-lg transition-colors shrink-0"
+                  aria-label="Toggle menu"
+                >
+                  {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
               </div>
-              <button
-                onClick={() =>
-                  setMobileMenuOpen(!mobileMenuOpen)
-                }
-                className="text-[#00b6a3] p-1.5 hover:bg-gray-100 rounded-lg transition-colors shrink-0"
-              >
-                <Menu size={24} />
-              </button>
             </div>
 
             {/* Mobile Layout */}
@@ -360,7 +327,6 @@ export default function HeroSection() {
         </div>
       </motion.nav>
 
-      {/* Placeholder to prevent content jump when navbar becomes fixed */}
       {isSticky && <div className="h-[72px] lg:h-[88px]" />}
 
       {/* Konten bagian utama */}
@@ -411,7 +377,8 @@ export default function HeroSection() {
             }}
           >
             <h2 className="not-italic text-[22px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.2] lg:leading-[60px] text-white">
-              Prioritas Utama Kami
+             Kementerian Kesehatan
+Republik Indonesia
             </h2>
           </motion.div>
 
@@ -427,11 +394,9 @@ export default function HeroSection() {
             }}
           >
             <p className="not-italic text-[13px] sm:text-[16px] lg:text-[20px] leading-[1.4] sm:leading-[1.5] lg:leading-[30px] text-white">
-              Dapatkan akses mudah ke informasi kesehatan terpercaya,
-              konsultasi dengan dokter profesional, dan layanan medis
-              berkualitas. Kami hadir 24/7 untuk mendukung perjalanan
-              kesehatan Anda dan keluarga dengan pelayanan yang
-              personal dan terpercaya.
+             Ayo Sehat Kemenkes RI merupakan platform/saluran sumber informasi,
+edukasi kesehatan, serta gaya hidup sehat resmi dari Kementerian
+Kesehatan sehingga dapat dipertanggungjawabkan dan informasi yang diberikan sejalan dengan program pemerintah.
             </p>
           </motion.div>
 

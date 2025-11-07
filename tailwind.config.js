@@ -11,8 +11,8 @@ export default {
         inter: ["Inter", "sans-serif"],
       },
       colors: {
-        primary: "#1E40AF",   // biru
-        secondary: "#F59E0B", // kuning
+        primary: "#1E40AF",  
+        secondary: "#F59E0B", 
       },
     },
   },

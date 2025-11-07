@@ -3,46 +3,46 @@ const imgSwitch = "../assets/Switch.png";
 export default function InfoSection() {
   const features = [
     {
-      title: "Bebas Asap Rokok",
+      title: "Tidak Merokok",
       description:
-        "Lingkungan sehat bebas asap rokok untuk kenyamanan pasien dan keluarga",
+        "Rokok meningkatkan risiko kanker, penyakit jantung, dan paru-paru.",
       position: "left",
       icon: "../assets/icon1.png",
     },
     {
-      title: "Fasilitas Modern",
+      title: "Hindari Konsumsi Alkohol",
       description:
-        "Peralatan medis terkini dengan teknologi kesehatan yang canggih",
+        "Alkohol dapat merusak organ tubuh dan memicu berbagai penyakit kronis.",
       position: "left",
       icon: "../assets/icon2.png",
     },
     {
-      title: "Pelayanan Terpadu",
+      title: "Batasi Konsumsi Gula, Garam, dan Lemak",
       description:
-        "Layanan kesehatan komprehensif dari pencegahan hingga perawatan lanjutan",
+        "Gula maksimal 50 gram, garam 5 gram, dan lemak total 67 gram per hari.",
       position: "left",
-      icon: "../assets/icon3.png",
+      icon: "../assets/icon5.png",
     },
     {
-      title: "Nutrisi Seimbang",
+      title: "Minum Air Putih yang Cukup",
       description:
-        "Program gizi dan konsultasi nutrisi untuk kesehatan optimal Anda",
+        "Minimal 8 gelas atau 2 liter per hari, sesuaikan dengan aktivitas.",
       position: "right",
       icon: "../assets/icon4.png",
     },
     {
-      title: "Kebersihan Terjamin",
+      title: "Konsumsi Makanan Begizi Seimbang",
       description:
-        "Standar kebersihan tinggi dengan protokol sterilisasi ketat",
-      position: "right",
-      icon: "../assets/icon5.png",
-    },
-    {
-      title: "Ramah Keluarga",
-      description:
-        "Fasilitas ramah keluarga dengan area bermain dan ruang tunggu nyaman",
+        "Utamakan buah, sayur, protein tanpa lemak, dan karbohidrat kompleks.",
       position: "right",
       icon: "../assets/icon6.png",
+    },
+    {
+      title: "Rutin Berolahraga",
+      description:
+        "Minimal 150 menit aktivitas fisik sedang setiap minggu.",
+      position: "right",
+      icon: "../assets/icon3.png",
     },
   ];
 
@@ -52,12 +52,12 @@ export default function InfoSection() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 animate-[fadeIn_0.6s_ease-out]">
           <h2 className="not-italic text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px] xl:text-[50px] leading-[1.3] sm:leading-[1.2] lg:leading-[30px] mb-4 sm:mb-5 lg:mb-6">
-            Fasilitas Kesehatan Berkualitas
+            Perilaku Hidup Sehat
           </h2>
           <p className="not-italic text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[22px] leading-[22px] sm:leading-[26px] lg:leading-[28px] xl:leading-[30px] text-neutral-600 max-w-4xl mx-auto px-4">
-            Kami menyediakan lingkungan yang aman, nyaman, dan mendukung
-            untuk setiap anggota keluarga. Dengan fasilitas modern dan tim
-            profesional, kesehatan Anda adalah komitmen kami.
+            Perilaku hidup sehat adalah kebiasaan sehari-hari yang dilakukan untuk menjaga dan
+meningkatkan kesehatan tubuh dan pikiran, seperti makan bergizi, olahraga teratur, cukup istirahat,
+serta menjaga kebersihan dan kesehatan mental.
           </p>
         </div>
 
@@ -133,7 +133,8 @@ export default function InfoSection() {
             </div>
 
             {/* Gambar tengah */}
-            <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] flex-shrink-0 mx-8 xl:mx-12 animate-[scaleIn_1s_ease-out]">
+            <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] flex-shrink-0 mx-8 xl:mx-12 mt-8 [@media(max-width:1080px)]:mt-32 animate-[scaleIn_1s_ease-out]">
+
               {/* Lingkaran latar belakang animasi */}
               <div className="absolute inset-0 animate-pulse">
                 <svg

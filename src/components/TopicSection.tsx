@@ -113,8 +113,9 @@ export default function TopicSection() {
               Topik A-Z
             </h2>
             <p className="not-italic text-[13px] sm:text-[15px] lg:text-[20px] leading-[20px] sm:leading-[24px] lg:leading-[30px] text-neutral-600 mb-5 sm:mb-6 lg:mb-16 max-w-full lg:max-w-[691px]">
-              Temukan informasi kesehatan yang Anda butuhkan dengan mudah. Pilih huruf untuk melihat
-              daftar topik kesehatan, penyakit, dan kondisi medis yang tersedia.
+              Temukan penyakit dan kondisi; hidup sehat; keselamatan di tempat kerja;
+ kesehatan lingkungan; cedera, kekerasan, dan keselamatan; kesehatan global;
+ kesehatan pelancong, dan banyak lagi.
             </p>
 
             {/* Grid alfabet */}
