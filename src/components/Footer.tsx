@@ -29,11 +29,10 @@ export default function Footer() {
     </p>
   </div>
               <p className="font-normal text-[12px] sm:text-[13px] lg:text-[14px] text-[#212121] mb-3 sm:mb-4">
-                Jl. Kesehatan Raya No. 123
-                Jakarta Selatan 12345
+                Jl. H.R. Rasuna Said Blok X5 Kav. 4-9 Jakarta Selatan, DKI Jakarta
               </p>
               <p className="font-normal not-italic text-[12px] sm:text-[13px] lg:text-[14px] text-[#18b3ab] mb-3 sm:mb-4">
-                info@Kesehatanplus.com
+                Chatbot WhatsApp Ayo Sehat
               </p>
             </div>
             <div>

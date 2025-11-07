@@ -106,13 +106,14 @@ export default function TopicSection() {
   return (
     <div className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-[#f0f4f5]">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-  <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-12 xl:gap-[49px]">
+      {/* At xl cap the left column so it doesn't expand indefinitely and cause overlap */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] xl:grid-cols-[980px_auto] gap-6 lg:gap-12 xl:gap-[49px]">
           {/* Left Column - Topik A-Z */}
-          <div className="relative bg-white rounded-[15px] sm:rounded-[20px] border border-[#cccccc] w-full h-auto px-4 sm:px-6 lg:px-[82px] py-6 sm:py-8 lg:py-12">
+              <div className="relative bg-white rounded-[15px] sm:rounded-[20px] border border-[#cccccc] w-full h-auto px-4 sm:px-6 lg:px-8 xl:px-[82px] py-6 sm:py-8 lg:py-12 xl:max-w-[980px]">
             <h2 className="not-italic text-[24px] sm:text-[32px] lg:text-[50px] leading-[1.2] sm:leading-[1.1] lg:leading-[30px] text-[#18b3ab] mb-3 sm:mb-5 lg:mb-20">
               Topik A-Z
             </h2>
-            <p className="not-italic text-[13px] sm:text-[15px] lg:text-[20px] leading-[20px] sm:leading-[24px] lg:leading-[30px] text-neutral-600 mb-5 sm:mb-6 lg:mb-16 max-w-full lg:max-w-[691px]">
+                <p className="not-italic text-[13px] sm:text-[15px] lg:text-[20px] leading-[20px] sm:leading-[24px] lg:leading-[30px] text-neutral-600 mb-5 sm:mb-6 lg:mb-16 max-w-full xl:max-w-[691px]">
               Temukan penyakit dan kondisi; hidup sehat; keselamatan di tempat kerja;
  kesehatan lingkungan; cedera, kekerasan, dan keselamatan; kesehatan global;
  kesehatan pelancong, dan banyak lagi.
@@ -209,13 +210,22 @@ export default function TopicSection() {
 
           {/* Right Column - Calendar & Slider */}
           <div className="flex flex-col gap-5 sm:gap-6 lg:gap-0 w-full lg:max-w-[452px]">
-            {/* Calendar Section with Title OUTSIDE */}
+            {/* Calendar Section with Title */}
             <div className="relative">
               {/* Title outside card */}
               <h3 className="not-italic text-[15px] sm:text-[17px] lg:text-[20px] leading-[1.3] text-[#18b3ab] mb-3 sm:mb-4 lg:mb-5">
-                Jadwal Konsultasi
+              Kalendar Kesehatan
               </h3>
-              
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 mt-3 sm:mt-4 lg:mt-5 text-[13px] sm:text-[14px] lg:text-[15px] leading-[1.4] text-neutral-600">
+    <p className="mb-1 sm:mb-0">
+      Informasi terkait dengan hari besar dan agenda kesehatan satu tahun penuh
+    </p>
+    <button
+      className="text-[#18b3ab] hover:text-[#16a199] font-light underline underline-offset-4 transition-colors duration-200"
+    >
+      Lihat detail →
+    </button>
+  </div>
               {/* Calendar Card */}
               <div className="w-full">
                 <CustomCalendar />

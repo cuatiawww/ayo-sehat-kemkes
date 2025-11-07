@@ -376,9 +376,8 @@ export default function HeroSection() {
               ease: "easeOut",
             }}
           >
-            <h2 className="not-italic text-[22px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.2] lg:leading-[60px] text-white">
-             Kementerian Kesehatan
-Republik Indonesia
+            <h2 className="not-italic text-[22px] sm:text-[36px] lg:text-[38px] leading-[1.2] sm:leading-[1.2] lg:leading-[40px] text-white">
+             Kementerian Kesehatan Republik Indonesia
             </h2>
           </motion.div>
 

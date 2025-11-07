@@ -236,7 +236,7 @@ serta menjaga kebersihan dan kesehatan mental.
         >
           <button className="bg-[#d5dd23] hover:bg-[#c5cd13] transition-all duration-500 hover:shadow-2xl hover:scale-110 hover:-translate-y-2 rounded-full px-8 sm:px-12 lg:px-16 xl:px-[85px] py-3 sm:py-4 lg:py-5 xl:py-[25px] border border-[#fcffbe] shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] group">
             <span className="font-medium text-[16px] sm:text-[20px] lg:text-[25px] xl:text-[30px] leading-[1.3] sm:leading-[30px] text-[#383838] group-hover:scale-105 inline-block transition-transform duration-300">
-              Lihat Semua Fasilitas
+              Simak Perilaku Hidup Sehat Lainnya
             </span>
           </button>
         </div>
