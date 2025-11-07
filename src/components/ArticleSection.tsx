@@ -73,11 +73,11 @@ export default function ArticleSection() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-5 sm:mb-6 lg:mb-8 gap-3 sm:gap-4">
-          <h2 className="font-['Roboto:Medium',sans-serif] font-medium text-[24px] sm:text-[28px] lg:text-[36px] xl:text-[40px] leading-[1.3] sm:leading-[1.2] text-[#18b3ab]">
+          <h2 className="font-medium text-[24px] sm:text-[28px] lg:text-[36px] xl:text-[40px] leading-[1.3] sm:leading-[1.2] text-[#18b3ab]">
             Artikel Terbaru
           </h2>
           <button className="border border-[#18b3ab] rounded-[8px] sm:rounded-[9px] px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 hover:bg-[#18b3ab] hover:text-white transition-all duration-300 shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] group">
-            <span className="font-['Roboto:Regular',sans-serif] font-normal text-[14px] sm:text-[15px] lg:text-[18px] leading-[1.4] sm:leading-[26px] lg:leading-[30px] text-neutral-600 group-hover:text-white transition-colors duration-300">
+            <span className="font-normal text-[14px] sm:text-[15px] lg:text-[18px] leading-[1.4] sm:leading-[26px] lg:leading-[30px] text-neutral-600 group-hover:text-white transition-colors duration-300">
               Lihat Artikel Lainnya
             </span>
           </button>
@@ -240,23 +240,23 @@ function ArticleCard({ article }: { article: any }) {
           <div className="border-b border-[#cccccc] pb-3 sm:pb-4 lg:pb-5">
             {/* Category */}
             <div className="mb-2 sm:mb-3">
-              <span className="font-['Inter:Regular',sans-serif] font-normal not-italic text-[10px] sm:text-[11px] lg:text-[12px] leading-[14px] sm:leading-[16px] lg:leading-[18px] text-[#18b3ab] group-hover:text-[#16a199] transition-colors duration-300">
+              <span className="font-normal not-italic text-[10px] sm:text-[11px] lg:text-[12px] leading-[14px] sm:leading-[16px] lg:leading-[18px] text-[#18b3ab] group-hover:text-[#16a199] transition-colors duration-300">
                 {article.category}
               </span>
             </div>
 
             {/* Title */}
-            <h3 className="font-['Inter:Medium',sans-serif] font-medium not-italic text-[14px] sm:text-[15px] lg:text-[17px] leading-[17px] sm:leading-[18px] lg:leading-[20.4px] text-[#212121] mb-3 sm:mb-4 lg:mb-6 group-hover:text-[#18b3ab] transition-colors duration-300 line-clamp-2">
+            <h3 className="font-medium not-italic text-[14px] sm:text-[15px] lg:text-[17px] leading-[17px] sm:leading-[18px] lg:leading-[20.4px] text-[#212121] mb-3 sm:mb-4 lg:mb-6 group-hover:text-[#18b3ab] transition-colors duration-300 line-clamp-2">
               {article.title}
             </h3>
 
             {/* Date and Read Time */}
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="font-['Inter:Regular',sans-serif] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] leading-[16px] sm:leading-[18px] lg:leading-[19.5px] text-[dimgrey]">
+              <span className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] leading-[16px] sm:leading-[18px] lg:leading-[19.5px] text-[dimgrey]">
                 {article.date}
               </span>
               <div className="w-[3px] h-[3px] sm:w-[4px] sm:h-[4px] rounded-[2px] bg-[dimgrey]"></div>
-              <span className="font-['Inter:Regular',sans-serif] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] leading-[16px] sm:leading-[18px] lg:leading-[19.5px] text-[dimgrey]">
+              <span className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] leading-[16px] sm:leading-[18px] lg:leading-[19.5px] text-[dimgrey]">
                 Waktu Baca {article.readTime}
               </span>
             </div>

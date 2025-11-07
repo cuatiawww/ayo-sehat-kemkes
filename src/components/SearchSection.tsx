@@ -167,10 +167,10 @@ export default function SearchSection() {
     <div className="bg-[#f0f4f5] py-8 sm:py-12 lg:py-16 xl:py-20">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-          <h2 className="font-['Poppins'] not-italic text-[24px] sm:text-[32px] lg:text-[40px] leading-[1.3] text-[#18b3ab] mb-3 sm:mb-4">
+          <h2 className="not-italic text-[24px] sm:text-[32px] lg:text-[40px] leading-[1.3] text-[#18b3ab] mb-3 sm:mb-4">
             Cari Informasi Kesehatan
           </h2>
-          <p className="font-['Poppins'] not-italic text-[14px] sm:text-[16px] lg:text-[18px] leading-[1.6] text-neutral-600 max-w-3xl mx-auto px-4">
+          <p className="not-italic text-[14px] sm:text-[16px] lg:text-[18px] leading-[1.6] text-neutral-600 max-w-3xl mx-auto px-4">
             Temukan informasi kesehatan, penyakit, gejala, dan layanan medis yang Anda butuhkan
           </p>
         </div>
@@ -190,7 +190,7 @@ export default function SearchSection() {
                 onFocus={() => setShowSuggestions(true)}
                 onKeyDown={handleKeyDown}
                 placeholder="Cari penyakit, gejala, atau layanan kesehatan..."
-                className="w-full h-[50px] sm:h-[56px] lg:h-[60px] bg-[#f4fffe] rounded-[12px] sm:rounded-[15px] border border-black px-4 sm:px-5 lg:px-6 font-['Poppins'] italic text-[14px] sm:text-[15px] lg:text-[16px] text-gray-700 placeholder:text-[#8c8c8c] focus:outline-none focus:ring-2 focus:ring-[#18b3ab] transition-all"
+                className="w-full h-[50px] sm:h-[56px] lg:h-[60px] bg-[#f4fffe] rounded-[12px] sm:rounded-[15px] border border-black px-4 sm:px-5 lg:px-6 italic text-[14px] sm:text-[15px] lg:text-[16px] text-gray-700 placeholder:text-[#8c8c8c] focus:outline-none focus:ring-2 focus:ring-[#18b3ab] transition-all"
               />
 
               {/* Clear button */}
@@ -256,7 +256,7 @@ export default function SearchSection() {
                             ) : (
                               <Clock size={16} className="text-gray-400 flex-shrink-0" />
                             )}
-                            <span className="font-['Poppins'] text-[14px] sm:text-[15px] truncate">
+                            <span className="text-[14px] sm:text-[15px] truncate">
                               {highlightMatch(suggestion, searchQuery)}
                             </span>
                           </div>
@@ -287,7 +287,7 @@ export default function SearchSection() {
 
             <button
               onClick={() => handleSearch()}
-              className="bg-[#18b3ab] hover:bg-[#16a199] active:scale-95 transition-all duration-300 rounded-[12px] sm:rounded-[15px] px-6 sm:px-7 lg:px-8 h-[50px] sm:h-[56px] lg:h-[60px] flex items-center justify-center gap-2 text-white font-['Roboto'] font-medium whitespace-nowrap text-[15px] sm:text-[16px] shadow-md hover:shadow-lg"
+              className="bg-[#18b3ab] hover:bg-[#16a199] active:scale-95 transition-all duration-300 rounded-[12px] sm:rounded-[15px] px-6 sm:px-7 lg:px-8 h-[50px] sm:h-[56px] lg:h-[60px] flex items-center justify-center gap-2 text-white font-medium whitespace-nowrap text-[15px] sm:text-[16px] shadow-md hover:shadow-lg"
             >
               <Search size={18} className="sm:w-5 sm:h-5" />
               <span>Cari</span>
@@ -302,7 +302,7 @@ export default function SearchSection() {
               transition={{ delay: 0.1 }}
               className="mt-6 flex flex-wrap gap-2 items-center justify-center"
             >
-              <span className="text-sm text-gray-600 font-['Poppins']">
+              <span className="text-sm text-gray-600">
                 Topik Populer:
               </span>
               {["Diabetes", "Jantung", "COVID-19", "Hipertensi", "Stroke"].map(
@@ -310,7 +310,7 @@ export default function SearchSection() {
                   <button
                     key={topic}
                     onClick={() => handleSearch(topic)}
-                    className="bg-white hover:bg-[#18b3ab] hover:text-white border border-gray-200 hover:border-[#18b3ab] px-4 py-1.5 rounded-full text-sm font-['Poppins'] transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="bg-white hover:bg-[#18b3ab] hover:text-white border border-gray-200 hover:border-[#18b3ab] px-4 py-1.5 rounded-full text-sm transition-all duration-300 shadow-sm hover:shadow-md"
                   >
                     {topic}
                   </button>

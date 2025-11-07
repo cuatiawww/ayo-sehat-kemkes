@@ -12,23 +12,23 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           {/* Column 1 - About */}
           <div>
-            <div className="mb-6">
-              <h3 className="font-['Inter'] font-bold not-italic text-[14px] sm:text-[15px] lg:text-[16px] text-[#212121] mb-3 sm:mb-4">
+        <div className="mb-6">
+          <h3 className="font-bold not-italic text-[14px] sm:text-[15px] lg:text-[16px] text-[#212121] mb-3 sm:mb-4">
                 Kesehatan Plus
               </h3>
-              <h4 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4">
+              <h4 className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4">
                 Pelayanan Kesehatan Terpercaya
               </h4>
-              <p className="font-['Roboto'] font-normal text-[12px] sm:text-[13px] lg:text-[14px] text-[#212121] mb-3 sm:mb-4">
+              <p className="font-normal text-[12px] sm:text-[13px] lg:text-[14px] text-[#212121] mb-3 sm:mb-4">
                 Jl. Kesehatan Raya No. 123
                 Jakarta Selatan 12345
               </p>
-              <p className="font-['Inter'] font-normal not-italic text-[12px] sm:text-[13px] lg:text-[14px] text-[#18b3ab] mb-3 sm:mb-4">
+              <p className="font-normal not-italic text-[12px] sm:text-[13px] lg:text-[14px] text-[#18b3ab] mb-3 sm:mb-4">
                 info@Kesehatanplus.com
               </p>
             </div>
             <div>
-              <h4 className="font-['Inter'] font-medium not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4">
+              <h4 className="font-medium not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4">
                 Media Sosial
               </h4>
               <div className="flex gap-3">
@@ -62,14 +62,14 @@ export default function Footer() {
 
           {/* Column 2 */}
           <div>
-            <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
+            <h3 className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
               Layanan Kami
             </h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Konsultasi Online
                 </a>
@@ -77,7 +77,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Medical Check-Up
                 </a>
@@ -85,21 +85,21 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Laboratorium
                 </a>
               </li>
             </ul>
 
-            <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 mt-6 sm:mt-8 uppercase">
+            <h3 className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 mt-6 sm:mt-8 uppercase">
               Spesialis
             </h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Dokter Umum
                 </a>
@@ -107,7 +107,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Dokter Gigi
                 </a>
@@ -117,14 +117,14 @@ export default function Footer() {
 
           {/* Column 3 */}
           <div>
-            <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
+            <h3 className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
               Informasi
             </h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Tentang Kami
                 </a>
@@ -132,7 +132,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Tim Medis
                 </a>
@@ -140,21 +140,21 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Karir
                 </a>
               </li>
             </ul>
 
-            <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 mt-6 sm:mt-8 uppercase">
+            <h3 className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 mt-6 sm:mt-8 uppercase">
               Artikel Kesehatan
             </h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Tips Kesehatan
                 </a>
@@ -162,7 +162,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Pencegahan Penyakit
                 </a>
@@ -170,7 +170,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Gaya Hidup Sehat
                 </a>
@@ -178,7 +178,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Nutrisi & Gizi
                 </a>
@@ -186,7 +186,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Kesehatan Mental
                 </a>
@@ -196,14 +196,14 @@ export default function Footer() {
 
           {/* Column 4 */}
           <div>
-            <h3 className="font-['Inter'] font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
+            <h3 className="font-bold not-italic text-[13px] sm:text-[14px] lg:text-[15px] text-[#212121] mb-3 sm:mb-4 uppercase">
               Hubungi Kami
             </h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   Customer Service
                 </a>
@@ -211,7 +211,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   WhatsApp
                 </a>
@@ -219,7 +219,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
+                  className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] uppercase hover:text-[#16a199] transition-colors duration-300"
                 >
                   FAQ
                 </a>
@@ -233,19 +233,19 @@ export default function Footer() {
       <div className="border-t border-[#d2d2d2]">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-            <p className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#212121] text-center sm:text-left">
+            <p className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#212121] text-center sm:text-left">
               © 2025 Kesehatan Plus. All rights reserved.
             </p>
             <div className="flex gap-3 sm:gap-4">
               <a
                 href="#"
-                className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] hover:text-[#16a199] transition-colors duration-300"
+                className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] hover:text-[#16a199] transition-colors duration-300"
               >
                 Privacy Policy
               </a>
               <a
                 href="#"
-                className="font-['Inter'] font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] hover:text-[#16a199] transition-colors duration-300"
+                className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#18b3ab] hover:text-[#16a199] transition-colors duration-300"
               >
                 Terms of Service
               </a>

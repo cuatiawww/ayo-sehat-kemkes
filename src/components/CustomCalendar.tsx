@@ -93,7 +93,7 @@ export default function CustomCalendar() {
       <div className="relative rounded-[inherit] p-4 sm:p-5 lg:px-8 lg:py-6">
         {/* Header bulan dan tahun */}
         <div className="relative h-[45px] sm:h-[50px] flex items-center justify-center mb-3 sm:mb-4 lg:mb-5">
-          <div className="font-['Work_Sans:Bold',sans-serif] text-[16px] sm:text-[17px] leading-[25.5px] text-black text-center">
+          <div className="text-[16px] sm:text-[17px] leading-[25.5px] text-black text-center">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </div>
           
@@ -127,7 +127,7 @@ export default function CustomCalendar() {
             {dayNames.map((day, index) => (
               <div
                 key={index}
-                className="text-center font-['Work_Sans:Medium',sans-serif] text-[13px] sm:text-[15px] lg:text-[16px] leading-[24px] text-black opacity-60 min-w-[40px] sm:min-w-[45px] lg:min-w-[50px]"
+                className="text-center text-[13px] sm:text-[15px] lg:text-[16px] leading-[24px] text-black opacity-60 min-w-[40px] sm:min-w-[45px] lg:min-w-[50px]"
               >
                 {day}
               </div>
@@ -147,7 +147,7 @@ export default function CustomCalendar() {
                   disabled={!item.isCurrentMonth}
                   className={`
                     relative flex items-center justify-center min-w-[40px] min-h-[40px] sm:min-w-[45px] sm:min-h-[45px] lg:min-w-[50px] lg:min-h-[50px]
-                    font-['Work_Sans:Regular',sans-serif] text-[15px] sm:text-[16px] leading-[24px]
+                    text-[15px] sm:text-[16px] leading-[24px]
                     transition-all duration-200 rounded-[5px]
                     ${!item.isCurrentMonth ? 'opacity-20 cursor-default text-black' : 'cursor-pointer'}
                     ${item.isCurrentMonth && !isSelectedDate && !isTodayDate ? 'text-black hover:bg-gray-100' : ''}

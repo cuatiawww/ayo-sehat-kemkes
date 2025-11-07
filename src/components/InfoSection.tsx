@@ -51,10 +51,10 @@ export default function InfoSection() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 animate-[fadeIn_0.6s_ease-out]">
-          <h2 className="font-['Poppins:Medium',sans-serif] not-italic text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px] xl:text-[50px] leading-[1.3] sm:leading-[1.2] lg:leading-[30px] mb-4 sm:mb-5 lg:mb-6">
+          <h2 className="not-italic text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px] xl:text-[50px] leading-[1.3] sm:leading-[1.2] lg:leading-[30px] mb-4 sm:mb-5 lg:mb-6">
             Fasilitas Kesehatan Berkualitas
           </h2>
-          <p className="font-['Poppins:Regular',sans-serif] not-italic text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[22px] leading-[22px] sm:leading-[26px] lg:leading-[28px] xl:leading-[30px] text-neutral-600 max-w-4xl mx-auto px-4">
+          <p className="not-italic text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[22px] leading-[22px] sm:leading-[26px] lg:leading-[28px] xl:leading-[30px] text-neutral-600 max-w-4xl mx-auto px-4">
             Kami menyediakan lingkungan yang aman, nyaman, dan mendukung
             untuk setiap anggota keluarga. Dengan fasilitas modern dan tim
             profesional, kesehatan Anda adalah komitmen kami.
@@ -82,10 +82,10 @@ export default function InfoSection() {
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-['Poppins:SemiBold',sans-serif] not-italic text-[16px] sm:text-[18px] leading-[20px] sm:leading-[24px] text-[#18b3ab] mb-1 sm:mb-2 transition-colors duration-300 hover:text-[#16a199]">
+                    <h3 className="not-italic text-[16px] sm:text-[18px] leading-[20px] sm:leading-[24px] text-[#18b3ab] mb-1 sm:mb-2 transition-colors duration-300 hover:text-[#16a199]">
                       {feature.title}
                     </h3>
-                    <p className="font-['Poppins:Regular',sans-serif] not-italic text-[13px] sm:text-[15px] leading-[20px] sm:leading-[24px] text-neutral-600">
+                    <p className="not-italic text-[13px] sm:text-[15px] leading-[20px] sm:leading-[24px] text-neutral-600">
                       {feature.description}
                     </p>
                   </div>
@@ -110,10 +110,10 @@ export default function InfoSection() {
                   }}
                 >
                   <div className="text-right max-w-[280px] xl:max-w-[335px] transition-all duration-500 group-hover:translate-x-[-10px]">
-                    <h3 className="font-['Poppins:SemiBold',sans-serif] not-italic text-[20px] leading-[24px] text-[#18b3ab] mb-2 group-hover:text-[#16a199] transition-colors duration-300">
+                    <h3 className="not-italic text-[20px] leading-[24px] text-[#18b3ab] mb-2 group-hover:text-[#16a199] transition-colors duration-300">
                       {feature.title}
                     </h3>
-                    <p className="font-['Poppins:Regular',sans-serif] not-italic text-[16px] leading-[24px] text-neutral-600">
+                    <p className="not-italic text-[16px] leading-[24px] text-neutral-600">
                       {feature.description}
                     </p>
                   </div>
@@ -215,10 +215,10 @@ export default function InfoSection() {
                     </div>
                   </div>
                   <div className="max-w-[280px] xl:max-w-[335px] transition-all duration-500 group-hover:translate-x-[10px]">
-                    <h3 className="font-['Poppins:SemiBold',sans-serif] not-italic text-[20px] leading-[24px] text-[#18b3ab] mb-2 group-hover:text-[#16a199] transition-colors duration-300">
+                    <h3 className="not-italic text-[20px] leading-[24px] text-[#18b3ab] mb-2 group-hover:text-[#16a199] transition-colors duration-300">
                       {feature.title}
                     </h3>
-                    <p className="font-['Poppins:Regular',sans-serif] not-italic text-[16px] leading-[24px] text-neutral-600">
+                    <p className="not-italic text-[16px] leading-[24px] text-neutral-600">
                       {feature.description}
                     </p>
                   </div>
@@ -234,7 +234,7 @@ export default function InfoSection() {
           style={{ animationFillMode: "forwards" }}
         >
           <button className="bg-[#d5dd23] hover:bg-[#c5cd13] transition-all duration-500 hover:shadow-2xl hover:scale-110 hover:-translate-y-2 rounded-full px-8 sm:px-12 lg:px-16 xl:px-[85px] py-3 sm:py-4 lg:py-5 xl:py-[25px] border border-[#fcffbe] shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] group">
-            <span className="font-['Roboto:Medium',sans-serif] font-medium text-[16px] sm:text-[20px] lg:text-[25px] xl:text-[30px] leading-[1.3] sm:leading-[30px] text-[#383838] group-hover:scale-105 inline-block transition-transform duration-300">
+            <span className="font-medium text-[16px] sm:text-[20px] lg:text-[25px] xl:text-[30px] leading-[1.3] sm:leading-[30px] text-[#383838] group-hover:scale-105 inline-block transition-transform duration-300">
               Lihat Semua Fasilitas
             </span>
           </button>

@@ -184,7 +184,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
         <div className="flex-1 flex flex-col">
           {/* Category with animated underline */}
           <div className="mb-3 sm:mb-4 lg:mb-5 relative inline-block">
-            <div className="font-['Inter:Medium',sans-serif] font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-[18px] sm:leading-[19px] lg:leading-[20px] text-[#18b3ab] group-hover:text-[#16a199] transition-colors duration-300">
+            <div className="font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-[18px] sm:leading-[19px] lg:leading-[20px] text-[#18b3ab] group-hover:text-[#16a199] transition-colors duration-300">
               {feature.category}
             </div>
             {/* Animated underline */}
@@ -192,7 +192,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
           </div>
 
           {/* Description with better spacing */}
-          <p className="font-['Inter:Regular',sans-serif] font-normal text-[11px] sm:text-[11.5px] lg:text-[12px] leading-[20px] sm:leading-[21px] lg:leading-[22px] text-[#212121] flex-1 text-left line-clamp-5 sm:line-clamp-6 group-hover:text-[#333] transition-colors duration-300">
+          <p className="font-normal text-[11px] sm:text-[11.5px] lg:text-[12px] leading-[20px] sm:leading-[21px] lg:leading-[22px] text-[#212121] flex-1 text-left line-clamp-5 sm:line-clamp-6 group-hover:text-[#333] transition-colors duration-300">
             {feature.description}
           </p>
 

@@ -32,10 +32,10 @@ export default function CategorySection() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="font-['Poppins:Medium',sans-serif] not-italic text-[28px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.1] lg:leading-[30px] text-[#18b3ab] mb-4 sm:mb-6">
+          <h2 className="not-italic text-[28px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.1] lg:leading-[30px] text-[#18b3ab] mb-4 sm:mb-6">
             Pasien Kami dari Berbagai Usia
           </h2>
-          <div className="font-['Poppins:Regular',sans-serif] not-italic text-[16px] sm:text-[18px] lg:text-[22px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-neutral-600 px-4">
+          <div className="not-italic text-[16px] sm:text-[18px] lg:text-[22px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-neutral-600 px-4">
             <p className="mb-0">
               Melayani kesehatan keluarga Indonesia dari bayi hingga lansia
             </p>
@@ -76,10 +76,10 @@ export default function CategorySection() {
 
                 {/* Text Label - Positioned at bottom with lift animation */}
                 <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-1/2 -translate-x-1/2 bg-[#d5dd23] rounded-[15px] sm:rounded-[20px] h-[70px] sm:h-[84px] w-[180px] sm:w-[222px] flex flex-col items-center justify-center transition-all duration-500 ease-out group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-2 group-hover:scale-105 z-10 px-2">
-                  <p className="font-['Poppins:SemiBold',sans-serif] not-italic text-[18px] sm:text-[20px] lg:text-[23px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
+                  <p className="not-italic text-[18px] sm:text-[20px] lg:text-[23px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
                     {category.name}
                   </p>
-                  <p className="font-['Poppins:Regular',sans-serif] not-italic text-[14px] sm:text-[15px] lg:text-[16px] leading-[20px] sm:leading-[26px] lg:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
+                  <p className="not-italic text-[14px] sm:text-[15px] lg:text-[16px] leading-[20px] sm:leading-[26px] lg:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
                     {category.age}
                   </p>
                 </div>

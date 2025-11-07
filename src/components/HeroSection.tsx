@@ -221,7 +221,7 @@ export default function HeroSection() {
                       </div>
                       {/* Label */}
                       <div
-                        className={`font-['Roboto:SemiBold',sans-serif] font-semibold text-[10px] xl:text-[11px] 2xl:text-[12px] leading-[14px] transition-colors duration-300 whitespace-nowrap ${
+                        className={`font-semibold text-[10px] xl:text-[11px] 2xl:text-[12px] leading-[14px] transition-colors duration-300 whitespace-nowrap ${
                           isActive
                             ? "text-white"
                             : "text-[#00b6a3]"
@@ -266,7 +266,7 @@ export default function HeroSection() {
                         <item.icon />
                       </div>
                       <div
-                        className={`font-['Roboto:SemiBold',sans-serif] font-semibold text-[9px] leading-[12px] whitespace-nowrap transition-colors duration-300 ${
+                        className={`font-semibold text-[9px] leading-[12px] whitespace-nowrap transition-colors duration-300 ${
                           isActive
                             ? "text-white"
                             : "text-[#00b6a3]"
@@ -340,7 +340,7 @@ export default function HeroSection() {
                         <item.icon />
                       </div>
                       <span
-                        className={`font-['Roboto:SemiBold',sans-serif] font-semibold text-[10px] leading-[14px] text-center transition-colors duration-300 ${
+                        className={`font-semibold text-[10px] leading-[14px] text-center transition-colors duration-300 ${
                           isActive
                             ? "text-white"
                             : "text-[#00b6a3]"
@@ -394,8 +394,8 @@ export default function HeroSection() {
               ease: "easeOut",
             }}
           >
-            <h1 className="font-['Poppins:Bold',sans-serif] not-italic text-[36px] sm:text-[60px] lg:text-[100px] leading-[1.1] sm:leading-[1.1] lg:leading-[30px] text-white whitespace-nowrap">
-              Kesehatan Anda
+            <h1 className="not-italic text-[36px] sm:text-[60px] lg:text-[100px] leading-[1.1] sm:leading-[1.1] lg:leading-[30px] text-white whitespace-nowrap">
+              Ayo Sehat
             </h1>
           </motion.div>
 
@@ -410,7 +410,7 @@ export default function HeroSection() {
               ease: "easeOut",
             }}
           >
-            <h2 className="font-['Poppins:Medium',sans-serif] not-italic text-[22px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.2] lg:leading-[60px] text-white">
+            <h2 className="not-italic text-[22px] sm:text-[36px] lg:text-[50px] leading-[1.2] sm:leading-[1.2] lg:leading-[60px] text-white">
               Prioritas Utama Kami
             </h2>
           </motion.div>
@@ -426,7 +426,7 @@ export default function HeroSection() {
               ease: "easeOut",
             }}
           >
-            <p className="font-['Poppins:Regular',sans-serif] not-italic text-[13px] sm:text-[16px] lg:text-[20px] leading-[1.4] sm:leading-[1.5] lg:leading-[30px] text-white">
+            <p className="not-italic text-[13px] sm:text-[16px] lg:text-[20px] leading-[1.4] sm:leading-[1.5] lg:leading-[30px] text-white">
               Dapatkan akses mudah ke informasi kesehatan terpercaya,
               konsultasi dengan dokter profesional, dan layanan medis
               berkualitas. Kami hadir 24/7 untuk mendukung perjalanan
@@ -449,7 +449,7 @@ export default function HeroSection() {
           >
             <button className="bg-[#d5dd23] hover:bg-[#c5cd13] transition-all duration-300 hover:shadow-[0px_8px_20px_0px_rgba(0,0,0,0.25)] rounded-[100px] w-[220px] sm:w-[270px] lg:w-[300px] h-[55px] sm:h-[70px] lg:h-[80px] border-[0.5px] border-[#fcffbe] shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] flex items-center justify-center">
               <span
-                className="font-['Roboto:Medium',sans-serif] font-medium text-[20px] sm:text-[26px] lg:text-[30px] leading-[1.2] text-[#383838]"
+                className="font-medium text-[20px] sm:text-[26px] lg:text-[30px] leading-[1.2] text-[#383838]"
                 style={{ fontVariationSettings: "'wdth' 100" }}
               >
                 Mulai Konsultasi

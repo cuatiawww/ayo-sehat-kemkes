@@ -80,7 +80,7 @@ export default function TopBar() {
           <div className="flex items-center gap-4 sm:gap-6">
             <a
               href="#"
-              className="font-['Poppins:Regular',sans-serif] text-[12px] text-neutral-600 hover:text-[#18b3ab] transition-colors"
+              className="text-[12px] text-neutral-600 hover:text-[#18b3ab] transition-colors"
             >
               Kontak
             </a>
@@ -89,7 +89,7 @@ export default function TopBar() {
               className="flex items-center gap-2 hover:opacity-70 transition-opacity"
             >
               <ProfileIcon />
-              <span className="font-['Poppins:Regular',sans-serif] text-[12px] text-neutral-600">
+              <span className="text-[12px] text-neutral-600">
                 Login
               </span>
             </a>
