@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-export default function ArticleSection() {
+interface ArticleSectionProps {
+  onNavigateArtikel: () => void;
+  onNavigateHome?: () => void; // Optional prop
+}
+
+export default function ArticleSection({ onNavigateArtikel }: ArticleSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const articles = [
@@ -76,7 +81,10 @@ export default function ArticleSection() {
           <h2 className="font-medium text-[24px] sm:text-[28px] lg:text-[36px] xl:text-[40px] leading-[1.3] sm:leading-[1.2] text-[#18b3ab]">
             Artikel Terbaru
           </h2>
-          <button className="border border-[#18b3ab] rounded-[8px] sm:rounded-[9px] px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 hover:bg-[#18b3ab] hover:text-white transition-all duration-300 shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] group">
+          <button 
+            onClick={onNavigateArtikel}
+            className="border border-[#18b3ab] rounded-[8px] sm:rounded-[9px] px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 hover:bg-[#18b3ab] hover:text-white transition-all duration-300 shadow-[0px_5px_10px_0px_rgba(0,0,0,0.15)] group"
+          >
             <span className="font-normal text-[14px] sm:text-[15px] lg:text-[18px] leading-[1.4] sm:leading-[26px] lg:leading-[30px] text-neutral-600 group-hover:text-white transition-colors duration-300">
               Lihat Artikel Lainnya
             </span>

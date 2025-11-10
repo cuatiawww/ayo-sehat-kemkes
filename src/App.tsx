@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
+import TopBar from "./components/TopBar";
 import HeroSection from "./components/HeroSection";
 import SearchSection from "./components/SearchSection";
 import CategorySection from "./components/CategorySection";
@@ -11,8 +12,9 @@ import Footer from "./components/Footer";
 import SearchResultsPage from "./components/SearchResultPage";
 import SiklusHidupPage from "./components/SiklusHidupPage";
 import TopikKesehatanPage from "./components/TopikKesehatanPage";
+import ArtikelPage from "./components/ArtikelPage";
 
-type PageType = "home" | "search" | "siklus-hidup" | "topik-kesehatan";
+type PageType = "home" | "search" | "siklus-hidup" | "topik-kesehatan" | "artikel";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageType>("home");
@@ -44,6 +46,12 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navigateToArtikel = () => {
+    console.log("📰 Navigate to ARTIKEL");
+    setCurrentPage("artikel");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   console.log("=== APP RENDER ===");
   console.log("Current page:", currentPage);
 
@@ -52,6 +60,7 @@ export default function App() {
     console.log("✅ Rendering SEARCH page");
     return (
       <>
+        <TopBar />
         <Navbar 
           onNavigateHome={navigateToHome} 
           onNavigateSiklusHidup={navigateToSiklusHidup}
@@ -68,6 +77,7 @@ export default function App() {
     console.log("✅ Rendering SIKLUS HIDUP page");
     return (
       <>
+        <TopBar />
         <Navbar 
           onNavigateHome={navigateToHome} 
           onNavigateSiklusHidup={navigateToSiklusHidup}
@@ -84,6 +94,7 @@ export default function App() {
     console.log("✅ Rendering TOPIK KESEHATAN page");
     return (
       <>
+        <TopBar />
         <Navbar 
           onNavigateHome={navigateToHome} 
           onNavigateSiklusHidup={navigateToSiklusHidup}
@@ -95,10 +106,28 @@ export default function App() {
     );
   }
 
+  // Render ARTIKEL page
+  if (currentPage === "artikel") {
+    console.log("✅ Rendering ARTIKEL page");
+    return (
+      <>
+        <TopBar />
+        <Navbar 
+          onNavigateHome={navigateToHome} 
+          onNavigateSiklusHidup={navigateToSiklusHidup}
+          onNavigateTopikKesehatan={navigateToTopikKesehatan}
+        />
+        <ArtikelPage onNavigateHome={navigateToHome} />
+        <Footer />
+      </>
+    );
+  }
+
   // Render HOME page (default)
   console.log("✅ Rendering HOME page");
   return (
     <>
+      <TopBar />
       <Navbar 
         onNavigateHome={navigateToHome} 
         onNavigateSiklusHidup={navigateToSiklusHidup}
@@ -109,7 +138,7 @@ export default function App() {
       <CategorySection />
       <InfoSection />
       <TopicSection />
-      <ArticleSection />
+      <ArticleSection onNavigateArtikel={navigateToArtikel} />
       <FeatureSection />
       <Footer />
     </>
