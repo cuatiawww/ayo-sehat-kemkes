@@ -11,7 +11,7 @@ const lifecycleStages = [
     age: "< 5 Tahun",
     slug: "bayi-balita",
     image:
-      "https://images.unsplash.com/photo-1545877790-63898f6ff403?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+      "../assets/image.png",
     color: "#d5dd23",
   },
   {
@@ -20,7 +20,7 @@ const lifecycleStages = [
     age: "5-9 Tahun",
     slug: "anak-anak",
     image:
-      "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+      "../assets/Image (4).png",
     color: "#d5dd23",
   },
   {
@@ -29,7 +29,7 @@ const lifecycleStages = [
     age: "10-18 Tahun",
     slug: "remaja",
     image:
-      "https://images.unsplash.com/photo-1622319107576-cca7c8a906f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+      "../assets/Image (1).png",
     color: "#d5dd23",
   },
   {
@@ -38,7 +38,7 @@ const lifecycleStages = [
     age: "18-59 Tahun",
     slug: "dewasa",
     image:
-      "https://images.unsplash.com/photo-1758798480119-409a9e9925ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+      "../assets/Image (2).png",
     color: "#d5dd23",
   },
   {
@@ -47,7 +47,7 @@ const lifecycleStages = [
     age: "60+ Tahun",
     slug: "lansia",
     image:
-      "https://images.unsplash.com/photo-1536522005573-40430ba2277f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+      "../assets/Image (3).png",
     color: "#d5dd23",
   },
 ];
@@ -640,66 +640,66 @@ export default function SiklusHidupPage({
           </motion.div>
 
           {/* Lifecycle Cards - EXACT STRUCTURE dari CategorySection */}
-          {/* Lifecycle Cards - EXACT STRUCTURE dari CategorySection */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-6 lg:gap-[26px] pb-8 items-end">
-            {lifecycleStages.map((stage, index) => {
-              // Card yang dipilih jadi BESAR (aspect taller)
-              const isSelected = stage.slug === selectedStage;
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-6 lg:gap-[26px] pb-8 items-end">
+  {lifecycleStages.map((stage, index) => {
+    const isSelected = stage.slug === selectedStage;
 
-              return (
-                <motion.div
-                  key={stage.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0,
-                    scale: isSelected ? 1.15 : 1
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                  }}
-                  className="group cursor-pointer flex flex-col items-center"
-                  onClick={() => setSelectedStage(stage.slug)}
-                >
-                  {/* Image Container with Overlay Text - PERSEGI dengan scale saat selected */}
-                  <div className={`relative w-full max-w-[272px] mx-auto transition-all duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-105 aspect-square ${isSelected ? 'shadow-[0_10px_40px_rgba(24,179,171,0.5)]' : ''}`}>
-                    {/* Background placeholder with glow effect */}
-                    <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] sm:rounded-[25px] transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(24,179,171,0.6)]" />
-
-                    {/* Animated border glow */}
-                    <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] border-2 border-[#d5dd23] animate-pulse"></div>
-                    </div>
-
-                    {/* Image */}
-                    <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] overflow-hidden transition-all duration-500 group-hover:rotate-1">
-                      <img
-                        alt={`${stage.name}, ${stage.age}`}
-                        className="absolute inset-0 max-w-none object-cover object-center pointer-events-none rounded-[20px] sm:rounded-[25px] size-full transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-                        src={stage.image}
-                      />
-                      {/* Hover Overlay with gradient animation */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-                      {/* Shimmer effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-                    </div>
-
-                    {/* Text Label - Positioned at bottom with lift animation */}
-                    <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-1/2 -translate-x-1/2 bg-[#d5dd23] rounded-[15px] sm:rounded-[20px] h-[70px] sm:h-[84px] w-[180px] sm:w-[222px] flex flex-col items-center justify-center transition-all duration-500 ease-out group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-2 group-hover:scale-105 z-10 px-2">
-                      <p className="font-['Poppins:SemiBold',sans-serif] not-italic text-[18px] sm:text-[20px] lg:text-[23px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
-                        {stage.name}
-                      </p>
-                      <p className="font-['Poppins:Regular',sans-serif] not-italic text-[14px] sm:text-[15px] lg:text-[16px] leading-[20px] sm:leading-[26px] lg:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
-                        {stage.age}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+    return (
+      <motion.div
+        key={stage.id}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: isSelected ? 1.15 : 1
+        }}
+        transition={{
+          duration: 0.5,
+          delay: index * 0.1,
+        }}
+        className="group cursor-pointer flex flex-col items-center"
+        onClick={() => setSelectedStage(stage.slug)}
+      >
+        {/* Image Container */}
+        <div
+          className={`relative w-full max-w-[272px] mx-auto aspect-square transition-all duration-500 ease-out
+            ${isSelected ? 'shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20' : 'z-10'}
+            group-hover:-translate-y-3 group-hover:scale-105`}
+        >
+          {/* Image Wrapper (hilangkan warna dasar biar nggak bocor putih) */}
+          <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] overflow-hidden">
+            <img
+              alt={`${stage.name}, ${stage.age}`}
+              src={stage.image}
+              className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700
+              group-hover:scale-105 group-hover:brightness-110"
+            />
+            {/* Gradient Overlay saat hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
           </div>
+
+          {/* Border Glow saat hover */}
+          <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
+
+          {/* Label bawah */}
+          <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-1/2 -translate-x-1/2 
+            bg-[#d5dd23] rounded-[15px] sm:rounded-[20px] h-[70px] sm:h-[84px] w-[180px] sm:w-[222px] 
+            flex flex-col items-center justify-center 
+            transition-all duration-500 ease-out 
+            group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-2 group-hover:scale-105 z-30 px-2">
+            <p className="font-['Poppins:SemiBold',sans-serif] not-italic text-[18px] sm:text-[20px] lg:text-[23px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
+              {stage.name}
+            </p>
+            <p className="font-['Poppins:Regular',sans-serif] not-italic text-[14px] sm:text-[15px] lg:text-[16px] leading-[20px] sm:leading-[26px] lg:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
+              {stage.age}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    );
+  })}
+</div>
+
         </div>
       </section>
 
@@ -715,7 +715,7 @@ export default function SiklusHidupPage({
                   <img
                     src={currentStageData?.image}
                     alt={currentContent?.title}
-                    className="absolute right-0 top-0 h-full w-auto object-cover opacity-90"
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover opacity-90"
                   />
                   <div className="relative z-10">
                     <div className="bg-[#d5dd23] inline-block rounded-full px-4 py-1.5 mb-4">
@@ -723,6 +723,22 @@ export default function SiklusHidupPage({
                         {currentStageData?.name}
                       </p>
                     </div>
+                  </div>
+                </div>
+
+                 {/* Kelompok Umur Header - EXACT from Figma */}
+                <div className="mb-6">
+                  <p className="font-['Poppins'] text-[#6b7280] text-[14px] mb-2">
+                    Kelompok Umur
+                  </p>
+                  <div className="flex items-center gap-3 mb-4">
+                    <h1 className="font-['Poppins'] text-[#18b3ab] text-[32px] lg:text-[40px]">
+                      {currentStageData?.name}
+                    </h1>
+                    <span className="font-['Poppins'] text-[#6b7280] text-[20px] lg:text-[24px]">•</span>
+                    <p className="font-['Poppins'] text-[#6b7280] text-[18px] lg:text-[20px]">
+                      {currentStageData?.age}
+                    </p>
                   </div>
                 </div>
 
@@ -814,9 +830,6 @@ export default function SiklusHidupPage({
 
                 {/* Content Article */}
                 <div>
-                  <h2 className="font-['Poppins'] font-semibold text-[24px] lg:text-[28px] text-[#18b3ab] mb-4">
-                    {currentContent?.title}
-                  </h2>
                   <div className="space-y-4">
                     <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
                       {currentContent?.description}
@@ -973,18 +986,23 @@ export default function SiklusHidupPage({
 
                           {/* Content */}
                           <div className="flex flex-col gap-[7px] flex-1">
-                            {/* Tags with bullets - EXACT from Figma */}
-                            <div className="font-['Poppins'] text-[#18b3ab] text-[12px] leading-[18px] flex flex-wrap items-center gap-[6px]">
+                            {/* Tags with bullets - EXACT from Figma - Truncate 1 line */}
+                            <div className="font-['Poppins'] text-[#18b3ab] text-[12px] leading-[18px] overflow-hidden whitespace-nowrap text-ellipsis">
                               <span>Bayi dan Balita (&lt; 5 Tahun)</span>
-                              <span className="text-[15px] leading-[30px]">•</span>
+                              <span className="text-[15px] leading-[30px]"> • </span>
                               <span>Anak-anak (5-9 Tahun)</span>
-                              <span className="text-[15px] leading-[30px]">•</span>
+                              <span className="text-[15px] leading-[30px]"> • </span>
                               <span>Remaja...</span>
                             </div>
 
-                            {/* Title - EXACT from Figma */}
-                            <p className="font-['Poppins'] font-medium text-[15px] leading-[25px] text-neutral-600 group-hover:text-[#18b3ab] transition-colors duration-200">
+                            {/* Title - EXACT from Figma - Truncate 1 line */}
+                            <p className="font-['Poppins'] font-medium text-[15px] leading-[25px] text-neutral-600 group-hover:text-[#18b3ab] transition-colors duration-200 overflow-hidden whitespace-nowrap text-ellipsis">
                               {article.title}
+                            </p>
+
+                            {/* Description - Truncate 3 lines */}
+                            <p className="font-['Poppins'] text-[13px] leading-[20px] text-[#6b7280] line-clamp-3">
+                              {article.description || "Informasi kesehatan penting untuk tahap perkembangan ini, mencakup nutrisi, vaksinasi, dan perawatan yang diperlukan untuk mendukung tumbuh kembang optimal."}
                             </p>
                           </div>
                         </div>
