@@ -553,133 +553,113 @@ export default function SiklusHidupPage({
       />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] py-6 sm:py-8 lg:py-12 overflow-hidden">
-        {/* Decorative Background Circles */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Large circle top left */}
-          <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
-          {/* Large circle top right */}
-          <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
-          {/* Medium circle bottom right */}
-          <div className="absolute bottom-0 -right-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
-          {/* Small decorative lines */}
-          <div className="absolute bottom-20 right-40 w-[300px] h-[150px]">
-            <svg
-              viewBox="0 0 300 150"
-              className="w-full h-full opacity-20"
-            >
-              <path
-                d="M0,30 Q75,20 150,30 T300,30"
-                stroke="#e5e7eb"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M0,60 Q75,50 150,60 T300,60"
-                stroke="#e5e7eb"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M0,90 Q75,80 150,90 T300,90"
-                stroke="#e5e7eb"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M0,120 Q75,110 150,120 T300,120"
-                stroke="#e5e7eb"
-                strokeWidth="2"
-                fill="none"
-              />
-            </svg>
-          </div>
-        </div>
+     <div className="relative">
+  {/* Hero Section - Background Gradient */}
+  <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-22 sm:pt-8 lg:pt-12 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+    {/* Decorative Background Circles */}
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
+      <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
+      <div className="absolute bottom-0 -right-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
+      <div className="absolute bottom-20 right-40 w-[300px] h-[150px]">
+        <svg viewBox="0 0 300 150" className="w-full h-full opacity-20">
+          <path d="M0,30 Q75,20 150,30 T300,30" stroke="#e5e7eb" strokeWidth="2" fill="none" />
+          <path d="M0,60 Q75,50 150,60 T300,60" stroke="#e5e7eb" strokeWidth="2" fill="none" />
+          <path d="M0,90 Q75,80 150,90 T300,90" stroke="#e5e7eb" strokeWidth="2" fill="none" />
+          <path d="M0,120 Q75,110 150,120 T300,120" stroke="#e5e7eb" strokeWidth="2" fill="none" />
+        </svg>
+      </div>
+    </div>
 
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6 sm:mb-8 lg:mb-10"
-          >
-            <h1 className="font-['Poppins'] font-medium text-[28px] sm:text-[36px] lg:text-[50px] text-[#18b3ab] mb-3 sm:mb-4">
-              Siklus Hidup Kesehatan
-            </h1>
-            <p className="font-['Poppins'] text-[14px] sm:text-[16px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
-              Pendampingan menjaga kesehatan sepanjang siklus
-              kehidupan, dengan informasi khusus setiap tahap
-              usia
-            </p>
-          </motion.div>
-
-          {/* Lifecycle Cards - EXACT STRUCTURE dari CategorySection */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 sm:gap-6 md:gap-8 lg:gap-6 xl:gap-[26px] pb-10 sm:pb-12 lg:pb-8 items-end">
-  {lifecycleStages.map((stage, index) => {
-    const isSelected = stage.slug === selectedStage;
-
-    return (
+    <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <motion.div
-        key={stage.id}
         initial={{ opacity: 0, y: 20 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          scale: isSelected ? 1.08 : 1
-        }}
-        transition={{
-          duration: 0.5,
-          delay: index * 0.1,
-        }}
-        className="group cursor-pointer flex flex-col items-center"
-        onClick={() => setSelectedStage(stage.slug)}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="mb-6 sm:mb-8 lg:mb-10"
       >
-        {/* Image Container */}
-        <div
-          className={`relative w-full max-w-[200px] sm:max-w-[220px] lg:max-w-[240px] xl:max-w-[272px] mx-auto aspect-square transition-all duration-500 ease-out
-            ${isSelected ? 'shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20' : 'z-10'}
-            group-hover:-translate-y-3 group-hover:scale-105`}
-        >
-          {/* Image Wrapper (hilangkan warna dasar biar nggak bocor putih) */}
-          <div className="absolute inset-0 rounded-[18px] sm:rounded-[20px] lg:rounded-[22px] xl:rounded-[25px] overflow-hidden">
-            <img
-              alt={`${stage.name}, ${stage.age}`}
-              src={stage.image}
-              className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700
-              group-hover:scale-105 group-hover:brightness-110"
-            />
-            {/* Gradient Overlay saat hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-          </div>
-
-          {/* Border Glow saat hover */}
-          <div className="absolute inset-0 rounded-[18px] sm:rounded-[20px] lg:rounded-[22px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
-
-          {/* Label bawah */}
-          <div className="absolute bottom-[-18px] sm:bottom-[-20px] lg:bottom-[-22px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 
-            bg-[#d5dd23] rounded-[12px] sm:rounded-[15px] lg:rounded-[18px] xl:rounded-[20px] h-[55px] sm:h-[65px] lg:h-[75px] xl:h-[84px] w-[140px] sm:w-[160px] lg:w-[180px] xl:w-[222px] 
-            flex flex-col items-center justify-center 
-            transition-all duration-500 ease-out 
-            group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-2 group-hover:scale-105 z-30 px-2">
-            <p className="font-['Poppins:SemiBold',sans-serif] not-italic text-[14px] sm:text-[16px] lg:text-[19px] xl:text-[23px] leading-[20px] sm:leading-[22px] lg:leading-[26px] xl:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
-              {stage.name}
-            </p>
-            <p className="font-['Poppins:Regular',sans-serif] not-italic text-[11px] sm:text-[12px] lg:text-[14px] xl:text-[16px] leading-[16px] sm:leading-[18px] lg:leading-[22px] xl:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
-              {stage.age}
-            </p>
-          </div>
-        </div>
+        <h1 className="font-semibold text-[28px] sm:text-[36px] lg:text-[50px] text-[#18b3ab] mb-3 sm:mb-4">
+          Siklus Hidup Kesehatan
+        </h1>
+        <p className="text-[14px] sm:text-[16px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
+          Pendampingan menjaga kesehatan sepanjang siklus kehidupan, dengan informasi khusus setiap tahap usia
+        </p>
       </motion.div>
-    );
-  })}
+    </div>
+  </section>
+
+  {/* LIFECYCLE CARDS - ABSOLUTE POSITION untuk OVERLAP 50-50 - RESPONSIVE 5 CARDS */}
+  <div className="absolute left-0 right-0 top-[calc(100%-50px)] sm:top-[calc(100%-20px)] lg:top-[calc(100%-80px)] z-20 pointer-events-none">
+    <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
+      <div className="grid grid-cols-5 gap-2 sm:gap-4 lg:gap-6 xl:gap-[26px] items-end pointer-events-auto">
+        {lifecycleStages.map((stage, index) => {
+          const isSelected = stage.slug === selectedStage;
+
+          return (
+            <motion.div
+              key={stage.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: isSelected ? 1.05 : 1
+              }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+              }}
+              className="group cursor-pointer flex flex-col items-center"
+              onClick={() => setSelectedStage(stage.slug)}
+            >
+              {/* Image Container - RESPONSIVE SIZES */}
+              <div
+                className={`relative w-full aspect-square transition-all duration-500 ease-out
+                  ${isSelected ? 'shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20' : 'z-10'}
+                  group-hover:-translate-y-2 group-hover:scale-105`}
+              >
+                {/* Image Wrapper */}
+                <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] overflow-hidden bg-[#18b3ab]">
+                  <img
+                    alt={`${stage.name}, ${stage.age}`}
+                    src={stage.image}
+                    className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700
+                    group-hover:scale-105 group-hover:brightness-110"
+                  />
+                  {/* Gradient Overlay saat hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                </div>
+
+                {/* Border Glow saat hover */}
+                <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
+
+                {/* Label bawah - RESPONSIVE SIZES */}
+                <div className="absolute bottom-[-10px] sm:bottom-[-15px] lg:bottom-[-20px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 
+                  bg-[#d5dd23] rounded-[8px] sm:rounded-[12px] lg:rounded-[16px] xl:rounded-[20px] 
+                  h-[40px] sm:h-[55px] lg:h-[70px] xl:h-[84px] 
+                  w-full max-w-[90%] sm:max-w-[85%] lg:max-w-[80%] xl:max-w-[222px]
+                  flex flex-col items-center justify-center 
+                  transition-all duration-500 ease-out 
+                  group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-1 group-hover:scale-105 z-30 px-1 sm:px-2">
+                  <p className="font-semibold text-[9px] sm:text-[12px] lg:text-[16px] xl:text-[23px] leading-tight text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
+                    {stage.name}
+                  </p>
+                  <p className="text-[7px] sm:text-[10px] lg:text-[12px] xl:text-[16px] leading-tight text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
+                    {stage.age}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
 </div>
 
-        </div>
-      </section>
 
       {/* Main Content Section - 2 COLUMN LAYOUT dengan Sticky Sidebar */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-white">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-white pt-[140px] sm:pt-[230px] lg:pt-[380px] pb-8 sm:pb-10 lg:pb-12">
+  <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 sm:gap-8 lg:gap-12">
             {/* LEFT COLUMN: Main Content (Artikel + Topik + Penyakit) */}
             <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
