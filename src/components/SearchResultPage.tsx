@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ChevronRight, Home, CircleArrowRight } from "lucide-react";
+import { CircleArrowRight } from "lucide-react";
 import SearchSidebar from "./SearchSidebar.tsx";
 import { motion, AnimatePresence } from "framer-motion";
+import CustomBreadcrumb from "./CustomBreadcrump";
 
 interface Article {
   id: number;
@@ -142,31 +143,17 @@ export default function SearchResultsPage({
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb Section with Background */}
-      <div className="bg-gradient-to-b from-[#f5f5f5] to-white py-4 lg:py-5 border-b border-gray-100">
+      {/* Breadcrumb */}
+      <CustomBreadcrumb
+        onNavigateHome={onNavigateHome}
+        currentPage={searchQuery ? `Pencarian: ${searchQuery}` : "Pencarian"}
+      />
+      
+      {/* Search Results Header */}
+      <div className="bg-white py-4 lg:py-5 border-b border-gray-100">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-sm">
-            <button
-              onClick={onNavigateHome}
-              className="flex items-center gap-1 text-[#18b3ab] hover:underline transition-colors font-['Poppins']"
-            >
-              <Home size={16} />
-              <span>Home</span>
-            </button>
-            <ChevronRight size={16} className="text-gray-400" />
-            <span className="text-gray-600 font-['Poppins']">Pencarian</span>
-            {searchQuery && (
-              <>
-                <ChevronRight size={16} className="text-gray-400" />
-                <span className="text-gray-900 font-medium font-['Poppins']">
-                  {searchQuery}
-                </span>
-              </>
-            )}
-          </div>
-          
           {/* Result Count */}
-          <div className="mt-3 flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <p className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">
               <span className="font-semibold text-gray-900">Hasil ({totalResults})</span>
             </p>

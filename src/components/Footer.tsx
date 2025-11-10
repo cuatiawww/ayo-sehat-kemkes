@@ -242,7 +242,7 @@ export default function Footer() {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <p className="font-normal not-italic text-[11px] sm:text-[12px] lg:text-[13px] text-[#212121] text-center sm:text-left">
-              © 2025 Kesehatan Plus. All rights reserved.
+              © 2025 Kemenkes. All rights reserved.
             </p>
             <div className="flex gap-3 sm:gap-4">
               <a

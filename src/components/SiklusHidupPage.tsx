@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { ChevronRight, Home, Share2 } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { motion } from "framer-motion";
 import CustomCalendar from "./CustomCalendar";
+import CustomBreadcrumb from "./CustomBreadcrump";
 
 // Lifecycle stage data
 const lifecycleStages = [
@@ -546,37 +547,10 @@ export default function SiklusHidupPage({
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="relative bg-gradient-to-b from-[#f5f5f5] to-white py-3 sm:py-4 lg:py-5 border-b border-gray-100 overflow-hidden">
-        {/* Decorative Background */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Large circle top left */}
-          <div className="absolute -top-20 -left-20 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full bg-gray-100/30 blur-3xl" />
-          {/* Medium circle top right */}
-          <div className="absolute -top-16 right-10 w-[200px] sm:w-[280px] h-[200px] sm:h-[280px] rounded-full bg-gray-50/40 blur-2xl" />
-        </div>
-
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm overflow-x-auto">
-            <button
-              onClick={onNavigateHome}
-              className="flex items-center gap-1 text-[#18b3ab] hover:underline transition-colors font-['Poppins'] whitespace-nowrap"
-            >
-              <Home size={14} className="sm:w-4 sm:h-4" />
-              <span>Home</span>
-            </button>
-            <ChevronRight size={14} className="text-gray-400 shrink-0 sm:w-4 sm:h-4" />
-            <span className="text-gray-900 font-medium font-['Poppins'] whitespace-nowrap">
-              Siklus Hidup
-            </span>
-            <ChevronRight size={14} className="text-gray-400 shrink-0 sm:w-4 sm:h-4" />
-            <span className="text-[#18b3ab] font-medium font-['Poppins'] capitalize whitespace-nowrap">
-              {lifecycleStages.find(
-                (stage) => stage.slug === selectedStage,
-              )?.name || "Remaja"}
-            </span>
-          </div>
-        </div>
-      </div>
+      <CustomBreadcrumb
+        onNavigateHome={onNavigateHome}
+        currentPage={`Siklus Hidup - ${lifecycleStages.find((stage) => stage.slug === selectedStage)?.name || "Remaja"}`}
+      />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] py-6 sm:py-8 lg:py-12 overflow-hidden">

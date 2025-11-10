@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ChevronRight, Home, Search, AlertCircle } from "lucide-react";
+import { Search, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import CustomBreadcrumb from "./CustomBreadcrump";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -9,7 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./ui/alert-dialog";
-import  Button from "./ui/button";
+import Button from "./ui/button";
 
 // Data topik kesehatan per huruf 
 const healthTopicsData = {
@@ -186,143 +187,119 @@ export default function TopikKesehatanPage({
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <div className="relative bg-white py-3 sm:py-4 border-b border-gray-200">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
-            <button
-              onClick={onNavigateHome}
-              className="flex items-center gap-1 text-gray-600 hover:text-[#18b3ab] transition-colors font-['Poppins']"
-            >
-              <Home size={14} className="sm:w-4 sm:h-4" />
-            </button>
-            <ChevronRight
-              size={14}
-              className="text-gray-400 shrink-0 sm:w-4 sm:h-4"
-            />
-            <button
-              onClick={onNavigateSiklusHidup}
-              className="text-gray-600 hover:text-[#18b3ab] transition-colors font-['Poppins']"
-            >
-              Siklus Hidup
-            </button>
-            <ChevronRight
-              size={14}
-              className="text-gray-400 shrink-0 sm:w-4 sm:h-4"
-            />
-            <span className="text-[#18b3ab] font-medium font-['Poppins']">
-              Topik Kesehatan
-            </span>
-          </div>
+       {/* Breadcrumb */}
+      <CustomBreadcrumb
+        onNavigateHome={onNavigateHome}
+        onNavigateSiklusHidup={onNavigateSiklusHidup}
+        currentPage="Topik Kesehatan"
+      />
+
+      {/* Search & Filter Section - Improved Color Scheme */}
+<section className="relative bg-gradient-to-b from-[#18b3ab] to-[#15a098] py-6 sm:py-8 lg:py-10 border-b border-[#13918a]">
+  <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Title */}
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="mb-4 sm:mb-5 lg:mb-6"
+    >
+      <h1 className="font-['Poppins'] font-semibold text-[28px] sm:text-[36px] lg:text-[44px] text-white mb-2">
+        Topik Kesehatan A-Z
+      </h1>
+      <p className="font-['Poppins'] text-[13px] sm:text-[14px] text-white/80">
+        Cari informasi kesehatan berdasarkan abjad atau kata kunci
+      </p>
+    </motion.div>
+
+    {/* Search Bar + Alphabet Filter - Auto Layout Responsive */}
+    <div className="space-y-3 sm:space-y-4">
+      {/* Row 1: Search Bar + Show All Button */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+        {/* Search Bar */}
+        <div className="relative flex-1 sm:max-w-[300px]">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Cari topik kesehatan..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full h-[40px] sm:h-[42px] pl-9 pr-3 font-['Poppins'] text-[13px] sm:text-[14px] text-[#212121] bg-white border-2 border-white/50 rounded-lg focus:outline-none focus:border-white focus:ring-2 focus:ring-white/30 transition-all duration-200 placeholder:text-gray-400 shadow-sm"
+          />
         </div>
-      </div>
 
-      {/* Search & Filter Section - Layout seperti screenshot */}
-      <section className="relative bg-gradient-to-b from-[#f8f9fa] to-white py-6 sm:py-8 lg:py-10 border-b border-gray-200">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Title */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4 sm:mb-5 lg:mb-6"
-          >
-            <h1 className="font-['Poppins'] font-semibold text-[28px] sm:text-[36px] lg:text-[44px] text-[#212121] mb-2">
-              Topik Kesehatan A-Z
-            </h1>
-            <p className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">
-              Cari informasi kesehatan berdasarkan abjad atau kata kunci
-            </p>
-          </motion.div>
-
-          {/* Search Bar + Alphabet Filter - Auto Layout Responsive */}
-          <div className="space-y-3 sm:space-y-4">
-            {/* Row 1: Search Bar + Show All Button */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-              {/* Search Bar */}
-              <div className="relative flex-1 sm:max-w-[300px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Cari topik kesehatan..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-[40px] sm:h-[42px] pl-9 pr-3 font-['Poppins'] text-[13px] sm:text-[14px] text-[#212121] bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-[#18b3ab] focus:ring-1 focus:ring-[#18b3ab]/30 transition-all duration-200 placeholder:text-gray-400"
-                />
-              </div>
-
-              {/* Show All Button */}
-              <button
-                onClick={() => setSelectedLetter(null)}
-                className={`
-                  font-['Poppins'] font-medium text-[13px] sm:text-[14px]
-                  px-5 sm:px-6 h-[40px] sm:h-[42px] whitespace-nowrap
-                  rounded-lg transition-all duration-300
-                  ${!selectedLetter 
-                    ? 'bg-[#18b3ab] text-white shadow-sm' 
-                    : 'bg-white text-gray-700 border border-gray-300 hover:border-[#18b3ab] hover:text-[#18b3ab]'
-                  }
-                `}
-              >
-                Tampilkan Semua
-              </button>
-            </div>
-
-           {/* Row 2: Alphabet Buttons - Horizontal Scroll */}
-<div className="relative -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
-  <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-    {alphabet.map((letter) => {
-      const hasContent = healthTopicsData[letter as keyof typeof healthTopicsData]?.length > 0;
-      const isSelected = selectedLetter === letter;
-      
-      return (
+        {/* Show All Button */}
         <button
-          key={letter}
-          onClick={() => hasContent ? setSelectedLetter(letter) : handleEmptyLetterClick(letter)}
+          onClick={() => setSelectedLetter(null)}
           className={`
-            font-['Poppins'] font-semibold text-[14px] sm:text-[15px]
-            min-w-[40px] w-[40px] h-[40px] sm:min-w-[44px] sm:w-[44px] sm:h-[44px]
-            rounded-lg transition-all duration-200
-            flex items-center justify-center shrink-0
-            ${hasContent 
-              ? isSelected
-                ? 'bg-[#18b3ab] text-white shadow-md'
-                : 'bg-white text-[#18b3ab] border border-gray-200 hover:border-[#18b3ab] hover:bg-[#18b3ab]/10'
-              : 'bg-gray-100 text-gray-400 border border-gray-200 hover:bg-gray-200 cursor-pointer'
+            font-['Poppins'] font-medium text-[13px] sm:text-[14px]
+            px-5 sm:px-6 h-[40px] sm:h-[42px] whitespace-nowrap
+            rounded-lg transition-all duration-300 shadow-sm
+            ${!selectedLetter 
+              ? 'bg-white text-[#18b3ab] hover:bg-white/90' 
+              : 'bg-white/20 text-white border-2 border-white/50 hover:bg-white/30 hover:border-white'
             }
           `}
         >
-          {letter}
+          Tampilkan Semua
         </button>
-      );
-    })}
-  </div>
-</div>
-          </div>
+      </div>
 
-          {/* Active Filter Info */}
-          {selectedLetter && (
-            <motion.div
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-3 flex items-center gap-2"
-            >
-              <span className="font-['Poppins'] text-[12px] sm:text-[13px] text-gray-600">
-                Filter aktif:
-              </span>
-              <span className="px-2.5 py-0.5 bg-[#18b3ab]/10 text-[#18b3ab] font-['Poppins'] font-medium text-[12px] rounded">
-                {selectedLetter}
-              </span>
+      {/* Row 2: Alphabet Buttons - Horizontal Scroll */}
+      <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          {alphabet.map((letter) => {
+            const hasContent = healthTopicsData[letter as keyof typeof healthTopicsData]?.length > 0;
+            const isSelected = selectedLetter === letter;
+            
+            return (
               <button
-                onClick={() => setSelectedLetter(null)}
-                className="text-[12px] text-gray-500 hover:text-[#18b3ab] font-['Poppins'] underline"
+                key={letter}
+                onClick={() => hasContent ? setSelectedLetter(letter) : handleEmptyLetterClick(letter)}
+                className={`
+                  font-['Poppins'] font-semibold text-[14px] sm:text-[15px]
+                  min-w-[40px] w-[40px] h-[40px] sm:min-w-[44px] sm:w-[44px] sm:h-[44px]
+                  rounded-lg transition-all duration-200
+                  flex items-center justify-center shrink-0
+                  ${hasContent 
+                    ? isSelected
+                      ? 'bg-white text-[#18b3ab] shadow-lg scale-105'
+                      : 'bg-white/20 text-white border-2 border-white/50 hover:bg-white hover:text-[#18b3ab] hover:border-white'
+                    : 'bg-white/10 text-white/50 border-2 border-white/30 hover:bg-white/20 cursor-pointer'
+                  }
+                `}
               >
-                Hapus
+                {letter}
               </button>
-            </motion.div>
-          )}
+            );
+          })}
         </div>
-      </section>
+      </div>
+    </div>
+
+    {/* Active Filter Info */}
+    {selectedLetter && (
+      <motion.div
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mt-3 flex items-center gap-2"
+      >
+        <span className="font-['Poppins'] text-[12px] sm:text-[13px] text-white/90">
+          Filter aktif:
+        </span>
+        <span className="px-2.5 py-1 bg-white text-[#18b3ab] font-['Poppins'] font-medium text-[12px] rounded shadow-sm">
+          {selectedLetter}
+        </span>
+        <button
+          onClick={() => setSelectedLetter(null)}
+          className="text-[12px] text-white/90 hover:text-white font-['Poppins'] underline underline-offset-2"
+        >
+          Hapus
+        </button>
+      </motion.div>
+    )}
+  </div>
+</section>
 
       {/* Topics Grid - Filtered */}
       <section className="py-8 sm:py-10 lg:py-12 bg-white">
