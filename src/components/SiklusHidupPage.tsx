@@ -546,30 +546,30 @@ export default function SiklusHidupPage({
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="relative bg-gradient-to-b from-[#f5f5f5] to-white py-4 lg:py-5 border-b border-gray-100 overflow-hidden">
+      <div className="relative bg-gradient-to-b from-[#f5f5f5] to-white py-3 sm:py-4 lg:py-5 border-b border-gray-100 overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Large circle top left */}
-          <div className="absolute -top-20 -left-20 w-[350px] h-[350px] rounded-full bg-gray-100/30 blur-3xl" />
+          <div className="absolute -top-20 -left-20 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full bg-gray-100/30 blur-3xl" />
           {/* Medium circle top right */}
-          <div className="absolute -top-16 right-10 w-[280px] h-[280px] rounded-full bg-gray-50/40 blur-2xl" />
+          <div className="absolute -top-16 right-10 w-[200px] sm:w-[280px] h-[200px] sm:h-[280px] rounded-full bg-gray-50/40 blur-2xl" />
         </div>
 
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm overflow-x-auto">
             <button
               onClick={onNavigateHome}
-              className="flex items-center gap-1 text-[#18b3ab] hover:underline transition-colors font-['Poppins']"
+              className="flex items-center gap-1 text-[#18b3ab] hover:underline transition-colors font-['Poppins'] whitespace-nowrap"
             >
-              <Home size={16} />
+              <Home size={14} className="sm:w-4 sm:h-4" />
               <span>Home</span>
             </button>
-            <ChevronRight size={16} className="text-gray-400" />
-            <span className="text-gray-900 font-medium font-['Poppins']">
+            <ChevronRight size={14} className="text-gray-400 shrink-0 sm:w-4 sm:h-4" />
+            <span className="text-gray-900 font-medium font-['Poppins'] whitespace-nowrap">
               Siklus Hidup
             </span>
-            <ChevronRight size={16} className="text-gray-400" />
-            <span className="text-[#18b3ab] font-medium font-['Poppins'] capitalize">
+            <ChevronRight size={14} className="text-gray-400 shrink-0 sm:w-4 sm:h-4" />
+            <span className="text-[#18b3ab] font-medium font-['Poppins'] capitalize whitespace-nowrap">
               {lifecycleStages.find(
                 (stage) => stage.slug === selectedStage,
               )?.name || "Remaja"}
@@ -579,15 +579,15 @@ export default function SiklusHidupPage({
       </div>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] py-8 lg:py-12 overflow-hidden">
+      <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] py-6 sm:py-8 lg:py-12 overflow-hidden">
         {/* Decorative Background Circles */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Large circle top left */}
-          <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
+          <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
           {/* Large circle top right */}
-          <div className="absolute -top-40 right-0 w-[600px] h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
+          <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
           {/* Medium circle bottom right */}
-          <div className="absolute bottom-0 -right-20 w-[400px] h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
+          <div className="absolute bottom-0 -right-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
           {/* Small decorative lines */}
           <div className="absolute bottom-20 right-40 w-[300px] h-[150px]">
             <svg
@@ -627,12 +627,12 @@ export default function SiklusHidupPage({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8 lg:mb-10"
+            className="mb-6 sm:mb-8 lg:mb-10"
           >
-            <h1 className="font-['Poppins'] font-medium text-[32px] sm:text-[40px] lg:text-[50px] text-[#18b3ab] mb-4">
+            <h1 className="font-['Poppins'] font-medium text-[28px] sm:text-[36px] lg:text-[50px] text-[#18b3ab] mb-3 sm:mb-4">
               Siklus Hidup Kesehatan
             </h1>
-            <p className="font-['Poppins'] text-[16px] sm:text-[18px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
+            <p className="font-['Poppins'] text-[14px] sm:text-[16px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
               Pendampingan menjaga kesehatan sepanjang siklus
               kehidupan, dengan informasi khusus setiap tahap
               usia
@@ -640,7 +640,7 @@ export default function SiklusHidupPage({
           </motion.div>
 
           {/* Lifecycle Cards - EXACT STRUCTURE dari CategorySection */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-6 lg:gap-[26px] pb-8 items-end">
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 sm:gap-6 md:gap-8 lg:gap-6 xl:gap-[26px] pb-10 sm:pb-12 lg:pb-8 items-end">
   {lifecycleStages.map((stage, index) => {
     const isSelected = stage.slug === selectedStage;
 
@@ -651,7 +651,7 @@ export default function SiklusHidupPage({
         animate={{
           opacity: 1,
           y: 0,
-          scale: isSelected ? 1.15 : 1
+          scale: isSelected ? 1.08 : 1
         }}
         transition={{
           duration: 0.5,
@@ -662,12 +662,12 @@ export default function SiklusHidupPage({
       >
         {/* Image Container */}
         <div
-          className={`relative w-full max-w-[272px] mx-auto aspect-square transition-all duration-500 ease-out
+          className={`relative w-full max-w-[200px] sm:max-w-[220px] lg:max-w-[240px] xl:max-w-[272px] mx-auto aspect-square transition-all duration-500 ease-out
             ${isSelected ? 'shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20' : 'z-10'}
             group-hover:-translate-y-3 group-hover:scale-105`}
         >
           {/* Image Wrapper (hilangkan warna dasar biar nggak bocor putih) */}
-          <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] overflow-hidden">
+          <div className="absolute inset-0 rounded-[18px] sm:rounded-[20px] lg:rounded-[22px] xl:rounded-[25px] overflow-hidden">
             <img
               alt={`${stage.name}, ${stage.age}`}
               src={stage.image}
@@ -679,18 +679,18 @@ export default function SiklusHidupPage({
           </div>
 
           {/* Border Glow saat hover */}
-          <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
+          <div className="absolute inset-0 rounded-[18px] sm:rounded-[20px] lg:rounded-[22px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
 
           {/* Label bawah */}
-          <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-1/2 -translate-x-1/2 
-            bg-[#d5dd23] rounded-[15px] sm:rounded-[20px] h-[70px] sm:h-[84px] w-[180px] sm:w-[222px] 
+          <div className="absolute bottom-[-18px] sm:bottom-[-20px] lg:bottom-[-22px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 
+            bg-[#d5dd23] rounded-[12px] sm:rounded-[15px] lg:rounded-[18px] xl:rounded-[20px] h-[55px] sm:h-[65px] lg:h-[75px] xl:h-[84px] w-[140px] sm:w-[160px] lg:w-[180px] xl:w-[222px] 
             flex flex-col items-center justify-center 
             transition-all duration-500 ease-out 
             group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-2 group-hover:scale-105 z-30 px-2">
-            <p className="font-['Poppins:SemiBold',sans-serif] not-italic text-[18px] sm:text-[20px] lg:text-[23px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
+            <p className="font-['Poppins:SemiBold',sans-serif] not-italic text-[14px] sm:text-[16px] lg:text-[19px] xl:text-[23px] leading-[20px] sm:leading-[22px] lg:leading-[26px] xl:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
               {stage.name}
             </p>
-            <p className="font-['Poppins:Regular',sans-serif] not-italic text-[14px] sm:text-[15px] lg:text-[16px] leading-[20px] sm:leading-[26px] lg:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
+            <p className="font-['Poppins:Regular',sans-serif] not-italic text-[11px] sm:text-[12px] lg:text-[14px] xl:text-[16px] leading-[16px] sm:leading-[18px] lg:leading-[22px] xl:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
               {stage.age}
             </p>
           </div>
@@ -704,14 +704,14 @@ export default function SiklusHidupPage({
       </section>
 
       {/* Main Content Section - 2 COLUMN LAYOUT dengan Sticky Sidebar */}
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="py-8 sm:py-12 lg:py-16 bg-white">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 sm:gap-8 lg:gap-12">
             {/* LEFT COLUMN: Main Content (Artikel + Topik + Penyakit) */}
-            <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
               {/* Featured Image dengan Tags dan Social Icons */}
               <div>
-                <div className="bg-gradient-to-br from-[#18b3ab] to-[#15a098] rounded-[20px] overflow-hidden p-6 lg:p-8 h-[400px] lg:h-[500px] relative mb-6">
+                <div className="bg-gradient-to-br from-[#18b3ab] to-[#15a098] rounded-[15px] sm:rounded-[20px] overflow-hidden p-4 sm:p-6 lg:p-8 h-[250px] sm:h-[350px] lg:h-[500px] relative mb-6">
                   <img
                     src={currentStageData?.image}
                     alt={currentContent?.title}
@@ -728,40 +728,40 @@ export default function SiklusHidupPage({
 
                  {/* Kelompok Umur Header - EXACT from Figma */}
                 <div className="mb-6">
-                  <p className="font-['Poppins'] text-[#6b7280] text-[14px] mb-2">
+                  <p className="font-['Poppins'] text-[#6b7280] text-[13px] sm:text-[14px] mb-2">
                     Kelompok Umur
                   </p>
-                  <div className="flex items-center gap-3 mb-4">
-                    <h1 className="font-['Poppins'] text-[#18b3ab] text-[32px] lg:text-[40px]">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+                    <h1 className="font-['Poppins'] text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px]">
                       {currentStageData?.name}
                     </h1>
-                    <span className="font-['Poppins'] text-[#6b7280] text-[20px] lg:text-[24px]">•</span>
-                    <p className="font-['Poppins'] text-[#6b7280] text-[18px] lg:text-[20px]">
+                    <span className="font-['Poppins'] text-[#6b7280] text-[18px] sm:text-[20px] lg:text-[24px]">•</span>
+                    <p className="font-['Poppins'] text-[#6b7280] text-[16px] sm:text-[18px] lg:text-[20px]">
                       {currentStageData?.age}
                     </p>
                   </div>
                 </div>
 
                 {/* Tags and Social Share - IMPROVED */}
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
+                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    <button className="px-4 py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
+                  <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
                       Penyakit Pernapasan
                     </button>
-                    <button className="px-4 py-1.5 bg-[#18b3ab] text-white rounded-full text-[13px] font-['Poppins'] hover:bg-[#16a199] transition-colors duration-200">
+                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 bg-[#18b3ab] text-white rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#16a199] transition-colors duration-200">
                       Penyakit Kardiovaskular
                     </button>
-                    <button className="px-4 py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
+                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
                       Penyakit Pencernaan
                     </button>
-                    <button className="px-4 py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
+                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
                       Neoplasma
                     </button>
                   </div>
 
                   {/* Social Share Icons */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-shrink-0">
                     <button
                       className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
                       aria-label="Share"
@@ -858,11 +858,11 @@ export default function SiklusHidupPage({
 
               {/* Topik Kesehatan Terkait - MOVED TO LEFT COLUMN */}
               <div>
-                <h2 className="font-['Poppins'] font-semibold text-[24px] lg:text-[28px] text-[#18b3ab] mb-6">
+                <h2 className="font-['Poppins'] font-semibold text-[20px] sm:text-[24px] lg:text-[28px] text-[#18b3ab] mb-4 sm:mb-6">
                   Topik Kesehatan Terkait
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {currentContent?.topics.map(
                     (topic, index) => (
                       <motion.div
@@ -901,11 +901,11 @@ export default function SiklusHidupPage({
 
               {/* Penyakit Terkait - MOVED TO LEFT COLUMN */}
               <div>
-                <h2 className="font-['Poppins'] font-semibold text-[24px] lg:text-[28px] text-[#18b3ab] mb-6">
+                <h2 className="font-['Poppins'] font-semibold text-[20px] sm:text-[24px] lg:text-[28px] text-[#18b3ab] mb-4 sm:mb-6">
                   Penyakit Terkait
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {diseases.map((disease, index) => (
                     <motion.div
                       key={disease.id}
@@ -942,13 +942,13 @@ export default function SiklusHidupPage({
             </div>
 
             {/* RIGHT COLUMN: Sticky Sidebar */}
-            <div className="lg:sticky lg:top-6 lg:self-start flex flex-col gap-8 h-fit">
+            <div className="lg:sticky lg:top-6 lg:self-start flex flex-col gap-6 sm:gap-8 h-fit">
               {/* Calendar */}
               <div>
-                <h3 className="font-['Poppins'] font-medium text-[18px] lg:text-[20px] text-[#18b3ab] mb-2">
+                <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#18b3ab] mb-2">
                   Kalender Kesehatan
                 </h3>
-                <p className="font-['Poppins'] text-[13px] lg:text-[14px] text-gray-600 mb-4 leading-relaxed">
+                <p className="font-['Poppins'] text-[12px] sm:text-[13px] lg:text-[14px] text-gray-600 mb-3 sm:mb-4 leading-relaxed">
                   Informasi terkait dengan hari besar dan agenda
                   kesehatan satu tahun penuh
                 </p>
@@ -958,25 +958,24 @@ export default function SiklusHidupPage({
               </div>
 
               {/* Artikel Terkait - EXACT from Figma Frame366 */}
-              <div className="flex flex-col gap-[24px]">
-                <h3 className="font-['Poppins'] font-medium text-[18px] lg:text-[20px] text-[#08847e]">
+              <div className="flex flex-col gap-[20px] sm:gap-[24px]">
+                <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#08847e]">
                   Artikel Terkait
                 </h3>
 
                 {/* Artikel List with separators */}
-                <div className="flex flex-col gap-[21px]">
+                <div className="flex flex-col gap-[18px] sm:gap-[21px]">
                   {currentContent?.articles
                     .slice(0, 4)
-                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                    .map((article, index) => (
+                    .map((article) => (
                       <div key={article.id}>
                         {/* Separator */}
-                        <div className="bg-[#cccccc] h-px w-full mb-[21px]" />
+                        <div className="bg-[#cccccc] h-px w-full mb-[18px] sm:mb-[21px]" />
                         
                         {/* Article Item - EXACT from Figma Frame366 */}
-                        <div className="flex gap-[18px] items-start cursor-pointer group">
+                        <div className="flex gap-[12px] sm:gap-[18px] items-start cursor-pointer group">
                           {/* Image - 138x129 rounded-[10px] */}
-                          <div className="h-[129px] w-[138px] rounded-[10px] overflow-hidden shrink-0">
+                          <div className="h-[100px] w-[110px] sm:h-[129px] sm:w-[138px] rounded-[8px] sm:rounded-[10px] overflow-hidden shrink-0">
                             <img
                               alt={article.title}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
@@ -985,23 +984,23 @@ export default function SiklusHidupPage({
                           </div>
 
                           {/* Content */}
-                          <div className="flex flex-col gap-[7px] flex-1">
+                          <div className="flex flex-col gap-[5px] sm:gap-[7px] flex-1 min-w-0">
                             {/* Tags with bullets - EXACT from Figma - Truncate 1 line */}
-                            <div className="font-['Poppins'] text-[#18b3ab] text-[12px] leading-[18px] overflow-hidden whitespace-nowrap text-ellipsis">
+                            <div className="font-['Poppins'] text-[#18b3ab] text-[10px] sm:text-[12px] leading-[16px] sm:leading-[18px] overflow-hidden whitespace-nowrap text-ellipsis">
                               <span>Bayi dan Balita (&lt; 5 Tahun)</span>
-                              <span className="text-[15px] leading-[30px]"> • </span>
+                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]"> • </span>
                               <span>Anak-anak (5-9 Tahun)</span>
-                              <span className="text-[15px] leading-[30px]"> • </span>
+                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]"> • </span>
                               <span>Remaja...</span>
                             </div>
 
                             {/* Title - EXACT from Figma - Truncate 1 line */}
-                            <p className="font-['Poppins'] font-medium text-[15px] leading-[25px] text-neutral-600 group-hover:text-[#18b3ab] transition-colors duration-200 overflow-hidden whitespace-nowrap text-ellipsis">
+                            <p className="font-['Poppins'] font-medium text-[13px] sm:text-[15px] leading-[20px] sm:leading-[25px] text-neutral-600 group-hover:text-[#18b3ab] transition-colors duration-200 overflow-hidden whitespace-nowrap text-ellipsis">
                               {article.title}
                             </p>
 
                             {/* Description - Truncate 3 lines */}
-                            <p className="font-['Poppins'] text-[13px] leading-[20px] text-[#6b7280] line-clamp-3">
+                            <p className="font-['Poppins'] text-[11px] sm:text-[13px] leading-[17px] sm:leading-[20px] text-[#6b7280] line-clamp-3">
                               {article.description || "Informasi kesehatan penting untuk tahap perkembangan ini, mencakup nutrisi, vaksinasi, dan perawatan yang diperlukan untuk mendukung tumbuh kembang optimal."}
                             </p>
                           </div>
@@ -1038,13 +1037,13 @@ export default function SiklusHidupPage({
               </div>
 
               {/* Media Publikasi Terkait - EXACT from Figma */}
-              <div className="flex flex-col gap-[24px]">
-                <h3 className="font-['Poppins'] font-medium text-[18px] lg:text-[20px] text-[#18b3ab]">
+              <div className="flex flex-col gap-[20px] sm:gap-[24px]">
+                <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#18b3ab]">
                   Media Publikasi Terkait
                 </h3>
 
                 {/* Publication Card */}
-                <div className="relative h-[280px] w-full">
+                <div className="relative h-[240px] sm:h-[280px] w-full">
                   {/* Border stroke container */}
                   <svg
                     className="absolute inset-0 w-full h-full"
