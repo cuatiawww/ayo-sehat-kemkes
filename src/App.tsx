@@ -10,8 +10,9 @@ import FeatureSection from "./components/FeatureSection";
 import Footer from "./components/Footer";
 import SearchResultsPage from "./components/SearchResultPage";
 import SiklusHidupPage from "./components/SiklusHidupPage";
+import TopikKesehatanPage from "./components/TopikKesehatanPage";
 
-type PageType = "home" | "search" | "siklus-hidup";
+type PageType = "home" | "search" | "siklus-hidup" | "topik-kesehatan";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageType>("home");
@@ -37,6 +38,12 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navigateToTopikKesehatan = () => {
+    console.log("💊 Navigate to TOPIK KESEHATAN");
+    setCurrentPage("topik-kesehatan");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   console.log("=== APP RENDER ===");
   console.log("Current page:", currentPage);
 
@@ -45,7 +52,11 @@ export default function App() {
     console.log("✅ Rendering SEARCH page");
     return (
       <>
-        <Navbar onNavigateHome={navigateToHome} onNavigateSiklusHidup={navigateToSiklusHidup} />
+        <Navbar 
+          onNavigateHome={navigateToHome} 
+          onNavigateSiklusHidup={navigateToSiklusHidup}
+          onNavigateTopikKesehatan={navigateToTopikKesehatan}
+        />
         <SearchResultsPage searchQuery={searchQuery} onNavigateHome={navigateToHome} />
         <Footer />
       </>
@@ -57,8 +68,28 @@ export default function App() {
     console.log("✅ Rendering SIKLUS HIDUP page");
     return (
       <>
-        <Navbar onNavigateHome={navigateToHome} onNavigateSiklusHidup={navigateToSiklusHidup} />
+        <Navbar 
+          onNavigateHome={navigateToHome} 
+          onNavigateSiklusHidup={navigateToSiklusHidup}
+          onNavigateTopikKesehatan={navigateToTopikKesehatan}
+        />
         <SiklusHidupPage onNavigateHome={navigateToHome} />
+        <Footer />
+      </>
+    );
+  }
+
+  // Render TOPIK KESEHATAN page
+  if (currentPage === "topik-kesehatan") {
+    console.log("✅ Rendering TOPIK KESEHATAN page");
+    return (
+      <>
+        <Navbar 
+          onNavigateHome={navigateToHome} 
+          onNavigateSiklusHidup={navigateToSiklusHidup}
+          onNavigateTopikKesehatan={navigateToTopikKesehatan}
+        />
+        <TopikKesehatanPage onNavigateHome={navigateToHome} />
         <Footer />
       </>
     );
@@ -68,7 +99,11 @@ export default function App() {
   console.log("✅ Rendering HOME page");
   return (
     <>
-      <Navbar onNavigateHome={navigateToHome} onNavigateSiklusHidup={navigateToSiklusHidup} />
+      <Navbar 
+        onNavigateHome={navigateToHome} 
+        onNavigateSiklusHidup={navigateToSiklusHidup}
+        onNavigateTopikKesehatan={navigateToTopikKesehatan}
+      />
       <HeroSection />
       <SearchSection onSearch={navigateToSearch} />
       <CategorySection />

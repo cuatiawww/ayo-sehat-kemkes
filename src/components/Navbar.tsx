@@ -79,13 +79,17 @@ function DocumentIcon() {
   );
 }
 
+interface NavbarProps {
+  onNavigateHome?: () => void;
+  onNavigateSiklusHidup?: () => void;
+  onNavigateTopikKesehatan?: () => void;
+}
+
 export default function Navbar({
   onNavigateHome,
   onNavigateSiklusHidup,
-}: {
-  onNavigateHome?: () => void;
-  onNavigateSiklusHidup?: () => void;
-}) {
+  onNavigateTopikKesehatan,
+}: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(0);
   const [isSticky, setIsSticky] = useState(false);
@@ -113,6 +117,14 @@ export default function Navbar({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleMenuClick = (label: string) => {
+    if (label === "SIKLUS HIDUP") {
+      onNavigateSiklusHidup?.();
+    } else if (label === "TOPIK") {
+      onNavigateTopikKesehatan?.();
+    }
+  };
 
   return (
     <>
@@ -162,10 +174,7 @@ export default function Navbar({
                       key={index}
                       onClick={() => {
                         setActiveMenu(index);
-                        // If user clicked the Siklus Hidup item, trigger navigation
-                        if (item.label === "SIKLUS HIDUP") {
-                          onNavigateSiklusHidup?.();
-                        }
+                        handleMenuClick(item.label);
                       }}
                       className={`flex flex-col items-center justify-center gap-0.5 cursor-pointer shrink-0 rounded-[12px] w-[70px] h-[70px] xl:w-[80px] xl:h-[80px] transition-all duration-300 ${
                         isActive
@@ -192,9 +201,16 @@ export default function Navbar({
                 })}
               </div>
             </div>
+
+            {/* Tablet Layout */}
             <div className="hidden md:flex lg:hidden items-center justify-between gap-3">
               <div className="shrink-0 w-[130px] h-auto">
-                <img alt="Logo" className="w-full h-auto object-contain" src={imgLogo} />
+                <img
+                  alt="Logo"
+                  className="w-full h-auto object-contain cursor-pointer"
+                  src={imgLogo}
+                  onClick={() => onNavigateHome?.()}
+                />
               </div>
 
               <div className="flex items-center">
@@ -211,11 +227,17 @@ export default function Navbar({
             {/* Mobile Layout */}
             <div className="flex md:hidden items-center justify-between">
               <div className="shrink-0 w-[100px] h-auto">
-                <img alt="Logo" className="w-full h-auto object-contain" src={imgLogo} />
+                <img
+                  alt="Logo"
+                  className="w-full h-auto object-contain cursor-pointer"
+                  src={imgLogo}
+                  onClick={() => onNavigateHome?.()}
+                />
               </div>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="text-[#00b6a3] p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -234,6 +256,7 @@ export default function Navbar({
                       onClick={() => {
                         setActiveMenu(index);
                         setMobileMenuOpen(false);
+                        handleMenuClick(item.label);
                       }}
                       className={`flex flex-col items-center justify-center gap-0.5 cursor-pointer rounded-[12px] w-full aspect-square transition-all duration-300 ${
                         isActive ? "bg-[#18b3ab] shadow-lg" : "bg-transparent hover:bg-[#e9fffe]"

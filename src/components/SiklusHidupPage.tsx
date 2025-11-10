@@ -726,7 +726,7 @@ export default function SiklusHidupPage({
                   </div>
                 </div>
 
-                 {/* Kelompok Umur Header - EXACT from Figma */}
+                 {/* Kelompok Umur Header -      */}
                 <div className="mb-6">
                   <p className="font-['Poppins'] text-[#6b7280] text-[13px] sm:text-[14px] mb-2">
                     Kelompok Umur
@@ -875,7 +875,7 @@ export default function SiklusHidupPage({
                         }}
                         className="group cursor-pointer"
                       >
-                        {/* Card Container - EXACT from Figma */}
+                        {/* Card Container -      */}
                         <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
                           {/* Image Top Section */}
                           <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
@@ -917,7 +917,7 @@ export default function SiklusHidupPage({
                       }}
                       className="group cursor-pointer"
                     >
-                      {/* Card Container - EXACT from Figma */}
+                      {/* Card Container -      */}
                       <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
                         {/* Image Top Section */}
                         <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
@@ -957,7 +957,7 @@ export default function SiklusHidupPage({
                 <CustomCalendar />
               </div>
 
-              {/* Artikel Terkait - EXACT from Figma Frame366 */}
+              {/* Artikel Terkait -      Frame366 */}
               <div className="flex flex-col gap-[20px] sm:gap-[24px]">
                 <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#08847e]">
                   Artikel Terkait
@@ -972,7 +972,7 @@ export default function SiklusHidupPage({
                         {/* Separator */}
                         <div className="bg-[#cccccc] h-px w-full mb-[18px] sm:mb-[21px]" />
                         
-                        {/* Article Item - EXACT from Figma Frame366 */}
+                        {/* Article Item -      Frame366 */}
                         <div className="flex gap-[12px] sm:gap-[18px] items-start cursor-pointer group">
                           {/* Image - 138x129 rounded-[10px] */}
                           <div className="h-[100px] w-[110px] sm:h-[129px] sm:w-[138px] rounded-[8px] sm:rounded-[10px] overflow-hidden shrink-0">
@@ -985,7 +985,7 @@ export default function SiklusHidupPage({
 
                           {/* Content */}
                           <div className="flex flex-col gap-[5px] sm:gap-[7px] flex-1 min-w-0">
-                            {/* Tags with bullets - EXACT from Figma - Truncate 1 line */}
+                            {/* Tags with bullets -      - Truncate 1 line */}
                             <div className="font-['Poppins'] text-[#18b3ab] text-[10px] sm:text-[12px] leading-[16px] sm:leading-[18px] overflow-hidden whitespace-nowrap text-ellipsis">
                               <span>Bayi dan Balita (&lt; 5 Tahun)</span>
                               <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]"> • </span>
@@ -994,7 +994,7 @@ export default function SiklusHidupPage({
                               <span>Remaja...</span>
                             </div>
 
-                            {/* Title - EXACT from Figma - Truncate 1 line */}
+                            {/* Title -      - Truncate 1 line */}
                             <p className="font-['Poppins'] font-medium text-[13px] sm:text-[15px] leading-[20px] sm:leading-[25px] text-neutral-600 group-hover:text-[#18b3ab] transition-colors duration-200 overflow-hidden whitespace-nowrap text-ellipsis">
                               {article.title}
                             </p>
@@ -1012,7 +1012,7 @@ export default function SiklusHidupPage({
                   <div className="bg-[#cccccc] h-px w-full" />
                 </div>
 
-                {/* Lainnya Button - EXACT from Figma */}
+                {/* Lainnya Button -      */}
                 <div className="flex items-center justify-end">
                   <button className="flex items-center gap-2 font-['Poppins'] text-[#18b3ab] text-[12px] leading-[24px] hover:text-[#16a199] transition-colors duration-200">
                     <span>Lainnya</span>
@@ -1036,7 +1036,7 @@ export default function SiklusHidupPage({
                 </div>
               </div>
 
-              {/* Media Publikasi Terkait - EXACT from Figma */}
+              {/* Media Publikasi Terkait -      */}
               <div className="flex flex-col gap-[20px] sm:gap-[24px]">
                 <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#18b3ab]">
                   Media Publikasi Terkait

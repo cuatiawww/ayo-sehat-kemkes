@@ -286,7 +286,7 @@ export default function TopicSection() {
                     <ChevronRight className="w-5 h-5 text-gray-600" />
                   </button>
 
-                  {/* Dots Indicator - Exact from   */}
+                  {/* Dots Indicator -     */}
                   <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
                     {slides.map((_, index) => (
                       <button
