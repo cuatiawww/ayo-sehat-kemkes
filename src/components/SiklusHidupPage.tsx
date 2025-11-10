@@ -1,0 +1,1145 @@
+import { useState, useEffect } from "react";
+import { ChevronRight, Home, Share2 } from "lucide-react";
+import { motion } from "framer-motion";
+import CustomCalendar from "./CustomCalendar";
+
+// Lifecycle stage data
+const lifecycleStages = [
+  {
+    id: 1,
+    name: "Bayi dan Balita",
+    age: "< 5 Tahun",
+    slug: "bayi-balita",
+    image:
+      "https://images.unsplash.com/photo-1545877790-63898f6ff403?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+    color: "#d5dd23",
+  },
+  {
+    id: 2,
+    name: "Anak-Anak",
+    age: "5-9 Tahun",
+    slug: "anak-anak",
+    image:
+      "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+    color: "#d5dd23",
+  },
+  {
+    id: 3,
+    name: "Remaja",
+    age: "10-18 Tahun",
+    slug: "remaja",
+    image:
+      "https://images.unsplash.com/photo-1622319107576-cca7c8a906f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+    color: "#d5dd23",
+  },
+  {
+    id: 4,
+    name: "Dewasa",
+    age: "18-59 Tahun",
+    slug: "dewasa",
+    image:
+      "https://images.unsplash.com/photo-1758798480119-409a9e9925ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+    color: "#d5dd23",
+  },
+  {
+    id: 5,
+    name: "Lansia",
+    age: "60+ Tahun",
+    slug: "lansia",
+    image:
+      "https://images.unsplash.com/photo-1536522005573-40430ba2277f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+    color: "#d5dd23",
+  },
+];
+
+// Content per stage
+const stageContent = {
+  "bayi-balita": {
+    title: "Bayi dan Balita (< 5 Tahun)",
+    description:
+      "Bayi dan balita merupakan kelompok usia di bawah 5 tahun yang merupakan periode emas pertumbuhan dan perkembangan. Upaya kesehatan bayi dan balita memiliki tujuan untuk mempersiapkan anak menjadi generasi yang sehat, cerdas, berkualitas, dan produktif serta berperan serta dalam menjaga, mempertahankan dan meningkatkan kesehatan dirinya.",
+    description2:
+      "Kesehatan bayi merupakan hal yang sangat penting diperhatikan karena pada masa ini bayi mengalami perubahan fisik, psikologis, dan sosial yang signifikan. Kementerian Kesehatan RI menekankan bahwa kesehatan bayi sangat dipengaruhi oleh pola makan yang sehat, aktivitas fisik yang teratur. Bayi yang sehat ditandai dengan berat badan, tinggi badan, dan indeks massa tubuh yang sesuai dengan usianya.",
+    description3:
+      "Upaya Kesehatan Bayi meliputi perkembangan positif, pencegahan kecelakaan, pencegahan kekerasan, kesehatan reproduksi, pencegahan dan pengendalian penyakit menular dan pencegahan penyakit tidak menular, gizi dan aktifitas fisik; kesehatan Jiwa; dan kesehatan bayi pada situasi krisis.",
+    description4:
+      "Bayi juga perlu memiliki kesehatan mental dan emosional yang baik, serta kemampuan untuk mengambil keputusan yang baik dan bertanggung jawab atas tindakan mereka. Pola makan yang sehat dan bergizi sangat penting bagi kesehatan bayi. Orangtua dan bayi sendiri perlu memperhatikan asupan makanan yang mengandung karbohidrat, protein, lemak, vitamin, dan mineral yang cukup untuk mendukung pertumbuhan dan perkembangan mereka.",
+    description5:
+      "Aktivitas fisik yang teratur juga perlu diperhatikan, seperti olahraga ringan atau berjalan-jalan, untuk membantu meningkatkan kesehatan jantung dan paru-paru, serta kekuatan otot dan tulang. Jika ada keluhan atau tanda-tanda tidak sehat pada bayi, segera konsultasikan ke dokter atau fasilitas kesehatan terdekat. Pencegahan dan perawatan yang tepat dapat membantu mempertahankan kesehatan bayi dan mendukung pertumbuhan dan perkembangan yang optimal.",
+    description6:
+      "Upaya Kesehatan Bayi selain ditujukan kepada bayi juga ditujukan kepada orang tua atau pengasuh untuk mendukung dan mewujudkan bayi yang sehat. Upaya Kesehatan Bayi harus melibatkan peran serta bayi dalam menjaga mempertahankan dan meningkatkan kesehatan dirinya.",
+    description7:
+      "Dukungan keluarga sangat diperlukan sehingga bayi dapat tumbuh sehat sesuai dengan kemampuan, minat, dan bakatnya; mencegah perkawinan bayi; dan memfasilitasi bayi mendapatkan pelayanan kesehatan sesuai standar. Dukungan Keluarga sebagaimana dimaksud dalam pengasuhan, pemeliharaan, Pendidikan, dan perlindungan kepada bayi.",
+    articles: [
+      {
+        id: 1,
+        title: "ASI Eksklusif untuk Bayi",
+        description:
+          "ASI adalah nutrisi terbaik untuk bayi dengan kandungan lengkap untuk tumbuh kembang optimal.",
+        image:
+          "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "8 Nov 2025",
+        readTime: "5 menit",
+      },
+      {
+        id: 2,
+        title: "Jadwal Imunisasi Bayi",
+        description:
+          "Imunisasi lengkap melindungi bayi dari berbagai penyakit berbahaya yang dapat dicegah.",
+        image:
+          "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "6 Nov 2025",
+        readTime: "4 menit",
+      },
+      {
+        id: 3,
+        title: "Stimulasi Dini untuk Bayi",
+        description:
+          "Stimulasi sejak dini membantu perkembangan otak dan kemampuan motorik bayi secara optimal.",
+        image:
+          "https://images.unsplash.com/photo-1519689680058-324335c77eba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "4 Nov 2025",
+        readTime: "6 menit",
+      },
+      {
+        id: 4,
+        title: "MPASI Pertama Bayi",
+        description:
+          "Makanan pendamping ASI yang tepat penting untuk memenuhi kebutuhan nutrisi bayi mulai usia 6 bulan.",
+        image:
+          "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "2 Nov 2025",
+        readTime: "5 menit",
+      },
+    ],
+    topics: [
+      {
+        id: 1,
+        title: "Stunting pada Bayi",
+        image:
+          "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Bayi",
+      },
+      {
+        id: 2,
+        title: "Perkembangan Motorik",
+        image:
+          "https://images.unsplash.com/photo-1519689680058-324335c77eba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Bayi",
+      },
+      {
+        id: 3,
+        title: "Gizi Seimbang Bayi",
+        image:
+          "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Bayi",
+      },
+    ],
+  },
+  "anak-anak": {
+    title: "Anak-Anak (5-9 Tahun)",
+    description:
+      "Anak-anak merupakan kelompok usia 5 tahun sampai sebelum berusia 10 tahun yang merupakan periode penting dalam pembentukan karakter dan pengembangan kemampuan akademis. Upaya kesehatan anak-anak memiliki tujuan untuk mempersiapkan anak menjadi generasi yang sehat, cerdas, berkualitas, dan produktif serta berperan serta dalam menjaga, mempertahankan dan meningkatkan kesehatan dirinya.",
+    description2:
+      "Kesehatan anak-anak merupakan hal yang sangat penting diperhatikan karena pada masa ini anak mengalami perubahan fisik, psikologis, dan sosial yang signifikan. Kementerian Kesehatan RI menekankan bahwa kesehatan anak-anak sangat dipengaruhi oleh pola makan yang sehat, aktivitas fisik yang teratur. Anak yang sehat ditandai dengan berat badan, tinggi badan, dan indeks massa tubuh yang sesuai dengan usianya.",
+    description3:
+      "Upaya Kesehatan Anak-Anak meliputi perkembangan positif, pencegahan kecelakaan, pencegahan kekerasan, pencegahan dan pengendalian penyakit menular dan pencegahan penyakit tidak menular, gizi dan aktifitas fisik, kesehatan Jiwa, dan kesehatan anak pada situasi krisis.",
+    description4:
+      "Anak-anak juga perlu memiliki kesehatan mental dan emosional yang baik, serta kemampuan untuk mengambil keputusan yang baik dan bertanggung jawab atas tindakan mereka. Pola makan yang sehat dan bergizi sangat penting bagi kesehatan anak. Orangtua dan anak sendiri perlu memperhatikan asupan makanan yang mengandung karbohidrat, protein, lemak, vitamin, dan mineral yang cukup untuk mendukung pertumbuhan dan perkembangan mereka.",
+    description5:
+      "Aktivitas fisik yang teratur juga perlu diperhatikan, seperti olahraga, bermain di luar ruangan, atau kegiatan ekstrakurikuler, untuk membantu meningkatkan kesehatan jantung dan paru-paru, serta kekuatan otot dan tulang. Jika ada keluhan atau tanda-tanda tidak sehat pada anak, segera konsultasikan ke dokter atau fasilitas kesehatan terdekat. Pencegahan dan perawatan yang tepat dapat membantu mempertahankan kesehatan anak dan mendukung pertumbuhan dan perkembangan yang optimal.",
+    description6:
+      "Upaya Kesehatan Anak-Anak selain ditujukan kepada anak juga ditujukan kepada orang tua atau pengasuh untuk mendukung dan mewujudkan anak yang sehat. Upaya Kesehatan Anak harus melibatkan peran serta anak dalam menjaga mempertahankan dan meningkatkan kesehatan dirinya.",
+    description7:
+      "Dukungan keluarga dan sekolah sangat diperlukan sehingga anak dapat tumbuh sehat sesuai dengan kemampuan, minat, dan bakatnya, serta memfasilitasi anak mendapatkan pelayanan kesehatan sesuai standar. Dukungan tersebut meliputi pengasuhan, pemeliharaan, pendidikan, dan perlindungan kepada anak.",
+    articles: [
+      {
+        id: 1,
+        title: "Nutrisi untuk Anak Usia Sekolah",
+        description:
+          "Kebutuhan nutrisi anak sekolah harus dipenuhi untuk mendukung aktivitas belajar dan bermain.",
+        image:
+          "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "9 Nov 2025",
+        readTime: "5 menit",
+      },
+      {
+        id: 2,
+        title: "Pentingnya Aktivitas Fisik Anak",
+        description:
+          "Bermain dan berolahraga membantu perkembangan fisik dan sosial anak secara optimal.",
+        image:
+          "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "7 Nov 2025",
+        readTime: "4 menit",
+      },
+      {
+        id: 3,
+        title: "Menjaga Kesehatan Gigi Anak",
+        description:
+          "Perawatan gigi sejak dini mencegah masalah kesehatan mulut di masa depan.",
+        image:
+          "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "5 Nov 2025",
+        readTime: "6 menit",
+      },
+      {
+        id: 4,
+        title: "Imunisasi Lanjutan untuk Anak",
+        description:
+          "Imunisasi lanjutan penting untuk menjaga kekebalan tubuh anak dari penyakit.",
+        image:
+          "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "3 Nov 2025",
+        readTime: "5 menit",
+      },
+    ],
+    topics: [
+      {
+        id: 1,
+        title: "Obesitas pada Anak",
+        image:
+          "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Anak-Anak",
+      },
+      {
+        id: 2,
+        title: "Kesehatan Mental Anak",
+        image:
+          "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Anak-Anak",
+      },
+      {
+        id: 3,
+        title: "Pola Tidur Sehat",
+        image:
+          "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Anak-Anak",
+      },
+    ],
+  },
+  remaja: {
+    title: "Remaja (10-18 Tahun)",
+    description:
+      "Remaja merupakan kelompok usia 10 tahun sampai sebelum berusia 18 tahun. Upaya kesehatan remaja memiliki tujuan untuk mempersiapkan remaja menjadi orang dewasa yang sehat, cerdas, berkualitas, dan produktif dan berperan serta dalam menjaga, mempertahankan dan meningkatkan kesehatan dirinya.",
+    description2:
+      "Kesehatan remaja merupakan hal yang sangat penting diperhatikan karena pada masa ini remaja mengalami perubahan fisik, psikologis, dan sosial yang signifikan. Kementerian Kesehatan RI menekankan bahwa kesehatan remaja sangat dipengaruhi oleh pola makan yang sehat, aktivitas fisik yang teratur. Remaja yang sehat ditandai dengan berat badan, tinggi badan, dan indeks massa tubuh yang sesuai dengan usianya.",
+    description3:
+      "Upaya Kesehatan Remaja meliputi perkembangan positif, pencegahan kecelakaan, pencegahan kekerasan, kesehatan reproduksi, pencegahan dan pengendalian penyakit menular dan pencegahan penyakit tidak menular, gizi dan aktifitas fisik; kesehatan Jiwa; dan kesehatan remaja pada situasi krisis.",
+    description4:
+      "Remaja juga perlu memiliki kesehatan mental dan emosional yang baik, serta kemampuan untuk mengambil keputusan yang baik dan bertanggung jawab atas tindakan mereka. Pola makan yang sehat dan bergizi sangat penting bagi kesehatan remaja. Orangtua dan remaja sendiri perlu memperhatikan asupan makanan yang mengandung karbohidrat, protein, lemak, vitamin, dan mineral yang cukup untuk mendukung pertumbuhan dan perkembangan mereka.",
+    description5:
+      "Aktivitas fisik yang teratur juga perlu diperhatikan, seperti olahraga ringan atau berjalan-jalan, untuk membantu meningkatkan kesehatan jantung dan paru-paru, serta kekuatan otot dan tulang. Jika ada keluhan atau tanda-tanda tidak sehat pada remaja, segera konsultasikan ke dokter atau fasilitas kesehatan terdekat. Pencegahan dan perawatan yang tepat dapat membantu mempertahankan kesehatan remaja dan mendukung pertumbuhan dan perkembangan yang optimal.",
+    description6:
+      "Upaya Kesehatan Remaja selain ditujukan kepada remaja juga ditujukan kepada orang tua atau pengasuh untuk mendukung dan mewujudkan remaja yang sehat. Upaya Kesehatan Remaja harus melibatkan peran serta remaja dalam menjaga mempertahankan dan meningkatkan kesehatan dirinya.",
+    description7:
+      "Dukungan keluarga sangat diperlukan sehingga remaja dapat tumbuh sehat sesuai dengan kemampuan, minat, dan bakatnya; mencegah perkawinan remaja; dan memfasilitasi remaja mendapatkan pelayanan kesehatan sesuai standar. Dukungan Keluarga sebagaimana dimaksud dalam pengasuhan, pemeliharaan, Pendidikan, dan perlindungan kepada remaja.",
+    articles: [
+      {
+        id: 1,
+        title: "Pentingnya Aktivitas Fisik untuk Remaja",
+        description:
+          "Aktivitas fisik rutin membantu remaja tumbuh sehat, meningkatkan konsentrasi belajar, dan mengurangi stres.",
+        image:
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "5 Nov 2025",
+        readTime: "4 menit",
+      },
+      {
+        id: 2,
+        title: "Nutrisi Seimbang untuk Pertumbuhan Optimal",
+        description:
+          "Pola makan bergizi seimbang penting untuk mendukung pertumbuhan dan perkembangan remaja.",
+        image:
+          "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "3 Nov 2025",
+        readTime: "5 menit",
+      },
+      {
+        id: 3,
+        title: "Kesehatan Mental Remaja di Era Digital",
+        description:
+          "Menjaga kesehatan mental remaja dengan manajemen stres dan penggunaan media sosial yang bijak.",
+        image:
+          "https://images.unsplash.com/photo-1573495627361-d9b87960b12d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "1 Nov 2025",
+        readTime: "6 menit",
+      },
+      {
+        id: 4,
+        title: "Imunisasi dan Vaksinasi untuk Remaja",
+        description:
+          "Vaksinasi penting untuk melindungi remaja dari berbagai penyakit menular yang dapat dicegah.",
+        image:
+          "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "28 Okt 2025",
+        readTime: "3 menit",
+      },
+    ],
+    topics: [
+      {
+        id: 1,
+        title: "Obesitas Remaja",
+        image:
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Remaja",
+      },
+      {
+        id: 2,
+        title: "Kesehatan Mental",
+        image:
+          "https://images.unsplash.com/photo-1573495627361-d9b87960b12d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Remaja",
+      },
+      {
+        id: 3,
+        title: "Kesehatan Reproduksi",
+        image:
+          "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Remaja",
+      },
+    ],
+  },
+  dewasa: {
+    title: "Dewasa (18-59 Tahun)",
+    description:
+      "Dewasa merupakan kelompok usia 18 tahun sampai sebelum berusia 60 tahun. Upaya kesehatan dewasa memiliki tujuan untuk mempersiapkan dewasa menjadi orang yang sehat, cerdas, berkualitas, dan produktif dan berperan serta dalam menjaga, mempertahankan dan meningkatkan kesehatan dirinya.",
+    description2:
+      "Kesehatan dewasa merupakan hal yang sangat penting diperhatikan karena pada masa ini dewasa mengalami perubahan fisik, psikologis, dan sosial yang signifikan. Kementerian Kesehatan RI menekankan bahwa kesehatan dewasa sangat dipengaruhi oleh pola makan yang sehat, aktivitas fisik yang teratur. Dewasa yang sehat ditandai dengan berat badan, tinggi badan, dan indeks massa tubuh yang sesuai dengan usianya.",
+    description3:
+      "Upaya Kesehatan Dewasa meliputi perkembangan positif, pencegahan kecelakaan, pencegahan kekerasan, kesehatan reproduksi, pencegahan dan pengendalian penyakit menular dan pencegahan penyakit tidak menular, gizi dan aktifitas fisik; kesehatan Jiwa; dan kesehatan dewasa pada situasi krisis.",
+    description4:
+      "Dewasa juga perlu memiliki kesehatan mental dan emosional yang baik, serta kemampuan untuk mengambil keputusan yang baik dan bertanggung jawab atas tindakan mereka. Pola makan yang sehat dan bergizi sangat penting bagi kesehatan dewasa. Orangtua dan dewasa sendiri perlu memperhatikan asupan makanan yang mengandung karbohidrat, protein, lemak, vitamin, dan mineral yang cukup untuk mendukung pertumbuhan dan perkembangan mereka.",
+    description5:
+      "Aktivitas fisik yang teratur juga perlu diperhatikan, seperti olahraga ringan atau berjalan-jalan, untuk membantu meningkatkan kesehatan jantung dan paru-paru, serta kekuatan otot dan tulang. Jika ada keluhan atau tanda-tanda tidak sehat pada dewasa, segera konsultasikan ke dokter atau fasilitas kesehatan terdekat. Pencegahan dan perawatan yang tepat dapat membantu mempertahankan kesehatan dewasa dan mendukung pertumbuhan dan perkembangan yang optimal.",
+    description6:
+      "Upaya Kesehatan Dewasa selain ditujukan kepada dewasa juga ditujukan kepada orang tua atau pengasuh untuk mendukung dan mewujudkan dewasa yang sehat. Upaya Kesehatan Dewasa harus melibatkan peran serta dewasa dalam menjaga mempertahankan dan meningkatkan kesehatan dirinya.",
+    description7:
+      "Dukungan keluarga sangat diperlukan sehingga dewasa dapat tumbuh sehat sesuai dengan kemampuan, minat, dan bakatnya; mencegah perkawinan dewasa; dan memfasilitasi dewasa mendapatkan pelayanan kesehatan sesuai standar. Dukungan Keluarga sebagaimana dimaksud dalam pengasuhan, pemeliharaan, Pendidikan, dan perlindungan kepada dewasa.",
+    articles: [
+      {
+        id: 1,
+        title: "Hipertensi dan Pencegahannya",
+        description:
+          "Tekanan darah tinggi dapat dicegah dengan pola hidup sehat dan pemeriksaan rutin.",
+        image:
+          "https://images.unsplash.com/photo-1584515933487-779824d29309?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "10 Nov 2025",
+        readTime: "5 menit",
+      },
+      {
+        id: 2,
+        title: "Diabetes Mellitus di Usia Produktif",
+        description:
+          "Deteksi dini dan pengelolaan diabetes yang tepat mencegah komplikasi jangka panjang.",
+        image:
+          "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "8 Nov 2025",
+        readTime: "6 menit",
+      },
+      {
+        id: 3,
+        title: "Kesehatan Jantung untuk Dewasa",
+        description:
+          "Menjaga kesehatan jantung dengan olahraga teratur dan pola makan seimbang sangat penting.",
+        image:
+          "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "6 Nov 2025",
+        readTime: "5 menit",
+      },
+      {
+        id: 4,
+        title: "Manajemen Stres di Tempat Kerja",
+        description:
+          "Stres kerja yang tidak dikelola dengan baik dapat berdampak pada kesehatan fisik dan mental.",
+        image:
+          "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "4 Nov 2025",
+        readTime: "4 menit",
+      },
+    ],
+    topics: [
+      {
+        id: 1,
+        title: "Hipertensi",
+        image:
+          "https://images.unsplash.com/photo-1584515933487-779824d29309?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Dewasa",
+      },
+      {
+        id: 2,
+        title: "Diabetes Mellitus",
+        image:
+          "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Dewasa",
+      },
+      {
+        id: 3,
+        title: "Kesehatan Jantung",
+        image:
+          "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Dewasa",
+      },
+    ],
+  },
+  lansia: {
+    title: "Lansia (60+ Tahun)",
+    description:
+      "Lansia merupakan kelompok usia 60 tahun ke atas. Upaya kesehatan lansia memiliki tujuan untuk mempersiapkan lansia menjadi orang yang sehat, cerdas, berkualitas, dan produktif dan berperan serta dalam menjaga, mempertahankan dan meningkatkan kesehatan dirinya.",
+    description2:
+      "Kesehatan lansia merupakan hal yang sangat penting diperhatikan karena pada masa ini lansia mengalami perubahan fisik, psikologis, dan sosial yang signifikan. Kementerian Kesehatan RI menekankan bahwa kesehatan lansia sangat dipengaruhi oleh pola makan yang sehat, aktivitas fisik yang teratur. Lansia yang sehat ditandai dengan berat badan, tinggi badan, dan indeks massa tubuh yang sesuai dengan usianya.",
+    description3:
+      "Upaya Kesehatan Lansia meliputi perkembangan positif, pencegahan kecelakaan, pencegahan kekerasan, kesehatan reproduksi, pencegahan dan pengendalian penyakit menular dan pencegahan penyakit tidak menular, gizi dan aktifitas fisik; kesehatan Jiwa; dan kesehatan lansia pada situasi krisis.",
+    description4:
+      "Lansia juga perlu memiliki kesehatan mental dan emosional yang baik, serta kemampuan untuk mengambil keputusan yang baik dan bertanggung jawab atas tindakan mereka. Pola makan yang sehat dan bergizi sangat penting bagi kesehatan lansia. Orangtua dan lansia sendiri perlu memperhatikan asupan makanan yang mengandung karbohidrat, protein, lemak, vitamin, dan mineral yang cukup untuk mendukung pertumbuhan dan perkembangan mereka.",
+    description5:
+      "Aktivitas fisik yang teratur juga perlu diperhatikan, seperti olahraga ringan atau berjalan-jalan, untuk membantu meningkatkan kesehatan jantung dan paru-paru, serta kekuatan otot dan tulang. Jika ada keluhan atau tanda-tanda tidak sehat pada lansia, segera konsultasikan ke dokter atau fasilitas kesehatan terdekat. Pencegahan dan perawatan yang tepat dapat membantu mempertahankan kesehatan lansia dan mendukung pertumbuhan dan perkembangan yang optimal.",
+    description6:
+      "Upaya Kesehatan Lansia selain ditujukan kepada lansia juga ditujukan kepada orang tua atau pengasuh untuk mendukung dan mewujudkan lansia yang sehat. Upaya Kesehatan Lansia harus melibatkan peran serta lansia dalam menjaga mempertahankan dan meningkatkan kesehatan dirinya.",
+    description7:
+      "Dukungan keluarga sangat diperlukan sehingga lansia dapat tumbuh sehat sesuai dengan kemampuan, minat, dan bakatnya; mencegah perkawinan lansia; dan memfasilitasi lansia mendapatkan pelayanan kesehatan sesuai standar. Dukungan Keluarga sebagaimana dimaksud dalam pengasuhan, pemeliharaan, Pendidikan, dan perlindungan kepada lansia.",
+    articles: [
+      {
+        id: 1,
+        title: "Osteoporosis pada Lansia",
+        description:
+          "Pencegahan dan penanganan osteoporosis penting untuk mencegah patah tulang pada lansia.",
+        image:
+          "https://images.unsplash.com/photo-1506126613408-eca07ce68773?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "10 Nov 2025",
+        readTime: "5 menit",
+      },
+      {
+        id: 2,
+        title: "Demensia dan Pencegahannya",
+        description:
+          "Stimulasi kognitif dan pola hidup sehat dapat memperlambat penurunan fungsi kognitif.",
+        image:
+          "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "8 Nov 2025",
+        readTime: "6 menit",
+      },
+      {
+        id: 3,
+        title: "Nutrisi untuk Lansia Sehat",
+        description:
+          "Kebutuhan nutrisi lansia berbeda dan perlu disesuaikan dengan kondisi kesehatan.",
+        image:
+          "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "6 Nov 2025",
+        readTime: "5 menit",
+      },
+      {
+        id: 4,
+        title: "Aktivitas Fisik untuk Lansia",
+        description:
+          "Olahraga ringan teratur membantu menjaga mobilitas dan kesehatan jantung lansia.",
+        image:
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        date: "4 Nov 2025",
+        readTime: "4 menit",
+      },
+    ],
+    topics: [
+      {
+        id: 1,
+        title: "Osteoporosis",
+        image:
+          "https://images.unsplash.com/photo-1506126613408-eca07ce68773?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Lansia",
+      },
+      {
+        id: 2,
+        title: "Demensia",
+        image:
+          "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Lansia",
+      },
+      {
+        id: 3,
+        title: "Kesehatan Jantung Lansia",
+        image:
+          "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Lansia",
+      },
+    ],
+  },
+};
+
+// Publications (sama untuk semua stage)
+const publications = [
+  {
+    id: 1,
+    title: "Buku Saku Kesehatan",
+    type: "PDF",
+    image:
+      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 2,
+    title: "Panduan Gizi Seimbang",
+    type: "PDF",
+    image:
+      "https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 3,
+    title: "Leaflet Imunisasi",
+    type: "PDF",
+    image:
+      "https://images.unsplash.com/photo-1589998059171-988d887df646?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+];
+
+// Diseases (sama untuk semua stage)
+const diseases = [
+  {
+    id: 1,
+    title: "ISPA (Infeksi Saluran Pernapasan Akut)",
+    image:
+      "https://images.unsplash.com/photo-1584515933487-779824d29309?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 2,
+    title: "Diare",
+    image:
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 3,
+    title: "Campak",
+    image:
+      "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+];
+
+export default function SiklusHidupPage({
+  onNavigateHome,
+  initialStage = "remaja",
+}: {
+  onNavigateHome: () => void;
+  initialStage?: string;
+}) {
+  const [selectedStage, setSelectedStage] =
+    useState(initialStage);
+  const [currentPublicationIndex, setCurrentPublicationIndex] =
+    useState(0);
+
+  // Get current content based on selected stage
+  const currentContent =
+    stageContent[selectedStage as keyof typeof stageContent];
+  const currentStageData = lifecycleStages.find(
+    (s) => s.slug === selectedStage,
+  );
+
+  // Auto-slide publications every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPublicationIndex(
+        (prevIndex) => (prevIndex + 1) % publications.length,
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Breadcrumb */}
+      <div className="relative bg-gradient-to-b from-[#f5f5f5] to-white py-4 lg:py-5 border-b border-gray-100 overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Large circle top left */}
+          <div className="absolute -top-20 -left-20 w-[350px] h-[350px] rounded-full bg-gray-100/30 blur-3xl" />
+          {/* Medium circle top right */}
+          <div className="absolute -top-16 right-10 w-[280px] h-[280px] rounded-full bg-gray-50/40 blur-2xl" />
+        </div>
+
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex items-center gap-2 text-sm">
+            <button
+              onClick={onNavigateHome}
+              className="flex items-center gap-1 text-[#18b3ab] hover:underline transition-colors font-['Poppins']"
+            >
+              <Home size={16} />
+              <span>Home</span>
+            </button>
+            <ChevronRight size={16} className="text-gray-400" />
+            <span className="text-gray-900 font-medium font-['Poppins']">
+              Siklus Hidup
+            </span>
+            <ChevronRight size={16} className="text-gray-400" />
+            <span className="text-[#18b3ab] font-medium font-['Poppins'] capitalize">
+              {lifecycleStages.find(
+                (stage) => stage.slug === selectedStage,
+              )?.name || "Remaja"}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] py-8 lg:py-12 overflow-hidden">
+        {/* Decorative Background Circles */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Large circle top left */}
+          <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
+          {/* Large circle top right */}
+          <div className="absolute -top-40 right-0 w-[600px] h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
+          {/* Medium circle bottom right */}
+          <div className="absolute bottom-0 -right-20 w-[400px] h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
+          {/* Small decorative lines */}
+          <div className="absolute bottom-20 right-40 w-[300px] h-[150px]">
+            <svg
+              viewBox="0 0 300 150"
+              className="w-full h-full opacity-20"
+            >
+              <path
+                d="M0,30 Q75,20 150,30 T300,30"
+                stroke="#e5e7eb"
+                strokeWidth="2"
+                fill="none"
+              />
+              <path
+                d="M0,60 Q75,50 150,60 T300,60"
+                stroke="#e5e7eb"
+                strokeWidth="2"
+                fill="none"
+              />
+              <path
+                d="M0,90 Q75,80 150,90 T300,90"
+                stroke="#e5e7eb"
+                strokeWidth="2"
+                fill="none"
+              />
+              <path
+                d="M0,120 Q75,110 150,120 T300,120"
+                stroke="#e5e7eb"
+                strokeWidth="2"
+                fill="none"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8 lg:mb-10"
+          >
+            <h1 className="font-['Poppins'] font-medium text-[32px] sm:text-[40px] lg:text-[50px] text-[#18b3ab] mb-4">
+              Siklus Hidup Kesehatan
+            </h1>
+            <p className="font-['Poppins'] text-[16px] sm:text-[18px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
+              Pendampingan menjaga kesehatan sepanjang siklus
+              kehidupan, dengan informasi khusus setiap tahap
+              usia
+            </p>
+          </motion.div>
+
+          {/* Lifecycle Cards - EXACT STRUCTURE dari CategorySection */}
+          {/* Lifecycle Cards - EXACT STRUCTURE dari CategorySection */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-6 lg:gap-[26px] pb-8 items-end">
+            {lifecycleStages.map((stage, index) => {
+              // Card yang dipilih jadi BESAR (aspect taller)
+              const isSelected = stage.slug === selectedStage;
+
+              return (
+                <motion.div
+                  key={stage.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    scale: isSelected ? 1.15 : 1
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                  }}
+                  className="group cursor-pointer flex flex-col items-center"
+                  onClick={() => setSelectedStage(stage.slug)}
+                >
+                  {/* Image Container with Overlay Text - PERSEGI dengan scale saat selected */}
+                  <div className={`relative w-full max-w-[272px] mx-auto transition-all duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-105 aspect-square ${isSelected ? 'shadow-[0_10px_40px_rgba(24,179,171,0.5)]' : ''}`}>
+                    {/* Background placeholder with glow effect */}
+                    <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] sm:rounded-[25px] transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(24,179,171,0.6)]" />
+
+                    {/* Animated border glow */}
+                    <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] border-2 border-[#d5dd23] animate-pulse"></div>
+                    </div>
+
+                    {/* Image */}
+                    <div className="absolute inset-0 rounded-[20px] sm:rounded-[25px] overflow-hidden transition-all duration-500 group-hover:rotate-1">
+                      <img
+                        alt={`${stage.name}, ${stage.age}`}
+                        className="absolute inset-0 max-w-none object-cover object-center pointer-events-none rounded-[20px] sm:rounded-[25px] size-full transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                        src={stage.image}
+                      />
+                      {/* Hover Overlay with gradient animation */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+                    </div>
+
+                    {/* Text Label - Positioned at bottom with lift animation */}
+                    <div className="absolute bottom-[-20px] sm:bottom-[-25px] left-1/2 -translate-x-1/2 bg-[#d5dd23] rounded-[15px] sm:rounded-[20px] h-[70px] sm:h-[84px] w-[180px] sm:w-[222px] flex flex-col items-center justify-center transition-all duration-500 ease-out group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-2 group-hover:scale-105 z-10 px-2">
+                      <p className="font-['Poppins:SemiBold',sans-serif] not-italic text-[18px] sm:text-[20px] lg:text-[23px] leading-[24px] sm:leading-[28px] lg:leading-[30px] text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
+                        {stage.name}
+                      </p>
+                      <p className="font-['Poppins:Regular',sans-serif] not-italic text-[14px] sm:text-[15px] lg:text-[16px] leading-[20px] sm:leading-[26px] lg:leading-[30px] text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
+                        {stage.age}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Section - 2 COLUMN LAYOUT dengan Sticky Sidebar */}
+      <section className="py-12 lg:py-16 bg-white">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-12">
+            {/* LEFT COLUMN: Main Content (Artikel + Topik + Penyakit) */}
+            <div className="flex flex-col gap-12">
+              {/* Featured Image dengan Tags dan Social Icons */}
+              <div>
+                <div className="bg-gradient-to-br from-[#18b3ab] to-[#15a098] rounded-[20px] overflow-hidden p-6 lg:p-8 h-[400px] lg:h-[500px] relative mb-6">
+                  <img
+                    src={currentStageData?.image}
+                    alt={currentContent?.title}
+                    className="absolute right-0 top-0 h-full w-auto object-cover opacity-90"
+                  />
+                  <div className="relative z-10">
+                    <div className="bg-[#d5dd23] inline-block rounded-full px-4 py-1.5 mb-4">
+                      <p className="font-['Poppins'] font-medium text-[14px] text-[#212121]">
+                        {currentStageData?.name}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tags and Social Share - IMPROVED */}
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    <button className="px-4 py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
+                      Penyakit Pernapasan
+                    </button>
+                    <button className="px-4 py-1.5 bg-[#18b3ab] text-white rounded-full text-[13px] font-['Poppins'] hover:bg-[#16a199] transition-colors duration-200">
+                      Penyakit Kardiovaskular
+                    </button>
+                    <button className="px-4 py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
+                      Penyakit Pencernaan
+                    </button>
+                    <button className="px-4 py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
+                      Neoplasma
+                    </button>
+                  </div>
+
+                  {/* Social Share Icons */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
+                      aria-label="Share"
+                    >
+                      <Share2 size={16} />
+                    </button>
+                    <button
+                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
+                      aria-label="Facebook"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                      </svg>
+                    </button>
+                    <button
+                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
+                      aria-label="Twitter"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                      </svg>
+                    </button>
+                    <button
+                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
+                      aria-label="WhatsApp"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                      </svg>
+                    </button>
+                    <button
+                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
+                      aria-label="Link"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Content Article */}
+                <div>
+                  <h2 className="font-['Poppins'] font-semibold text-[24px] lg:text-[28px] text-[#18b3ab] mb-4">
+                    {currentContent?.title}
+                  </h2>
+                  <div className="space-y-4">
+                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
+                      {currentContent?.description}
+                    </p>
+                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
+                      {currentContent?.description2}
+                    </p>
+                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
+                      {currentContent?.description3}
+                    </p>
+                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
+                      {currentContent?.description4}
+                    </p>
+                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
+                      {currentContent?.description5}
+                    </p>
+                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
+                      {currentContent?.description6}
+                    </p>
+                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
+                      {currentContent?.description7}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Topik Kesehatan Terkait - MOVED TO LEFT COLUMN */}
+              <div>
+                <h2 className="font-['Poppins'] font-semibold text-[24px] lg:text-[28px] text-[#18b3ab] mb-6">
+                  Topik Kesehatan Terkait
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {currentContent?.topics.map(
+                    (topic, index) => (
+                      <motion.div
+                        key={topic.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.5,
+                          delay: index * 0.1,
+                        }}
+                        className="group cursor-pointer"
+                      >
+                        {/* Card Container - EXACT from Figma */}
+                        <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
+                          {/* Image Top Section */}
+                          <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
+                            <img
+                              alt={topic.title}
+                              className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
+                              src={topic.image}
+                            />
+                          </div>
+
+                          {/* Title Bottom Section */}
+                          <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
+                            <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
+                              {topic.title}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ),
+                  )}
+                </div>
+              </div>
+
+              {/* Penyakit Terkait - MOVED TO LEFT COLUMN */}
+              <div>
+                <h2 className="font-['Poppins'] font-semibold text-[24px] lg:text-[28px] text-[#18b3ab] mb-6">
+                  Penyakit Terkait
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {diseases.map((disease, index) => (
+                    <motion.div
+                      key={disease.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.1,
+                      }}
+                      className="group cursor-pointer"
+                    >
+                      {/* Card Container - EXACT from Figma */}
+                      <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
+                        {/* Image Top Section */}
+                        <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
+                          <img
+                            alt={disease.title}
+                            className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
+                            src={disease.image}
+                          />
+                        </div>
+
+                        {/* Title Bottom Section */}
+                        <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
+                          <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
+                            {disease.title}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN: Sticky Sidebar */}
+            <div className="lg:sticky lg:top-6 lg:self-start flex flex-col gap-8 h-fit">
+              {/* Calendar */}
+              <div>
+                <h3 className="font-['Poppins'] font-medium text-[18px] lg:text-[20px] text-[#18b3ab] mb-2">
+                  Kalender Kesehatan
+                </h3>
+                <p className="font-['Poppins'] text-[13px] lg:text-[14px] text-gray-600 mb-4 leading-relaxed">
+                  Informasi terkait dengan hari besar dan agenda
+                  kesehatan satu tahun penuh
+                </p>
+
+                {/* Custom Calendar Component */}
+                <CustomCalendar />
+              </div>
+
+              {/* Artikel Terkait - EXACT from Figma Frame366 */}
+              <div className="flex flex-col gap-[24px]">
+                <h3 className="font-['Poppins'] font-medium text-[18px] lg:text-[20px] text-[#08847e]">
+                  Artikel Terkait
+                </h3>
+
+                {/* Artikel List with separators */}
+                <div className="flex flex-col gap-[21px]">
+                  {currentContent?.articles
+                    .slice(0, 4)
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    .map((article, index) => (
+                      <div key={article.id}>
+                        {/* Separator */}
+                        <div className="bg-[#cccccc] h-px w-full mb-[21px]" />
+                        
+                        {/* Article Item - EXACT from Figma Frame366 */}
+                        <div className="flex gap-[18px] items-start cursor-pointer group">
+                          {/* Image - 138x129 rounded-[10px] */}
+                          <div className="h-[129px] w-[138px] rounded-[10px] overflow-hidden shrink-0">
+                            <img
+                              alt={article.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                              src={article.image}
+                            />
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex flex-col gap-[7px] flex-1">
+                            {/* Tags with bullets - EXACT from Figma */}
+                            <div className="font-['Poppins'] text-[#18b3ab] text-[12px] leading-[18px] flex flex-wrap items-center gap-[6px]">
+                              <span>Bayi dan Balita (&lt; 5 Tahun)</span>
+                              <span className="text-[15px] leading-[30px]">•</span>
+                              <span>Anak-anak (5-9 Tahun)</span>
+                              <span className="text-[15px] leading-[30px]">•</span>
+                              <span>Remaja...</span>
+                            </div>
+
+                            {/* Title - EXACT from Figma */}
+                            <p className="font-['Poppins'] font-medium text-[15px] leading-[25px] text-neutral-600 group-hover:text-[#18b3ab] transition-colors duration-200">
+                              {article.title}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  
+                  {/* Bottom separator */}
+                  <div className="bg-[#cccccc] h-px w-full" />
+                </div>
+
+                {/* Lainnya Button - EXACT from Figma */}
+                <div className="flex items-center justify-end">
+                  <button className="flex items-center gap-2 font-['Poppins'] text-[#18b3ab] text-[12px] leading-[24px] hover:text-[#16a199] transition-colors duration-200">
+                    <span>Lainnya</span>
+                    <div className="relative size-[18px]">
+                      <svg
+                        className="absolute inset-0"
+                        fill="none"
+                        viewBox="0 0 18 18"
+                      >
+                        <g transform="translate(6.75, 4.5)">
+                          <path
+                            d="M0.5 0.5L4 4L0.5 7.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Media Publikasi Terkait - EXACT from Figma */}
+              <div className="flex flex-col gap-[24px]">
+                <h3 className="font-['Poppins'] font-medium text-[18px] lg:text-[20px] text-[#18b3ab]">
+                  Media Publikasi Terkait
+                </h3>
+
+                {/* Publication Card */}
+                <div className="relative h-[280px] w-full">
+                  {/* Border stroke container */}
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    preserveAspectRatio="none"
+                    viewBox="0 0 387 282"
+                  >
+                    <path
+                      d="M1 15C1 7.26801 7.26801 1 15 1H372C379.732 1 386 7.26801 386 15V267C386 274.732 379.732 281 372 281H15C7.26801 281 1 274.732 1 267V15Z"
+                      stroke="#CCCCCC"
+                      fill="white"
+                    />
+                  </svg>
+
+                  {/* Image at top with fade transition */}
+                  <div className="absolute top-0 left-0 right-0 h-[154px] rounded-tl-[15px] rounded-tr-[15px] overflow-hidden">
+                    <img
+                      src={
+                        publications[currentPublicationIndex]
+                          .image
+                      }
+                      alt={
+                        publications[currentPublicationIndex]
+                          .title
+                      }
+                      className="w-full h-full object-cover transition-opacity duration-500"
+                      key={currentPublicationIndex}
+                    />
+                  </div>
+
+                  {/* Title at bottom center with fade transition */}
+                  <div className="absolute bottom-[81px] left-0 right-0 flex justify-center">
+                    <p
+                      className="font-['Poppins'] font-medium text-[18px] text-center text-neutral-600 leading-[30px] px-4 transition-opacity duration-500"
+                      key={`title-${currentPublicationIndex}`}
+                    >
+                      {
+                        publications[currentPublicationIndex]
+                          .title
+                      }
+                    </p>
+                  </div>
+
+                  {/* Carousel Dots - Clickable */}
+                  <div className="absolute bottom-[27px] left-1/2 -translate-x-1/2 flex items-center gap-[6px]">
+                    {publications.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() =>
+                          setCurrentPublicationIndex(index)
+                        }
+                        className="transition-all duration-300 hover:scale-110 cursor-pointer"
+                        aria-label={`Go to slide ${index + 1}`}
+                      >
+                        <svg
+                          width={
+                            index === currentPublicationIndex
+                              ? "25"
+                              : "7"
+                          }
+                          height="7"
+                          viewBox={
+                            index === currentPublicationIndex
+                              ? "0 0 25 7"
+                              : "0 0 7 7"
+                          }
+                          className="transition-all duration-300"
+                        >
+                          <path
+                            d={
+                              index === currentPublicationIndex
+                                ? "M3.5 0C1.567 0 0 1.567 0 3.5C0 5.433 1.567 7 3.5 7H21.5C23.433 7 25 5.433 25 3.5C25 1.567 23.433 0 21.5 0H3.5Z"
+                                : "M3.5 0C1.567 0 0 1.567 0 3.5C0 5.433 1.567 7 3.5 7C5.433 7 7 5.433 7 3.5C7 1.567 5.433 0 3.5 0Z"
+                            }
+                            fill={
+                              index === currentPublicationIndex
+                                ? "#18B3AB"
+                                : "#D9D9D9"
+                            }
+                            className="transition-colors duration-300"
+                          />
+                        </svg>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Lainnya Button */}
+                <div className="flex items-center justify-end">
+                  <button className="flex items-center gap-2 text-[#18b3ab] hover:text-[#16a199] font-['Poppins'] text-[12px] leading-[24px] transition-colors duration-200">
+                    <span>Lainnya</span>
+                    <div className="relative size-[18px]">
+                      <svg
+                        className="absolute inset-0"
+                        fill="none"
+                        viewBox="0 0 18 18"
+                      >
+                        <g transform="translate(6.75, 4.5)">
+                          <path
+                            d="M0.5 0.5L4 4L0.5 7.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
