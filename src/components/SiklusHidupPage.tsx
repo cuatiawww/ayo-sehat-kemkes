@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Share2 } from "lucide-react";
+import { Share2, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import CustomCalendar from "./CustomCalendar";
 import CustomBreadcrumb from "./CustomBreadcrump";
@@ -11,8 +11,7 @@ const lifecycleStages = [
     name: "Bayi dan Balita",
     age: "< 5 Tahun",
     slug: "bayi-balita",
-    image:
-      "../assets/image.png",
+    image: "../assets/image.png",
     color: "#d5dd23",
   },
   {
@@ -20,8 +19,7 @@ const lifecycleStages = [
     name: "Anak-Anak",
     age: "5-9 Tahun",
     slug: "anak-anak",
-    image:
-      "../assets/Image (4).png",
+    image: "../assets/Image (4).png",
     color: "#d5dd23",
   },
   {
@@ -29,8 +27,7 @@ const lifecycleStages = [
     name: "Remaja",
     age: "10-18 Tahun",
     slug: "remaja",
-    image:
-      "../assets/Image (1).png",
+    image: "../assets/Image (1).png",
     color: "#d5dd23",
   },
   {
@@ -38,8 +35,7 @@ const lifecycleStages = [
     name: "Dewasa",
     age: "18-59 Tahun",
     slug: "dewasa",
-    image:
-      "../assets/Image (2).png",
+    image: "../assets/Image (2).png",
     color: "#d5dd23",
   },
   {
@@ -47,8 +43,7 @@ const lifecycleStages = [
     name: "Lansia",
     age: "60+ Tahun",
     slug: "lansia",
-    image:
-      "../assets/Image (3).png",
+    image: "../assets/Image (3).png",
     color: "#d5dd23",
   },
 ];
@@ -135,6 +130,27 @@ const stageContent = {
           "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
         category: "Bayi",
       },
+      {
+        id: 4,
+        title: "Imunisasi Dasar Lengkap",
+        image:
+          "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Bayi",
+      },
+      {
+        id: 5,
+        title: "Tumbuh Kembang Optimal",
+        image:
+          "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Bayi",
+      },
+      {
+        id: 6,
+        title: "ASI Eksklusif",
+        image:
+          "https://images.unsplash.com/photo-1566753323558-f4e0952af115?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Bayi",
+      },
     ],
   },
   "anak-anak": {
@@ -217,6 +233,27 @@ const stageContent = {
           "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
         category: "Anak-Anak",
       },
+      {
+        id: 4,
+        title: "Kesehatan Gigi Anak",
+        image:
+          "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Anak-Anak",
+      },
+      {
+        id: 5,
+        title: "Aktivitas Fisik Rutin",
+        image:
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Anak-Anak",
+      },
+      {
+        id: 6,
+        title: "Nutrisi Seimbang",
+        image:
+          "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Anak-Anak",
+      },
     ],
   },
   remaja: {
@@ -297,6 +334,27 @@ const stageContent = {
         title: "Kesehatan Reproduksi",
         image:
           "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Remaja",
+      },
+      {
+        id: 4,
+        title: "Gizi Seimbang Remaja",
+        image:
+          "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Remaja",
+      },
+      {
+        id: 5,
+        title: "Aktivitas Fisik Remaja",
+        image:
+          "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        category: "Remaja",
+      },
+      {
+        id: 6,
+        title: "Pola Hidup Sehat",
+        image:
+          "https://images.unsplash.com/photo-1519689680058-324335c77eba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
         category: "Remaja",
       },
     ],
@@ -512,6 +570,24 @@ const diseases = [
     image:
       "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
   },
+  {
+    id: 4,
+    title: "Demam Berdarah Dengue (DBD)",
+    image:
+      "https://images.unsplash.com/photo-1579154204845-5e8a6cc07087?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 5,
+    title: "Tuberkulosis (TBC)",
+    image:
+      "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 6,
+    title: "Cacar Air",
+    image:
+      "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
 ];
 
 export default function SiklusHidupPage({
@@ -525,6 +601,8 @@ export default function SiklusHidupPage({
     useState(initialStage);
   const [currentPublicationIndex, setCurrentPublicationIndex] =
     useState(0);
+  const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
+  const [currentDiseaseIndex, setCurrentDiseaseIndex] = useState(0);
 
   // Get current content based on selected stage
   const currentContent =
@@ -553,113 +631,139 @@ export default function SiklusHidupPage({
       />
 
       {/* Hero Section */}
-     <div className="relative">
-  {/* Hero Section - Background Gradient */}
-  <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-22 sm:pt-8 lg:pt-12 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
-    {/* Decorative Background Circles */}
-    <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
-      <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
-      <div className="absolute bottom-0 -right-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
-      <div className="absolute bottom-20 right-40 w-[300px] h-[150px]">
-        <svg viewBox="0 0 300 150" className="w-full h-full opacity-20">
-          <path d="M0,30 Q75,20 150,30 T300,30" stroke="#e5e7eb" strokeWidth="2" fill="none" />
-          <path d="M0,60 Q75,50 150,60 T300,60" stroke="#e5e7eb" strokeWidth="2" fill="none" />
-          <path d="M0,90 Q75,80 150,90 T300,90" stroke="#e5e7eb" strokeWidth="2" fill="none" />
-          <path d="M0,120 Q75,110 150,120 T300,120" stroke="#e5e7eb" strokeWidth="2" fill="none" />
-        </svg>
-      </div>
-    </div>
-
-    <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-6 sm:mb-8 lg:mb-10"
-      >
-        <h1 className="font-semibold text-[28px] sm:text-[36px] lg:text-[50px] text-[#18b3ab] mb-3 sm:mb-4">
-          Siklus Hidup Kesehatan
-        </h1>
-        <p className="text-[14px] sm:text-[16px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
-          Pendampingan menjaga kesehatan sepanjang siklus kehidupan, dengan informasi khusus setiap tahap usia
-        </p>
-      </motion.div>
-    </div>
-  </section>
-
-  {/* LIFECYCLE CARDS - ABSOLUTE POSITION untuk OVERLAP 50-50 - RESPONSIVE 5 CARDS */}
-  <div className="absolute left-0 right-0 top-[calc(100%-50px)] sm:top-[calc(100%-20px)] lg:top-[calc(100%-80px)] z-20 pointer-events-none">
-    <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
-      <div className="grid grid-cols-5 gap-2 sm:gap-4 lg:gap-6 xl:gap-[26px] items-end pointer-events-auto">
-        {lifecycleStages.map((stage, index) => {
-          const isSelected = stage.slug === selectedStage;
-
-          return (
-            <motion.div
-              key={stage.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: isSelected ? 1.05 : 1
-              }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.1,
-              }}
-              className="group cursor-pointer flex flex-col items-center"
-              onClick={() => setSelectedStage(stage.slug)}
-            >
-              {/* Image Container - RESPONSIVE SIZES */}
-              <div
-                className={`relative w-full aspect-square transition-all duration-500 ease-out
-                  ${isSelected ? 'shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20' : 'z-10'}
-                  group-hover:-translate-y-2 group-hover:scale-105`}
+      <div className="relative">
+        {/* Hero Section - Background Gradient */}
+        <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-22 sm:pt-8 lg:pt-12 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+          {/* Decorative Background Circles */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
+            <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
+            <div className="absolute bottom-0 -right-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
+            <div className="absolute bottom-20 right-40 w-[300px] h-[150px]">
+              <svg
+                viewBox="0 0 300 150"
+                className="w-full h-full opacity-20"
               >
-                {/* Image Wrapper */}
-                <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] overflow-hidden bg-[#18b3ab]">
-                  <img
-                    alt={`${stage.name}, ${stage.age}`}
-                    src={stage.image}
-                    className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700
+                <path
+                  d="M0,30 Q75,20 150,30 T300,30"
+                  stroke="#e5e7eb"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <path
+                  d="M0,60 Q75,50 150,60 T300,60"
+                  stroke="#e5e7eb"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <path
+                  d="M0,90 Q75,80 150,90 T300,90"
+                  stroke="#e5e7eb"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <path
+                  d="M0,120 Q75,110 150,120 T300,120"
+                  stroke="#e5e7eb"
+                  strokeWidth="2"
+                  fill="none"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-6 sm:mb-8 lg:mb-10"
+            >
+              <h1 className="font-semibold text-[28px] sm:text-[36px] lg:text-[50px] text-[#18b3ab] mb-3 sm:mb-4">
+                Siklus Hidup Kesehatan
+              </h1>
+              <p className="text-[14px] sm:text-[16px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
+                Pendampingan menjaga kesehatan sepanjang siklus
+                kehidupan, dengan informasi khusus setiap tahap
+                usia
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* LIFECYCLE CARDS - ABSOLUTE POSITION untuk OVERLAP 50-50 - RESPONSIVE 5 CARDS */}
+        <div className="absolute left-0 right-0 top-[calc(100%-50px)] sm:top-[calc(100%-20px)] lg:top-[calc(100%-80px)] z-20 pointer-events-none">
+          <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
+            <div className="grid grid-cols-5 gap-2 sm:gap-4 lg:gap-6 xl:gap-[26px] items-end pointer-events-auto">
+              {lifecycleStages.map((stage, index) => {
+                const isSelected = stage.slug === selectedStage;
+
+                return (
+                  <motion.div
+                    key={stage.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: isSelected ? 1.05 : 1,
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      delay: index * 0.1,
+                    }}
+                    className="group cursor-pointer flex flex-col items-center"
+                    onClick={() => setSelectedStage(stage.slug)}
+                  >
+                    {/* Image Container - RESPONSIVE SIZES */}
+                    <div
+                      className={`relative w-full aspect-square transition-all duration-500 ease-out
+                  ${isSelected ? "shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20" : "z-10"}
+                  group-hover:-translate-y-2 group-hover:scale-105`}
+                    >
+                      {/* Image Wrapper */}
+                      <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] overflow-hidden bg-[#18b3ab]">
+                        <img
+                          alt={`${stage.name}, ${stage.age}`}
+                          src={stage.image}
+                          className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700
                     group-hover:scale-105 group-hover:brightness-110"
-                  />
-                  {/* Gradient Overlay saat hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                </div>
+                        />
+                        {/* Gradient Overlay saat hover */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                      </div>
 
-                {/* Border Glow saat hover */}
-                <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
+                      {/* Border Glow saat hover */}
+                      <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
 
-                {/* Label bawah - RESPONSIVE SIZES */}
-                <div className="absolute bottom-[-10px] sm:bottom-[-15px] lg:bottom-[-20px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 
+                      {/* Label bawah - RESPONSIVE SIZES */}
+                      <div
+                        className="absolute bottom-[-10px] sm:bottom-[-15px] lg:bottom-[-20px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 
                   bg-[#d5dd23] rounded-[8px] sm:rounded-[12px] lg:rounded-[16px] xl:rounded-[20px] 
                   h-[40px] sm:h-[55px] lg:h-[70px] xl:h-[84px] 
                   w-full max-w-[90%] sm:max-w-[85%] lg:max-w-[80%] xl:max-w-[222px]
                   flex flex-col items-center justify-center 
                   transition-all duration-500 ease-out 
-                  group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-1 group-hover:scale-105 z-30 px-1 sm:px-2">
-                  <p className="font-semibold text-[9px] sm:text-[12px] lg:text-[16px] xl:text-[23px] leading-tight text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
-                    {stage.name}
-                  </p>
-                  <p className="text-[7px] sm:text-[10px] lg:text-[12px] xl:text-[16px] leading-tight text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
-                    {stage.age}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+                  group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-1 group-hover:scale-105 z-30 px-1 sm:px-2"
+                      >
+                        <p className="font-semibold text-[9px] sm:text-[12px] lg:text-[16px] xl:text-[23px] leading-tight text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
+                          {stage.name}
+                        </p>
+                        <p className="text-[7px] sm:text-[10px] lg:text-[12px] xl:text-[16px] leading-tight text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
+                          {stage.age}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-
 
       {/* Main Content Section - 2 COLUMN LAYOUT dengan Sticky Sidebar */}
-    <section className="relative bg-white pt-[140px] sm:pt-[230px] lg:pt-[380px] pb-8 sm:pb-10 lg:pb-12">
-  <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-white pt-[140px] sm:pt-[230px] lg:pt-[380px] pb-8 sm:pb-10 lg:pb-12">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 sm:gap-8 lg:gap-12">
             {/* LEFT COLUMN: Main Content (Artikel + Topik + Penyakit) */}
             <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
@@ -680,7 +784,7 @@ export default function SiklusHidupPage({
                   </div>
                 </div>
 
-                 {/* Kelompok Umur Header -      */}
+                {/* Kelompok Umur Header -      */}
                 <div className="mb-6">
                   <p className="font-['Poppins'] text-[#6b7280] text-[13px] sm:text-[14px] mb-2">
                     Kelompok Umur
@@ -689,7 +793,9 @@ export default function SiklusHidupPage({
                     <h1 className="font-['Poppins'] text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px]">
                       {currentStageData?.name}
                     </h1>
-                    <span className="font-['Poppins'] text-[#6b7280] text-[18px] sm:text-[20px] lg:text-[24px]">•</span>
+                    <span className="font-['Poppins'] text-[#6b7280] text-[18px] sm:text-[20px] lg:text-[24px]">
+                      •
+                    </span>
                     <p className="font-['Poppins'] text-[#6b7280] text-[16px] sm:text-[18px] lg:text-[20px]">
                       {currentStageData?.age}
                     </p>
@@ -816,40 +922,78 @@ export default function SiklusHidupPage({
                   Topik Kesehatan Terkait
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {currentContent?.topics.map(
-                    (topic, index) => (
-                      <motion.div
-                        key={topic.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.5,
-                          delay: index * 0.1,
-                        }}
-                        className="group cursor-pointer"
-                      >
-                        {/* Card Container -      */}
-                        <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
-                          {/* Image Top Section */}
-                          <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
-                            <img
-                              alt={topic.title}
-                              className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
-                              src={topic.image}
-                            />
-                          </div>
+                {/* Carousel Container with Navigation */}
+                <div className="relative group/carousel">
+                  {/* Navigation Buttons */}
+                  <button
+                    onClick={() =>
+                      setCurrentTopicIndex((prev) =>
+                        prev === 0
+                          ? Math.max(0, (currentContent?.topics.length || 0) - 3)
+                          : Math.max(0, prev - 1)
+                      )
+                    }
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
+                    disabled={currentTopicIndex === 0}
+                  >
+                    <ChevronLeft className="w-6 h-6 text-[#18b3ab]" />
+                  </button>
 
-                          {/* Title Bottom Section */}
-                          <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
-                            <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
-                              {topic.title}
-                            </p>
+                  <button
+                    onClick={() =>
+                      setCurrentTopicIndex((prev) =>
+                        prev >= (currentContent?.topics.length || 0) - 3
+                          ? 0
+                          : prev + 1
+                      )
+                    }
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
+                    disabled={currentTopicIndex >= (currentContent?.topics.length || 0) - 3}
+                  >
+                    <ChevronRight className="w-6 h-6 text-[#18b3ab]" />
+                  </button>
+
+                  {/* Carousel Track */}
+                  <div className="overflow-hidden">
+                    <div
+                      className="flex gap-4 sm:gap-6 transition-transform duration-500 ease-out"
+                      style={{
+                        transform: `translateX(-${currentTopicIndex * (100 / 3)}%)`,
+                      }}
+                    >
+                      {currentContent?.topics.map((topic, index) => (
+                        <motion.div
+                          key={topic.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: index * 0.1,
+                          }}
+                          className="group cursor-pointer flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+                        >
+                          {/* Card Container */}
+                          <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
+                            {/* Image Top Section */}
+                            <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
+                              <img
+                                alt={topic.title}
+                                className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
+                                src={topic.image}
+                              />
+                            </div>
+
+                            {/* Title Bottom Section */}
+                            <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
+                              <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
+                                {topic.title}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </motion.div>
-                    ),
-                  )}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -859,38 +1003,74 @@ export default function SiklusHidupPage({
                   Penyakit Terkait
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {diseases.map((disease, index) => (
-                    <motion.div
-                      key={disease.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.5,
-                        delay: index * 0.1,
-                      }}
-                      className="group cursor-pointer"
-                    >
-                      {/* Card Container -      */}
-                      <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
-                        {/* Image Top Section */}
-                        <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
-                          <img
-                            alt={disease.title}
-                            className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
-                            src={disease.image}
-                          />
-                        </div>
+                {/* Carousel Container with Navigation */}
+                <div className="relative group/carousel">
+                  {/* Navigation Buttons */}
+                  <button
+                    onClick={() =>
+                      setCurrentDiseaseIndex((prev) =>
+                        prev === 0 ? Math.max(0, diseases.length - 3) : Math.max(0, prev - 1)
+                      )
+                    }
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
+                    disabled={currentDiseaseIndex === 0}
+                  >
+                    <ChevronLeft className="w-6 h-6 text-[#18b3ab]" />
+                  </button>
 
-                        {/* Title Bottom Section */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
-                          <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
-                            {disease.title}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                  <button
+                    onClick={() =>
+                      setCurrentDiseaseIndex((prev) =>
+                        prev >= diseases.length - 3 ? 0 : prev + 1
+                      )
+                    }
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
+                    disabled={currentDiseaseIndex >= diseases.length - 3}
+                  >
+                    <ChevronRight className="w-6 h-6 text-[#18b3ab]" />
+                  </button>
+
+                  {/* Carousel Track */}
+                  <div className="overflow-hidden">
+                    <div
+                      className="flex gap-4 sm:gap-6 transition-transform duration-500 ease-out"
+                      style={{
+                        transform: `translateX(-${currentDiseaseIndex * (100 / 3)}%)`,
+                      }}
+                    >
+                      {diseases.map((disease, index) => (
+                        <motion.div
+                          key={disease.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: index * 0.1,
+                          }}
+                          className="group cursor-pointer flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+                        >
+                          {/* Card Container */}
+                          <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
+                            {/* Image Top Section */}
+                            <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
+                              <img
+                                alt={disease.title}
+                                className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
+                                src={disease.image}
+                              />
+                            </div>
+
+                            {/* Title Bottom Section */}
+                            <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
+                              <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
+                                {disease.title}
+                              </p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -925,7 +1105,7 @@ export default function SiklusHidupPage({
                       <div key={article.id}>
                         {/* Separator */}
                         <div className="bg-[#cccccc] h-px w-full mb-[18px] sm:mb-[21px]" />
-                        
+
                         {/* Article Item -      Frame366 */}
                         <div className="flex gap-[12px] sm:gap-[18px] items-start cursor-pointer group">
                           {/* Image - 138x129 rounded-[10px] */}
@@ -941,10 +1121,18 @@ export default function SiklusHidupPage({
                           <div className="flex flex-col gap-[5px] sm:gap-[7px] flex-1 min-w-0">
                             {/* Tags with bullets -      - Truncate 1 line */}
                             <div className="font-['Poppins'] text-[#18b3ab] text-[10px] sm:text-[12px] leading-[16px] sm:leading-[18px] overflow-hidden whitespace-nowrap text-ellipsis">
-                              <span>Bayi dan Balita (&lt; 5 Tahun)</span>
-                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]"> • </span>
+                              <span>
+                                Bayi dan Balita (&lt; 5 Tahun)
+                              </span>
+                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]">
+                                {" "}
+                                •{" "}
+                              </span>
                               <span>Anak-anak (5-9 Tahun)</span>
-                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]"> • </span>
+                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]">
+                                {" "}
+                                •{" "}
+                              </span>
                               <span>Remaja...</span>
                             </div>
 
@@ -955,13 +1143,14 @@ export default function SiklusHidupPage({
 
                             {/* Description - Truncate 3 lines */}
                             <p className="font-['Poppins'] text-[11px] sm:text-[13px] leading-[17px] sm:leading-[20px] text-[#6b7280] line-clamp-3">
-                              {article.description || "Informasi kesehatan penting untuk tahap perkembangan ini, mencakup nutrisi, vaksinasi, dan perawatan yang diperlukan untuk mendukung tumbuh kembang optimal."}
+                              {article.description ||
+                                "Informasi kesehatan penting untuk tahap perkembangan ini, mencakup nutrisi, vaksinasi, dan perawatan yang diperlukan untuk mendukung tumbuh kembang optimal."}
                             </p>
                           </div>
                         </div>
                       </div>
                     ))}
-                  
+
                   {/* Bottom separator */}
                   <div className="bg-[#cccccc] h-px w-full" />
                 </div>
