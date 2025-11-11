@@ -231,17 +231,17 @@ export default function RightSidebar({
               <p className="font-['Poppins'] text-[14px] text-[dimgrey] leading-[20px] flex-1">
                 Informasi terkait dengan kampanye kesehatan yang sedang berlangsung
               </p>
-              <button className="flex gap-[2px] items-center shrink-0 group">
+              <button className="flex gap-[6px] items-center shrink-0 group">
                 <span className="font-['Poppins'] text-[10px] leading-[30px] text-[#18b3ab] whitespace-nowrap">
                   Lihat Detail
                 </span>
                 <svg
-                  className="w-[14px] h-[10px]"
+                  className="w-[10px] h-[14px] group-hover:translate-x-0.5 transition-transform"
                   fill="none"
-                  viewBox="0 0 8 5"
+                  viewBox="0 0 5 8"
                 >
                   <path
-                    d="M7.5 0.5L4 4L0.5 0.5"
+                    d="M0.5 0.5L4 4L0.5 7.5"
                     stroke="#18B3AB"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -310,17 +310,17 @@ export default function RightSidebar({
               <p className="font-['Poppins'] text-[14px] text-[dimgrey] leading-[20px] flex-1">
                 Informasi terkait dengan media publikasi kesehatan yang tersedia
               </p>
-              <button className="flex gap-[2px] items-center shrink-0 group">
+              <button className="flex gap-[6px] items-center shrink-0 group">
                 <span className="font-['Poppins'] text-[10px] leading-[30px] text-[#18b3ab] whitespace-nowrap">
                   Lihat Detail
                 </span>
                 <svg
-                  className="w-[14px] h-[10px]"
+                  className="w-[10px] h-[14px] group-hover:translate-x-0.5 transition-transform"
                   fill="none"
-                  viewBox="0 0 8 5"
+                  viewBox="0 0 5 8"
                 >
                   <path
-                    d="M7.5 0.5L4 4L0.5 0.5"
+                    d="M0.5 0.5L4 4L0.5 7.5"
                     stroke="#18B3AB"
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -220,11 +220,6 @@ export default function TopicSection() {
     <p className="mb-1 sm:mb-0">
       Informasi terkait dengan hari besar dan agenda kesehatan satu tahun penuh
     </p>
-    <button
-      className="text-[#18b3ab] hover:text-[#16a199] font-light text-[10px] underline underline-offset-4 transition-colors duration-200"
-    >
-      Lihat detail →
-    </button>
   </div>
               {/* Calendar Card */}
               <div className="w-full">

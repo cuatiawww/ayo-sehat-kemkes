@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import CustomBreadcrumb from "./CustomBreadcrump";
 import RightSidebar from "./RightSidebar";
 
+
 interface Article {
   id: number;
   title: string;
@@ -22,7 +23,26 @@ interface ArtikelPageProps {
 
 export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState<string>("Semua");
+  const [selectedLifecycle, setSelectedLifecycle] = useState<string>("Dewasa");
+  const [selectedTopic, setSelectedTopic] = useState<string>("Topik Kesehatan");
+  const [showLifecycleDropdown, setShowLifecycleDropdown] = useState(false);
+  const [showTopicDropdown, setShowTopicDropdown] = useState(false);
+  const [selectedSort, setSelectedSort] = useState<string>("Terbaru");
+  const [showSortDropdown, setShowSortDropdown] = useState(false);
   const articlesPerPage = 10;
+
+  // Lifecycle stages options
+  const lifecycleStages = [
+    "Bayi dan Balita",
+    "Anak-Anak",
+    "Remaja",
+    "Dewasa",
+    "Lansia",
+  ];
+
+  // Sort options
+  const sortOptions = ["Terbaru", "Terlama", "Paling Populer"];
 
   // Popular Topics - Topik yang Banyak Dicari
   const popularTopics = [
@@ -148,6 +168,61 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
       category: "Cegah",
       lifecycleStage: "Remaja (10-18 tahun)",
     },
+    {
+      id: 11,
+      title: "Pentingnya Nutrisi Seimbang untuk Pertumbuhan Anak Usia Sekolah",
+      excerpt: "Gizi yang tepat pada usia sekolah sangat mempengaruhi perkembangan fisik dan kognitif anak untuk masa depan mereka.",
+      image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      date: "1 Sep 2025",
+      views: "1.678",
+      readTime: "5",
+      category: "Cegah",
+      lifecycleStage: "Anak (5-9 tahun)",
+    },
+    {
+      id: 12,
+      title: "Mengenal Diabetes Gestasional: Risiko dan Pencegahan untuk Ibu Hamil",
+      excerpt: "Diabetes gestasional perlu dideteksi dini dan dikelola dengan baik untuk kesehatan ibu dan janin.",
+      image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      date: "31 Agu 2025",
+      views: "1.234",
+      readTime: "6",
+      category: "Gejala",
+      lifecycleStage: "Dewasa (19-59 tahun)",
+    },
+    {
+      id: 13,
+      title: "Osteoporosis pada Lansia: Pencegahan Lebih Baik dari Pengobatan",
+      excerpt: "Menjaga kesehatan tulang sejak dini adalah kunci mencegah osteoporosis di usia lanjut.",
+      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      date: "30 Agu 2025",
+      views: "987",
+      readTime: "4",
+      category: "Cegah",
+      lifecycleStage: "Lansia (>60 tahun)",
+    },
+    {
+      id: 14,
+      title: "Menjaga Kesehatan Mental Remaja di Tengah Tekanan Akademik",
+      excerpt: "Kesehatan mental remaja sama pentingnya dengan kesehatan fisik, terutama menghadapi tekanan pendidikan modern.",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      date: "29 Agu 2025",
+      views: "2.145",
+      readTime: "5",
+      category: "Cegah",
+      lifecycleStage: "Remaja (10-18 tahun)",
+    },
+    {
+      id: 15,
+      title: "ASI Eksklusif 6 Bulan: Manfaat Optimal untuk Tumbuh Kembang Bayi",
+      excerpt: "ASI eksklusif memberikan nutrisi terbaik dan perlindungan alami untuk bayi di 6 bulan pertama kehidupan.",
+      image: "https://images.unsplash.com/photo-1555252332-17b31b76c1d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      date: "28 Agu 2025",
+      views: "1.543",
+      readTime: "4",
+      category: "Cegah",
+      lifecycleStage: "Bayi dan Balita (<5 tahun)",
+    },
   ];
 
   // Pagination
@@ -200,7 +275,7 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="absolute right-[5%] lg:right-[8%] bottom-[-80px] sm:bottom-[-100px] lg:bottom-[-120px] hidden lg:block z-10"
         >
-          <div className="relative w-[400px] xl:w-[480px] aspect-[4/3] rounded-[20px] overflow-hidden shadow-2xl border-4 border-white">
+          <div className="relative w-[480px] xl:w-[580px] aspect-[4/3] rounded-[20px] overflow-hidden shadow-2xl border-4 border-white">
             <img
               src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
               alt="Doctor working on computer"
@@ -248,6 +323,212 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-8 lg:gap-12">
             {/* Articles List */}
             <div className="space-y-6 sm:space-y-8">
+              {/* Filter Tabs & Dropdowns */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-gray-200">
+                {/* Category Tabs */}
+                <div className="flex gap-[8px] items-start flex-wrap">
+                  {/* Semua Tab with Icon */}
+                  <button
+                    onClick={() => setActiveTab("Semua")}
+                    className={`flex gap-[8px] items-center justify-center px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
+                      activeTab === "Semua"
+                        ? "bg-[#18b3ab]"
+                        : "bg-white border border-[#d9d9d9] hover:border-[#18b3ab]/50"
+                    }`}
+                  >
+                    <div className="relative shrink-0 size-[17px]">
+                      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13 15">
+                        <path d="M8.97563 10.0438H3.86147" stroke={activeTab === "Semua" ? "white" : "#18b3ab"} strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M8.97563 7.07836H3.86147" stroke={activeTab === "Semua" ? "white" : "#18b3ab"} strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M5.813 4.1198H3.86154" stroke={activeTab === "Semua" ? "white" : "#18b3ab"} strokeLinecap="round" strokeLinejoin="round" />
+                        {/* <path clipRule="evenodd" d={svgPaths.p275da600} fillRule="evenodd" stroke={activeTab === "Semua" ? "white" : "#18b3ab"} strokeLinecap="round" strokeLinejoin="round" /> */}
+                      </svg>
+                    </div>
+                  </button>
+
+                  {/* Cegah Tab */}
+                  <button
+                    onClick={() => setActiveTab("Cegah")}
+                    className={`px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
+                      activeTab === "Cegah"
+                        ? "bg-[#18b3ab] text-white"
+                        : "bg-white border border-[#d9d9d9] text-neutral-600 hover:border-[#18b3ab]/50"
+                    }`}
+                  >
+                    <p className="font-['Poppins'] font-semibold text-[14px] leading-normal text-center w-[71px]">
+                      Cegah
+                    </p>
+                  </button>
+
+                  {/* Deteksi Tab */}
+                  <button
+                    onClick={() => setActiveTab("Deteksi")}
+                    className={`px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
+                      activeTab === "Deteksi"
+                        ? "bg-[#18b3ab] text-white"
+                        : "bg-white border border-[#d9d9d9] text-neutral-600 hover:border-[#18b3ab]/50"
+                    }`}
+                  >
+                    <p className="font-['Poppins'] font-semibold text-[14px] leading-normal text-center w-[80px]">
+                      Deteksi
+                    </p>
+                  </button>
+
+                  {/* Pengobatan Tab */}
+                  <button
+                    onClick={() => setActiveTab("Pengobatan")}
+                    className={`px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
+                      activeTab === "Pengobatan"
+                        ? "bg-[#18b3ab] text-white"
+                        : "bg-white border border-[#d9d9d9] text-neutral-600 hover:border-[#18b3ab]/50"
+                    }`}
+                  >
+                    <p className="font-['Poppins'] font-semibold text-[14px] leading-normal text-center w-[120px]">
+                      Pengobatan
+                    </p>
+                  </button>
+                </div>
+
+                {/* Filter Dropdowns */}
+                <div className="flex gap-[10px] items-center flex-wrap">
+                  {/* Lifecycle Stage Dropdown */}
+                  <div className="relative">
+                    <div
+                      className="relative rounded-[4px] shrink-0 cursor-pointer hover:border-[#18b3ab]/50 transition-colors"
+                      onClick={() => {
+                        setShowLifecycleDropdown(!showLifecycleDropdown);
+                        setShowTopicDropdown(false);
+                        setShowSortDropdown(false);
+                      }}
+                    >
+                      <div className="box-border flex gap-[10px] items-center px-[8px] py-0 relative rounded-[inherit]">
+                        <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#666666] whitespace-pre">
+                          {selectedLifecycle}
+                        </p>
+                        <div className="relative shrink-0 size-[24px]">
+                          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                            <path d="M7 10L12 15L17 10H7Z" fill="#18B3AB" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div aria-hidden="true" className="absolute border border-[#cccccc] border-solid inset-0 pointer-events-none rounded-[4px]" />
+                    </div>
+                    
+                    {/* Lifecycle Dropdown Menu */}
+                    {showLifecycleDropdown && (
+                      <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-[4px] shadow-lg z-50 min-w-[160px]">
+                        {lifecycleStages.map((stage) => (
+                          <button
+                            key={stage}
+                            onClick={() => {
+                              setSelectedLifecycle(stage);
+                              setShowLifecycleDropdown(false);
+                            }}
+                            className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab] transition-colors"
+                          >
+                            {stage}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Topic Dropdown */}
+                  <div className="relative">
+                    <div
+                      className="relative rounded-[4px] shrink-0 cursor-pointer hover:border-[#18b3ab]/50 transition-colors"
+                      onClick={() => {
+                        setShowTopicDropdown(!showTopicDropdown);
+                        setShowLifecycleDropdown(false);
+                        setShowSortDropdown(false);
+                      }}
+                    >
+                      <div className="box-border flex gap-[10px] items-center px-[8px] py-0 relative rounded-[inherit]">
+                        <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#666666] whitespace-pre">
+                          {selectedTopic}
+                        </p>
+                        <div className="relative shrink-0 size-[24px]">
+                          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                            <path d="M7 10L12 15L17 10H7Z" fill="#18B3AB" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div aria-hidden="true" className="absolute border border-[#cccccc] border-solid inset-0 pointer-events-none rounded-[4px]" />
+                    </div>
+
+                    {/* Topic Dropdown Menu */}
+                    {showTopicDropdown && (
+                      <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-[4px] shadow-lg z-50 min-w-[180px]">
+                        <button
+                          onClick={() => {
+                            setSelectedTopic("Topik Kesehatan");
+                            setShowTopicDropdown(false);
+                          }}
+                          className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab] transition-colors border-b border-gray-100"
+                        >
+                          Topik Kesehatan
+                        </button>
+                        {popularTopics.map((topic) => (
+                          <button
+                            key={topic.id}
+                            onClick={() => {
+                              setSelectedTopic(topic.text);
+                              setShowTopicDropdown(false);
+                            }}
+                            className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab] transition-colors capitalize"
+                          >
+                            {topic.text}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Sort Dropdown */}
+                  <div className="relative">
+                    <div
+                      className="relative rounded-[4px] shrink-0 cursor-pointer hover:border-[#18b3ab]/50 transition-colors"
+                      onClick={() => {
+                        setShowSortDropdown(!showSortDropdown);
+                        setShowLifecycleDropdown(false);
+                        setShowTopicDropdown(false);
+                      }}
+                    >
+                      <div className="box-border flex gap-[10px] items-center px-[8px] py-0 relative rounded-[inherit]">
+                        <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#666666] whitespace-pre">
+                          {selectedSort}
+                        </p>
+                        <div className="relative shrink-0 size-[24px]">
+                          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                            <path d="M7 10L12 15L17 10H7Z" fill="#18B3AB" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div aria-hidden="true" className="absolute border border-[#cccccc] border-solid inset-0 pointer-events-none rounded-[4px]" />
+                    </div>
+
+                    {/* Sort Dropdown Menu */}
+                    {showSortDropdown && (
+                      <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-[4px] shadow-lg z-50 min-w-[140px]">
+                        {sortOptions.map((option) => (
+                          <button
+                            key={option}
+                            onClick={() => {
+                              setSelectedSort(option);
+                              setShowSortDropdown(false);
+                            }}
+                            className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab] transition-colors"
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Articles */}
               {currentArticles.map((article, index) => (
                 <motion.article
                   key={article.id}
@@ -270,7 +551,7 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
                         />
                       </div>
 
-                      {/* Content - Bottom */}
+                       {/* Content - Bottom */}
                       <div className="p-4 sm:p-5 flex flex-col gap-2.5 sm:gap-3">
                         {/* Breadcrumb */}
                         <div className="flex gap-2.5 items-center flex-wrap">
