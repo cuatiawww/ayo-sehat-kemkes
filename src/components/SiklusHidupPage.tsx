@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Share2, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import CustomCalendar from "./CustomCalendar";
 import CustomBreadcrumb from "./CustomBreadcrump";
+import RightSidebar from "./RightSidebar";
 
 // Lifecycle stage data
 const lifecycleStages = [
@@ -599,7 +599,7 @@ export default function SiklusHidupPage({
 }) {
   const [selectedStage, setSelectedStage] =
     useState(initialStage);
-  const [currentPublicationIndex, setCurrentPublicationIndex] =
+  const [, setCurrentPublicationIndex] =
     useState(0);
   const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
   const [currentDiseaseIndex, setCurrentDiseaseIndex] = useState(0);
@@ -1075,228 +1075,14 @@ export default function SiklusHidupPage({
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Sticky Sidebar */}
-            <div className="lg:sticky lg:top-6 lg:self-start flex flex-col gap-6 sm:gap-8 h-fit">
-              {/* Calendar */}
-              <div>
-                <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#18b3ab] mb-2">
-                  Kalender Kesehatan
-                </h3>
-                <p className="font-['Poppins'] text-[12px] sm:text-[13px] lg:text-[14px] text-gray-600 mb-3 sm:mb-4 leading-relaxed">
-                  Informasi terkait dengan hari besar dan agenda
-                  kesehatan satu tahun penuh
-                </p>
-
-                {/* Custom Calendar Component */}
-                <CustomCalendar />
-              </div>
-
-              {/* Artikel Terkait -      Frame366 */}
-              <div className="flex flex-col gap-[20px] sm:gap-[24px]">
-                <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#08847e]">
-                  Artikel Terkait
-                </h3>
-
-                {/* Artikel List with separators */}
-                <div className="flex flex-col gap-[18px] sm:gap-[21px]">
-                  {currentContent?.articles
-                    .slice(0, 4)
-                    .map((article) => (
-                      <div key={article.id}>
-                        {/* Separator */}
-                        <div className="bg-[#cccccc] h-px w-full mb-[18px] sm:mb-[21px]" />
-
-                        {/* Article Item -      Frame366 */}
-                        <div className="flex gap-[12px] sm:gap-[18px] items-start cursor-pointer group">
-                          {/* Image - 138x129 rounded-[10px] */}
-                          <div className="h-[100px] w-[110px] sm:h-[129px] sm:w-[138px] rounded-[8px] sm:rounded-[10px] overflow-hidden shrink-0">
-                            <img
-                              alt={article.title}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                              src={article.image}
-                            />
-                          </div>
-
-                          {/* Content */}
-                          <div className="flex flex-col gap-[5px] sm:gap-[7px] flex-1 min-w-0">
-                            {/* Tags with bullets -      - Truncate 1 line */}
-                            <div className="font-['Poppins'] text-[#18b3ab] text-[10px] sm:text-[12px] leading-[16px] sm:leading-[18px] overflow-hidden whitespace-nowrap text-ellipsis">
-                              <span>
-                                Bayi dan Balita (&lt; 5 Tahun)
-                              </span>
-                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]">
-                                {" "}
-                                •{" "}
-                              </span>
-                              <span>Anak-anak (5-9 Tahun)</span>
-                              <span className="text-[13px] sm:text-[15px] leading-[24px] sm:leading-[30px]">
-                                {" "}
-                                •{" "}
-                              </span>
-                              <span>Remaja...</span>
-                            </div>
-
-                            {/* Title -      - Truncate 1 line */}
-                            <p className="font-['Poppins'] font-medium text-[13px] sm:text-[15px] leading-[20px] sm:leading-[25px] text-neutral-600 group-hover:text-[#18b3ab] transition-colors duration-200 overflow-hidden whitespace-nowrap text-ellipsis">
-                              {article.title}
-                            </p>
-
-                            {/* Description - Truncate 3 lines */}
-                            <p className="font-['Poppins'] text-[11px] sm:text-[13px] leading-[17px] sm:leading-[20px] text-[#6b7280] line-clamp-3">
-                              {article.description ||
-                                "Informasi kesehatan penting untuk tahap perkembangan ini, mencakup nutrisi, vaksinasi, dan perawatan yang diperlukan untuk mendukung tumbuh kembang optimal."}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-
-                  {/* Bottom separator */}
-                  <div className="bg-[#cccccc] h-px w-full" />
-                </div>
-
-                {/* Lainnya Button -      */}
-                <div className="flex items-center justify-end">
-                  <button className="flex items-center gap-2 font-['Poppins'] text-[#18b3ab] text-[12px] leading-[24px] hover:text-[#16a199] transition-colors duration-200">
-                    <span>Lainnya</span>
-                    <div className="relative size-[18px]">
-                      <svg
-                        className="absolute inset-0"
-                        fill="none"
-                        viewBox="0 0 18 18"
-                      >
-                        <g transform="translate(6.75, 4.5)">
-                          <path
-                            d="M0.5 0.5L4 4L0.5 7.5"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </g>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              {/* Media Publikasi Terkait -      */}
-              <div className="flex flex-col gap-[20px] sm:gap-[24px]">
-                <h3 className="font-['Poppins'] font-medium text-[17px] sm:text-[18px] lg:text-[20px] text-[#18b3ab]">
-                  Media Publikasi Terkait
-                </h3>
-
-                {/* Publication Card */}
-                <div className="relative h-[240px] sm:h-[280px] w-full">
-                  {/* Border stroke container */}
-                  <svg
-                    className="absolute inset-0 w-full h-full"
-                    preserveAspectRatio="none"
-                    viewBox="0 0 387 282"
-                  >
-                    <path
-                      d="M1 15C1 7.26801 7.26801 1 15 1H372C379.732 1 386 7.26801 386 15V267C386 274.732 379.732 281 372 281H15C7.26801 281 1 274.732 1 267V15Z"
-                      stroke="#CCCCCC"
-                      fill="white"
-                    />
-                  </svg>
-
-                  {/* Image at top with fade transition */}
-                  <div className="absolute top-0 left-0 right-0 h-[154px] rounded-tl-[15px] rounded-tr-[15px] overflow-hidden">
-                    <img
-                      src={
-                        publications[currentPublicationIndex]
-                          .image
-                      }
-                      alt={
-                        publications[currentPublicationIndex]
-                          .title
-                      }
-                      className="w-full h-full object-cover transition-opacity duration-500"
-                      key={currentPublicationIndex}
-                    />
-                  </div>
-
-                  {/* Title at bottom center with fade transition */}
-                  <div className="absolute bottom-[81px] left-0 right-0 flex justify-center">
-                    <p
-                      className="font-['Poppins'] font-medium text-[18px] text-center text-neutral-600 leading-[30px] px-4 transition-opacity duration-500"
-                      key={`title-${currentPublicationIndex}`}
-                    >
-                      {
-                        publications[currentPublicationIndex]
-                          .title
-                      }
-                    </p>
-                  </div>
-
-                  {/* Carousel Dots - Clickable */}
-                  <div className="absolute bottom-[27px] left-1/2 -translate-x-1/2 flex items-center gap-[6px]">
-                    {publications.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() =>
-                          setCurrentPublicationIndex(index)
-                        }
-                        className="transition-all duration-300 hover:scale-110 cursor-pointer"
-                        aria-label={`Go to slide ${index + 1}`}
-                      >
-                        <svg
-                          width={
-                            index === currentPublicationIndex
-                              ? "25"
-                              : "7"
-                          }
-                          height="7"
-                          viewBox={
-                            index === currentPublicationIndex
-                              ? "0 0 25 7"
-                              : "0 0 7 7"
-                          }
-                          className="transition-all duration-300"
-                        >
-                          <path
-                            d={
-                              index === currentPublicationIndex
-                                ? "M3.5 0C1.567 0 0 1.567 0 3.5C0 5.433 1.567 7 3.5 7H21.5C23.433 7 25 5.433 25 3.5C25 1.567 23.433 0 21.5 0H3.5Z"
-                                : "M3.5 0C1.567 0 0 1.567 0 3.5C0 5.433 1.567 7 3.5 7C5.433 7 7 5.433 7 3.5C7 1.567 5.433 0 3.5 0Z"
-                            }
-                            fill={
-                              index === currentPublicationIndex
-                                ? "#18B3AB"
-                                : "#D9D9D9"
-                            }
-                            className="transition-colors duration-300"
-                          />
-                        </svg>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Lainnya Button */}
-                <div className="flex items-center justify-end">
-                  <button className="flex items-center gap-2 text-[#18b3ab] hover:text-[#16a199] font-['Poppins'] text-[12px] leading-[24px] transition-colors duration-200">
-                    <span>Lainnya</span>
-                    <div className="relative size-[18px]">
-                      <svg
-                        className="absolute inset-0"
-                        fill="none"
-                        viewBox="0 0 18 18"
-                      >
-                        <g transform="translate(6.75, 4.5)">
-                          <path
-                            d="M0.5 0.5L4 4L0.5 7.5"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </g>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
+            {/* RIGHT COLUMN: Sticky Sidebar - Using RightSidebar Component */}
+            <RightSidebar 
+              className="lg:sticky lg:top-6 lg:self-start"
+              showCalendar={true}
+              showRelatedArticles={true}
+              showPublications={true}
+              relatedArticles={currentContent?.articles || []}
+            />
           </div>
         </div>
       </section>
