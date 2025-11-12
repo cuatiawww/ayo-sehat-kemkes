@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { CircleArrowRight } from "lucide-react";
-import SearchSidebar from "../components/SearchSidebar";
 import { motion, AnimatePresence } from "framer-motion";
-import CustomBreadcrumb from "../components/CustomBreadcrump";
+import { lazy, Suspense } from "react";
+
+// Lazy load komponen
+const SearchSidebarLazy = lazy(() => import("../components/SearchSidebar"));
+const CustomBreadcrumbLazy = lazy(() => import("../components/CustomBreadcrump"));
 
 interface Article {
   id: number;
@@ -13,33 +17,56 @@ interface Article {
   category: string;
 }
 
-export default function SearchResultsPage({ 
-  searchQuery, 
-  onNavigateHome 
-}: { 
+interface DownloadItem {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+}
+
+interface TopicItem {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+}
+
+interface CampaignItem {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+}
+
+export default function SearchResultsPage({
+  searchQuery,
+  onNavigateHome,
+}: {
   searchQuery: string;
   onNavigateHome: () => void;
 }) {
   // State for active categories
   const [activeCategories, setActiveCategories] = useState<string[]>([
-    "articles", "download", "topics", "agenda"
+    "articles",
+    "download",
+    "topics",
+    "agenda",
   ]);
-
-  // Check if category is active
-  const isCategoryActive = (category: string) => {
-    return activeCategories.includes(category);
-  };
 
   // Toggle category
   const toggleCategory = (category: string) => {
-    setActiveCategories(prev =>
+    setActiveCategories((prev) =>
       prev.includes(category)
-        ? prev.filter(c => c !== category)
+        ? prev.filter((c) => c !== category)
         : [...prev, category]
     );
   };
 
-  // Sample articles based on search query
+  const isCategoryActive = (category: string) => activeCategories.includes(category);
+
+  // Sample data
   const articles: Article[] = [
     {
       id: 1,
@@ -91,7 +118,7 @@ export default function SearchResultsPage({
     },
   ];
 
-  const downloadItems = [
+  const downloadItems: DownloadItem[] = [
     {
       id: 1,
       title: "Buku Peduan Kesehatan Ibu dan Anak (KIA)",
@@ -112,7 +139,7 @@ export default function SearchResultsPage({
     },
   ];
 
-  const topicItems = [
+  const topicItems: TopicItem[] = [
     {
       id: 1,
       title: "Asma",
@@ -124,12 +151,12 @@ export default function SearchResultsPage({
       id: 2,
       title: "Anemia",
       description: "Kondisi kekurangan sel darah merah atau hemoglobin",
-      image: "https://images.unsplash.com/photo-1598519308220-094dbe75ff4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2YWNjaW5lJTIwaW1tdW5pemF0aW9ufGVufDF8fHx8MTc2MjY3NzQyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      image: "https://images.unsplash.com/photo-1598519308220-094dbe75ff4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWRpY2FsJTIwaW1tdW5pemF0aW9ufGVufDF8fHx8MTc2MjY3NzQyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "1 Nov 2025",
     },
   ];
 
-  const campaignItems = [
+  const campaignItems: CampaignItem[] = [
     {
       id: 1,
       title: "Gerakan Hidup Sehat",
@@ -139,402 +166,342 @@ export default function SearchResultsPage({
     },
   ];
 
-  const totalResults = articles.length + downloadItems.length + topicItems.length + campaignItems.length;
+  const totalResults =
+    articles.length + downloadItems.length + topicItems.length + campaignItems.length;
+
+  // Dynamic SEO
+  const pageTitle = searchQuery
+    ? `Hasil Pencarian: "${searchQuery}" - Ayo Sehat`
+    : "Pencarian - Ayo Sehat";
+  const pageDescription = searchQuery
+    ? `Temukan ${totalResults} hasil untuk "${searchQuery}" di artikel, download, topik, dan agenda kesehatan.`
+    : "Cari informasi kesehatan terlengkap di Ayo Sehat.";
+
+  // JSON-LD
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SearchResultsPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: `https://ayosehat.example.com/search?q=${encodeURIComponent(searchQuery)}`,
+    query: searchQuery,
+    numberOfItems: totalResults,
+    itemListElement: [
+      ...articles.slice(0, 3).map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: a.title,
+        url: `https://ayosehat.example.com/artikel/${a.id}`,
+      })),
+    ],
+  };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <CustomBreadcrumb
-        onNavigateHome={onNavigateHome}
-        currentPage={searchQuery ? `Pencarian: ${searchQuery}` : "Pencarian"}
-      />
-      
-      {/* Search Results Header */}
-      <div className="bg-white py-4 lg:py-5 border-b border-gray-100">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Result Count */}
-          <div className="flex items-center justify-between">
-            <p className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">
-              <span className="font-semibold text-gray-900">Hasil ({totalResults})</span>
-            </p>
-            <div className="flex items-center gap-2">
-              <span className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">Sortir:</span>
-              <select className="font-['Poppins'] text-[13px] sm:text-[14px] text-[#18b3ab] bg-white border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#18b3ab]">
-                <option>Terbaru</option>
-                <option>Terlama</option>
-                <option>Terpopuler</option>
-              </select>
+    <>
+      {/* SEO HEAD */}
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="robots" content="noindex, follow" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`https://ayosehat.example.com/search?q=${encodeURIComponent(searchQuery)}`}
+        />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link
+          rel="canonical"
+          href={`https://ayosehat.example.com/search?q=${encodeURIComponent(searchQuery)}`}
+        />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="min-h-screen bg-white"
+      >
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-32">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#18b3ab]"></div>
+            </div>
+          }
+        >
+          {/* Breadcrumb */}
+          <CustomBreadcrumbLazy
+            onNavigateHome={onNavigateHome}
+            currentPage={searchQuery ? `Pencarian: ${searchQuery}` : "Pencarian"}
+          />
+
+          {/* Header */}
+          <div className="bg-white py-4 lg:py-5 border-b border-gray-100">
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between">
+                <p className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">
+                  <span className="font-semibold text-gray-900">Hasil ({totalResults})</span>
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">
+                    Sortir:
+                  </span>
+                  <select className="font-['Poppins'] text-[13px] sm:text-[14px] text-[#18b3ab] bg-white border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#18b3ab]">
+                    <option>Terbaru</option>
+                    <option>Terlama</option>
+                    <option>Terpopuler</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Main Container */}
-      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-        {/* Main Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] xl:grid-cols-[380px_1fr] gap-6 lg:gap-8">
-          {/* Left Sidebar - Search Panel */}
-          <aside className="lg:sticky lg:top-6 self-start">
-            <SearchSidebar
-              searchQuery={searchQuery}
-              activeCategories={activeCategories}
-              onToggleCategory={toggleCategory}
-              onSearch={(query: string) => {
-                // Re-navigate with new query (simple behavior for demo)
-                console.log("Search requested:", query);
-                window.location.reload();
-              }}
-            />
-          </aside>
+          {/* Main Layout */}
+          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] xl:grid-cols-[380px_1fr] gap-6 lg:gap-8">
+              {/* Sidebar */}
+              <aside className="lg:sticky lg:top-6 self-start">
+                <SearchSidebarLazy
+                  searchQuery={searchQuery}
+                  activeCategories={activeCategories}
+                  onToggleCategory={toggleCategory}
+                  onSearch={(query: string) => {
+                    if (typeof window !== "undefined") {
+                      window.location.href = `/search?q=${encodeURIComponent(query)}`;
+                    }
+                  }}
+                />
+              </aside>
 
-          {/* Main Content */}
-          <main>
-            <AnimatePresence mode="wait">
-              {/* Articles Grid - Only show if "articles" category is active */}
-              {isCategoryActive("articles") && articles.length > 0 && (
-                <motion.section
-                  key="articles"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-10 lg:mb-12"
-                >
-                  <div className="mb-6">
-                    <h2 className="font-['Poppins'] font-semibold text-[18px] sm:text-[20px] lg:text-[22px] text-[#18b3ab] mb-2">
-                      Pencarian "{searchQuery}" dalam Artikel Siklus Hidup
-                    </h2>
-                    <p className="font-['Poppins'] text-[14px] text-gray-600">
-                      Menampilkan 6 dari 15 hasil pencarian
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:gap-x-[50px] lg:gap-y-[45px]">
-                    {articles.map((article) => (
-                      <article
-                        key={article.id}
-                        className="cursor-pointer group"
-                      >
-                        {/* Image */}
-                        <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
-                          <img
-                            src={article.image}
-                            alt={article.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-
-                        {/* Content with Border */}
-                        <div className="relative min-h-[122px] border-b border-[#cccccc] pb-4">
-                          <div className="flex flex-col gap-[8px] pt-[20px]">
-                            {/* Tag */}
-                            <div className="flex flex-col h-[15px] justify-center">
+              {/* Main Content */}
+              <main>
+                <AnimatePresence mode="wait">
+                  {/* Articles */}
+                  {isCategoryActive("articles") && articles.length > 0 && (
+                    <ResultSection
+                      key="articles"
+                      title={`Pencarian "${searchQuery}" dalam Artikel Siklus Hidup`}
+                      subtitle="Menampilkan 6 dari 15 hasil pencarian"
+                      items={articles}
+                      renderItem={(item: Article) => (
+                        <article key={item.id} className="cursor-pointer group">
+                          <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="relative min-h-[122px] border-b border-[#cccccc] pb-4">
+                            <div className="flex flex-col gap-[8px] pt-[20px]">
                               <p className="font-['Poppins'] text-[12px] text-[#18b3ab] leading-[18px]">
                                 Dewasa (18-59 Tahun)
                               </p>
-                            </div>
-
-                            {/* Title */}
-                            <div>
                               <h3 className="font-['Poppins'] font-medium text-[17px] text-[#212121] leading-[20.4px] group-hover:text-[#18b3ab] transition-colors line-clamp-2">
-                                {article.title}
+                                {item.title}
                               </h3>
-                            </div>
-
-                            {/* Meta Info */}
-                            <div className="flex items-center gap-[12px]">
-                              <div className="flex flex-col h-[19.5px] justify-center">
+                              <div className="flex items-center gap-[12px]">
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
-                                  {article.date}
+                                  {item.date}
                                 </p>
-                              </div>
-                              <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
-                              <div className="flex flex-col h-[19px] justify-center">
+                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   Waktu Baca 3 Menit
                                 </p>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
+                        </article>
+                      )}
+                    />
+                  )}
 
-                  {/* View All Link */}
-                  <div className="mt-6 flex justify-end">
-                    <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium">
-                      Selengkapnya
-                      <CircleArrowRight size={20} className="text-[#18b3ab]" />
-                    </button>
-                  </div>
-                </motion.section>
-              )}
-
-              {/* Download Section - Only show if "download" category is active */}
-              {isCategoryActive("download") && downloadItems.length > 0 && (
-                <motion.section
-                  key="download"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-10 lg:mb-12"
-                >
-                  <div className="mb-5">
-                    <div>
-                      <h2 className="font-['Poppins'] font-semibold text-[18px] sm:text-[20px] lg:text-[22px] text-[#18b3ab]">
-                        Pencarian "{searchQuery}" dalam Media Download
-                      </h2>
-                      <p className="font-['Poppins'] text-[14px] text-gray-600 mt-1">
-                        Menampilkan 3 dari 3 hasil pencarian
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:gap-x-[50px] lg:gap-y-[47px]">
-                    {downloadItems.map((item) => (
-                      <article
-                        key={item.id}
-                        className="cursor-pointer group"
-                      >
-                        {/* Image */}
-                        <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
-                          <img
-                            src="https://images.unsplash.com/photo-1583394838336-acd977736f90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwcG9zdGVyfGVufDF8fHx8MTc2MjY3NzQyN3ww&ixlib=rb-4.1.0&q=80&w=1080"
-                            alt={item.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-
-                        {/* Content with Border */}
-                        <div className="relative min-h-[105px] border-b border-[#cccccc] pb-4">
-                          <div className="flex flex-col gap-[8px] pt-[20px]">
-                            {/* Tag */}
-                            <div className="flex flex-col h-[15px] justify-center">
+                  {/* Download */}
+                  {isCategoryActive("download") && downloadItems.length > 0 && (
+                    <ResultSection
+                      key="download"
+                      title={`Pencarian "${searchQuery}" dalam Media Download`}
+                      subtitle="Menampilkan 3 dari 3 hasil pencarian"
+                      items={downloadItems}
+                      renderItem={(item: DownloadItem) => (
+                        <article key={item.id} className="cursor-pointer group">
+                          <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
+                            <img
+                              src="https://images.unsplash.com/photo-1583394838336-acd977736f90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwcG9zdGVyfGVufDF8fHx8MTc2MjY3NzQyN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+                              alt={item.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="relative min-h-[105px] border-b border-[#cccccc] pb-4">
+                            <div className="flex flex-col gap-[8px] pt-[20px]">
                               <p className="font-['Poppins'] text-[12px] text-[#18b3ab] leading-[18px]">
                                 Dewasa (18-59 Tahun)
                               </p>
-                            </div>
-
-                            {/* Title */}
-                            <div>
                               <h3 className="font-['Poppins'] font-medium text-[17px] text-[#212121] leading-[20.4px] group-hover:text-[#18b3ab] transition-colors line-clamp-2">
                                 {item.title}
                               </h3>
-                            </div>
-
-                            {/* Meta Info */}
-                            <div className="flex gap-[9px] items-center">
-                              <div className="flex flex-col h-[20px] justify-center">
+                              <div className="flex gap-[9px] items-center">
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   {item.date}
                                 </p>
-                              </div>
-                              <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
-                              <div className="flex flex-col h-[19px] justify-center">
+                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   1000 kali diunduh
                                 </p>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
+                        </article>
+                      )}
+                    />
+                  )}
 
-                  {/* View All Link */}
-                  <div className="mt-6 flex justify-end">
-                    <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium">
-                      Selengkapnya
-                      <CircleArrowRight size={20} className="text-[#18b3ab]" />
-                    </button>
-                  </div>
-                </motion.section>
-              )}
-
-              {/* Topic A-Z Section - Only show if "topics" category is active */}
-              {isCategoryActive("topics") && topicItems.length > 0 && (
-                <motion.section
-                  key="topics"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-10 lg:mb-12"
-                >
-                  <div className="mb-5">
-                    <div>
-                      <h2 className="font-['Poppins'] font-semibold text-[18px] sm:text-[20px] lg:text-[22px] text-[#18b3ab]">
-                        Pencarian "{searchQuery}" dalam Topik Kesehatan A-Z
-                      </h2>
-                      <p className="font-['Poppins'] text-[14px] text-gray-600 mt-1">
-                        Menampilkan 2 dari 4 hasil pencarian
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:gap-x-[50px] lg:gap-y-[47px]">
-                    {topicItems.map((topic) => (
-                      <article
-                        key={topic.id}
-                        className="cursor-pointer group"
-                      >
-                        {/* Image */}
-                        <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
-                          <img
-                            src={topic.image}
-                            alt={topic.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-
-                        {/* Content with Border */}
-                        <div className="relative min-h-[102px] border-b border-[#cccccc] pb-4">
-                          <div className="flex flex-col gap-[8px] pt-[20px]">
-                            {/* Tags */}
-                            <div className="flex gap-[8px] items-start flex-wrap">
-                              <div className="bg-white border border-[#cccccc] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
-                                <p className="font-['Poppins'] text-[11px] text-[#18b3ab] whitespace-nowrap">
-                                  Dewasa
-                                </p>
+                  {/* Topics */}
+                  {isCategoryActive("topics") && topicItems.length > 0 && (
+                    <ResultSection
+                      key="topics"
+                      title={`Pencarian "${searchQuery}" dalam Topik Kesehatan A-Z`}
+                      subtitle="Menampilkan 2 dari 4 hasil pencarian"
+                      items={topicItems}
+                      renderItem={(item: TopicItem) => (
+                        <article key={item.id} className="cursor-pointer group">
+                          <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="relative min-h-[102px] border-b border-[#cccccc] pb-4">
+                            <div className="flex flex-col gap-[8px] pt-[20px]">
+                              <div className="flex gap-[8px] items-start flex-wrap">
+                                <div className="bg-white border border-[#cccccc] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
+                                  <p className="font-['Poppins'] text-[11px] text-[#18b3ab] whitespace-nowrap">
+                                    Dewasa
+                                  </p>
+                                </div>
+                                <div className="bg-white border border-[#cccccc] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
+                                  <p className="font-['Poppins'] text-[11px] text-[#18b3ab] whitespace-nowrap">
+                                    Remaja
+                                  </p>
+                                </div>
+                                <div className="bg-[#18b3ab] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
+                                  <p className="font-['Poppins'] text-[11px] text-white whitespace-nowrap">
+                                    {item.title}
+                                  </p>
+                                </div>
                               </div>
-                              <div className="bg-white border border-[#cccccc] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
-                                <p className="font-['Poppins'] text-[11px] text-[#18b3ab] whitespace-nowrap">
-                                  Remaja
-                                </p>
-                              </div>
-                              <div className="bg-[#18b3ab] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
-                                <p className="font-['Poppins'] text-[11px] text-white whitespace-nowrap">
-                                  {topic.title}
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Title */}
-                            <div>
                               <h3 className="font-['Poppins'] font-medium text-[17px] text-[#212121] leading-[20.4px] group-hover:text-[#18b3ab] transition-colors line-clamp-2">
-                                {topic.title}
+                                {item.title}
                               </h3>
-                            </div>
-
-                            {/* Meta Info */}
-                            <div className="flex gap-[12px] items-center">
-                              <div className="flex flex-col justify-center h-[20px]">
+                              <div className="flex gap-[12px] items-center">
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
-                                  {topic.date}
+                                  {item.date}
                                 </p>
-                              </div>
-                              <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
-                              <div className="flex flex-col justify-center h-[19px]">
+                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   1000 kali dilihat
                                 </p>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
+                        </article>
+                      )}
+                    />
+                  )}
 
-                  {/* View All Link */}
-                  <div className="mt-6 flex justify-end">
-                    <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium">
-                      Selengkapnya
-                      <CircleArrowRight size={20} className="text-[#18b3ab]" />
-                    </button>
-                  </div>
-                </motion.section>
-              )}
-
-              {/* Campaign/Agenda Section - Only show if "agenda" category is active */}
-              {isCategoryActive("agenda") && campaignItems.length > 0 && (
-                <motion.section
-                  key="agenda"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="mb-10 lg:mb-12"
-                >
-                  <div className="mb-5">
-                    <div>
-                      <h2 className="font-['Poppins'] font-semibold text-[18px] sm:text-[20px] lg:text-[22px] text-[#18b3ab]">
-                        Pencarian "{searchQuery}" dalam Agenda Kegiatan
-                      </h2>
-                      <p className="font-['Poppins'] text-[14px] text-gray-600 mt-1">
-                        Menampilkan 1 dari 1 hasil pencarian
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:gap-x-[50px] lg:gap-y-[47px]">
-                    {campaignItems.map((campaign) => (
-                      <article
-                        key={campaign.id}
-                        className="cursor-pointer group"
-                      >
-                        {/* Image */}
-                        <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
-                          <img
-                            src={campaign.image}
-                            alt={campaign.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-
-                        {/* Content with Border */}
-                        <div className="relative min-h-[102px] border-b border-[#cccccc] pb-4">
-                          <div className="flex flex-col gap-[8px] pt-[20px]">
-                            {/* Tag */}
-                            <div className="flex flex-col h-[15px] justify-center">
+                  {/* Agenda */}
+                  {isCategoryActive("agenda") && campaignItems.length > 0 && (
+                    <ResultSection
+                      key="agenda"
+                      title={`Pencarian "${searchQuery}" dalam Agenda Kegiatan`}
+                      subtitle="Menampilkan 1 dari 1 hasil pencarian"
+                      items={campaignItems}
+                      renderItem={(item: CampaignItem) => (
+                        <article key={item.id} className="cursor-pointer group">
+                          <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="relative min-h-[102px] border-b border-[#cccccc] pb-4">
+                            <div className="flex flex-col gap-[8px] pt-[20px]">
                               <p className="font-['Poppins'] text-[12px] text-[#18b3ab] leading-[18px]">
                                 Kampanye Prioritas
                               </p>
-                            </div>
-
-                            {/* Title */}
-                            <div>
                               <h3 className="font-['Poppins'] font-medium text-[17px] text-[#212121] leading-[20.4px] group-hover:text-[#18b3ab] transition-colors line-clamp-2">
-                                {campaign.title}
+                                {item.title}
                               </h3>
-                            </div>
-
-                            {/* Meta Info */}
-                            <div className="flex items-center gap-[12px]">
-                              <div className="flex flex-col h-[19.5px] justify-center">
+                              <div className="flex items-center gap-[12px]">
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
-                                  {campaign.date}
+                                  {item.date}
                                 </p>
-                              </div>
-                              <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
-                              <div className="flex flex-col h-[19px] justify-center">
+                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   10,000 kali dilihat
                                 </p>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
+                        </article>
+                      )}
+                    />
+                  )}
+                </AnimatePresence>
+              </main>
+            </div>
+          </div>
+        </Suspense>
+      </motion.div>
+    </>
+  );
+}
 
-                  {/* View All Link */}
-                  <div className="mt-6 flex justify-end">
-                    <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium">
-                      Selengkapnya
-                      <CircleArrowRight size={20} className="text-[#18b3ab]" />
-                    </button>
-                  </div>
-                </motion.section>
-              )}
-            </AnimatePresence>
-          </main>
-        </div>
+// Reusable Result Section
+function ResultSection<T>({
+  title,
+  subtitle,
+  items,
+  renderItem,
+}: {
+  title: string;
+  subtitle: string;
+  items: T[];
+  renderItem: (item: T) => JSX.Element;
+}) {
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="mb-10 lg:mb-12"
+    >
+      <div className="mb-6">
+        <h2 className="font-['Poppins'] font-semibold text-[18px] sm:text-[20px] lg:text-[22px] text-[#18b3ab] mb-2">
+          {title}
+        </h2>
+        <p className="font-['Poppins'] text-[14px] text-gray-600">{subtitle}</p>
       </div>
-    </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:gap-x-[50px] lg:gap-y-[45px]">
+        {items.map(renderItem)}
+      </div>
+
+      <div className="mt-6 flex justify-end">
+        <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium">
+          Selengkapnya
+          <CircleArrowRight size={20} className="text-[#18b3ab]" />
+        </button>
+      </div>
+    </motion.section>
   );
 }
