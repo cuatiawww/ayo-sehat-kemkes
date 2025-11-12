@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import CustomBreadcrumb from "./CustomBreadcrump";
-import RightSidebar from "./RightSidebar";
+import CustomBreadcrumb from "../components/CustomBreadcrump";
+import RightSidebar from "../components/RightSidebar";
 
 
 interface Article {

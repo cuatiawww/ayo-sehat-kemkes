@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Search, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import CustomBreadcrumb from "./CustomBreadcrump";
+import CustomBreadcrumb from "../components/CustomBreadcrump";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -9,8 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "./ui/alert-dialog";
-import Button from "./ui/button";
+} from "../components/ui/alert-dialog";
+import Button from "../components/ui/button";
 
 // Data topik kesehatan per huruf 
 const healthTopicsData = {

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { CircleArrowRight } from "lucide-react";
-import SearchSidebar from "./SearchSidebar.tsx";
+import SearchSidebar from "../components/SearchSidebar";
 import { motion, AnimatePresence } from "framer-motion";
-import CustomBreadcrumb from "./CustomBreadcrump";
+import CustomBreadcrumb from "../components/CustomBreadcrump";
 
 interface Article {
   id: number;

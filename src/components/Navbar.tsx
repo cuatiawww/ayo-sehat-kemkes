@@ -137,14 +137,14 @@ export default function Navbar({
   }, []);
 
   const menuItems = [
-    { label: "TENTANG", icon: InfoCircleIcon, onClick: () => { console.log("TENTANG clicked"); } },
-    { label: "TOPIK", icon: CategoryIcon, onClick: () => { console.log("TOPIK clicked"); onNavigateTopikKesehatan(); } },
-    { label: "SIKLUS HIDUP", icon: UserIcon, onClick: () => { console.log("SIKLUS HIDUP clicked"); onNavigateSiklusHidup(); } },
-    { label: "PERILAKU HIDUP SEHAT", icon: HeartIcon, onClick: () => { console.log("PERILAKU clicked"); } },
-    { label: "KEGIATAN", icon: CalendarIcon, onClick: () => { console.log("KEGIATAN clicked"); } },
-    { label: "DOWNLOAD", icon: DownloadIcon, onClick: () => { console.log("DOWNLOAD clicked"); } },
-    { label: "KAMPANYE", icon: ActivityIcon, onClick: () => { console.log("KAMPANYE clicked"); } },
-    { label: "KEMITRAAN", icon: DocumentIcon, onClick: () => { console.log("KEMITRAAN clicked"); } },
+    { label: "TENTANG", icon: InfoCircleIcon, onClick: () => { } },
+    { label: "TOPIK", icon: CategoryIcon, onClick: onNavigateTopikKesehatan },
+    { label: "SIKLUS HIDUP", icon: UserIcon, onClick: () => { onNavigateSiklusHidup(); } },
+    { label: "PERILAKU HIDUP SEHAT", icon: HeartIcon, onClick: () => { } },
+    { label: "KEGIATAN", icon: CalendarIcon, onClick: () => {  } },
+    { label: "DOWNLOAD", icon: DownloadIcon, onClick: () => { } },
+    { label: "KAMPANYE", icon: ActivityIcon, onClick: () => { } },
+    { label: "KEMITRAAN", icon: DocumentIcon, onClick: () => {  } },
   ];
 
   return (

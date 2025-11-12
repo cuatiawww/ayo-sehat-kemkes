@@ -1,10 +1,11 @@
+
 import { useState, useEffect } from "react";
 import { Share2, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import CustomBreadcrumb from "./CustomBreadcrump";
-import RightSidebar from "./RightSidebar";
+import CustomBreadcrumb from "../components/CustomBreadcrump";
+import RightSidebar from "../components/RightSidebar";
 
-// Lifecycle stage data
+// Card stage data
 const lifecycleStages = [
   {
     id: 1,
