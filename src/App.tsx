@@ -22,6 +22,7 @@ function AppContent() {
         onNavigateHome={navigateToHome}
         onNavigateSiklusHidup={navigateToSiklusHidup}
         onNavigateTopikKesehatan={navigateToTopikKesehatan}
+        isHomePage={location.pathname === '/'}
       />
       <main className="flex-1">
         <AppRouter />

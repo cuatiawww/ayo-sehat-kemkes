@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 interface ArticleSectionProps {
   onNavigateArtikel: () => void;
-  onNavigateHome?: () => void; // Optional prop
+  onNavigateHome?: () => void; // Optional
 }
 
 export default function ArticleSection({ onNavigateArtikel }: ArticleSectionProps) {

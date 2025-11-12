@@ -23,7 +23,7 @@ export default function CustomBreadcrumb({
             <Home size={14} className="sm:w-4 sm:h-4 group-hover:scale-110 transition-transform" />
           </button>
 
-          {/* Siklus Hidup (jika ada) */}
+          {/* Siklus Hidup*/}
           {onNavigateSiklusHidup && (
             <>
               <ChevronRight

@@ -31,7 +31,7 @@ export default function HomePage() {
     "@type": "WebPage",
     name: "Ayo Sehat - Portal Kesehatan Keluarga Indonesia",
     description: "Informasi kesehatan terpercaya dari bayi hingga lansia. Cegah, deteksi, dan pengobatan sesuai siklus hidup.",
-    url: "https://ayosehat.example.com/",
+    url: "https://staging-ayo-sehat.vercel.app/",
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -39,7 +39,7 @@ export default function HomePage() {
           "@type": "ListItem",
           position: 1,
           name: "Beranda",
-          item: "https://ayosehat.example.com/",
+          item: "https://staging-ayo-sehat.vercel.app/",
         },
       ],
     },
@@ -48,7 +48,7 @@ export default function HomePage() {
       name: "Ayo Sehat",
       logo: {
         "@type": "ImageObject",
-        url: "https://ayosehat.example.com/logo.png",
+        url: "https://staging-ayo-sehat.vercel.app/logo.png",
         width: 600,
         height: 60,
       },
@@ -71,13 +71,13 @@ export default function HomePage() {
           content="Portal kesehatan resmi dengan artikel, tips, dan layanan untuk setiap tahap kehidupan."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ayosehat.example.com/" />
+        <meta property="og:url" content="https://staging-ayo-sehat.vercel.app/" />
         <meta
           property="og:image"
           content="https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://ayosehat.example.com/" />
+        <link rel="canonical" href="https://staging-ayo-sehat.vercel.app/" />
 
         {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>

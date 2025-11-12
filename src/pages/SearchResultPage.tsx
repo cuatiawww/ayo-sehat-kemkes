@@ -183,7 +183,7 @@ export default function SearchResultsPage({
     "@type": "SearchResultsPage",
     name: pageTitle,
     description: pageDescription,
-    url: `https://ayosehat.example.com/search?q=${encodeURIComponent(searchQuery)}`,
+    url: `https://staging-ayo-sehat.vercel.app/search?q=${encodeURIComponent(searchQuery)}`,
     query: searchQuery,
     numberOfItems: totalResults,
     itemListElement: [
@@ -191,7 +191,7 @@ export default function SearchResultsPage({
         "@type": "ListItem",
         position: i + 1,
         name: a.title,
-        url: `https://ayosehat.example.com/artikel/${a.id}`,
+        url: `https://staging-ayo-sehat.vercel.app/artikel/${a.id}`,
       })),
     ],
   };
@@ -208,7 +208,7 @@ export default function SearchResultsPage({
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`https://ayosehat.example.com/search?q=${encodeURIComponent(searchQuery)}`}
+          content={`https://staging-ayo-sehat.vercel.app/search?q=${encodeURIComponent(searchQuery)}`}
         />
         <meta
           property="og:image"
@@ -217,7 +217,7 @@ export default function SearchResultsPage({
         <meta name="twitter:card" content="summary_large_image" />
         <link
           rel="canonical"
-          href={`https://ayosehat.example.com/search?q=${encodeURIComponent(searchQuery)}`}
+          href={`https://staging-ayo-sehat.vercel.app/search?q=${encodeURIComponent(searchQuery)}`}
         />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>

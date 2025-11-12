@@ -52,7 +52,7 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
     {
       id: 3,
       title: "Melihat Fakta Antara Kontrasepsi dan Kanker Payudara",
-      excerpt: "Memahami hubungan antara penggunaan kontrasepsi hormonal dan risiko k  risiko kanker payudara berdasarkan penelitian terkini.",
+      excerpt: "Memahami hubungan antara penggunaan kontrasepsi hormonal dan risiko kanker payudara berdasarkan penelitian terkini.",
       image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       date: "9 Sep 2025",
       views: "1.234",
@@ -261,12 +261,12 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
     "@type": "WebPage",
     name: "Artikel Ayo Sehat",
     description: "Kumpulan artikel kesehatan terlengkap dari bayi hingga lansia. Temukan tips cegah, deteksi, dan pengobatan berdasarkan tahap kehidupan.",
-    url: "https://ayosehat.example.com/page/artikel",
+    url: "https://staging-ayo-sehat.vercel.app/page/artikel",
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Beranda", item: "https://ayosehat.example.com/" },
-        { "@type": "ListItem", position: 2, name: "Artikel", item: "https://ayosehat.example.com/page/artikel" },
+        { "@type": "ListItem", position: 1, name: "Beranda", item: "https://staging-ayo-sehat.vercel.app/" },
+        { "@type": "ListItem", position: 2, name: "Artikel", item: "https://staging-ayo-sehat.vercel.app/page/artikel" },
       ],
     },
   };
@@ -283,13 +283,13 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
         <meta property="og:title" content="Artikel Ayo Sehat" />
         <meta property="og:description" content="Pendekatan menjaga kesehatan sejak lahir hingga lanjut usia." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ayosehat.example.com/page/artikel" />
+        <meta property="og:url" content="https://staging-ayo-sehat.vercel.app/page/artikel" />
         <meta
           property="og:image"
           content="https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://ayosehat.example.com/page/artikel" />
+        <link rel="canonical" href="https://staging-ayo-sehat.vercel.app/page/artikel" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
@@ -352,7 +352,8 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
         {/* Main Content */}
         <section className="py-10 sm:py-12 lg:py-16 bg-white border-t border-gray-100">
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px] gap-6 sm:gap-8 lg:gap-12">
+              {/* ===== KIRI: ARTIKEL ===== */}
               <div className="space-y-6 sm:space-y-8">
                 {/* Filter Tabs & Dropdowns */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-gray-200">
@@ -625,7 +626,10 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
                 </div>
               </div>
 
-              <RightSidebar showCalendar={true} showCampaigns={true} showPublications={true} />
+              {/* ===== KANAN: SIDEBAR STICKY ===== */}
+              <div className="lg:sticky lg:top-6 lg:self-start">
+                <RightSidebar showCalendar={true} showCampaigns={true} showPublications={true} />
+              </div>
             </div>
           </div>
         </section>

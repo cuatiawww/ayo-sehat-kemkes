@@ -634,7 +634,7 @@ export default function SiklusHidupPage({
       {/* Hero Section */}
       <div className="relative">
         {/* Hero Section - Background Gradient */}
-        <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-22 sm:pt-8 lg:pt-12 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+        <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
           {/* Decorative Background Circles */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
@@ -762,10 +762,10 @@ export default function SiklusHidupPage({
         </div>
       </div>
 
-      {/* Main Content Section - 2 COLUMN LAYOUT dengan Sticky Sidebar */}
+      {/* Main Content Section*/}
       <section className="relative bg-white pt-[140px] sm:pt-[230px] lg:pt-[380px] pb-8 sm:pb-10 lg:pb-12">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 sm:gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px]  sm:gap-8 lg:gap-12">
             {/* LEFT COLUMN: Main Content (Artikel + Topik + Penyakit) */}
             <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
               {/* Featured Image dengan Tags dan Social Icons */}

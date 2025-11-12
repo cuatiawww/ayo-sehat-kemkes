@@ -91,7 +91,7 @@ export default function TopikKesehatanPage({
   // SEO
   const pageTitle = "Topik Kesehatan A-Z | Ayo Sehat";
   const pageDescription = "Jelajahi ratusan topik kesehatan dari A sampai Z. Cari berdasarkan abjad atau kata kunci untuk informasi pencegahan, pengobatan, dan gaya hidup sehat.";
-  const canonicalUrl = "https://ayosehat.example.com/topik-kesehatan";
+  const canonicalUrl = "https://staging-ayo-sehat.vercel.app/topik-kesehatan";
 
   // Generate JSON-LD ItemList
   const itemList = Object.entries(healthTopicsData).flatMap(([letter, topics]) =>
