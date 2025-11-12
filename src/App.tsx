@@ -15,9 +15,6 @@ function AppContent() {
   const navigateToSiklusHidup = () => navigate("/page/siklus-hidup");
   const navigateToTopikKesehatan = () => navigate("/page/topik-kesehatan");
 
-  // HAPUS useEffect INI! TIDAK PERLU!
-  // useEffect(() => { ... }, [navigateToSiklusHidup, navigateToTopikKesehatan]);
-
   return (
     <div className="min-h-screen flex flex-col">
       <TopBar />
