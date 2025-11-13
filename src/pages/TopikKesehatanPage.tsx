@@ -97,7 +97,7 @@ export default function TopikKesehatanPage({
   const currentUrl = typeof window !== "undefined" ? window.location.href : canonicalUrl;
 
   // === JSON-LD ItemList ===
-  const baseUrl = "https://staging-ayo-sehat.vercel.app/page/";
+  const baseUrl = "https://staging-ayo-sehat.vercel.app/page/topik-kesehatan";
 
   const itemList = Object.entries(healthTopicsData).flatMap(([, topics]) =>
     topics.map((topic, index) => {
