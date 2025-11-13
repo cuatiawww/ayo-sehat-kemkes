@@ -89,9 +89,9 @@ export default function SearchSidebar({
       <div className="bg-white relative rounded-[20px] w-full border border-[#818181]/30">
         <div className="px-6 py-7 lg:px-7 lg:py-8">
           {/* Title */}
-          <h3 className="font-['Poppins'] font-semibold text-[18px] lg:text-[20px] text-[#18b3ab] mb-6">
+          <h2 className="font-['Poppins'] font-semibold text-[18px] lg:text-[20px] text-[#18b3ab] mb-6">
             Pencarian Ayosehat
-          </h3>
+          </h2>
 
           {/* Search Box */}
           <form onSubmit={handleSearchSubmit} className="flex gap-4 mb-6">

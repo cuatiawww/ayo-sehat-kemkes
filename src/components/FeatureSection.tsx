@@ -163,7 +163,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
         <div className="relative h-[200px] sm:h-[180px] lg:h-[199px] rounded-[10px] sm:rounded-[13px] overflow-hidden mb-4 sm:mb-5 lg:mb-7 flex-shrink-0">
           {/* Image */}
           <img
-            alt=""
+            alt="image"
             src={feature.image}
             className="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
           />

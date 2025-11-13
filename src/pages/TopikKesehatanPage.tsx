@@ -57,6 +57,7 @@ interface TopikKesehatanPageProps {
   onNavigateSiklusHidup?: () => void;
 }
 
+
 export default function TopikKesehatanPage({
   onNavigateHome,
   onNavigateSiklusHidup,
@@ -88,28 +89,60 @@ export default function TopikKesehatanPage({
     }
   }, [selectedLetter]);
 
-  // SEO
-  const pageTitle = "Topik Kesehatan A-Z | Ayo Sehat";
-  const pageDescription = "Jelajahi ratusan topik kesehatan dari A sampai Z. Cari berdasarkan abjad atau kata kunci untuk informasi pencegahan, pengobatan, dan gaya hidup sehat.";
-  const canonicalUrl = "https://staging-ayo-sehat.vercel.app/topik-kesehatan";
+  // === SEO DATA ===
+  const pageTitle = "Daftar Topik Kesehatan A‑Z – Ayo Sehat Kemenkes";
+  const pageDescription = "Jelajahi ratusan topik kesehatan dari A sampai Z. Temukan info pencegahan, pengobatan, dan gaya hidup sehat dari Kemenkes.";
+  const canonicalUrl = "https://ayo-sehat.vercel.app/topik-kesehatan";
+  const ogImageUrl = "https://ayo-sehat.vercel.app/og-topik-kesehatan.jpg";
+  const currentUrl = typeof window !== "undefined" ? window.location.href : canonicalUrl;
 
-  // Generate JSON-LD ItemList
-  const itemList = Object.entries(healthTopicsData).flatMap(([letter, topics]) =>
-    topics.map((topic, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: `${topic} - Huruf ${letter}`,
-      url: `${canonicalUrl}#${topic.toLowerCase().replace(/\s+/g, '-')}`,
-    }))
+  // === JSON-LD ItemList ===
+  const baseUrl = "https://ayo-sehat.vercel.app/topik-kesehatan";
+
+  const itemList = Object.entries(healthTopicsData).flatMap(([, topics]) =>
+    topics.map((topic, index) => {
+      const slug = topic
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        name: topic,
+        url: `${baseUrl}#${slug}`,
+      };
+    })
   );
 
-  const jsonLd = {
+  const totalItems = itemList.length;
+
+  const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Daftar Topik Kesehatan A-Z",
     description: pageDescription,
-    numberOfItems: itemList.length,
+    numberOfItems: totalItems,
     itemListElement: itemList,
+  };
+
+  // === Breadcrumb JSON-LD ===
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Beranda",
+        item: "https://ayo-sehat.vercel.app",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Topik Kesehatan",
+        item: currentUrl,
+      },
+    ],
   };
 
   // Filter logic
@@ -123,7 +156,7 @@ export default function TopikKesehatanPage({
     );
   };
 
-  const totalTopics = alphabet.reduce((acc, letter) => acc + getFilteredTopics(letter).length, 0);
+  const totalTopics = filteredAlphabet.reduce((acc, letter) => acc + getFilteredTopics(letter).length, 0);
 
   const handleEmptyLetterClick = (letter: Letter) => {
     setDialogLetter(letter);
@@ -132,19 +165,39 @@ export default function TopikKesehatanPage({
 
   return (
     <>
-      {/* SEO */}
+      {/* === SEO HEAD === */}
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={currentUrl} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Daftar Topik Kesehatan A-Z - Ayo Sehat Kemenkes" />
+        <meta property="og:locale" content="id_ID" />
+
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href={canonicalUrl} />
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <meta name="twitter:url" content={currentUrl} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={ogImageUrl} />
+        <meta name="twitter:image:alt" content="Topik Kesehatan A-Z" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(itemListJsonLd, null, 2)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbJsonLd, null, 2)}
+        </script>
       </Helmet>
 
       <motion.div
@@ -153,7 +206,11 @@ export default function TopikKesehatanPage({
         transition={{ duration: 0.5 }}
         className="min-h-screen bg-white"
       >
-        <Suspense fallback={<div className="h-32 flex items-center justify-center"><div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#18b3ab]"></div></div>}>
+        <Suspense fallback={
+          <div className="h-32 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#18b3ab]"></div>
+          </div>
+        }>
           {/* Breadcrumb */}
           <CustomBreadcrumbLazy
             onNavigateHome={onNavigateHome}
@@ -189,7 +246,8 @@ export default function TopikKesehatanPage({
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full h-[40px] sm:h-[42px] pl-9 pr-3 font-['Poppins'] text-[13px] sm:text-[14px] text-[#212121] bg-white border-2 border-white/50 rounded-lg focus:outline-none focus:border-white focus:ring-2 focus:ring-white/30 transition-all duration-200 placeholder:text-gray-400 shadow-sm"
-                      aria-label="Cari topik kesehatan"
+                      aria-label="Cari topik kesehatan, misalnya: diabetes, hipertensi, atau vaksin"
+                      role="searchbox"
                     />
                   </div>
 
@@ -204,6 +262,7 @@ export default function TopikKesehatanPage({
                         : 'bg-white/20 text-white border-2 border-white/50 hover:bg-white/30 hover:border-white'
                       }
                     `}
+                    aria-label="Tampilkan semua topik kesehatan"
                   >
                     Tampilkan Semua
                   </button>
@@ -232,7 +291,7 @@ export default function TopikKesehatanPage({
                               : 'bg-white/10 text-white/50 border-2 border-white/30 hover:bg-white/20 cursor-pointer'
                             }
                           `}
-                          aria-label={`Filter huruf ${letter}`}
+                          aria-label={`Filter topik kesehatan dengan huruf ${letter}`}
                         >
                           {letter}
                         </button>
@@ -257,6 +316,7 @@ export default function TopikKesehatanPage({
                     <button
                       onClick={() => setSelectedLetter(null)}
                       className="text-[12px] text-white/90 hover:text-white font-['Poppins'] underline underline-offset-2"
+                      aria-label="Hapus filter huruf"
                     >
                       Hapus
                     </button>
@@ -308,34 +368,35 @@ export default function TopikKesehatanPage({
                           {topics.length > 0 ? (
                             <>
                               <div className="space-y-2">
-                                {topics.map((topic, idx) => (
-                                  <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: idx * 0.03 }}
-                                  >
-                                    <button
-                                      className="w-full text-left font-['Poppins'] text-[14px] sm:text-[15px] lg:text-[16px] text-[#212121] py-1.5 px-2 rounded-md hover:bg-[#18b3ab] hover:text-white transition-all duration-200 group/item flex items-center justify-between gap-2"
-                                      onClick={() => {
-                                        // TODO: Navigate to topic detail
-                                        console.log("Navigate to:", topic);
-                                      }}
+                                {topics.map((topic, idx) => {
+                                  const slug = topic.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                                  return (
+                                    <motion.div
+                                      key={idx}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: idx * 0.03 }}
                                     >
-                                      <span>{topic}</span>
-                                      {((letter === 'A' && idx === 4) || 
-                                        (letter === 'K' && idx === 1) || 
-                                        (letter === 'M' && idx === 4) ||
-                                        (letter === 'P' && idx === 3)) && (
-                                        <div className="inline-flex items-center px-[7px] py-[3px] bg-[#d5dd23] rounded-[5px] shrink-0 group-hover/item:bg-[#c5cd13] transition-colors">
-                                          <span className="font-['Poppins'] text-[9px] sm:text-[10px] text-[#212121] font-medium">
-                                            BARU
-                                          </span>
-                                        </div>
-                                      )}
-                                    </button>
-                                  </motion.div>
-                                ))}
+                                      <a
+                                        href={`/topik/${slug}`}
+                                        className="w-full text-left font-['Poppins'] text-[14px] sm:text-[15px] lg:text-[16px] text-[#212121] py-1.5 px-2 rounded-md hover:bg-[#18b3ab] hover:text-white transition-all duration-200 group/item  items-center justify-between gap-2 block"
+                                        aria-label={`Baca tentang ${topic}`}
+                                      >
+                                        <span>{topic}</span>
+                                        {((letter === 'A' && idx === 4) || 
+                                          (letter === 'K' && idx === 1) || 
+                                          (letter === 'M' && idx === 4) ||
+                                          (letter === 'P' && idx === 3)) && (
+                                          <div className="inline-flex items-center px-[7px] py-[3px] bg-[#d5dd23] rounded-[5px] shrink-0 group-hover/item:bg-[#c5cd13] transition-colors">
+                                            <span className="font-['Poppins'] text-[9px] sm:text-[10px] text-[#212121] font-medium">
+                                              BARU
+                                            </span>
+                                          </div>
+                                        )}
+                                      </a>
+                                    </motion.div>
+                                  );
+                                })}
                               </div>
                               <div className="mt-4 pt-3 border-t border-gray-100">
                                 <p className="font-['Poppins'] text-[11px] sm:text-[12px] text-gray-500 text-center">

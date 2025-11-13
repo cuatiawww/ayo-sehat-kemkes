@@ -1,10 +1,12 @@
-
-import { useState, useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Share2, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import CustomBreadcrumb from "../components/CustomBreadcrump";
 import RightSidebar from "../components/RightSidebar";
 
+// === DUMMY DATA (tanpa konten asli) ===
 // Card stage data
 const lifecycleStages = [
   {
@@ -598,495 +600,323 @@ export default function SiklusHidupPage({
   onNavigateHome: () => void;
   initialStage?: string;
 }) {
-  const [selectedStage, setSelectedStage] =
-    useState(initialStage);
-  const [, setCurrentPublicationIndex] =
-    useState(0);
+  const [selectedStage, setSelectedStage] = useState(initialStage);
   const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
   const [currentDiseaseIndex, setCurrentDiseaseIndex] = useState(0);
 
-  // Get current content based on selected stage
-  const currentContent =
-    stageContent[selectedStage as keyof typeof stageContent];
-  const currentStageData = lifecycleStages.find(
-    (s) => s.slug === selectedStage,
-  );
+  const currentContent =  stageContent.remaja;
+  const currentStageData = lifecycleStages.find(s => s.slug === selectedStage) || lifecycleStages[2];
 
-  // Auto-slide publications every 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPublicationIndex(
-        (prevIndex) => (prevIndex + 1) % publications.length,
-      );
-    }, 3000);
+  // === SEO DATA ===
+  const baseUrl = "https://ayosehat.kemkes.go.id";
+  const canonicalUrl = `${baseUrl}/siklus-hidup/${selectedStage}`;
+  const pageTitle = `${currentStageData.name} (${currentStageData.age}) - Panduan Kesehatan | Ayo Sehat Kemenkes`;
+  const pageDescription = `Informasi lengkap kesehatan untuk kelompok usia ${currentStageData.name}. Gizi, imunisasi, pencegahan penyakit, dan tips hidup sehat dari Kementerian Kesehatan RI.`;
 
-    return () => clearInterval(interval);
-  }, []);
+  const ogImage = currentStageData.image.startsWith("http") ? currentStageData.image : `${baseUrl}${currentStageData.image}`;
+
+  const breadcrumb = [
+    { name: "Beranda", url: baseUrl },
+    { name: "Siklus Hidup", url: `${baseUrl}/siklus-hidup` },
+    { name: currentStageData.name, url: canonicalUrl },
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <CustomBreadcrumb
-        onNavigateHome={onNavigateHome}
-        currentPage={`Siklus Hidup - ${lifecycleStages.find((stage) => stage.slug === selectedStage)?.name || "Remaja"}`}
-      />
+    <>
+      {/* === SEO & METADATA === */}
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta name="robots" content="index, follow" />
 
-      {/* Hero Section */}
-      <div className="relative">
-        {/* Hero Section - Background Gradient */}
-        <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
-          {/* Decorative Background Circles */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
-            <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
-            <div className="absolute bottom-0 -right-20 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-gray-50/50 blur-2xl" />
-            <div className="absolute bottom-20 right-40 w-[300px] h-[150px]">
-              <svg
-                viewBox="0 0 300 150"
-                className="w-full h-full opacity-20"
-              >
-                <path
-                  d="M0,30 Q75,20 150,30 T300,30"
-                  stroke="#e5e7eb"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                <path
-                  d="M0,60 Q75,50 150,60 T300,60"
-                  stroke="#e5e7eb"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                <path
-                  d="M0,90 Q75,80 150,90 T300,90"
-                  stroke="#e5e7eb"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                <path
-                  d="M0,120 Q75,110 150,120 T300,120"
-                  stroke="#e5e7eb"
-                  strokeWidth="2"
-                  fill="none"
-                />
-              </svg>
+        {/* Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:site_name" content="Ayo Sehat Kemenkes" />
+        <meta property="og:locale" content="id_ID" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={ogImage} />
+      </Helmet>
+
+      {/* JSON-LD */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: pageTitle,
+          description: pageDescription,
+          url: canonicalUrl,
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumb.map((item, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: item.name,
+              item: item.url,
+            })),
+          },
+        })}
+      </script>
+
+      {/* === PAGE CONTENT === */}
+      <div className="min-h-screen bg-white">
+        <CustomBreadcrumb onNavigateHome={onNavigateHome} currentPage={`Siklus Hidup - ${currentStageData.name}`} />
+
+        {/* Hero Section */}
+        <div className="relative">
+          <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
+              <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
+            </div>
+
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-6 sm:mb-8 lg:mb-10">
+                <h1 className="font-semibold text-[28px] sm:text-[36px] lg:text-[50px] text-[#18b3ab] mb-3 sm:mb-4">
+                  Siklus Hidup Kesehatan
+                </h1>
+                <p className="text-[14px] sm:text-[16px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
+                  Pendampingan menjaga kesehatan sepanjang siklus kehidupan, dengan informasi khusus setiap tahap usia
+                </p>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Lifecycle Cards - Overlap */}
+          <div className="absolute left-0 right-0 top-[calc(100%-50px)] sm:top-[calc(100%-20px)] lg:top-[calc(100%-80px)] z-20 pointer-events-none">
+            <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
+              <div className="grid grid-cols-5 gap-2 sm:gap-4 lg:gap-6 xl:gap-[26px] items-end pointer-events-auto">
+                {lifecycleStages.map((stage, index) => {
+                  const isSelected = stage.slug === selectedStage;
+                  return (
+                    <motion.div
+                      key={stage.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0, scale: isSelected ? 1.05 : 1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="group cursor-pointer flex flex-col items-center"
+                      onClick={() => setSelectedStage(stage.slug)}
+                    >
+                      <div className={`relative w-full aspect-square transition-all duration-500 ${isSelected ? "shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20" : "z-10"} group-hover:-translate-y-2 group-hover:scale-105`}>
+                        <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] overflow-hidden bg-[#18b3ab]">
+                          <img
+                            src={stage.image}
+                            alt={`Ilustrasi kesehatan ${stage.name} usia ${stage.age} - Kemenkes RI`}
+                            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                        </div>
+                        <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
+                        <div className={`absolute bottom-[-10px] sm:bottom-[-15px] lg:bottom-[-20px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 bg-[#d5dd23] rounded-[8px] sm:rounded-[12px] lg:rounded-[16px] xl:rounded-[20px] h-[40px] sm:h-[55px] lg:h-[70px] xl:h-[84px] w-full max-w-[90%] sm:max-w-[85%] lg:max-w-[80%] xl:max-w-[222px] flex flex-col items-center justify-center transition-all duration-500 group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-1 group-hover:scale-105 z-30 px-1 sm:px-2`}>
+                          <p className="font-semibold text-[9px] sm:text-[12px] lg:text-[16px] xl:text-[23px] leading-tight text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
+                            {stage.name}
+                          </p>
+                          <p className="text-[7px] sm:text-[10px] lg:text-[12px] xl:text-[16px] leading-tight text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
+                            {stage.age}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6 sm:mb-8 lg:mb-10"
-            >
-              <h1 className="font-semibold text-[28px] sm:text-[36px] lg:text-[50px] text-[#18b3ab] mb-3 sm:mb-4">
-                Siklus Hidup Kesehatan
-              </h1>
-              <p className="text-[14px] sm:text-[16px] lg:text-[22px] text-neutral-600 max-w-[794px] leading-relaxed">
-                Pendampingan menjaga kesehatan sepanjang siklus
-                kehidupan, dengan informasi khusus setiap tahap
-                usia
-              </p>
-            </motion.div>
+        {/* Main Content */}
+        <section className="relative bg-white pt-[140px] sm:pt-[230px] lg:pt-[380px] pb-8 sm:pb-10 lg:pb-12">
+          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px] sm:gap-8 lg:gap-12">
+              {/* LEFT: Main Content */}
+              <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
+                {/* Hero Image */}
+                <div>
+                  <div className="bg-gradient-to-br from-[#18b3ab] to-[#15a098] rounded-[15px] sm:rounded-[20px] overflow-hidden p-4 sm:p-6 lg:p-8 h-[250px] sm:h-[350px] lg:h-[500px] relative mb-6">
+                    <img
+                      src={currentStageData.image}
+                      alt={`Panduan kesehatan untuk ${currentStageData.name} - Kemenkes RI`}
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover opacity-90"
+                      loading="lazy"
+                    />
+                    <div className="relative z-10">
+                      <div className="bg-[#d5dd23] inline-block rounded-full px-4 py-1.5 mb-4">
+                        <p className="font-medium text-[14px] text-[#212121]">{currentStageData.name}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Title & Age */}
+                  <div className="mb-6">
+                    <p className="text-[#6b7280] text-[13px] sm:text-[14px] mb-2">Kelompok Umur</p>
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+                      <h1 className="text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px]">{currentStageData.name}</h1>
+                      <span className="text-[#6b7280] text-[18px] sm:text-[20px] lg:text-[24px]">•</span>
+                      <p className="text-[#6b7280] text-[16px] sm:text-[18px] lg:text-[20px]">{currentStageData.age}</p>
+                    </div>
+                  </div>
+
+                  {/* Tags + Share */}
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
+                    <div className="flex flex-wrap gap-2">
+                      {["Penyakit Pernapasan", "Kardiovaskular", "Pencernaan", "Neoplasma"].map((tag, i) => (
+                        <button
+                          key={i}
+                          className={`px-3 sm:px-4 py-1 sm:py-1.5 text-[11px] sm:text-[13px] font-medium rounded-full transition-colors ${
+                            i === 1
+                              ? "bg-[#18b3ab] text-white hover:bg-[#16a199]"
+                              : "border border-[#18b3ab] text-[#18b3ab] hover:bg-[#18b3ab] hover:text-white"
+                          }`}
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      <button aria-label="Bagikan" className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors">
+                        <Share2 size={16} />
+                      </button>
+                      {["Facebook", "Twitter", "WhatsApp", "Link"].map((platform, i) => (
+                        <button
+                          key={i}
+                          aria-label={platform}
+                          className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors"
+                        >
+                          {platform === "Link" ? (
+                            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                          ) : (
+                            <div className="w-4 h-4 bg-white/30 rounded" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Article Content */}
+                  <div className="space-y-4 text-justify">
+                    <p className="text-[15px] lg:text-[16px] text-gray-700 leading-relaxed">
+                      Ini adalah contoh paragraf deskripsi kesehatan untuk kelompok usia {currentStageData.name}. Informasi ini mencakup gizi, imunisasi, dan pencegahan penyakit.
+                    </p>
+                    <p className="text-[15px] lg:text-[16px] text-gray-700 leading-relaxed">
+                      Kementerian Kesehatan RI menekankan pentingnya pola hidup sehat sejak dini untuk mendukung pertumbuhan optimal.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Topik Kesehatan */}
+                <div>
+                  <h2 className="font-semibold text-[20px] sm:text-[24px] lg:text-[28px] text-[#18b3ab] mb-4 sm:mb-6">
+                    Topik Kesehatan Terkait
+                  </h2>
+                  <div className="relative group/carousel">
+                    <button
+                      onClick={() => setCurrentTopicIndex(prev => Math.max(0, prev - 1))}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+                      aria-label="Sebelumnya"
+                    >
+                      <ChevronLeft className="w-6 h-6 text-[#18b3ab]" />
+                    </button>
+                    <button
+                      onClick={() => setCurrentTopicIndex(prev => prev + 1)}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+                      aria-label="Berikutnya"
+                    >
+                      <ChevronRight className="w-6 h-6 text-[#18b3ab]" />
+                    </button>
+                    <div className="overflow-hidden">
+                      <div
+                        className="flex gap-4 sm:gap-6 transition-transform duration-500"
+                        style={{ transform: `translateX(-${currentTopicIndex * (100 / 3)}%)` }}
+                      >
+                        {currentContent.topics.map((topic: any, i: number) => (
+                          <motion.div key={i} className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                            <div className="h-[245px] rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-md hover:shadow-lg transition-all">
+                              <div className="h-[151px] overflow-hidden">
+                                <img src={topic.image} alt={topic.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                              </div>
+                              <div className="h-[94px] flex items-center justify-center px-4 bg-white hover:bg-[#18b3ab] transition-colors">
+                                <p className="text-[18px] font-medium text-center text-[#18b3ab] hover:text-white transition-colors">
+                                  {topic.title}
+                                </p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Penyakit Terkait */}
+                <div>
+                  <h2 className="font-semibold text-[20px] sm:text-[24px] lg:text-[28px] text-[#18b3ab] mb-4 sm:mb-6">
+                    Penyakit Terkait
+                  </h2>
+                  <div className="relative group/carousel">
+                    <button
+                      onClick={() => setCurrentDiseaseIndex(prev => Math.max(0, prev - 1))}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+                      aria-label="Sebelumnya"
+                    >
+                      <ChevronLeft className="w-6 h-6 text-[#18b3ab]" />
+                    </button>
+                    <button
+                      onClick={() => setCurrentDiseaseIndex(prev => prev + 1)}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+                      aria-label="Berikutnya"
+                    >
+                      <ChevronRight className="w-6 h-6 text-[#18b3ab]" />
+                    </button>
+                    <div className="overflow-hidden">
+                      <div
+                        className="flex gap-4 sm:gap-6 transition-transform duration-500"
+                        style={{ transform: `translateX(-${currentDiseaseIndex * (100 / 3)}%)` }}
+                      >
+                        {diseases.map((disease, i) => (
+                          <motion.div key={i} className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                            <div className="h-[245px] rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-md hover:shadow-lg transition-all">
+                              <div className="h-[151px] overflow-hidden">
+                                <img src={disease.image} alt={disease.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                              </div>
+                              <div className="h-[94px] flex items-center justify-center px-4 bg-white hover:bg-[#18b3ab] transition-colors">
+                                <p className="text-[18px] font-medium text-center text-[#18b3ab] hover:text-white transition-colors">
+                                  {disease.title}
+                                </p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT SIDEBAR */}
+              <RightSidebar
+  className="lg:sticky lg:top-6 lg:self-start"
+  showCalendar={true}
+  showRelatedArticles={true}
+  showPublications={true}
+  relatedArticles={currentContent.articles || []}
+  publications={publications} 
+/>
+            </div>
           </div>
         </section>
-
-        {/* LIFECYCLE CARDS - ABSOLUTE POSITION untuk OVERLAP 50-50 - RESPONSIVE 5 CARDS */}
-        <div className="absolute left-0 right-0 top-[calc(100%-50px)] sm:top-[calc(100%-20px)] lg:top-[calc(100%-80px)] z-20 pointer-events-none">
-          <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
-            <div className="grid grid-cols-5 gap-2 sm:gap-4 lg:gap-6 xl:gap-[26px] items-end pointer-events-auto">
-              {lifecycleStages.map((stage, index) => {
-                const isSelected = stage.slug === selectedStage;
-
-                return (
-                  <motion.div
-                    key={stage.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      scale: isSelected ? 1.05 : 1,
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      delay: index * 0.1,
-                    }}
-                    className="group cursor-pointer flex flex-col items-center"
-                    onClick={() => setSelectedStage(stage.slug)}
-                  >
-                    {/* Image Container - RESPONSIVE SIZES */}
-                    <div
-                      className={`relative w-full aspect-square transition-all duration-500 ease-out
-                  ${isSelected ? "shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20" : "z-10"}
-                  group-hover:-translate-y-2 group-hover:scale-105`}
-                    >
-                      {/* Image Wrapper */}
-                      <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] overflow-hidden bg-[#18b3ab]">
-                        <img
-                          alt={`${stage.name}, ${stage.age}`}
-                          src={stage.image}
-                          className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700
-                    group-hover:scale-105 group-hover:brightness-110"
-                        />
-                        {/* Gradient Overlay saat hover */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                      </div>
-
-                      {/* Border Glow saat hover */}
-                      <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
-
-                      {/* Label bawah - RESPONSIVE SIZES */}
-                      <div
-                        className="absolute bottom-[-10px] sm:bottom-[-15px] lg:bottom-[-20px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 
-                  bg-[#d5dd23] rounded-[8px] sm:rounded-[12px] lg:rounded-[16px] xl:rounded-[20px] 
-                  h-[40px] sm:h-[55px] lg:h-[70px] xl:h-[84px] 
-                  w-full max-w-[90%] sm:max-w-[85%] lg:max-w-[80%] xl:max-w-[222px]
-                  flex flex-col items-center justify-center 
-                  transition-all duration-500 ease-out 
-                  group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-1 group-hover:scale-105 z-30 px-1 sm:px-2"
-                      >
-                        <p className="font-semibold text-[9px] sm:text-[12px] lg:text-[16px] xl:text-[23px] leading-tight text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
-                          {stage.name}
-                        </p>
-                        <p className="text-[7px] sm:text-[10px] lg:text-[12px] xl:text-[16px] leading-tight text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
-                          {stage.age}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
       </div>
-
-      {/* Main Content Section*/}
-      <section className="relative bg-white pt-[140px] sm:pt-[230px] lg:pt-[380px] pb-8 sm:pb-10 lg:pb-12">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px]  sm:gap-8 lg:gap-12">
-            {/* LEFT COLUMN: Main Content (Artikel + Topik + Penyakit) */}
-            <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
-              {/* Featured Image dengan Tags dan Social Icons */}
-              <div>
-                <div className="bg-gradient-to-br from-[#18b3ab] to-[#15a098] rounded-[15px] sm:rounded-[20px] overflow-hidden p-4 sm:p-6 lg:p-8 h-[250px] sm:h-[350px] lg:h-[500px] relative mb-6">
-                  <img
-                    src={currentStageData?.image}
-                    alt={currentContent?.title}
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover opacity-90"
-                  />
-                  <div className="relative z-10">
-                    <div className="bg-[#d5dd23] inline-block rounded-full px-4 py-1.5 mb-4">
-                      <p className="font-['Poppins'] font-medium text-[14px] text-[#212121]">
-                        {currentStageData?.name}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Kelompok Umur Header -      */}
-                <div className="mb-6">
-                  <p className="font-['Poppins'] text-[#6b7280] text-[13px] sm:text-[14px] mb-2">
-                    Kelompok Umur
-                  </p>
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
-                    <h1 className="font-['Poppins'] text-[#18b3ab] text-[24px] sm:text-[32px] lg:text-[40px]">
-                      {currentStageData?.name}
-                    </h1>
-                    <span className="font-['Poppins'] text-[#6b7280] text-[18px] sm:text-[20px] lg:text-[24px]">
-                      •
-                    </span>
-                    <p className="font-['Poppins'] text-[#6b7280] text-[16px] sm:text-[18px] lg:text-[20px]">
-                      {currentStageData?.age}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Tags and Social Share - IMPROVED */}
-                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
-                      Penyakit Pernapasan
-                    </button>
-                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 bg-[#18b3ab] text-white rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#16a199] transition-colors duration-200">
-                      Penyakit Kardiovaskular
-                    </button>
-                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
-                      Penyakit Pencernaan
-                    </button>
-                    <button className="px-3 sm:px-4 py-1 sm:py-1.5 border border-[#18b3ab] text-[#18b3ab] rounded-full text-[11px] sm:text-[13px] font-['Poppins'] hover:bg-[#18b3ab] hover:text-white transition-colors duration-200">
-                      Neoplasma
-                    </button>
-                  </div>
-
-                  {/* Social Share Icons */}
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <button
-                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
-                      aria-label="Share"
-                    >
-                      <Share2 size={16} />
-                    </button>
-                    <button
-                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
-                      aria-label="Facebook"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                      </svg>
-                    </button>
-                    <button
-                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
-                      aria-label="Twitter"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                      </svg>
-                    </button>
-                    <button
-                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
-                      aria-label="WhatsApp"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                      </svg>
-                    </button>
-                    <button
-                      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors duration-200"
-                      aria-label="Link"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Content Article */}
-                <div>
-                  <div className="space-y-4">
-                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
-                      {currentContent?.description}
-                    </p>
-                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
-                      {currentContent?.description2}
-                    </p>
-                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
-                      {currentContent?.description3}
-                    </p>
-                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
-                      {currentContent?.description4}
-                    </p>
-                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
-                      {currentContent?.description5}
-                    </p>
-                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
-                      {currentContent?.description6}
-                    </p>
-                    <p className="font-['Poppins'] text-[15px] lg:text-[16px] text-gray-700 leading-relaxed text-justify">
-                      {currentContent?.description7}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Topik Kesehatan Terkait - MOVED TO LEFT COLUMN */}
-              <div>
-                <h2 className="font-['Poppins'] font-semibold text-[20px] sm:text-[24px] lg:text-[28px] text-[#18b3ab] mb-4 sm:mb-6">
-                  Topik Kesehatan Terkait
-                </h2>
-
-                {/* Carousel Container with Navigation */}
-                <div className="relative group/carousel">
-                  {/* Navigation Buttons */}
-                  <button
-                    onClick={() =>
-                      setCurrentTopicIndex((prev) =>
-                        prev === 0
-                          ? Math.max(0, (currentContent?.topics.length || 0) - 3)
-                          : Math.max(0, prev - 1)
-                      )
-                    }
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
-                    disabled={currentTopicIndex === 0}
-                  >
-                    <ChevronLeft className="w-6 h-6 text-[#18b3ab]" />
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      setCurrentTopicIndex((prev) =>
-                        prev >= (currentContent?.topics.length || 0) - 3
-                          ? 0
-                          : prev + 1
-                      )
-                    }
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
-                    disabled={currentTopicIndex >= (currentContent?.topics.length || 0) - 3}
-                  >
-                    <ChevronRight className="w-6 h-6 text-[#18b3ab]" />
-                  </button>
-
-                  {/* Carousel Track */}
-                  <div className="overflow-hidden">
-                    <div
-                      className="flex gap-4 sm:gap-6 transition-transform duration-500 ease-out"
-                      style={{
-                        transform: `translateX(-${currentTopicIndex * (100 / 3)}%)`,
-                      }}
-                    >
-                      {currentContent?.topics.map((topic, index) => (
-                        <motion.div
-                          key={topic.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: index * 0.1,
-                          }}
-                          className="group cursor-pointer flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-                        >
-                          {/* Card Container */}
-                          <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
-                            {/* Image Top Section */}
-                            <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
-                              <img
-                                alt={topic.title}
-                                className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
-                                src={topic.image}
-                              />
-                            </div>
-
-                            {/* Title Bottom Section */}
-                            <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
-                              <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
-                                {topic.title}
-                              </p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Penyakit Terkait - MOVED TO LEFT COLUMN */}
-              <div>
-                <h2 className="font-['Poppins'] font-semibold text-[20px] sm:text-[24px] lg:text-[28px] text-[#18b3ab] mb-4 sm:mb-6">
-                  Penyakit Terkait
-                </h2>
-
-                {/* Carousel Container with Navigation */}
-                <div className="relative group/carousel">
-                  {/* Navigation Buttons */}
-                  <button
-                    onClick={() =>
-                      setCurrentDiseaseIndex((prev) =>
-                        prev === 0 ? Math.max(0, diseases.length - 3) : Math.max(0, prev - 1)
-                      )
-                    }
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
-                    disabled={currentDiseaseIndex === 0}
-                  >
-                    <ChevronLeft className="w-6 h-6 text-[#18b3ab]" />
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      setCurrentDiseaseIndex((prev) =>
-                        prev >= diseases.length - 3 ? 0 : prev + 1
-                      )
-                    }
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 disabled:opacity-0"
-                    disabled={currentDiseaseIndex >= diseases.length - 3}
-                  >
-                    <ChevronRight className="w-6 h-6 text-[#18b3ab]" />
-                  </button>
-
-                  {/* Carousel Track */}
-                  <div className="overflow-hidden">
-                    <div
-                      className="flex gap-4 sm:gap-6 transition-transform duration-500 ease-out"
-                      style={{
-                        transform: `translateX(-${currentDiseaseIndex * (100 / 3)}%)`,
-                      }}
-                    >
-                      {diseases.map((disease, index) => (
-                        <motion.div
-                          key={disease.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: index * 0.1,
-                          }}
-                          className="group cursor-pointer flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-                        >
-                          {/* Card Container */}
-                          <div className="h-[245px] w-full relative rounded-[15px] overflow-hidden border border-[#d2d2d2] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 hover:shadow-[2px_6px_12px_0px_rgba(0,0,0,0.25)]">
-                            {/* Image Top Section */}
-                            <div className="absolute top-0 left-0 right-0 h-[151px] overflow-hidden">
-                              <img
-                                alt={disease.title}
-                                className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover:scale-110"
-                                src={disease.image}
-                              />
-                            </div>
-
-                            {/* Title Bottom Section */}
-                            <div className="absolute bottom-0 left-0 right-0 h-[94px] flex items-center justify-center px-4 bg-white group-hover:bg-[#18b3ab] transition-colors duration-300">
-                              <p className="font-['Poppins'] font-medium text-[18px] leading-[26px] text-center text-[#18b3ab] group-hover:text-white transition-colors duration-300">
-                                {disease.title}
-                              </p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN: Sticky Sidebar - Using RightSidebar Component */}
-            <RightSidebar 
-              className="lg:sticky lg:top-6 lg:self-start"
-              showCalendar={true}
-              showRelatedArticles={true}
-              showPublications={true}
-              relatedArticles={currentContent?.articles || []}
-            />
-          </div>
-        </div>
-      </section>
-    </div>
+    </>
   );
 }

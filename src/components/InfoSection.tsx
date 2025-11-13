@@ -76,7 +76,7 @@ serta menjaga kebersihan dan kesehatan mental.
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="bg-[#18b3ab] rounded-[15px] sm:rounded-[20px] w-[70px] h-[70px] sm:w-[80px] sm:h-[80px] flex-shrink-0 hover:bg-[#16a199] hover:rotate-6 hover:scale-110 transition-all duration-500 flex items-center justify-center overflow-hidden shadow-lg">
                     <img
-                      alt=""
+                      alt="image/icon"
                       className="w-auto h-auto max-w-[45px] max-h-[45px] sm:max-w-[55px] sm:max-h-[55px] object-contain transition-transform duration-500 hover:scale-125"
                       src={feature.icon}
                     />
@@ -122,7 +122,7 @@ serta menjaga kebersihan dan kesehatan mental.
                     <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                     <div className="relative bg-[#18b3ab] rounded-[20px] w-[88px] h-[88px] flex-shrink-0 group-hover:bg-[#16a199] group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 cursor-pointer flex items-center justify-center overflow-hidden shadow-lg group-hover:shadow-2xl">
                       <img
-                        alt=""
+                        alt="image/icon"
                         className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[-12deg]"
                         src={feature.icon}
                       />
@@ -209,7 +209,7 @@ serta menjaga kebersihan dan kesehatan mental.
                     <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                     <div className="relative bg-[#18b3ab] rounded-[20px] w-[88px] h-[88px] flex-shrink-0 group-hover:bg-[#16a199] group-hover:scale-125 group-hover:rotate-[-12deg] transition-all duration-500 cursor-pointer flex items-center justify-center overflow-hidden shadow-lg group-hover:shadow-2xl">
                       <img
-                        alt=""
+                        alt="image/icon"
                         className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[12deg]"
                         src={feature.icon}
                       />

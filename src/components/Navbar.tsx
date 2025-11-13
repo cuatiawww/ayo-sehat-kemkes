@@ -16,7 +16,12 @@ const iconPaths = {
 function InfoCircleIcon() {
   return (
     <div className="relative size-[42px] rounded-full flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.info} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.info}
+        alt="Ikon Informasi"
+        title="Informasi tentang Ayo Sehat"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -24,7 +29,12 @@ function InfoCircleIcon() {
 function CategoryIcon() {
   return (
     <div className="relative size-[42px] rounded-full flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.category} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.category}
+        alt="Ikon Kategori Topik"
+        title="Jelajahi topik kesehatan"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -32,7 +42,12 @@ function CategoryIcon() {
 function UserIcon() {
   return (
     <div className="relative size-[42px] rounded-full flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.user} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.user}
+        alt="Ikon Siklus Hidup"
+        title="Informasi berdasarkan tahap kehidupan"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -40,7 +55,12 @@ function UserIcon() {
 function HeartIcon() {
   return (
     <div className="relative size-[42px] rounded-full flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.heart} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.heart}
+        alt="Ikon Hidup Sehat"
+        title="Tips gaya hidup sehat"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -48,7 +68,12 @@ function HeartIcon() {
 function CalendarIcon() {
   return (
     <div className="relative size-[42px] rounded flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.calendar} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.calendar}
+        alt="Ikon Kegiatan"
+        title="Agenda dan acara kesehatan"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -56,7 +81,12 @@ function CalendarIcon() {
 function DownloadIcon() {
   return (
     <div className="relative size-[42px] rounded flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.download} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.download}
+        alt="Ikon Unduh Materi"
+        title="Unduh materi kesehatan"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -64,7 +94,12 @@ function DownloadIcon() {
 function ActivityIcon() {
   return (
     <div className="relative size-[42px] rounded flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.activity} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.activity}
+        alt="Ikon Kampanye"
+        title="Kampanye kesehatan nasional"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -72,7 +107,12 @@ function ActivityIcon() {
 function DocumentIcon() {
   return (
     <div className="relative size-[42px] rounded flex items-center justify-center" aria-hidden="true">
-      <img src={iconPaths.document} alt="" className="w-full h-full object-contain" />
+      <img
+        src={iconPaths.document}
+        alt="Ikon Kemitraan"
+        title="Informasi kemitraan dan kerjasama"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }

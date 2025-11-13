@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import { CircleArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { lazy, Suspense } from "react";
 
-// Lazy load komponen
+// Lazy load components
 const SearchSidebarLazy = lazy(() => import("../components/SearchSidebar"));
 const CustomBreadcrumbLazy = lazy(() => import("../components/CustomBreadcrump"));
 
+// Interfaces
 interface Article {
   id: number;
   title: string;
@@ -15,6 +15,8 @@ interface Article {
   image: string;
   date: string;
   category: string;
+  stage?: string;
+  readTime?: string;
 }
 
 interface DownloadItem {
@@ -22,6 +24,7 @@ interface DownloadItem {
   title: string;
   description: string;
   date: string;
+  downloads?: number;
 }
 
 interface TopicItem {
@@ -30,6 +33,8 @@ interface TopicItem {
   description: string;
   image: string;
   date: string;
+  stages?: string[];
+  views?: number;
 }
 
 interface CampaignItem {
@@ -38,6 +43,7 @@ interface CampaignItem {
   description: string;
   image: string;
   date: string;
+  views?: number;
 }
 
 export default function SearchResultsPage({
@@ -66,7 +72,7 @@ export default function SearchResultsPage({
 
   const isCategoryActive = (category: string) => activeCategories.includes(category);
 
-  // Sample data
+  // === SAMPLE DATA ===
   const articles: Article[] = [
     {
       id: 1,
@@ -75,6 +81,8 @@ export default function SearchResultsPage({
       image: "https://images.unsplash.com/photo-1758691463198-dc663b8a64e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwZG9jdG9yJTIwY29uc3VsdGF0aW9ufGVufDF8fHx8MTc2MjY3MzE4MXww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "8 Nov 2025",
       category: "Artikel Kesehatan",
+      stage: "Dewasa (18-59 Tahun)",
+      readTime: "3 menit",
     },
     {
       id: 2,
@@ -83,6 +91,8 @@ export default function SearchResultsPage({
       image: "https://images.unsplash.com/photo-1576766125468-a5d48274c5b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwZmFtaWx5fGVufDF8fHx8MTc2MjY3NzQwOXww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "7 Nov 2025",
       category: "Info Kesehatan",
+      stage: "Semua Usia",
+      readTime: "4 menit",
     },
     {
       id: 3,
@@ -91,6 +101,8 @@ export default function SearchResultsPage({
       image: "https://images.unsplash.com/photo-1615461066159-fea0960485d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwY2hlY2t1cHxlbnwxfHx8fDE3NjI2MzIyNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       date: "6 Nov 2025",
       category: "Artikel Kesehatan",
+      stage: "Dewasa (18-59 Tahun)",
+      readTime: "5 menit",
     },
     {
       id: 4,
@@ -99,6 +111,8 @@ export default function SearchResultsPage({
       image: "https://images.unsplash.com/flagged/photo-1551049215-23fd6d2ac3f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWJ5JTIwaGVhbHRofGVufDF8fHx8MTc2MjY3NzQwOXww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "5 Nov 2025",
       category: "Info Kesehatan",
+      stage: "Bayi dan Balita (< 5 Tahun)",
+      readTime: "6 menit",
     },
     {
       id: 5,
@@ -107,6 +121,8 @@ export default function SearchResultsPage({
       image: "https://images.unsplash.com/photo-1512102438733-bfa4ed29aef7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwZGlhZ25vc2lzfGVufDF8fHx8MTc2MjY3NzQwOXww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "4 Nov 2025",
       category: "Tips Kesehatan",
+      stage: "Dewasa (18-59 Tahun)",
+      readTime: "4 menit",
     },
     {
       id: 6,
@@ -115,27 +131,32 @@ export default function SearchResultsPage({
       image: "https://images.unsplash.com/photo-1584515933487-779824d29309?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXRpZW50JTIwZG9jdG9yfGVufDF8fHx8MTc2MjY3NzQwOXww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "3 Nov 2025",
       category: "Artikel Kesehatan",
+      stage: "Semua Usia",
+      readTime: "5 menit",
     },
   ];
 
   const downloadItems: DownloadItem[] = [
     {
       id: 1,
-      title: "Buku Peduan Kesehatan Ibu dan Anak (KIA)",
+      title: "Buku Pedoman Kesehatan Ibu dan Anak (KIA)",
       description: "Panduan lengkap kesehatan untuk ibu hamil dan balita",
       date: "1 Nov 2025",
+      downloads: 1000,
     },
     {
       id: 2,
       title: "Leaflet Imunisasi Rutin Lengkap",
       description: "Informasi jadwal dan jenis imunisasi untuk anak",
       date: "30 Okt 2025",
+      downloads: 850,
     },
     {
       id: 3,
       title: "Panduan Pencegahan Penyakit Menular",
       description: "Cara mencegah dan menangani penyakit menular",
       date: "28 Okt 2025",
+      downloads: 1200,
     },
   ];
 
@@ -144,8 +165,10 @@ export default function SearchResultsPage({
       id: 1,
       title: "Asma",
       description: "Penyakit pernapasan kronis yang menyebabkan kesulitan bernapas",
-      image: "https://images.unsplash.com/photo-1676890578150-03af781f60e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxudXJzZSUyMGNhcmluZ3xlbnwxfHx8fDE3NjI2Nzc0Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      image: "https://images.unsplash.com/photo-1676890578150-03af781f60e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwcG9zdGVyfGVufDF8fHx8MTc2MjY3NzQyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "2 Nov 2025",
+      stages: ["Dewasa", "Remaja", "Anak-Anak"],
+      views: 1000,
     },
     {
       id: 2,
@@ -153,6 +176,8 @@ export default function SearchResultsPage({
       description: "Kondisi kekurangan sel darah merah atau hemoglobin",
       image: "https://images.unsplash.com/photo-1598519308220-094dbe75ff4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWRpY2FsJTIwaW1tdW5pemF0aW9ufGVufDF8fHx8MTc2MjY3NzQyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       date: "1 Nov 2025",
+      stages: ["Bayi dan Balita", "Anak-Anak"],
+      views: 950,
     },
   ];
 
@@ -163,19 +188,21 @@ export default function SearchResultsPage({
       description: "Kampanye nasional untuk meningkatkan kesadaran masyarakat akan pentingnya pola hidup sehat",
       image: "https://images.unsplash.com/photo-1746190351529-6d19fa55de45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjBjYW1wYWlnbnxlbnwxfHx8fDE3NjI2Nzc0Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       date: "5 Nov 2025",
+      views: 10000,
     },
   ];
 
-  const totalResults =
-    articles.length + downloadItems.length + topicItems.length + campaignItems.length;
+  const totalResults = articles.length + downloadItems.length + topicItems.length + campaignItems.length;
 
-  // Dynamic SEO
-  const pageTitle = searchQuery
-    ? `Hasil Pencarian: "${searchQuery}" - Ayo Sehat`
-    : "Pencarian - Ayo Sehat";
+  // === SEO & METADATA ===
+  const baseUrl = "https://ayosehat.kemkes.go.id";
+  const canonicalUrl = `${baseUrl}/search?q=${encodeURIComponent(searchQuery)}`;
+  const pageTitle = searchQuery ? `Hasil Pencarian: "${searchQuery}" - Ayo Sehat Kemenkes` : "Pencarian - Ayo Sehat Kemenkes";
   const pageDescription = searchQuery
-    ? `Temukan ${totalResults} hasil untuk "${searchQuery}" di artikel, download, topik, dan agenda kesehatan.`
-    : "Cari informasi kesehatan terlengkap di Ayo Sehat.";
+    ? `Temukan ${totalResults} hasil untuk "${searchQuery}" di artikel, download, topik, dan agenda kesehatan dari Kementerian Kesehatan RI.`
+    : "Cari informasi kesehatan terlengkap di Ayo Sehat Kemenkes.";
+
+  const ogImage = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200";
 
   // JSON-LD
   const jsonLd = {
@@ -183,42 +210,42 @@ export default function SearchResultsPage({
     "@type": "SearchResultsPage",
     name: pageTitle,
     description: pageDescription,
-    url: `https://staging-ayo-sehat.vercel.app/search?q=${encodeURIComponent(searchQuery)}`,
+    url: canonicalUrl,
     query: searchQuery,
     numberOfItems: totalResults,
-    itemListElement: [
-      ...articles.slice(0, 3).map((a, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        name: a.title,
-        url: `https://staging-ayo-sehat.vercel.app/artikel/${a.id}`,
-      })),
-    ],
+    itemListElement: articles.slice(0, 3).map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: a.title,
+      url: `${baseUrl}/artikel/${a.id}`,
+    })),
   };
 
   return (
     <>
-      {/* SEO HEAD */}
+      {/* === SEO & METADATA === */}
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content={`https://staging-ayo-sehat.vercel.app/search?q=${encodeURIComponent(searchQuery)}`}
-        />
-        <meta
-          property="og:image"
-          content="https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
-        />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:site_name" content="Ayo Sehat Kemenkes" />
+        <meta property="og:locale" content="id_ID" />
+
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <link
-          rel="canonical"
-          href={`https://staging-ayo-sehat.vercel.app/search?q=${encodeURIComponent(searchQuery)}`}
-        />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={ogImage} />
+
+        {/* JSON-LD */}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
@@ -244,15 +271,13 @@ export default function SearchResultsPage({
           {/* Header */}
           <div className="bg-white py-4 lg:py-5 border-b border-gray-100">
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <p className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">
-                  <span className="font-semibold text-gray-900">Hasil ({totalResults})</span>
+                  <span className="font-semibold text-gray-900">Hasil ({totalResults})</span> untuk pencarian “{searchQuery}”
                 </p>
                 <div className="flex items-center gap-2">
-                  <span className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">
-                    Sortir:
-                  </span>
-                  <select className="font-['Poppins'] text-[13px] sm:text-[14px] text-[#18b3ab] bg-white border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#18b3ab]">
+                  <span className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">Sortir:</span>
+                  <select className="font-['Poppins'] text-[13px] sm:text-[14px] text-[#18b3ab] bg-white border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#18b3ab] transition-all">
                     <option>Terbaru</option>
                     <option>Terlama</option>
                     <option>Terpopuler</option>
@@ -294,14 +319,15 @@ export default function SearchResultsPage({
                           <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
                             <img
                               src={item.image}
-                              alt={item.title}
+                              alt={`Gambar artikel: ${item.title} - Panduan kesehatan ${item.stage} - Kemenkes RI`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
                             />
                           </div>
                           <div className="relative min-h-[122px] border-b border-[#cccccc] pb-4">
                             <div className="flex flex-col gap-[8px] pt-[20px]">
                               <p className="font-['Poppins'] text-[12px] text-[#18b3ab] leading-[18px]">
-                                Dewasa (18-59 Tahun)
+                                {item.stage}
                               </p>
                               <h3 className="font-['Poppins'] font-medium text-[17px] text-[#212121] leading-[20.4px] group-hover:text-[#18b3ab] transition-colors line-clamp-2">
                                 {item.title}
@@ -310,9 +336,9 @@ export default function SearchResultsPage({
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   {item.date}
                                 </p>
-                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
+                                <div className="bg-[dimgrey] rounded-[2px] w-1 h-1" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
-                                  Waktu Baca 3 Menit
+                                  Waktu Baca {item.readTime}
                                 </p>
                               </div>
                             </div>
@@ -331,12 +357,14 @@ export default function SearchResultsPage({
                       items={downloadItems}
                       renderItem={(item: DownloadItem) => (
                         <article key={item.id} className="cursor-pointer group">
-                          <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
-                            <img
-                              src="https://images.unsplash.com/photo-1583394838336-acd977736f90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwcG9zdGVyfGVufDF8fHx8MTc2MjY3NzQyN3ww&ixlib=rb-4.1.0&q=80&w=1080"
-                              alt={item.title}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                          <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1 bg-gradient-to-br from-[#18b3ab]/10 to-[#15a098]/10">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+                                <svg className="w-16 h-16 text-[#18b3ab]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                           <div className="relative min-h-[105px] border-b border-[#cccccc] pb-4">
                             <div className="flex flex-col gap-[8px] pt-[20px]">
@@ -350,9 +378,9 @@ export default function SearchResultsPage({
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   {item.date}
                                 </p>
-                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
+                                <div className="bg-[dimgrey] rounded-[2px] w-1 h-1" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
-                                  1000 kali diunduh
+                                  {item.downloads?.toLocaleString()} kali diunduh
                                 </p>
                               </div>
                             </div>
@@ -374,28 +402,26 @@ export default function SearchResultsPage({
                           <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
                             <img
                               src={item.image}
-                              alt={item.title}
+                              alt={`Gambar topik kesehatan: ${item.title} - Informasi lengkap dari Kemenkes RI`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
                             />
                           </div>
                           <div className="relative min-h-[102px] border-b border-[#cccccc] pb-4">
                             <div className="flex flex-col gap-[8px] pt-[20px]">
                               <div className="flex gap-[8px] items-start flex-wrap">
-                                <div className="bg-white border border-[#cccccc] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
-                                  <p className="font-['Poppins'] text-[11px] text-[#18b3ab] whitespace-nowrap">
-                                    Dewasa
-                                  </p>
-                                </div>
-                                <div className="bg-white border border-[#cccccc] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
-                                  <p className="font-['Poppins'] text-[11px] text-[#18b3ab] whitespace-nowrap">
-                                    Remaja
-                                  </p>
-                                </div>
-                                <div className="bg-[#18b3ab] rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center">
-                                  <p className="font-['Poppins'] text-[11px] text-white whitespace-nowrap">
-                                    {item.title}
-                                  </p>
-                                </div>
+                                {item.stages?.map((stage) => (
+                                  <div
+                                    key={stage}
+                                    className={`rounded-[5px] px-[12px] py-[8px] h-[21px] flex items-center justify-center text-[11px] font-['Poppins'] whitespace-nowrap ${
+                                      stage === item.title
+                                        ? "bg-[#18b3ab] text-white"
+                                        : "bg-white border border-[#cccccc] text-[#18b3ab]"
+                                    }`}
+                                  >
+                                    {stage}
+                                  </div>
+                                ))}
                               </div>
                               <h3 className="font-['Poppins'] font-medium text-[17px] text-[#212121] leading-[20.4px] group-hover:text-[#18b3ab] transition-colors line-clamp-2">
                                 {item.title}
@@ -404,9 +430,9 @@ export default function SearchResultsPage({
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   {item.date}
                                 </p>
-                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
+                                <div className="bg-[dimgrey] rounded-[2px] w-1 h-1" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
-                                  1000 kali dilihat
+                                  {item.views?.toLocaleString()} kali dilihat
                                 </p>
                               </div>
                             </div>
@@ -428,8 +454,9 @@ export default function SearchResultsPage({
                           <div className="relative h-[208px] rounded-[14px] overflow-hidden mb-1">
                             <img
                               src={item.image}
-                              alt={item.title}
+                              alt={`Gambar kampanye: ${item.title} - Kegiatan kesehatan nasional Kemenkes RI`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
                             />
                           </div>
                           <div className="relative min-h-[102px] border-b border-[#cccccc] pb-4">
@@ -444,9 +471,9 @@ export default function SearchResultsPage({
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
                                   {item.date}
                                 </p>
-                                <div className="bg-[dimgrey] rounded-[2px] size-[4px]" />
+                                <div className="bg-[dimgrey] rounded-[2px] w-1 h-1" />
                                 <p className="font-['Poppins'] text-[13px] text-[dimgrey] leading-[19.5px]">
-                                  10,000 kali dilihat
+                                  {item.views?.toLocaleString()} kali dilihat
                                 </p>
                               </div>
                             </div>
@@ -497,9 +524,9 @@ function ResultSection<T>({
       </div>
 
       <div className="mt-6 flex justify-end">
-        <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium">
+        <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium group">
           Selengkapnya
-          <CircleArrowRight size={20} className="text-[#18b3ab]" />
+          <CircleArrowRight size={20} className="text-[#18b3ab] group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </motion.section>

@@ -16,7 +16,7 @@ export default function HeroSection() {
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <img
-              alt=""
+              alt="image/icon"
               className="absolute h-[108.92%] left-[-1.09%] max-w-none top-[0.24%] w-[113.69%] object-cover"
               src={imgHeroBackground}
             />
