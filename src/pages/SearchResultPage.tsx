@@ -195,48 +195,87 @@ export default function SearchResultsPage({
   const totalResults = articles.length + downloadItems.length + topicItems.length + campaignItems.length;
 
   // === SEO & METADATA ===
-  const baseUrl = "https://staging-ayo-sehat.vercel.app";
-  const canonicalUrl = `${baseUrl}/search?q=${encodeURIComponent(searchQuery)}`;
-  const pageTitle = searchQuery ? `Hasil Pencarian: "${searchQuery}" - Ayo Sehat Kemenkes` : "Pencarian - Ayo Sehat Kemenkes";
+  const baseUrl = "https://staging-ayo-sehat.vercel.app"; 
+
+  // Normalisasi canonical URL
+  const getCanonicalUrl = () => {
+    try {
+      // Gunakan URL saat ini jika tersedia (client-side)
+      const currentUrl = typeof window !== "undefined" ? new URL(window.location.href) : null;
+      const params = currentUrl ? new URLSearchParams(currentUrl.search) : new URLSearchParams();
+
+      // Hapus parameter 
+      params.delete("sort");
+      params.delete("page");
+      params.delete("filter");
+      params.delete("utm_source");
+      params.delete("utm_medium");
+      params.delete("utm_campaign");
+
+      // Pertahankan hanya ?q=
+      if (searchQuery && searchQuery.trim()) {
+        params.set("q", searchQuery.trim());
+      } else {
+        params.delete("q");
+      }
+
+      const queryString = params.toString();
+      return `${baseUrl}/search${queryString ? `?${queryString}` : ""}`;
+    } catch {
+      // Fallback jika window tidak tersedia
+      return searchQuery && searchQuery.trim()
+        ? `${baseUrl}/search?q=${encodeURIComponent(searchQuery.trim())}`
+        : `${baseUrl}/search`;
+    }
+  };
+
+  const canonicalUrl = getCanonicalUrl();
+
+  const pageTitle = searchQuery
+    ? `Hasil Pencarian: "${searchQuery}" - Ayo Sehat Kemenkes`
+    : "Pencarian Kesehatan - Ayo Sehat Kemenkes";
+
   const pageDescription = searchQuery
-    ? `Temukan ${totalResults} hasil untuk "${searchQuery}" di artikel, download, topik, dan agenda kesehatan dari Kementerian Kesehatan RI.`
-    : "Cari informasi kesehatan terlengkap di Ayo Sehat Kemenkes.";
+    ? `${totalResults} hasil untuk "${searchQuery}". Informasi kesehatan terlengkap dari Kemenkes: artikel, download, topik, dan agenda.`
+    : "Cari informasi kesehatan terpercaya: penyakit, gejala, pencegahan, dan layanan medis dari Kementerian Kesehatan RI.";
 
   const ogImage = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200";
-  const ogImageTitle = `Hasil Pencarian: "${searchQuery}" - Ayo Sehat Kemenkes`;
+  const ogImageTitle = `Hasil Pencarian: "${searchQuery || "Kesehatan"}" - Ayo Sehat Kemenkes`;
 
   // JSON-LD
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SearchResultsPage",
-    name: pageTitle,
-    description: pageDescription,
-    url: canonicalUrl,
-    query: searchQuery,
-    numberOfItems: totalResults,
-    image: {
+    "name": pageTitle,
+    "url": canonicalUrl,
+    "query": searchQuery || "",
+    "numberOfItems": totalResults,
+    "description": pageDescription,
+    "image": {
       "@type": "ImageObject",
-      url: ogImage,
-      width: 1200,
-      height: 630,
-      caption: ogImageTitle,
-      contentUrl: ogImage,
-      inLanguage: "id-ID",
+      "url": ogImage,
+      "width": 1200,
+      "height": 630,
+      "caption": ogImageTitle,
     },
-    itemListElement: [
-      ...articles.slice(0, 3).map((a, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        name: a.title,
-        url: `${baseUrl}/artikel/${a.id}`,
-      })),
-      ...downloadItems.slice(0, 1).map((d, i) => ({
-        "@type": "ListItem",
-        position: articles.length + i + 1,
-        name: d.title,
-        url: `${baseUrl}/download/${d.id}`,
-      })),
-    ],
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": totalResults,
+      "itemListElement": [
+        ...articles.slice(0, 3).map((a, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "name": a.title,
+          "url": `${baseUrl}/artikel/${a.id}`,
+        })),
+        ...downloadItems.slice(0, 1).map((d, i) => ({
+          "@type": "ListItem",
+          "position": articles.length + i + 1,
+          "name": d.title,
+          "url": `${baseUrl}/download/${d.id}`,
+        })),
+      ],
+    },
   };
 
   return (
@@ -246,7 +285,10 @@ export default function SearchResultsPage({
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Robots */}
         <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
 
         {/* Open Graph */}
         <meta property="og:title" content={pageTitle} />
@@ -267,7 +309,6 @@ export default function SearchResultsPage({
         <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={ogImage} />
         <meta name="twitter:image:alt" content={ogImageTitle} />
-        <meta name="twitter:image:title" content={ogImageTitle} />
 
         {/* JSON-LD */}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
@@ -302,9 +343,9 @@ export default function SearchResultsPage({
                 <div className="flex items-center gap-2">
                   <span className="font-['Poppins'] text-[13px] sm:text-[14px] text-gray-600">Sortir:</span>
                   <select className="font-['Poppins'] text-[13px] sm:text-[14px] text-[#18b3ab] bg-white border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#18b3ab] transition-all">
-                    <option>Terbaru</option>
-                    <option>Terlama</option>
-                    <option>Terpopuler</option>
+                    <option value="">Terbaru</option>
+                    <option value="terlama">Terlama</option>
+                    <option value="terpopuler">Terpopuler</option>
                   </select>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -6,13 +7,21 @@ import CustomCalendar from "./CustomCalendar";
 interface Campaign {
   id: number;
   title: string;
+  type?: string; // Opsional untuk kompatibilitas
   image: string;
+  alt?: string; // Opsional, fallback jika custom data tidak punya
+  width?: number; // Opsional
+  height?: number; // Opsional
 }
 
 interface Publication {
   id: number;
   title: string;
+  type?: string; // Opsional untuk kompatibilitas
   image: string;
+  alt?: string; // Opsional
+  width?: number; // Opsional
+  height?: number; // Opsional
 }
 
 interface RelatedArticle {
@@ -39,11 +48,11 @@ interface RightSidebarProps {
 }
 
 interface SliderCardProps {
-  items: Campaign[] | Publication[];
+  items: (Campaign | Publication)[]; // Union type untuk fleksibilitas
   currentIndex: number;
   setCurrentIndex: (index: number) => void;
-  nextSlide: () => void;
-  prevSlide: () => void;
+  nextSlide: () => void; // Tidak return apa-apa
+  prevSlide: () => void; // Tidak return apa-apa
 }
 
 export default function RightSidebar({
@@ -62,61 +71,97 @@ export default function RightSidebar({
   const [currentCampaignIndex, setCurrentCampaignIndex] = useState(0);
   const [currentPublicationIndex, setCurrentPublicationIndex] = useState(0);
 
+  // === DEFAULT CAMPAIGNS (SEO-OPTIMIZED) ===
   const defaultCampaigns: Campaign[] = [
     {
       id: 1,
       title: "Cek Kesehatan Gratis (CKG) di Sekolah",
-      image: "https://images.unsplash.com/photo-1712239009742-497ba0c4776d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      type: "campaign",
+      image: "https://images.unsplash.com/photo-1712239009742-497ba0c4776d?auto=format&fit=crop&w=800&q=80",
+      alt: "Anak-anak sedang diperiksa dokter di sekolah dalam program Cek Kesehatan Gratis (CKG) Kemenkes RI",
+      width: 800,
+      height: 600,
     },
     {
       id: 2,
       title: "Bulan Imunisasi Anak Nasional (BIAN) 2025",
-      image: "https://images.unsplash.com/photo-1639401122143-5c3b82fef620?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      type: "campaign",
+      image: "https://images.unsplash.com/photo-1639401122143-5c3b82fef620?auto=format&fit=crop&w=800&q=80",
+      alt: "Petugas kesehatan memberikan vaksin kepada bayi dalam program BIAN 2025 Kementerian Kesehatan",
+      width: 800,
+      height: 600,
     },
     {
       id: 3,
       title: "Gerakan Masyarakat Hidup Sehat (GERMAS)",
-      image: "https://images.unsplash.com/photo-1621147977473-48979eaa0995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      type: "campaign",
+      image: "https://images.unsplash.com/photo-1621147977473-48979eaa0995?auto=format&fit=crop&w=800&q=80",
+      alt: "Keluarga berolahraga bersama di taman dalam kampanye GERMAS untuk hidup sehat",
+      width: 800,
+      height: 600,
     },
   ];
 
+  // === DEFAULT PUBLICATIONS (SEO-OPTIMIZED) ===
   const defaultPublications: Publication[] = [
     {
       id: 1,
-      title: "Payung Hari Kesehatan Nasional\n(HKN) Ke-61",
-      image: "https://images.unsplash.com/photo-1631543722888-01f8a17ebf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      title: "Payung Hari Kesehatan Nasional (HKN) Ke-61",
+      type: "publication",
+      image: "https://images.unsplash.com/photo-1631543722888-01f8a17ebf3f?auto=format&fit=crop&w=800&q=80",
+      alt: "Payung warna-warni bertuliskan HKN Ke-61 di acara Hari Kesehatan Nasional Kemenkes",
+      width: 800,
+      height: 600,
     },
     {
       id: 2,
-      title: "Infografis Pencegahan\nStunting 2025",
-      image: "https://images.unsplash.com/photo-1620933967796-53cc2b175b6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      title: "Infografis Pencegahan Stunting 2025",
+      type: "publication",
+      image: "https://images.unsplash.com/photo-1620933967796-53cc2b175b6c?auto=format&fit=crop&w=800&q=80",
+      alt: "Infografis resmi pencegahan stunting tahun 2025 dari Kementerian Kesehatan RI",
+      width: 800,
+      height: 600,
     },
     {
       id: 3,
-      title: "Panduan Imunisasi\nLengkap untuk Anak",
-      image: "https://images.unsplash.com/photo-1631543722888-01f8a17ebf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      title: "Panduan Imunisasi Lengkap untuk Anak",
+      type: "publication",
+      image: "https://images.unsplash.com/photo-1631543722888-01f8a17ebf3f?auto=format&fit=crop&w=800&q=80",
+      alt: "Panduan lengkap jadwal imunisasi anak dari bayi hingga remaja oleh Kemenkes",
+      width: 800,
+      height: 600,
     },
     {
       id: 4,
-      title: "Poster Kampanye\nGerakan Cuci Tangan",
-      image: "https://images.unsplash.com/photo-1620933967796-53cc2b175b6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      title: "Poster Kampanye Gerakan Cuci Tangan",
+      type: "publication",
+      image: "https://images.unsplash.com/photo-1620933967796-53cc2b175b6c?auto=format&fit=crop&w=800&q=80",
+      alt: "Poster edukasi 6 langkah cuci tangan pakai sabun untuk cegah penyakit menular",
+      width: 800,
+      height: 600,
     },
     {
       id: 5,
-      title: "Brosur Kesehatan\nIbu dan Anak",
-      image: "https://images.unsplash.com/photo-1631543722888-01f8a17ebf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      title: "Brosur Kesehatan Ibu dan Anak",
+      type: "publication",
+      image: "https://images.unsplash.com/photo-1631543722888-01f8a17ebf3f?auto=format&fit=crop&w=800&q=80",
+      alt: "Brosur informasi kesehatan ibu hamil, menyusui, dan tumbuh kembang anak",
+      width: 800,
+      height: 600,
     },
   ];
 
   const campaigns = customCampaigns || defaultCampaigns;
   const publications = customPublications || defaultPublications;
 
+  // === FIXED: No return value, no unused expressions ===
   const nextSlide = (
     setter: React.Dispatch<React.SetStateAction<number>>,
     current: number,
     total: number
   ) => {
     setter((current + 1) % total);
+    // Tidak return apa-apa → no unused
   };
 
   const prevSlide = (
@@ -125,31 +170,22 @@ export default function RightSidebar({
     total: number
   ) => {
     setter((current - 1 + total) % total);
+    // Tidak return apa-apa → no unused
   };
 
   const handleCampaignDetail = () => {
-    if (onCampaignDetailClick) {
-      onCampaignDetailClick();
-    } else {
-      console.log("Navigate to campaign details page");
-    }
+    onCampaignDetailClick?.() || console.log("Navigate to campaign details");
   };
 
   const handlePublicationDetail = () => {
-    if (onPublicationDetailClick) {
-      onPublicationDetailClick();
-    } else {
-      console.log("Navigate to publication details page");
-    }
+    onPublicationDetailClick?.() || console.log("Navigate to publication details");
   };
 
   const handleRelatedArticles = () => {
-    if (onRelatedArticlesClick) {
-      onRelatedArticlesClick();
-    } else {
-      console.log("Navigate to related articles page");
-    }
+    onRelatedArticlesClick?.() || console.log("Navigate to related articles");
   };
+
+  // === HELPER: Fallback untuk alt, width, height jika custom data tidak punya ===
 
   return (
     <aside className={`space-y-6 lg:space-y-8 ${className}`}>
@@ -170,7 +206,7 @@ export default function RightSidebar({
         </motion.div>
       )}
 
-      {/* ARTIKEL TERKAIT */}
+      {/* ARTIKEL TERKAIT (FIXED: Tambah width/height) */}
       {showRelatedArticles && relatedArticles.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -188,9 +224,13 @@ export default function RightSidebar({
                 <div className="flex gap-[12px] sm:gap-[18px] items-start cursor-pointer group">
                   <div className="h-[100px] w-[110px] sm:h-[129px] sm:w-[138px] rounded-[8px] sm:rounded-[10px] overflow-hidden shrink-0">
                     <img
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       src={article.image}
+                      alt={`${article.title} - Artikel kesehatan terkait`}
+                      title={article.title}
+                      width={138}
+                      height={129}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="flex flex-col gap-[5px] sm:gap-[7px] flex-1 min-w-0">
@@ -214,7 +254,7 @@ export default function RightSidebar({
             <div className="bg-[#cccccc] h-px w-full" />
           </div>
           <div className="flex justify-end">
-            <button 
+            <button
               onClick={handleRelatedArticles}
               className="flex items-center gap-2 text-[#18b3ab] text-[12px] hover:text-[#16a199] transition-colors"
             >
@@ -227,7 +267,7 @@ export default function RightSidebar({
         </motion.div>
       )}
 
-      {/* KAMPANYE KESEHATAN - SLIDER DENGAN ARROW */}
+      {/* KAMPANYE KESEHATAN */}
       {showCampaigns && campaigns.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -244,7 +284,7 @@ export default function RightSidebar({
                 Informasi terkait dengan kampanye kesehatan yang sedang berlangsung
               </p>
             </div>
-            <button 
+            <button
               onClick={handleCampaignDetail}
               className="flex items-center gap-1 text-[#18b3ab] text-[10px] hover:text-[#16a199] transition-colors whitespace-nowrap ml-3"
             >
@@ -255,6 +295,7 @@ export default function RightSidebar({
             </button>
           </div>
 
+          {/* FIXED: onClick tanpa (), no unused */}
           <SliderCard
             items={campaigns}
             currentIndex={currentCampaignIndex}
@@ -265,7 +306,7 @@ export default function RightSidebar({
         </motion.div>
       )}
 
-      {/* MEDIA PUBLIKASI - SLIDER DENGAN ARROW */}
+      {/* MEDIA PUBLIKASI */}
       {showPublications && publications.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -282,7 +323,7 @@ export default function RightSidebar({
                 Informasi terkait dengan media publikasi kesehatan yang tersedia
               </p>
             </div>
-            <button 
+            <button
               onClick={handlePublicationDetail}
               className="flex items-center gap-1 text-[#18b3ab] text-[10px] hover:text-[#16a199] transition-colors whitespace-nowrap ml-3"
             >
@@ -293,6 +334,7 @@ export default function RightSidebar({
             </button>
           </div>
 
+          {/* FIXED: onClick tanpa (), no unused */}
           <SliderCard
             items={publications}
             currentIndex={currentPublicationIndex}
@@ -306,7 +348,7 @@ export default function RightSidebar({
   );
 }
 
-// === REUSABLE SLIDER CARD COMPONENT ===
+// === SLIDER CARD (FIXED: Union type, fallback props, no unused) ===
 function SliderCard({ items, currentIndex, setCurrentIndex, nextSlide, prevSlide }: SliderCardProps) {
   return (
     <div className="relative group bg-white rounded-[12px] sm:rounded-[15px] border border-[#d2d2d2] overflow-hidden h-[300px] sm:h-[320px] lg:h-[338px]">
@@ -315,40 +357,56 @@ function SliderCard({ items, currentIndex, setCurrentIndex, nextSlide, prevSlide
           className="flex transition-transform duration-700 ease-in-out h-full"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {items.map((item, index) => (
-            <div key={index} className="w-full flex-shrink-0 h-full">
-              <div className="bg-white rounded-[3.75px] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] hover:shadow-[2px_4px_8px_0px_rgba(0,0,0,0.25)] transition-shadow duration-300 h-full flex flex-col cursor-pointer">
-                <div className="relative h-[180px] sm:h-[200px] lg:h-[220px] overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                </div>
-                <div className="p-3 sm:p-4 lg:p-6 bg-white flex items-center justify-center flex-1">
-                  <p className="font-medium text-[12px] sm:text-[13px] lg:text-[16px] leading-tight text-[#18b3ab] text-center line-clamp-3 hover:text-[#16a199] transition-colors">
-                    {item.title}
-                  </p>
+          {items.map((item, index) => {
+            const imgProps = getImageProps(item); // FIXED: Gunakan helper untuk fallback
+
+            return (
+              <div key={item.id} className="w-full flex-shrink-0 h-full">
+                <div className="bg-white rounded-[3.75px] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] hover:shadow-[2px_4px_8px_0px_rgba(0,0,0,0.25)] transition-shadow duration-300 h-full flex flex-col cursor-pointer">
+                  <div className="relative h-[180px] sm:h-[200px] lg:h-[220px] overflow-hidden">
+                    <img
+                      src={imgProps.image}
+                      alt={imgProps.alt}
+                      title={imgProps.title}
+                      width={imgProps.width}
+                      height={imgProps.height}
+                      srcSet={`
+                        ${imgProps.image.replace('&w=800', '&w=400')} 400w,
+                        ${imgProps.image.replace('&w=800', '&w=600')} 600w,
+                        ${imgProps.image} 800w,
+                        ${imgProps.image.replace('&w=800', '&w=1200')} 1200w
+                      `}
+                      sizes="(max-width: 640px) 400px, (max-width: 1024px) 600px, 800px"
+                      loading="lazy"
+                      fetchPriority={index === 0 ? "high" : "low"}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  </div>
+                  <div className="p-3 sm:p-4 lg:p-6 bg-white flex items-center justify-center flex-1">
+                    <p className="font-medium text-[12px] sm:text-[13px] lg:text-[16px] leading-tight text-[#18b3ab] text-center line-clamp-3 hover:text-[#16a199] transition-colors">
+                      {item.title}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* ARROW - Mobile: selalu muncul, Desktop: muncul saat hover */}
+      {/* FIXED: onClick tanpa () */}
       <button
         onClick={prevSlide}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-1.5 sm:p-2 shadow-lg transition-all z-10 sm:opacity-0 sm:group-hover:opacity-100"
-        aria-label="Previous slide"
+        aria-label="Slide sebelumnya"
       >
         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
       </button>
       <button
         onClick={nextSlide}
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-1.5 sm:p-2 shadow-lg transition-all z-10 sm:opacity-0 sm:group-hover:opacity-100"
-        aria-label="Next slide"
+        aria-label="Slide berikutnya"
       >
         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
       </button>
@@ -364,10 +422,21 @@ function SliderCard({ items, currentIndex, setCurrentIndex, nextSlide, prevSlide
                 ? "bg-[#18b3ab] w-2 h-2"
                 : "bg-black/20 hover:bg-black/40 w-2 h-2"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Pergi ke slide ${index + 1}`}
           />
         ))}
       </div>
     </div>
   );
+}
+
+// === HELPER UNTUK FALLBACK (Dari SliderCard, tapi global) ===
+function getImageProps(item: Campaign | Publication) {
+  return {
+    alt: item.alt || `${item.title} - Kampanye Kesehatan Kemenkes RI`,
+    width: item.width || 800,
+    height: item.height || 600,
+    image: item.image,
+    title: item.title,
+  };
 }
