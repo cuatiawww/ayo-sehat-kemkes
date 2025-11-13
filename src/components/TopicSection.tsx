@@ -2,14 +2,20 @@ import { useState, useEffect } from "react";
 import CustomCalendar from "./CustomCalendar";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 
+interface Slide {
+  image: string;
+  title: string;
+  alt: string;
+  imgTitle: string;
+}
+
 export default function TopicSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [bannerSlide, setBannerSlide] = useState(0);
-
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
 
-  // Health topics organized by letter
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
+
   const topicsByLetter: Record<string, string[]> = {
     A: ["Asma", "Alergi", "Anemia", "Artritis", "Asam Urat", "Autisme"],
     B: ["Batuk", "Bronkitis", "Batu Ginjal", "Batuk Rejan", "Bulimia"],
@@ -40,41 +46,50 @@ export default function TopicSection() {
     "#": ["123 Konsultasi Dokter", "24/7 Emergency", "911 Ambulance"],
   };
 
-  const bannerSlides = [
+  const bannerSlides: string[] = [
     "https://images.unsplash.com/photo-1758691463198-dc663b8a64e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwcHJvZmVzc2lvbmFsJTIwY29uc3VsdGF0aW9ufGVufDF8fHx8MTc2MjMzMTM5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
     "https://images.unsplash.com/photo-1740410643780-883b33ee1b86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwZG9jdG9yJTIwcGF0aWVudHxlbnwxfHx8fDE3NjIzMzUzNTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
     "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc2MjMzNDkzNHww&ixlib=rb-4.1.0&q=80&w=1080",
   ];
 
-  const slides = [
+  const slides: Slide[] = [
     {
       image: "https://images.unsplash.com/photo-1758691463198-dc663b8a64e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwcHJvZmVzc2lvbmFsJTIwY29uc3VsdGF0aW9ufGVufDF8fHx8MTc2MjMzMTM5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
       title: "Konsultasi Dokter Spesialis Online",
+      alt: "Dokter spesialis melakukan konsultasi online dengan pasien melalui video call",
+      imgTitle: "Konsultasi Dokter Online",
     },
     {
       image: "https://images.unsplash.com/photo-1740410643780-883b33ee1b86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwZG9jdG9yJTIwcGF0aWVudHxlbnwxfHx8fDE3NjIzMzUzNTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       title: "Pemeriksaan Kesehatan Rutin",
+      alt: "Dokter memeriksa tekanan darah pasien saat medical check-up rutin",
+      imgTitle: "Medical Check-Up Rutin",
     },
     {
       image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc2MjMzNDkzNHww&ixlib=rb-4.1.0&q=80&w=1080",
       title: "Layanan Home Care 24/7",
+      alt: "Perawat memberikan layanan home care kepada pasien di rumah",
+      imgTitle: "Home Care 24 Jam",
     },
     {
       image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob3NwaXRhbCUyMGVxdWlwbWVudHxlbnwxfHx8fDE3NjIzMDQ1OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       title: "Fasilitas Medis Modern",
+      alt: "Ruang operasi dengan peralatan medis canggih dan modern",
+      imgTitle: "Fasilitas Medis Modern",
     },
     {
       image: "https://images.unsplash.com/photo-1758691462493-120a069304e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwd2VsbG5lc3MlMjBmaXRuZXNzfGVufDF8fHx8MTc2MjMzNTc4OHww&ixlib=rb-4.1.0&q=80&w=1080",
       title: "Program Wellness & Fitness",
+      alt: "Orang berolahraga di gym untuk program kesehatan dan kebugaran",
+      imgTitle: "Program Wellness",
     },
   ];
 
-  // Auto-play banner slider
+  // Auto-play banner
   useEffect(() => {
     const timer = setInterval(() => {
       setBannerSlide((prev) => (prev + 1) % bannerSlides.length);
     }, 5000);
-
     return () => clearInterval(timer);
   }, [bannerSlides.length]);
 
@@ -83,60 +98,48 @@ export default function TopicSection() {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 4000);
-
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const handleLetterClick = (letter: string) => {
-    if (selectedLetter === letter) {
-      setSelectedLetter(null); // Collapse if already selected
-    } else {
-      setSelectedLetter(letter); // Expand new letter
-    }
+    setSelectedLetter((prev) => (prev === letter ? null : letter));
   };
 
   return (
     <div className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-[#f0f4f5]">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-      {/* At xl cap the left column so it doesn't expand indefinitely and cause overlap */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] xl:grid-cols-[980px_auto] gap-6 lg:gap-12 xl:gap-[49px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] xl:grid-cols-[980px_auto] gap-6 lg:gap-12 xl:gap-[49px]">
           {/* Left Column - Topik A-Z */}
-              <div className="relative bg-white rounded-[15px] sm:rounded-[20px] border border-[#cccccc] w-full h-auto px-4 sm:px-6 lg:px-8 xl:px-[82px] py-6 sm:py-8 lg:py-12 xl:max-w-[980px]">
+          <div className="relative bg-white rounded-[15px] sm:rounded-[20px] border border-[#cccccc] w-full h-auto px-4 sm:px-6 lg:px-8 xl:px-[82px] py-6 sm:py-8 lg:py-12 xl:max-w-[980px]">
             <h2 className="not-italic text-[24px] sm:text-[32px] lg:text-[50px] leading-[1.2] sm:leading-[1.1] lg:leading-[30px] text-[#18b3ab] mb-3 sm:mb-5 lg:mb-20">
               Topik A-Z
             </h2>
-                <p className="not-italic text-[13px] sm:text-[15px] lg:text-[20px] leading-[20px] sm:leading-[24px] lg:leading-[30px] text-neutral-600 mb-5 sm:mb-6 lg:mb-16 max-w-full xl:max-w-[691px]">
-              Temukan penyakit dan kondisi; hidup sehat; keselamatan di tempat kerja;
- kesehatan lingkungan; cedera, kekerasan, dan keselamatan; kesehatan global;
- kesehatan pelancong, dan banyak lagi.
+            <p className="not-italic text-[13px] sm:text-[15px] lg:text-[20px] leading-[20px] sm:leading-[24px] lg:leading-[30px] text-neutral-600 mb-5 sm:mb-6 lg:mb-16 max-w-full xl:max-w-[691px]">
+              Temukan penyakit dan kondisi; hidup sehat; keselamatan di tempat kerja; kesehatan lingkungan; cedera, kekerasan, dan keselamatan; kesehatan global; kesehatan pelancong, dan banyak lagi.
             </p>
 
-            {/* Grid alfabet */}
+            {/* Alphabet Grid */}
             <div className="grid grid-cols-7 gap-[12px] sm:gap-[18px] lg:gap-[25px] mb-5 sm:mb-6 lg:mb-8 max-w-full lg:max-w-[610px]">
               {alphabet.map((letter) => (
                 <button
                   key={letter}
                   onClick={() => handleLetterClick(letter)}
-                  className={`w-full aspect-square max-w-[42px] sm:max-w-[52px] lg:max-w-[65px] lg:w-[65px] lg:h-[65px] rounded-[7px] sm:rounded-[8px] lg:rounded-[9px] flex items-center justify-center text-[18px] sm:text-[22px] lg:text-[28px] leading-[1] transition-all duration-300 hover:scale-110 hover:shadow-lg ${
+                  className={`w-full aspect-square max-w-[42px] sm:max-w-[52px] lg:max-w-[65px] rounded-[7px] sm:rounded-[8px] lg:rounded-[9px] flex items-center justify-center text-[18px] sm:text-[22px] lg:text-[28px] leading-[1] transition-all duration-300 hover:scale-110 hover:shadow-lg active:scale-95 ${
                     selectedLetter === letter
                       ? "bg-[#18b3ab] text-white shadow-md"
                       : "bg-white text-black border border-transparent hover:border-[#18b3ab]"
                   }`}
+                  aria-label={`Lihat topik huruf ${letter}`}
                 >
                   {letter}
                 </button>
               ))}
             </div>
 
-            {/* topik */}
+            {/* Topics Dropdown */}
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out mb-5 sm:mb-6 lg:mb-8 max-w-full lg:max-w-[806px] ${
                 selectedLetter ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
@@ -154,6 +157,7 @@ export default function TopicSection() {
                     <button
                       onClick={() => setSelectedLetter(null)}
                       className="text-gray-400 hover:text-[#18b3ab] transition-colors duration-300"
+                      aria-label="Tutup topik"
                     >
                       <ChevronDown className="w-5 h-5 rotate-180" />
                     </button>
@@ -164,7 +168,8 @@ export default function TopicSection() {
                       {topicsByLetter[selectedLetter].map((topic, index) => (
                         <button
                           key={index}
-                          className="group text-left bg-white hover:bg-[#18b3ab] border border-gray-200 hover:border-[#18b3ab] rounded-[8px] sm:rounded-[10px] px-3 sm:px-4 py-2 sm:py-3 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                          className="group text-left bg-white hover:bg-[#18b3ab] border border-gray-200 hover:border-[#18b3ab] rounded-[8px] sm:rounded-[10px] px-3 sm:px-4 py-2 sm:py-3 transition-all duration-300 hover:shadow-md hover:-translate-y-1 active:scale-95"
+                          aria-label={`Baca tentang ${topic}`}
                         >
                           <div className="flex items-center gap-2">
                             <ChevronRight className="w-4 h-4 text-[#18b3ab] group-hover:text-white transition-colors duration-300 flex-shrink-0" />
@@ -186,21 +191,23 @@ export default function TopicSection() {
 
             <div className="h-px bg-[#d9d9d9] mb-5 sm:mb-6 lg:mb-12 max-w-full lg:max-w-[806px]"></div>
 
-            {/* Slider banner otomatis */}
-            <div className="relative h-[90px] sm:h-[110px] lg:h-[145px] rounded-[12px] sm:rounded-[15px] overflow-hidden bg-[#18b3ab] cursor-pointer max-w-full lg:max-w-[786px]">
+            {/* Banner Slider */}
+            <div className="relative h-[90px] sm:h-[110px] lg:h-[145px] rounded-[12px] sm:rounded-[15px] overflow-hidden bg-[#18b3ab] cursor-pointer max-w-full lg:max-w-[786px] group">
               <div className="relative h-full overflow-hidden">
                 <div
                   className="flex h-full transition-transform duration-700 ease-in-out"
                   style={{ transform: `translateX(-${bannerSlide * 100}%)` }}
                 >
                   {bannerSlides.map((image, index) => (
-                    <div key={index} className="w-full flex-shrink-0 h-full relative group">
+                    <div key={index} className="w-full flex-shrink-0 h-full relative">
                       <img
                         src={image}
-                        alt={`Healthcare Banner ${index + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        alt={`Banner layanan kesehatan ${index + 1} - profesional medis memberikan pelayanan terbaik`}
+                        title={`Banner Layanan Kesehatan ${index + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent"></div>
                     </div>
                   ))}
                 </div>
@@ -208,33 +215,29 @@ export default function TopicSection() {
             </div>
           </div>
 
-          {/* Right Column - Calendar & Slider */}
+          {/* Right Column */}
           <div className="flex flex-col gap-5 sm:gap-6 lg:gap-0 w-full lg:max-w-[452px]">
-            {/* Calendar Section with Title */}
+            {/* Calendar */}
             <div className="relative">
-              {/* Title outside card */}
               <h3 className="not-italic text-[15px] sm:text-[17px] lg:text-[20px] leading-[1.3] text-[#18b3ab] mb-3 sm:mb-4 lg:mb-5">
-              Kalendar Kesehatan
+                Kalendar Kesehatan
               </h3>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 mt sm:mt-4 lg:mt-5 text-[13px] sm:text-[14px] lg:text-[15px] leading-[1.4] text-neutral-600">
-    <p className="mb-1 sm:mb-0">
-      Informasi terkait dengan hari besar dan agenda kesehatan satu tahun penuh
-    </p>
-  </div>
-              {/* Calendar Card */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 mt sm:mt-4 lg:mt-5 text-[13px] sm:text-[14px] lg:text-[15px] leading-[1.4] text-neutral-600">
+                <p className="mb-1 sm:mb-0">
+                  Informasi terkait dengan hari besar dan agenda kesehatan satu tahun penuh
+                </p>
+              </div>
               <div className="w-full">
                 <CustomCalendar />
               </div>
             </div>
 
-            {/* Slider Section with Title OUTSIDE */}
+            {/* Slider Layanan */}
             <div className="relative mt-4 sm:mt-6 lg:mt-16">
-              {/* Title outside card */}
               <h3 className="not-italic text-[15px] sm:text-[17px] lg:text-[20px] leading-[1.3] text-[#18b3ab] mb-3 sm:mb-4 lg:mb-5">
                 Layanan Unggulan
               </h3>
 
-              {/* Slider Card - Border and rounded on container */}
               <div className="bg-white rounded-[12px] sm:rounded-[15px] border border-[#d2d2d2] overflow-hidden w-full lg:w-[452px] lg:h-[338px]">
                 <div className="relative group h-full">
                   <div className="overflow-hidden h-full">
@@ -244,18 +247,18 @@ export default function TopicSection() {
                     >
                       {slides.map((slide, index) => (
                         <div key={index} className="w-full flex-shrink-0 h-full">
-                          {/* Card with exact shadow from   */}
-                          <div className="bg-white rounded-[3.75px] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] overflow-hidden cursor-pointer hover:shadow-[2px_4px_8px_0px_rgba(0,0,0,0.25)] transition-shadow duration-300 h-full flex flex-col">
-                            {/* Image - menyatu dengan card, no padding */}
+                          <div className="bg-white rounded-[3.75px] shadow-[1px_3px_6px_0px_rgba(0,0,0,0.2)] overflow-hidden cursor-pointer hover:shadow-[2px_4px_8px_0px_rgba(0,0,0,0.25)] transition-all duration-300 h-full flex flex-col active:scale-95">
                             <div className="relative h-[140px] sm:h-[180px] lg:h-[220px] overflow-hidden flex-shrink-0">
                               <img
                                 src={slide.image}
-                                alt={slide.title}
-                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                                alt={slide.alt}
+                                title={slide.imgTitle}
+                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110 hover:rotate-1"
+                                loading="lazy"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                             </div>
-                            {/* Text area - bg white, exact height from   */}
                             <div className="p-3 sm:p-4 lg:p-6 bg-white flex items-center justify-center flex-1 min-h-[60px] sm:min-h-[75px] lg:min-h-[98px]">
                               <h4 className="font-medium not-italic text-[12px] sm:text-[13px] lg:text-[16px] leading-[16px] sm:leading-[17px] lg:leading-[18px] text-[#18b3ab] text-center hover:text-[#16a199] transition-colors duration-300">
                                 {slide.title}
@@ -267,31 +270,34 @@ export default function TopicSection() {
                     </div>
                   </div>
 
-                  {/* Navigation Arrows - Hidden on mobile, show on hover */}
+                  {/* Navigation */}
                   <button
                     onClick={prevSlide}
-                    className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 items-center justify-center z-10"
+                    className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 items-center justify-center z-10 active:scale-90"
+                    aria-label="Slide sebelumnya"
                   >
                     <ChevronLeft className="w-5 h-5 text-gray-600" />
                   </button>
                   <button
                     onClick={nextSlide}
-                    className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 items-center justify-center z-10"
+                    className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 items-center justify-center z-10 active:scale-90"
+                    aria-label="Slide berikutnya"
                   >
                     <ChevronRight className="w-5 h-5 text-gray-600" />
                   </button>
 
-                  {/* Dots Indicator -     */}
+                  {/* Dots */}
                   <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
                     {slides.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentSlide(index)}
-                        className={`rounded-[4px] transition-all duration-300 ${
+                        className={`rounded-full transition-all duration-300 ${
                           currentSlide === index
-                            ? "bg-[#18b3ab] w-[8px] h-[8px]"
-                            : "bg-black opacity-20 hover:opacity-40 w-[8px] h-[8px]"
+                            ? "w-10 h-2 bg-[#18b3ab] shadow-md"
+                            : "w-2 h-2 bg-gray-400 hover:bg-gray-500"
                         }`}
+                        aria-label={`Ke slide ${index + 1}`}
                       />
                     ))}
                   </div>
@@ -304,14 +310,8 @@ export default function TopicSection() {
 
       <style>{`
         @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>

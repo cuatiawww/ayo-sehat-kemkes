@@ -4,6 +4,8 @@ interface Feature {
   image: string;
   category: string;
   description: string;
+  alt: string;
+  title: string;
 }
 
 export default function FeatureSection() {
@@ -11,28 +13,34 @@ export default function FeatureSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
-  const features = [
+  const features: Feature[] = [
     {
-      image: "../assets/content1.png",  
-      category: "Lorem Ipsum",
+      image: "../assets/content1.png",
+      category: "Kesehatan Jantung",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      alt: "Ilustrasi gaya hidup sehat untuk menjaga kesehatan jantung",
+      title: "Tips Menjaga Kesehatan Jantung",
     },
     {
-      image: "../assets/content2.png",  
-      category: "Lorem Ipsum",
+      image: "../assets/content2.png",
+      category: "Pola Makan Sehat",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      alt: "Contoh menu makanan seimbang dengan sayur, buah, dan protein",
+      title: "Panduan Pola Makan Sehat Sehari-hari",
     },
     {
-      image: "../assets/content3.png",  
-      category: "Lorem Ipsum",
+      image: "../assets/content3.png",
+      category: "Olahraga Rutin",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      alt: "Orang berolahraga di taman untuk menjaga kebugaran",
+      title: "Manfaat Olahraga Rutin untuk Tubuh dan Pikiran",
     },
   ];
 
-  // Intersection Observer for scroll animation
+  // Intersection Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -46,14 +54,10 @@ export default function FeatureSection() {
     );
 
     const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    if (currentRef) observer.observe(currentRef);
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
@@ -72,40 +76,30 @@ export default function FeatureSection() {
   return (
     <div ref={sectionRef} className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-[#f0f4f5] overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        {/* Desktop Grid - 3 columns */}
+        {/* Desktop Grid */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 xl:gap-10">
           {features.map((feature, index) => (
             <div
               key={index}
               className={`transition-all duration-700 ${
-                isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-16'
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
               }`}
-              style={{
-                transitionDelay: `${index * 200}ms`,
-              }}
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
               <FeatureCard feature={feature} />
             </div>
           ))}
         </div>
 
-        {/* Mobile Carousel - Swipeable */}
+        {/* Mobile Carousel */}
         <div className="md:hidden relative">
-          {/* Cards Container */}
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden rounded-2xl">
             <div
               className="flex transition-transform duration-500 ease-out"
-              style={{
-                transform: `translateX(-${currentSlide * 100}%)`,
-              }}
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="w-full flex-shrink-0 px-2"
-                >
+                <div key={index} className="w-full flex-shrink-0 px-2">
                   <FeatureCard feature={feature} />
                 </div>
               ))}
@@ -115,8 +109,9 @@ export default function FeatureSection() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-[#18b3ab] rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/95 hover:bg-white text-[#18b3ab] rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
             disabled={currentSlide === 0}
+            aria-label="Slide sebelumnya"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -125,15 +120,16 @@ export default function FeatureSection() {
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-[#18b3ab] rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/95 hover:bg-white text-[#18b3ab] rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
             disabled={currentSlide === features.length - 1}
+            aria-label="Slide berikutnya"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
-          {/* Dots Indicator */}
+          {/* Dots */}
           <div className="flex justify-center gap-2 mt-6">
             {features.map((_, index) => (
               <button
@@ -141,9 +137,10 @@ export default function FeatureSection() {
                 onClick={() => goToSlide(index)}
                 className={`transition-all duration-300 rounded-full ${
                   currentSlide === index
-                    ? 'w-8 h-3 bg-[#18b3ab]'
-                    : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                    ? "w-10 h-3 bg-[#18b3ab] shadow-md"
+                    : "w-3 h-3 bg-gray-300 hover:bg-gray-400"
                 }`}
+                aria-label={`Ke slide ${index + 1}`}
               />
             ))}
           </div>
@@ -153,53 +150,52 @@ export default function FeatureSection() {
   );
 }
 
-// Feature Card Component with enhanced hover effects
+// Enhanced Feature Card
 function FeatureCard({ feature }: { feature: Feature }) {
   return (
     <div className="bg-white rounded-[20px] sm:rounded-[25px] border border-[#d2d2d2] overflow-hidden group cursor-pointer hover:shadow-2xl hover:-translate-y-3 hover:border-[#18b3ab] transition-all duration-500 flex flex-col h-full">
-      {/* Card Container */}
       <div className="w-full h-auto lg:h-[472px] flex flex-col p-5 sm:p-6 lg:p-7">
-        {/* Image Section with overlay effects */}
+        {/* Image Section */}
         <div className="relative h-[200px] sm:h-[180px] lg:h-[199px] rounded-[10px] sm:rounded-[13px] overflow-hidden mb-4 sm:mb-5 lg:mb-7 flex-shrink-0">
-          {/* Image */}
           <img
-            alt="image"
             src={feature.image}
+            alt={feature.alt}
+            title={feature.title}
             className="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
+            loading="lazy"
           />
           
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
           
           {/* Shine Effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
           {/* Corner Badge */}
-          <div className="absolute top-3 right-3 bg-[#18b3ab] text-white px-3 py-1 rounded-full text-xs font-semibold opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500">
-            View Details
+          <div className="absolute top-3 right-3 bg-[#18b3ab] text-white px-3 py-1 rounded-full text-xs font-semibold opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500 flex items-center gap-1">
+            Lihat Detail
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </div>
         </div>
 
-        {/* Content Section */}
+        {/* Content */}
         <div className="flex-1 flex flex-col">
-          {/* Category with animated underline */}
           <div className="mb-3 sm:mb-4 lg:mb-5 relative inline-block">
             <div className="font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-[18px] sm:leading-[19px] lg:leading-[20px] text-[#18b3ab] group-hover:text-[#16a199] transition-colors duration-300">
               {feature.category}
             </div>
-            {/* Animated underline */}
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#18b3ab] group-hover:w-full transition-all duration-500"></div>
           </div>
 
-          {/* Description with better spacing */}
           <p className="font-normal text-[11px] sm:text-[11.5px] lg:text-[12px] leading-[20px] sm:leading-[21px] lg:leading-[22px] text-[#212121] flex-1 text-left line-clamp-5 sm:line-clamp-6 group-hover:text-[#333] transition-colors duration-300">
             {feature.description}
           </p>
 
-          {/* Read More Link */}
           <div className="mt-4 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
             <span className="text-[#18b3ab] text-sm font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all duration-300">
-              Read More
+              Baca Selengkapnya
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -208,7 +204,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
         </div>
       </div>
 
-      {/* Bottom Border Animation */}
+      {/* Bottom Border */}
       <div className="h-1 bg-gradient-to-r from-[#18b3ab] to-[#16a199] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
     </div>
   );

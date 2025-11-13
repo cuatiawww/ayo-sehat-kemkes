@@ -195,7 +195,7 @@ export default function SearchResultsPage({
   const totalResults = articles.length + downloadItems.length + topicItems.length + campaignItems.length;
 
   // === SEO & METADATA ===
-  const baseUrl = "https://ayosehat.kemkes.go.id";
+  const baseUrl = "https://staging-ayo-sehat.vercel.app/";
   const canonicalUrl = `${baseUrl}/search?q=${encodeURIComponent(searchQuery)}`;
   const pageTitle = searchQuery ? `Hasil Pencarian: "${searchQuery}" - Ayo Sehat Kemenkes` : "Pencarian - Ayo Sehat Kemenkes";
   const pageDescription = searchQuery

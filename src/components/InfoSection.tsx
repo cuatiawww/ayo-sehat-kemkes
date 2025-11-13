@@ -4,45 +4,46 @@ export default function InfoSection() {
   const features = [
     {
       title: "Tidak Merokok",
-      description:
-        "Rokok meningkatkan risiko kanker, penyakit jantung, dan paru-paru.",
+      description: "Rokok meningkatkan risiko kanker, penyakit jantung, dan paru-paru.",
       position: "left",
       icon: "../assets/icon1.png",
+      alt: "Ikon larangan merokok",
     },
     {
       title: "Hindari Konsumsi Alkohol",
-      description:
-        "Alkohol dapat merusak organ tubuh dan memicu berbagai penyakit kronis.",
+      description: "Alkohol dapat merusak organ tubuh dan memicu berbagai penyakit kronis.",
       position: "left",
       icon: "../assets/icon2.png",
+      alt: "Ikon larangan minum alkohol",
     },
     {
       title: "Batasi Konsumsi Gula, Garam, dan Lemak",
-      description:
-        "Gula maksimal 50 gram, garam 5 gram, dan lemak total 67 gram per hari.",
+      description: "Gula maksimal 50 gram, garam 5 gram, dan lemak total 67 gram per hari.",
       position: "left",
       icon: "../assets/icon5.png",
+      alt: "Ikon batasi gula, garam, dan lemak",
+
     },
     {
       title: "Minum Air Putih yang Cukup",
-      description:
-        "Minimal 8 gelas atau 2 liter per hari, sesuaikan dengan aktivitas.",
+      description: "Minimal 8 gelas atau 2 liter per hari, sesuaikan dengan aktivitas.",
       position: "right",
       icon: "../assets/icon4.png",
+      alt: "Ikon minum air putih",
     },
     {
-      title: "Konsumsi Makanan Begizi Seimbang",
-      description:
-        "Utamakan buah, sayur, protein tanpa lemak, dan karbohidrat kompleks.",
+      title: "Konsumsi Makanan Bergizi Seimbang",
+      description: "Utamakan buah, sayur, protein tanpa lemak, dan karbohidrat kompleks.",
       position: "right",
       icon: "../assets/icon6.png",
+      alt: "Ikon makanan sehat",
     },
     {
       title: "Rutin Berolahraga",
-      description:
-        "Minimal 150 menit aktivitas fisik sedang setiap minggu.",
+      description: "Minimal 150 menit aktivitas fisik sedang setiap minggu.",
       position: "right",
       icon: "../assets/icon3.png",
+      alt: "Ikon olahraga rutin",
     },
   ];
 
@@ -55,9 +56,7 @@ export default function InfoSection() {
             Perilaku Hidup Sehat
           </h2>
           <p className="not-italic text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[22px] leading-[22px] sm:leading-[26px] lg:leading-[28px] xl:leading-[30px] text-neutral-600 max-w-4xl mx-auto px-4">
-            Perilaku hidup sehat adalah kebiasaan sehari-hari yang dilakukan untuk menjaga dan
-meningkatkan kesehatan tubuh dan pikiran, seperti makan bergizi, olahraga teratur, cukup istirahat,
-serta menjaga kebersihan dan kesehatan mental.
+            Perilaku hidup sehat adalah kebiasaan sehari-hari yang dilakukan untuk menjaga dan meningkatkan kesehatan tubuh dan pikiran, seperti makan bergizi, olahraga teratur, cukup istirahat, serta menjaga kebersihan dan kesehatan mental.
           </p>
         </div>
 
@@ -74,11 +73,13 @@ serta menjaga kebersihan dan kesehatan mental.
                 }}
               >
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="bg-[#18b3ab] rounded-[15px] sm:rounded-[20px] w-[70px] h-[70px] sm:w-[80px] sm:h-[80px] flex-shrink-0 hover:bg-[#16a199] hover:rotate-6 hover:scale-110 transition-all duration-500 flex items-center justify-center overflow-hidden shadow-lg">
+                  <div className="bg-[#18b3ab] rounded-[15px] sm:rounded-[20px] w-[70px] h-[70px] sm:w-[80px] sm:h-[80px] flex-shrink-0 hover:bg-[#16a199] hover:rotate-6 hover:scale-110 transition-all duration-500 flex items-center justify-center overflow-hidden shadow-lg group">
                     <img
-                      alt="image/icon"
-                      className="w-auto h-auto max-w-[45px] max-h-[45px] sm:max-w-[55px] sm:max-h-[55px] object-contain transition-transform duration-500 hover:scale-125"
                       src={feature.icon}
+                      alt={feature.alt}
+                      title={feature.title}
+                      className="w-auto h-auto max-w-[45px] max-h-[45px] sm:max-w-[55px] sm:max-h-[55px] object-contain transition-transform duration-500 group-hover:scale-125"
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex-1">
@@ -96,7 +97,7 @@ serta menjaga kebersihan dan kesehatan mental.
 
           {/* Desktop View - Staggered Layout */}
           <div className="hidden lg:flex items-start justify-between gap-0">
-            {/* Left Features - Staggered */}
+            {/* Left Features */}
             <div className="w-[35%] pt-0">
               {features.slice(0, 3).map((feature, index) => (
                 <div
@@ -118,13 +119,14 @@ serta menjaga kebersihan dan kesehatan mental.
                     </p>
                   </div>
                   <div className="relative">
-                    {/* Glow effect on hover */}
                     <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                     <div className="relative bg-[#18b3ab] rounded-[20px] w-[88px] h-[88px] flex-shrink-0 group-hover:bg-[#16a199] group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 cursor-pointer flex items-center justify-center overflow-hidden shadow-lg group-hover:shadow-2xl">
                       <img
-                        alt="image/icon"
-                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[-12deg]"
                         src={feature.icon}
+                        alt={feature.alt}
+                        title={feature.title}
+                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[-12deg]"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -132,67 +134,38 @@ serta menjaga kebersihan dan kesehatan mental.
               ))}
             </div>
 
-            {/* Gambar tengah */}
-            <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] flex-shrink-0 mx-8 xl:mx-12 mt-8 [@media(max-width:1080px)]:mt-32 animate-[scaleIn_1s_ease-out]">
-
-              {/* Lingkaran latar belakang animasi */}
+            {/* Gambar Tengah */}
+            <div className="relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px] flex-shrink-0 mx-8 xl:mx-12 mt-8 animate-[scaleIn_1s_ease-out]">
               <div className="absolute inset-0 animate-pulse">
-                <svg
-                  className="block size-full"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  viewBox="0 0 522 522"
-                >
-                  <circle
-                    cx="261"
-                    cy="261"
-                    r="261"
-                    fill="#18B3AB"
-                    opacity="0.1"
-                  />
+                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 522 522">
+                  <circle cx="261" cy="261" r="261" fill="#18B3AB" opacity="0.1" />
                 </svg>
               </div>
-              {/* Rotating ring effect */}
               <div className="absolute inset-0 animate-[spin_20s_linear_infinite]">
-                <svg
-                  className="block size-full"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  viewBox="0 0 522 522"
-                >
-                  <circle
-                    cx="261"
-                    cy="261"
-                    r="250"
-                    stroke="#18B3AB"
-                    strokeWidth="2"
-                    strokeDasharray="10 20"
-                    opacity="0.3"
-                    fill="none"
-                  />
+                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 522 522">
+                  <circle cx="261" cy="261" r="250" stroke="#18B3AB" strokeWidth="2" strokeDasharray="10 20" opacity="0.3" fill="none" />
                 </svg>
               </div>
-              {/* Gambar utama */}
               <div className="absolute inset-0 hover:scale-110 transition-transform duration-700 cursor-pointer flex items-center justify-center group">
                 <div className="absolute inset-0 bg-[#18b3ab] rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-all duration-700"></div>
                 {imgSwitch ? (
                   <img
-                    alt="Happy family representing health and wellness"
-                    className="relative block max-w-none size-full object-cover rounded-full shadow-2xl group-hover:shadow-[0_0_50px_rgba(24,179,171,0.5)] transition-all duration-700"
                     src={imgSwitch}
+                    alt="Keluarga bahagia yang mewakili kesehatan dan kesejahteraan"
+                    title="Perilaku Hidup Sehat - Keluarga Sehat"
+                    className="relative block max-w-none size-full object-cover rounded-full shadow-2xl group-hover:shadow-[0_0_50px_rgba(24,179,171,0.5)] transition-all duration-700"
+                    loading="lazy"
                   />
                 ) : (
                   <div className="relative w-full h-full bg-[#18b3ab] rounded-full flex items-center justify-center shadow-2xl">
-                    <span className="text-white text-6xl">
-                      🏥
-                    </span>
+                    <span className="text-white text-6xl">Hospital</span>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Right Features - Staggered */}
-            <div className="w-[35%] ">
+            {/* Right Features */}
+            <div className="w-[35%]">
               {features.slice(3, 6).map((feature, index) => (
                 <div
                   key={index}
@@ -205,13 +178,14 @@ serta menjaga kebersihan dan kesehatan mental.
                   }}
                 >
                   <div className="relative">
-                    {/* Glow effect on hover */}
                     <div className="absolute inset-0 bg-[#18b3ab] rounded-[20px] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                     <div className="relative bg-[#18b3ab] rounded-[20px] w-[88px] h-[88px] flex-shrink-0 group-hover:bg-[#16a199] group-hover:scale-125 group-hover:rotate-[-12deg] transition-all duration-500 cursor-pointer flex items-center justify-center overflow-hidden shadow-lg group-hover:shadow-2xl">
                       <img
-                        alt="image/icon"
-                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[12deg]"
                         src={feature.icon}
+                        alt={feature.alt}
+                        title={feature.title}
+                        className="w-auto h-auto max-w-[60px] max-h-[60px] object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[12deg]"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -244,58 +218,28 @@ serta menjaga kebersihan dan kesehatan mental.
 
       <style>{`
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(-50px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(50px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.8);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
       `}</style>
     </div>

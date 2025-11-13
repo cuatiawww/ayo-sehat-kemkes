@@ -65,6 +65,13 @@ export default function HomePage() {
           content="Informasi kesehatan terlengkap dan terpercaya untuk semua usia: bayi, anak, remaja, dewasa, lansia. Cegah penyakit, deteksi dini, dan pengobatan tepat."
         />
         <meta name="robots" content="index, follow" />
+        <meta http-equiv="X-Robots-Tag" content="index, follow" />
+        <meta
+  name="keywords"
+  content="kesehatan keluarga, kesehatan anak, kesehatan lansia, pola hidup sehat, ayo sehat"
+/>
+<meta name="publisher" content="Kementerian Kesehatan" />
+
         <meta property="og:title" content="Ayo Sehat - Kesehatan Keluarga Indonesia" />
         <meta
           property="og:description"

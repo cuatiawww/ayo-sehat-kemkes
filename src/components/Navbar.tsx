@@ -163,9 +163,7 @@ export default function Navbar({
         <div className="relative py-2 lg:py-3">
           {/* Desktop Layout */}
           <div className="hidden lg:flex items-center gap-4 xl:gap-6">
-            {/* Logo - H1 hanya di homepage */}
             {isHomePage ? (
-              <h1 className="m-0 shrink-0">
                 <a
                   href="/"
                   onClick={(e) => {
@@ -184,7 +182,6 @@ export default function Navbar({
                     loading="eager"
                   />
                 </a>
-              </h1>
             ) : (
               <div className="shrink-0">
                 <a
@@ -257,7 +254,6 @@ export default function Navbar({
           {/* Tablet Layout */}
           <div className="hidden md:flex lg:hidden items-center justify-between gap-3">
             {isHomePage ? (
-              <h1 className="m-0">
                 <a
                   href="/"
                   onClick={(e) => {
@@ -269,7 +265,7 @@ export default function Navbar({
                 >
                   <img src={imgLogo} alt="Kemenkes Ayo Sehat - Beranda" className="w-full h-auto object-contain" />
                 </a>
-              </h1>
+
             ) : (
               <a
                 href="/"
@@ -298,7 +294,7 @@ export default function Navbar({
           {/* Mobile Layout */}
           <div className="flex md:hidden items-center justify-between">
             {isHomePage ? (
-              <h1 className="m-0">
+
                 <a
                   href="/"
                   onClick={(e) => {
@@ -310,7 +306,7 @@ export default function Navbar({
                 >
                   <img src={imgLogo} alt="Kemenkes Ayo Sehat - Beranda" className="w-full h-auto object-contain" />
                 </a>
-              </h1>
+
             ) : (
               <a
                 href="/"

@@ -16,9 +16,11 @@ export default function HeroSection() {
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <img
-              alt="image/icon"
-              className="absolute h-[108.92%] left-[-1.09%] max-w-none top-[0.24%] w-[113.69%] object-cover"
               src={imgHeroBackground}
+              alt="Ilustrasi keluarga sehat bersama Kementerian Kesehatan RI - Ayo Sehat"
+              title="Hero Banner Ayo Sehat - Portal Resmi Kemenkes RI"
+              className="absolute h-[108.92%] left-[-1.09%] max-w-none top-[0.24%] w-[113.69%] object-cover"
+              loading="eager" // Hero image = prioritas
             />
           </div>
         </motion.div>
@@ -41,7 +43,7 @@ export default function HeroSection() {
             </h1>
           </motion.div>
 
-          {/* Subheading  */}
+          {/* Subheading */}
           <motion.div
             className="absolute left-[5%] sm:left-[8%] lg:left-[127px] top-[28%] sm:top-[33%] lg:top-[324px] lg:translate-y-[-50%] w-[90%] sm:w-[450px] lg:w-[510px]"
             initial={{ x: -100, opacity: 0 }}
@@ -53,11 +55,11 @@ export default function HeroSection() {
             }}
           >
             <h2 className="not-italic text-[22px] sm:text-[36px] lg:text-[38px] leading-[1.2] sm:leading-[1.2] lg:leading-[40px] text-white">
-             Kementerian Kesehatan Republik Indonesia
+              Kementerian Kesehatan Republik Indonesia
             </h2>
           </motion.div>
 
-          {/* Description  */}
+          {/* Description */}
           <motion.div
             className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[45%] sm:top-[50%] lg:top-[429px] lg:translate-y-[-50%] w-[90%] sm:w-[550px] lg:w-[640px]"
             initial={{ y: 30, opacity: 0 }}
@@ -69,13 +71,13 @@ export default function HeroSection() {
             }}
           >
             <p className="not-italic text-[13px] sm:text-[16px] lg:text-[20px] leading-[1.4] sm:leading-[1.5] lg:leading-[30px] text-white">
-             Ayo Sehat Kemenkes RI merupakan platform/saluran sumber informasi,
-edukasi kesehatan, serta gaya hidup sehat resmi dari Kementerian
-Kesehatan sehingga dapat dipertanggungjawabkan dan informasi yang diberikan sejalan dengan program pemerintah.
+              Ayo Sehat Kemenkes RI merupakan platform/saluran sumber informasi,
+              edukasi kesehatan, serta gaya hidup sehat resmi dari Kementerian
+              Kesehatan sehingga dapat dipertanggungjawabkan dan informasi yang diberikan sejalan dengan program pemerintah.
             </p>
           </motion.div>
 
-          {/* Button  */}
+          {/* Button */}
           <motion.div
             className="absolute left-[5%] sm:left-[8%] lg:left-[131px] top-[72%] sm:top-[72%] lg:top-[620px]"
             initial={{ scale: 0.8, opacity: 0 }}
