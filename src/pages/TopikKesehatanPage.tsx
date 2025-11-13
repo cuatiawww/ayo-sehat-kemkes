@@ -92,12 +92,12 @@ export default function TopikKesehatanPage({
   // === SEO DATA ===
   const pageTitle = "Daftar Topik Kesehatan A‑Z – Ayo Sehat Kemenkes";
   const pageDescription = "Jelajahi ratusan topik kesehatan dari A sampai Z. Temukan info pencegahan, pengobatan, dan gaya hidup sehat dari Kemenkes.";
-  const canonicalUrl = "https://ayo-sehat.vercel.app/topik-kesehatan";
-  const ogImageUrl = "https://ayo-sehat.vercel.app/og-topik-kesehatan.jpg";
+  const canonicalUrl = "https://staging-ayo-sehat.vercel.app/page/topik-kesehatan";
+  const ogImageUrl = "https://staging-ayo-sehat.vercel.app/page/og-topik-kesehatan.jpg";
   const currentUrl = typeof window !== "undefined" ? window.location.href : canonicalUrl;
 
   // === JSON-LD ItemList ===
-  const baseUrl = "https://ayo-sehat.vercel.app/topik-kesehatan";
+  const baseUrl = "https://staging-ayo-sehat.vercel.app/page/";
 
   const itemList = Object.entries(healthTopicsData).flatMap(([, topics]) =>
     topics.map((topic, index) => {
