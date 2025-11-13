@@ -256,18 +256,45 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
     document.title = "Artikel Ayo Sehat - Kumpulan Informasi Kesehatan Lengkap";
   }, []);
 
+  const ogImageUrl = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200";
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebPage",
+    "@type": "CollectionPage",
     name: "Artikel Ayo Sehat",
     description: "Kumpulan artikel kesehatan terlengkap dari bayi hingga lansia. Temukan tips cegah, deteksi, dan pengobatan berdasarkan tahap kehidupan.",
     url: "https://staging-ayo-sehat.vercel.app/page/artikel",
+    image: {
+      "@type": "ImageObject",
+      url: ogImageUrl,
+      width: 1200,
+      height: 630,
+      caption: "Artikel Kesehatan Ayo Sehat - Kemenkes",
+      contentUrl: ogImageUrl,
+      inLanguage: "id-ID",
+    },
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Beranda", item: "https://staging-ayo-sehat.vercel.app/" },
         { "@type": "ListItem", position: 2, name: "Artikel", item: "https://staging-ayo-sehat.vercel.app/page/artikel" },
       ],
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: articles.length,
+      itemListElement: articles.map((article, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Article",
+          headline: article.title,
+          description: article.excerpt,
+          image: article.image,
+          datePublished: article.date.replace(/(\d+) (\w+) (\d+)/, "$3-$2-$1"),
+          author: { "@type": "Organization", name: "Kemenkes Ayo Sehat" },
+        },
+      })),
     },
   };
 
@@ -280,16 +307,29 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
           content="Temukan artikel kesehatan terbaru tentang pencegahan, deteksi, dan pengobatan sesuai siklus hidup: bayi, anak, remaja, dewasa, lansia."
         />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Artikel Ayo Sehat" />
+        <link rel="canonical" href="https://staging-ayo-sehat.vercel.app/page/artikel" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Artikel Ayo Sehat - Kemenkes" />
         <meta property="og:description" content="Pendekatan menjaga kesehatan sejak lahir hingga lanjut usia." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://staging-ayo-sehat.vercel.app/page/artikel" />
-        <meta
-          property="og:image"
-          content="https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
-        />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Dokter sedang bekerja di depan komputer - Artikel Ayo Sehat" />
+        <meta property="og:image:title" content="Artikel Kesehatan Ayo Sehat" />
+        <meta property="og:locale" content="id_ID" />
+
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://staging-ayo-sehat.vercel.app/page/artikel" />
+        <meta name="twitter:title" content="Artikel Ayo Sehat - Kemenkes" />
+        <meta name="twitter:description" content="Pendekatan menjaga kesehatan sejak lahir hingga lanjut usia." />
+        <meta name="twitter:image" content={ogImageUrl} />
+        <meta name="twitter:image:alt" content="Artikel Kesehatan Ayo Sehat" />
+        <meta name="twitter:image:title" content="Artikel Kesehatan Ayo Sehat" />
+
+        {/* Structured Data */}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
@@ -317,9 +357,12 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
           >
             <div className="relative w-[480px] xl:w-[580px] aspect-[4/3] rounded-[20px] overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+                src={ogImageUrl}
                 alt="Dokter sedang bekerja di depan komputer - Artikel Ayo Sehat"
+                title="Ilustrasi dokter memeriksa data kesehatan - Ayo Sehat Kemenkes"
                 className="w-full h-full object-cover"
+                loading="eager"
+                fetchPriority="high"
               />
             </div>
           </motion.div>
@@ -544,7 +587,13 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
                       {/* Mobile Layout */}
                       <div className="flex flex-col lg:hidden">
                         <div className="w-full h-[200px] sm:h-[240px]">
-                          <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                          <img
+                            src={article.image}
+                            alt={article.title}
+                            title={`${article.title} - Ayo Sehat Kemenkes`}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
                         </div>
                         <div className="p-4 sm:p-5 flex flex-col gap-2.5 sm:gap-3">
                           <div className="flex gap-2.5 items-center flex-wrap">
@@ -569,7 +618,13 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
                       {/* Desktop Layout */}
                       <div className="hidden lg:block relative h-[192px]">
                         <div className="absolute left-0 top-0 h-[192px] w-[349px] rounded-l-[15px] overflow-hidden">
-                          <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                          <img
+                            src={article.image}
+                            alt={article.title}
+                            title={`${article.title} - Ayo Sehat Kemenkes`}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
                         </div>
                         <div className="absolute left-[383px] top-[22px] right-[20px] flex flex-col gap-[8px]">
                           <div className="flex gap-[11px] items-center">

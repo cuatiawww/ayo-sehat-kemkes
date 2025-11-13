@@ -195,7 +195,7 @@ export default function SearchResultsPage({
   const totalResults = articles.length + downloadItems.length + topicItems.length + campaignItems.length;
 
   // === SEO & METADATA ===
-  const baseUrl = "https://staging-ayo-sehat.vercel.app/";
+  const baseUrl = "https://staging-ayo-sehat.vercel.app";
   const canonicalUrl = `${baseUrl}/search?q=${encodeURIComponent(searchQuery)}`;
   const pageTitle = searchQuery ? `Hasil Pencarian: "${searchQuery}" - Ayo Sehat Kemenkes` : "Pencarian - Ayo Sehat Kemenkes";
   const pageDescription = searchQuery
@@ -203,6 +203,7 @@ export default function SearchResultsPage({
     : "Cari informasi kesehatan terlengkap di Ayo Sehat Kemenkes.";
 
   const ogImage = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200";
+  const ogImageTitle = `Hasil Pencarian: "${searchQuery}" - Ayo Sehat Kemenkes`;
 
   // JSON-LD
   const jsonLd = {
@@ -213,12 +214,29 @@ export default function SearchResultsPage({
     url: canonicalUrl,
     query: searchQuery,
     numberOfItems: totalResults,
-    itemListElement: articles.slice(0, 3).map((a, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: a.title,
-      url: `${baseUrl}/artikel/${a.id}`,
-    })),
+    image: {
+      "@type": "ImageObject",
+      url: ogImage,
+      width: 1200,
+      height: 630,
+      caption: ogImageTitle,
+      contentUrl: ogImage,
+      inLanguage: "id-ID",
+    },
+    itemListElement: [
+      ...articles.slice(0, 3).map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: a.title,
+        url: `${baseUrl}/artikel/${a.id}`,
+      })),
+      ...downloadItems.slice(0, 1).map((d, i) => ({
+        "@type": "ListItem",
+        position: articles.length + i + 1,
+        name: d.title,
+        url: `${baseUrl}/download/${d.id}`,
+      })),
+    ],
   };
 
   return (
@@ -236,6 +254,10 @@ export default function SearchResultsPage({
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={ogImageTitle} />
+        <meta property="og:image:title" content={ogImageTitle} />
         <meta property="og:site_name" content="Ayo Sehat Kemenkes" />
         <meta property="og:locale" content="id_ID" />
 
@@ -244,6 +266,8 @@ export default function SearchResultsPage({
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content={ogImageTitle} />
+        <meta name="twitter:image:title" content={ogImageTitle} />
 
         {/* JSON-LD */}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
@@ -320,6 +344,7 @@ export default function SearchResultsPage({
                             <img
                               src={item.image}
                               alt={`Gambar artikel: ${item.title} - Panduan kesehatan ${item.stage} - Kemenkes RI`}
+                              title={`${item.title} - Artikel Kesehatan Ayo Sehat`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               loading="lazy"
                             />
@@ -403,6 +428,7 @@ export default function SearchResultsPage({
                             <img
                               src={item.image}
                               alt={`Gambar topik kesehatan: ${item.title} - Informasi lengkap dari Kemenkes RI`}
+                              title={`${item.title} - Topik Kesehatan Ayo Sehat`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               loading="lazy"
                             />
@@ -455,6 +481,7 @@ export default function SearchResultsPage({
                             <img
                               src={item.image}
                               alt={`Gambar kampanye: ${item.title} - Kegiatan kesehatan nasional Kemenkes RI`}
+                              title={`${item.title} - Kampanye Kesehatan Ayo Sehat`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               loading="lazy"
                             />
@@ -524,10 +551,13 @@ function ResultSection<T>({
       </div>
 
       <div className="mt-6 flex justify-end">
-        <button className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium group">
+        <a
+          href={`/search?q=${encodeURIComponent(title.split('"')[1])}`}
+          className="inline-flex items-center gap-2 text-[#18b3ab] hover:opacity-80 transition-opacity font-['Poppins'] text-[14px] font-medium group"
+        >
           Selengkapnya
           <CircleArrowRight size={20} className="text-[#18b3ab] group-hover:translate-x-1 transition-transform" />
-        </button>
+        </a>
       </div>
     </motion.section>
   );
