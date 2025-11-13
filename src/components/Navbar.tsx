@@ -21,6 +21,7 @@ function InfoCircleIcon() {
         alt="Ikon Informasi"
         title="Informasi tentang Ayo Sehat"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -34,6 +35,7 @@ function CategoryIcon() {
         alt="Ikon Kategori Topik"
         title="Jelajahi topik kesehatan"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -47,6 +49,7 @@ function UserIcon() {
         alt="Ikon Siklus Hidup"
         title="Informasi berdasarkan tahap kehidupan"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -60,6 +63,7 @@ function HeartIcon() {
         alt="Ikon Hidup Sehat"
         title="Tips gaya hidup sehat"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -73,6 +77,7 @@ function CalendarIcon() {
         alt="Ikon Kegiatan"
         title="Agenda dan acara kesehatan"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -86,6 +91,7 @@ function DownloadIcon() {
         alt="Ikon Unduh Materi"
         title="Unduh materi kesehatan"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -99,6 +105,7 @@ function ActivityIcon() {
         alt="Ikon Kampanye"
         title="Kampanye kesehatan nasional"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -112,6 +119,7 @@ function DocumentIcon() {
         alt="Ikon Kemitraan"
         title="Informasi kemitraan dan kerjasama"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </div>
   );
@@ -121,7 +129,7 @@ export default function Navbar({
   onNavigateHome,
   onNavigateSiklusHidup,
   onNavigateTopikKesehatan,
-  isHomePage = false, // prop untuk tahu homepage
+  isHomePage = false,
 }: {
   onNavigateHome: () => void;
   onNavigateSiklusHidup: () => void;
@@ -164,24 +172,26 @@ export default function Navbar({
           {/* Desktop Layout */}
           <div className="hidden lg:flex items-center gap-4 xl:gap-6">
             {isHomePage ? (
-                <a
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigateHome();
-                  }}
-                  className="block w-[150px] xl:w-[180px] h-auto cursor-pointer hover:opacity-80 transition-opacity"
-                  rel="home"
-                  itemProp="url"
-                >
-                  <img
-                    src={imgLogo}
-                    alt="Kemenkes Ayo Sehat - Beranda"
-                    className="w-full h-auto object-contain"
-                    itemProp="logo"
-                    loading="eager"
-                  />
-                </a>
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigateHome();
+                }}
+                className="block w-[150px] xl:w-[180px] h-auto cursor-pointer hover:opacity-80 transition-opacity"
+                rel="home"
+                itemProp="url"
+                aria-label="Beranda Kemenkes Ayo Sehat"
+              >
+                <img
+                  src={imgLogo}
+                  alt="Kemenkes Ayo Sehat - Beranda"
+                  title="Kemenkes Ayo Sehat - Platform Kesehatan Resmi"
+                  className="w-full h-auto object-contain"
+                  itemProp="logo"
+                  loading="eager"
+                />
+              </a>
             ) : (
               <div className="shrink-0">
                 <a
@@ -198,6 +208,7 @@ export default function Navbar({
                   <img
                     src={imgLogo}
                     alt="Kemenkes Ayo Sehat"
+                    title="Kemenkes Ayo Sehat - Kembali ke Beranda"
                     className="w-full h-auto object-contain"
                     itemProp="logo"
                     loading="eager"
@@ -206,8 +217,6 @@ export default function Navbar({
               </div>
             )}
 
-            {/* Menu Container - Mengisi sisa ruang di sebelah logo */}
-            {/* Menu Container - Mengisi sisa ruang di sebelah logo */}
             <div className="flex-1 flex justify-end gap-4 xl:gap-5 2xl:gap-6">
               {menuItems.map((item, index) => {
                 const isActive = activeMenu === index;
@@ -254,18 +263,24 @@ export default function Navbar({
           {/* Tablet Layout */}
           <div className="hidden md:flex lg:hidden items-center justify-between gap-3">
             {isHomePage ? (
-                <a
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigateHome();
-                  }}
-                  className="block w-[130px] h-auto cursor-pointer hover:opacity-80 transition-opacity"
-                  rel="home"
-                >
-                  <img src={imgLogo} alt="Kemenkes Ayo Sehat - Beranda" className="w-full h-auto object-contain" />
-                </a>
-
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigateHome();
+                }}
+                className="block w-[130px] h-auto cursor-pointer hover:opacity-80 transition-opacity"
+                rel="home"
+                aria-label="Beranda Kemenkes Ayo Sehat"
+              >
+                <img
+                  src={imgLogo}
+                  alt="Kemenkes Ayo Sehat - Beranda"
+                  title="Kemenkes Ayo Sehat - Platform Kesehatan Resmi"
+                  className="w-full h-auto object-contain"
+                  loading="eager"
+                />
+              </a>
             ) : (
               <a
                 href="/"
@@ -277,7 +292,13 @@ export default function Navbar({
                 rel="home"
                 aria-label="Kembali ke beranda"
               >
-                <img src={imgLogo} alt="Kemenkes Ayo Sehat" className="w-full h-auto object-contain" />
+                <img
+                  src={imgLogo}
+                  alt="Kemenkes Ayo Sehat"
+                  title="Kemenkes Ayo Sehat - Kembali ke Beranda"
+                  className="w-full h-auto object-contain"
+                  loading="eager"
+                />
               </a>
             )}
             <button
@@ -294,19 +315,24 @@ export default function Navbar({
           {/* Mobile Layout */}
           <div className="flex md:hidden items-center justify-between">
             {isHomePage ? (
-
-                <a
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigateHome();
-                  }}
-                  className="block w-[100px] h-auto cursor-pointer hover:opacity-80 transition-opacity"
-                  rel="home"
-                >
-                  <img src={imgLogo} alt="Kemenkes Ayo Sehat - Beranda" className="w-full h-auto object-contain" />
-                </a>
-
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigateHome();
+                }}
+                className="block w-[100px] h-auto cursor-pointer hover:opacity-80 transition-opacity"
+                rel="home"
+                aria-label="Beranda Kemenkes Ayo Sehat"
+              >
+                <img
+                  src={imgLogo}
+                  alt="Kemenkes Ayo Sehat - Beranda"
+                  title="Kemenkes Ayo Sehat - Platform Kesehatan Resmi"
+                  className="w-full h-auto object-contain"
+                  loading="eager"
+                />
+              </a>
             ) : (
               <a
                 href="/"
@@ -318,7 +344,13 @@ export default function Navbar({
                 rel="home"
                 aria-label="Kembali ke beranda"
               >
-                <img src={imgLogo} alt="Kemenkes Ayo Sehat" className="w-full h-auto object-contain" />
+                <img
+                  src={imgLogo}
+                  alt="Kemenkes Ayo Sehat"
+                  title="Kemenkes Ayo Sehat - Kembali ke Beranda"
+                  className="w-full h-auto object-contain"
+                  loading="eager"
+                />
               </a>
             )}
             <button

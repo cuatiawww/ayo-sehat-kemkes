@@ -45,7 +45,7 @@ export default function HomePage() {
     },
     publisher: {
       "@type": "Organization",
-      name: "Ayo Sehat",
+      name: "Kementerian Kesehatan Republik Indonesia",
       logo: {
         "@type": "ImageObject",
         url: "https://staging-ayo-sehat.vercel.app/logo.png",
