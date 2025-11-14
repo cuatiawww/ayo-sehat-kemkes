@@ -110,7 +110,7 @@ export default function SiklusHidupPage({
 
   // === SEO DATA ===
   const baseUrl = "https://staging-ayo-sehat.vercel.app";
-  const canonicalUrl = `${baseUrl}/siklus-hidup/${selectedStage}`;
+  const canonicalUrl = `${baseUrl}/siklus-hidup`;
   const pageTitle = `${currentStageData.name} (${currentStageData.age}) - Panduan Kesehatan | Ayo Sehat Kemenkes`;
   const pageDescription = `Informasi lengkap kesehatan untuk kelompok usia ${currentStageData.name}. Gizi, imunisasi, pencegahan penyakit, dan tips hidup sehat dari Kementerian Kesehatan RI.`;
   const ogImage = currentStageData.image;
