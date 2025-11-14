@@ -177,7 +177,7 @@ export default function SiklusHidupPage({
 
         {/* Hero Section */}
         <div className="relative">
-          <section className="relative bg-gradient-to-b from-white to-[#f8f9fa] pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+          <section className="relative bg-gradient-to-b bg-black pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute -top-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gray-100/40 blur-3xl" />
               <div className="absolute -top-40 right-0 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-gray-100/30 blur-3xl" />
@@ -208,46 +208,99 @@ export default function SiklusHidupPage({
                   const isSelected = stage.slug === selectedStage;
                   return (
                     <motion.div
-                      key={stage.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0, scale: isSelected ? 1.05 : 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="group cursor-pointer flex flex-col items-center"
-                      onClick={() => {
-                        setSelectedStage(stage.slug);
-                        setCurrentTopicIndex(0);
-                        setCurrentDiseaseIndex(0);
-                      }}
-                    >
-                      <div
-                        className={`relative w-full aspect-square transition-all duration-500 ${
-                          isSelected ? "shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20" : "z-10"
-                        } group-hover:-translate-y-2 group-hover:scale-105`}
-                      >
-                        <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] overflow-hidden bg-[#18b3ab]">
-                          <img
-                            src={stage.image}
-                            alt={stage.alt}
-                            width={stage.width}
-                            height={stage.height}
-                            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                        </div>
-                        <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] border-2 border-transparent group-hover:border-[#d5dd23] transition-all duration-500" />
-                        <div
-                          className={`absolute bottom-[-10px] sm:bottom-[-15px] lg:bottom-[-20px] xl:bottom-[-25px] left-1/2 -translate-x-1/2 bg-[#d5dd23] rounded-[8px] sm:rounded-[12px] lg:rounded-[16px] xl:rounded-[20px] h-[40px] sm:h-[55px] lg:h-[70px] xl:h-[84px] w-full max-w-[90%] sm:max-w-[85%] lg:max-w-[80%] xl:max-w-[222px] flex flex-col items-center justify-center transition-all duration-500 group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-1 group-hover:scale-105 z-30 px-1 sm:px-2`}
-                        >
-                          <p className="font-semibold text-[9px] sm:text-[12px] lg:text-[16px] xl:text-[23px] leading-tight text-[#383838] text-center transition-all duration-300 group-hover:scale-110">
-                            {stage.name}
-                          </p>
-                          <p className="text-[7px] sm:text-[10px] lg:text-[12px] xl:text-[16px] leading-tight text-[#302e2e] text-center transition-all duration-300 group-hover:text-[#1a1a1a]">
-                            {stage.age}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
+  key={stage.id}
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ 
+    opacity: 1, 
+    y: 0, 
+    scale: isSelected ? 1.05 : 1 
+  }}
+  transition={{ duration: 0.5, delay: index * 0.1 }}
+  className="group cursor-pointer flex flex-col items-center outline-none focus:outline-none"
+  onClick={() => {
+    setSelectedStage(stage.slug);
+    setCurrentTopicIndex(0);
+    setCurrentDiseaseIndex(0);
+  }}
+  tabIndex={0}
+  role="button"
+  onKeyDown={(e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setSelectedStage(stage.slug);
+      setCurrentTopicIndex(0);
+      setCurrentDiseaseIndex(0);
+    }
+  }}
+>
+  <div
+    className={`
+      relative w-full aspect-square transition-all duration-500
+      ${isSelected 
+        ? "shadow-[0_10px_40px_rgba(24,179,171,0.5)] z-20 -translate-y-2 scale-105" 
+        : "z-10"
+      }
+      ${!isSelected ? "group-hover:-translate-y-2 group-hover:scale-105" : ""}
+    `}
+  >
+    {/* Background Image Container */}
+    <div className="absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] overflow-hidden bg-[#18b3ab]">
+      <img
+        src={stage.image}
+        alt={stage.alt}
+        width={stage.width}
+        height={stage.height}
+        className={`
+          absolute inset-0 w-full h-full object-cover transition-all duration-700
+          ${isSelected ? "scale-105 brightness-110" : ""}
+          ${!isSelected ? "group-hover:scale-105 group-hover:brightness-110" : ""}
+        `}
+        loading="lazy"
+      />
+      <div className={`
+        absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent 
+        transition-all duration-500
+        ${isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
+      `} />
+    </div>
+
+    {/* Border Kuning */}
+    <div className={`
+      absolute inset-0 rounded-[10px] sm:rounded-[15px] lg:rounded-[20px] xl:rounded-[25px] 
+      border-[3px] transition-all duration-500 pointer-events-none
+      ${isSelected ? "border-[#d5dd23]" : "border-transparent group-hover:border-[#d5dd23]"}
+    `} />
+
+    {/* Label Bawah */}
+    <div
+      className={`
+        absolute bottom-[-10px] sm:bottom-[-15px] lg:bottom-[-20px] xl:bottom-[-25px] 
+        left-1/2 -translate-x-1/2 bg-[#d5dd23] rounded-[8px] sm:rounded-[12px] lg:rounded-[16px] xl:rounded-[20px] 
+        h-[40px] sm:h-[55px] lg:h-[70px] xl:h-[84px] w-full max-w-[90%] sm:max-w-[85%] lg:max-w-[80%] xl:max-w-[222px] 
+        flex flex-col items-center justify-center transition-all duration-500 z-30 px-1 sm:px-2
+        ${isSelected 
+          ? "bg-[#c5cd13] shadow-[0_10px_30px_rgba(213,221,35,0.4)] -translate-y-1 scale-105" 
+          : "group-hover:bg-[#c5cd13] group-hover:shadow-[0_10px_30px_rgba(213,221,35,0.4)] group-hover:-translate-y-1 group-hover:scale-105"
+        }
+      `}
+    >
+      <p className={`
+        font-semibold text-[9px] sm:text-[12px] lg:text-[16px] xl:text-[23px] leading-tight 
+        text-[#383838] text-center transition-all duration-300
+        ${isSelected ? "scale-110" : "group-hover:scale-110"}
+      `}>
+        {stage.name}
+      </p>
+      <p className={`
+        text-[7px] sm:text-[10px] lg:text-[12px] xl:text-[16px] leading-tight 
+        text-[#302e2e] text-center transition-all duration-300
+        ${isSelected ? "text-[#1a1a1a]" : "group-hover:text-[#1a1a1a]"}
+      `}>
+        {stage.age}
+      </p>
+    </div>
+  </div>
+</motion.div>
                   );
                 })}
               </div>
