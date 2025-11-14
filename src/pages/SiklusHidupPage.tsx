@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Share2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Share2, Facebook, Twitter, Link2, ChevronLeft, ChevronRight, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
 import CustomBreadcrumb from "../components/CustomBreadcrump";
 import RightSidebar from "../components/RightSidebar";
+
 
 // Import data dari JSON
 import data from "../data/siklushidupData.json";
@@ -344,44 +345,84 @@ export default function SiklusHidupPage({
                     </div>
                   </div>
 
-                  {/* Tags + Share */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
-                    <div className="flex flex-wrap gap-2">
-                      {["Penyakit Pernapasan", "Kardiovaskular", "Pencernaan", "Neoplasma"].map((tag, i) => (
-                        <button
-                          key={i}
-                          className={`px-3 sm:px-4 py-1 sm:py-1.5 text-[11px] sm:text-[13px] font-medium rounded-full transition-colors ${
-                            i === 1
-                              ? "bg-[#18b3ab] text-white hover:bg-[#16a199]"
-                              : "border border-[#18b3ab] text-[#18b3ab] hover:bg-[#18b3ab] hover:text-white"
-                          }`}
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
-                    <div className="flex gap-2">
-                      <button aria-label="Bagikan" className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors">
-                        <Share2 size={16} />
-                      </button>
-                      {["Facebook", "Twitter", "WhatsApp", "Link"].map((platform, i) => (
-                        <button
-                          key={i}
-                          aria-label={platform}
-                          className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors"
-                        >
-                          {platform === "Link" ? (
-                            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                            </svg>
-                          ) : (
-                            <div className="w-4 h-4 bg-white/30 rounded" />
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                 {/* Tags + Share */}
+<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
+  {/* Tags */}
+  <div className="flex flex-wrap gap-2">
+    {["Penyakit Pernapasan", "Kardiovaskular", "Pencernaan", "Neoplasma"].map((tag, i) => (
+      <button
+        key={i}
+        className={`px-3 sm:px-4 py-1 sm:py-1.5 text-[11px] sm:text-[13px] font-medium rounded-full transition-colors ${
+          i === 1
+            ? "bg-[#18b3ab] text-white hover:bg-[#16a199]"
+            : "border border-[#18b3ab] text-[#18b3ab] hover:bg-[#18b3ab] hover:text-white"
+        }`}
+      >
+        {tag}
+      </button>
+    ))}
+  </div>
+
+  {/* Share Buttons */}
+  <div className="flex gap-2">
+    {/* Share Utama */}
+    <button
+      aria-label="Bagikan"
+      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors"
+    >
+      <Share2 size={16} />
+    </button>
+
+    {/* Facebook */}
+    <button
+      aria-label="Bagikan ke Facebook"
+      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors"
+      onClick={() => {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, "_blank");
+      }}
+    >
+      <Facebook size={16} />
+    </button>
+
+    {/* Twitter */}
+    <button
+      aria-label="Bagikan ke Twitter"
+      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors"
+      onClick={() => {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, "_blank");
+      }}
+    >
+      <Twitter size={16} />
+    </button>
+
+    {/* WhatsApp */}
+    <button
+      aria-label="Bagikan ke WhatsApp"
+      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors"
+      onClick={() => {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://wa.me/?text=${url}`, "_blank");
+      }}
+    >
+      <Instagram size={16} />
+    </button>
+
+    {/* Copy Link */}
+    <button
+      aria-label="Salin Link"
+      className="w-9 h-9 rounded bg-[#18b3ab] text-white flex items-center justify-center hover:bg-[#16a199] transition-colors"
+      onClick={() => {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link disalin!");
+      }}
+    >
+      <Link2 size={16} />
+    </button>
+  </div>
+</div>
 
                   {/* Article Content */}
                   <div className="space-y-4 text-justify">

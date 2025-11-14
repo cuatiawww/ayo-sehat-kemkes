@@ -154,14 +154,12 @@ export default function RightSidebar({
   const campaigns = customCampaigns || defaultCampaigns;
   const publications = customPublications || defaultPublications;
 
-  // === FIXED: No return value, no unused expressions ===
   const nextSlide = (
     setter: React.Dispatch<React.SetStateAction<number>>,
     current: number,
     total: number
   ) => {
     setter((current + 1) % total);
-    // Tidak return apa-apa → no unused
   };
 
   const prevSlide = (
@@ -170,7 +168,6 @@ export default function RightSidebar({
     total: number
   ) => {
     setter((current - 1 + total) % total);
-    // Tidak return apa-apa → no unused
   };
 
   const handleCampaignDetail = () => {
@@ -185,7 +182,6 @@ export default function RightSidebar({
     onRelatedArticlesClick?.() || console.log("Navigate to related articles");
   };
 
-  // === HELPER: Fallback untuk alt, width, height jika custom data tidak punya ===
 
   return (
     <aside className={`space-y-6 lg:space-y-8 ${className}`}>
@@ -206,7 +202,7 @@ export default function RightSidebar({
         </motion.div>
       )}
 
-      {/* ARTIKEL TERKAIT (FIXED: Tambah width/height) */}
+      {/* ARTIKEL TERKAIT */}
       {showRelatedArticles && relatedArticles.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -295,7 +291,7 @@ export default function RightSidebar({
             </button>
           </div>
 
-          {/* FIXED: onClick tanpa (), no unused */}
+          {/*onClick*/}
           <SliderCard
             items={campaigns}
             currentIndex={currentCampaignIndex}
@@ -333,8 +329,6 @@ export default function RightSidebar({
               </svg>
             </button>
           </div>
-
-          {/* FIXED: onClick tanpa (), no unused */}
           <SliderCard
             items={publications}
             currentIndex={currentPublicationIndex}
@@ -348,7 +342,7 @@ export default function RightSidebar({
   );
 }
 
-// === SLIDER CARD (FIXED: Union type, fallback props, no unused) ===
+// === SLIDER CARD
 function SliderCard({ items, currentIndex, setCurrentIndex, nextSlide, prevSlide }: SliderCardProps) {
   return (
     <div className="relative group bg-white rounded-[12px] sm:rounded-[15px] border border-[#d2d2d2] overflow-hidden h-[300px] sm:h-[320px] lg:h-[338px]">
@@ -394,8 +388,6 @@ function SliderCard({ items, currentIndex, setCurrentIndex, nextSlide, prevSlide
           })}
         </div>
       </div>
-
-      {/* FIXED: onClick tanpa () */}
       <button
         onClick={prevSlide}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-1.5 sm:p-2 shadow-lg transition-all z-10 sm:opacity-0 sm:group-hover:opacity-100"

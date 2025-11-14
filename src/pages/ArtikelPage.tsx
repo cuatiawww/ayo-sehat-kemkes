@@ -336,53 +336,61 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
       <div className="min-h-screen bg-white">
         <CustomBreadcrumb onNavigateHome={onNavigateHome} currentPage="Artikel" />
 
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-[#18b3ab] to-[#15a098] py-12 sm:py-16 lg:py-20 pb-32 sm:pb-40 lg:pb-48 overflow-visible">
+        {/* HERO - RESPONSIVE */}
+        <section className="relative bg-gradient-to-b from-[#18b3ab] to-[#15a098] py-10 sm:py-14 lg:py-20 overflow-hidden">
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-[600px]">
-              <h1 className="font-['Poppins'] font-bold text-[36px] sm:text-[42px] lg:text-[48px] xl:text-[52px] leading-[1.2] text-white mb-4 sm:mb-5">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-full sm:max-w-[600px]"
+            >
+              <h1 className="font-bold text-[28px] xs:text-[32px] sm:text-[38px] lg:text-[48px] leading-tight text-white mb-3 sm:mb-4">
                 Artikel Ayo Sehat
               </h1>
-              <p className="font-['Poppins'] font-normal text-[15px] sm:text-[16px] lg:text-[17px] xl:text-[18px] leading-[1.6] text-white/90">
+              <p className="text-[14px] xs:text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed text-white/90">
                 Pendekatan menjaga kesehatan sejak lahir hingga lanjut usia, dengan perhatian khusus sesuai kebutuhan di setiap tahap usia.
               </p>
             </motion.div>
           </div>
 
+          {/* GAMBAR HERO HANYA MUNcul DI DESKTOP */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="absolute right-[5%] lg:right-[8%] bottom-[-80px] sm:bottom-[-100px] lg:bottom-[-120px] hidden lg:block z-10"
+            className="absolute right-0 bottom-[-60px] sm:bottom-[-80px] lg:bottom-[-120px] hidden lg:block z-10"
           >
-            <div className="relative w-[480px] xl:w-[580px] aspect-[4/3] rounded-[20px] overflow-hidden shadow-2xl border-4 border-white">
+            <div className="w-[300px] sm:w-[400px] lg:w-[480px] xl:w-[580px] aspect-[4/3] rounded-[16px] overflow-hidden shadow-2xl border-4 border-white">
               <img
                 src={ogImageUrl}
-                alt="Dokter sedang bekerja di depan komputer - Artikel Ayo Sehat"
-                title="Ilustrasi dokter memeriksa data kesehatan - Ayo Sehat Kemenkes"
+                alt="Dokter sedang bekerja"
                 className="w-full h-full object-cover"
                 loading="eager"
-                fetchPriority="high"
               />
             </div>
           </motion.div>
         </section>
 
-        {/* Topik Populer */}
-        <section className="relative bg-white pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-10 lg:pb-12">
+        {/* TOPIK POPULER - 1 KOLOM DI MOBILE */}
+        <section className="bg-white py-10 sm:py-12 lg:py-16">
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="max-w-[900px]">
-              <h2 className="font-['Poppins'] font-semibold text-[28px] sm:text-[32px] lg:text-[36px] leading-[1.3] text-neutral-800 mb-6 sm:mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <h2 className="font-semibold text-[24px] xs:text-[26px] sm:text-[30px] lg:text-[36px] text-neutral-800 mb-5 sm:mb-6">
                 Topik yang Banyak Dicari
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-8 lg:gap-x-12 gap-y-3 sm:gap-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
                 {popularTopics.map((topic, index) => (
                   <motion.button
                     key={topic.id}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-                    className="text-left font-['Poppins'] text-[13px] sm:text-[14px] lg:text-[15px] text-[#18b3ab] bg-white border border-[#18b3ab]/20 hover:border-[#18b3ab] hover:bg-[#18b3ab]/5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
+                    className="text-left text-[13px] xs:text-[14px] sm:text-[15px] text-[#18b3ab] bg-white border border-[#18b3ab]/20 hover:border-[#18b3ab] hover:bg-[#18b3ab]/5 px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-sm"
                   >
                     # {topic.text}
                   </motion.button>
@@ -392,296 +400,158 @@ export default function ArtikelPage({ onNavigateHome }: ArtikelPageProps) {
           </div>
         </section>
 
-        {/* Main Content */}
-        <section className="py-10 sm:py-12 lg:py-16 bg-white border-t border-gray-100">
+        {/* MAIN CONTENT */}
+        <section className="py-8 sm:py-10 lg:py-12 bg-white border-t border-gray-100">
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px] gap-6 sm:gap-8 lg:gap-12">
-              {/* ===== KIRI: ARTIKEL ===== */}
-              <div className="space-y-6 sm:space-y-8">
-                {/* Filter Tabs & Dropdowns */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-gray-200">
-                  {/* Tabs */}
-                  <div className="flex gap-[8px] items-start flex-wrap">
-                    <button
-                      onClick={() => setActiveTab("Semua")}
-                      className={`flex gap-[8px] items-center justify-center px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
-                        activeTab === "Semua"
-                          ? "bg-[#18b3ab] text-white"
-                          : "bg-white border border-[#d9d9d9] hover:border-[#18b3ab]/50"
-                      }`}
-                    >
-                      <div className="relative shrink-0 size-[17px]">
-                        <svg className="block size-full" fill="none" viewBox="0 0 13 15">
-                          <path d="M8.97563 10.0438H3.86147" stroke={activeTab === "Semua" ? "white" : "#18b3ab"} strokeLinecap="round" strokeLinejoin="round" />
-                          <path d="M8.97563 7.07836H3.86147" stroke={activeTab === "Semua" ? "white" : "#18b3ab"} strokeLinecap="round" strokeLinejoin="round" />
-                          <path d="M5.813 4.1198H3.86154" stroke={activeTab === "Semua" ? "white" : "#18b3ab"} strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </div>
-                    </button>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px] gap-6 lg:gap-10">
 
-                    <button
-                      onClick={() => setActiveTab("Cegah")}
-                      className={`px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
-                        activeTab === "Cegah" ? "bg-[#18b3ab] text-white" : "bg-white border border-[#d9d9d9] text-neutral-600 hover:border-[#18b3ab]/50"
-                      }`}
-                    >
-                      <p className="font-['Poppins'] font-semibold text-[14px] leading-normal text-center w-[71px]">Cegah</p>
-                    </button>
+              {/* KIRI: ARTIKEL */}
+              <div className="space-y-6">
 
-                    <button
-                      onClick={() => setActiveTab("Deteksi")}
-                      className={`px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
-                        activeTab === "Deteksi" ? "bg-[#18b3ab] text-white" : "bg-white border border-[#d9d9d9] text-neutral-600 hover:border-[#18b3ab]/50"
-                      }`}
-                    >
-                      <p className="font-['Poppins'] font-semibold text-[14px] leading-normal text-center w-[80px]">Deteksi</p>
-                    </button>
-
-                    <button
-                      onClick={() => setActiveTab("Pengobatan")}
-                      className={`px-[12px] py-[8px] h-[41px] rounded-tl-[7px] rounded-tr-[7px] transition-all duration-200 ${
-                        activeTab === "Pengobatan" ? "bg-[#18b3ab] text-white" : "bg-white border border-[#d9d9d9] text-neutral-600 hover:border-[#18b3ab]/50"
-                      }`}
-                    >
-                      <p className="font-['Poppins'] font-semibold text-[14px] leading-normal text-center w-[120px]">Pengobatan</p>
-                    </button>
+                {/* FILTER TABS & DROPDOWNS */}
+                <div className="flex flex-col gap-4 pb-5 border-b border-gray-200">
+                  {/* TABS */}
+                  <div className="flex gap-2 flex-wrap">
+                    {["Semua", "Cegah", "Deteksi", "Pengobatan"].map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`flex items-center gap-2 px-3 xs:px-4 py-2.5 rounded-lg text-[13px] xs:text-[14px] font-medium transition-all ${
+                          activeTab === tab
+                            ? "bg-[#18b3ab] text-white shadow-sm"
+                            : "bg-white border border-gray-300 text-gray-700 hover:border-[#18b3ab]/50"
+                        }`}
+                      >
+                        {tab === "Semua" && (
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 13 15">
+                            <path d="M8.97563 10.0438H3.86147" stroke="currentColor" strokeLinecap="round" />
+                            <path d="M8.97563 7.07836H3.86147" stroke="currentColor" strokeLinecap="round" />
+                            <path d="M5.813 4.1198H3.86154" stroke="currentColor" strokeLinecap="round" />
+                          </svg>
+                        )}
+                        {tab}
+                      </button>
+                    ))}
                   </div>
 
-                  {/* Dropdowns */}
-                  <div className="flex gap-[10px] items-center flex-wrap">
-                    {/* Lifecycle */}
-                    <div className="relative">
-                      <div
-                        className="relative rounded-[4px] shrink-0 cursor-pointer hover:border-[#18b3ab]/50 transition-colors"
-                        onClick={() => {
-                          setShowLifecycleDropdown(!showLifecycleDropdown);
-                          setShowTopicDropdown(false);
-                          setShowSortDropdown(false);
-                        }}
-                      >
-                        <div className="box-border flex gap-[10px] items-center px-[8px] py-0 relative rounded-[inherit]">
-                          <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#666666] whitespace-pre">{selectedLifecycle}</p>
-                          <div className="relative shrink-0 size-[24px]">
-                            <svg className="block size-full" fill="none" viewBox="0 0 24 24">
-                              <path d="M7 10L12 15L17 10H7Z" fill="#18B3AB" />
-                            </svg>
+                  {/* DROPDOWNS */}
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { label: selectedLifecycle, options: lifecycleStages, state: showLifecycleDropdown, setState: setShowLifecycleDropdown, setValue: setSelectedLifecycle },
+                      { label: selectedTopic, options: ["Topik Kesehatan", ...popularTopics.map(t => t.text)], state: showTopicDropdown, setState: setShowTopicDropdown, setValue: setSelectedTopic },
+                      { label: selectedSort, options: sortOptions, state: showSortDropdown, setState: setShowSortDropdown, setValue: setSelectedSort },
+                    ].map((dropdown, i) => (
+                      <div key={i} className="relative">
+                        <button
+                          onClick={() => {
+                            dropdown.setState(!dropdown.state);
+                            const others = [setShowLifecycleDropdown, setShowTopicDropdown, setShowSortDropdown];
+                            others.forEach((s, idx) => idx !== i && s(false));
+                          }}
+                          className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg text-[12px] xs:text-[13px] text-gray-600 hover:border-[#18b3ab] transition-all"
+                        >
+                          <span className="truncate max-w-[100px] xs:max-w-[120px]">{dropdown.label}</span>
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24">
+                            <path d="M7 10L12 15L17 10H7Z" fill="#18B3AB" />
+                          </svg>
+                        </button>
+                        {dropdown.state && (
+                          <div className="absolute top-full left-0 mt-1 w-full min-w-[160px] bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                            {dropdown.options.map((opt) => (
+                              <button
+                                key={opt}
+                                onClick={() => { dropdown.setValue(opt); dropdown.setState(false); }}
+                                className="w-full text-left px-3 py-2 text-[12px] text-gray-700 hover:bg-[#18b3ab]/5 hover:text-[#18b3ab]"
+                              >
+                                {opt}
+                              </button>
+                            ))}
                           </div>
-                        </div>
-                        <div className="absolute border border-[#cccccc] inset-0 pointer-events-none rounded-[4px]" />
+                        )}
                       </div>
-                      {showLifecycleDropdown && (
-                        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-[4px] shadow-lg z-50 min-w-[160px]">
-                          {lifecycleStages.map((stage) => (
-                            <button
-                              key={stage}
-                              onClick={() => {
-                                setSelectedLifecycle(stage);
-                                setShowLifecycleDropdown(false);
-                              }}
-                              className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab]"
-                            >
-                              {stage}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Topic */}
-                    <div className="relative">
-                      <div
-                        className="relative rounded-[4px] shrink-0 cursor-pointer hover:border-[#18b3ab]/50 transition-colors"
-                        onClick={() => {
-                          setShowTopicDropdown(!showTopicDropdown);
-                          setShowLifecycleDropdown(false);
-                          setShowSortDropdown(false);
-                        }}
-                      >
-                        <div className="box-border flex gap-[10px] items-center px-[8px] py-0 relative rounded-[inherit]">
-                          <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#666666] whitespace-pre">{selectedTopic}</p>
-                          <div className="relative shrink-0 size-[24px]">
-                            <svg className="block size-full" fill="none" viewBox="0 0 24 24">
-                              <path d="M7 10L12 15L17 10H7Z" fill="#18B3AB" />
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="absolute border border-[#cccccc] inset-0 pointer-events-none rounded-[4px]" />
-                      </div>
-                      {showTopicDropdown && (
-                        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-[4px] shadow-lg z-50 min-w-[180px]">
-                          <button
-                            onClick={() => {
-                              setSelectedTopic("Topik Kesehatan");
-                              setShowTopicDropdown(false);
-                            }}
-                            className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab] border-b border-gray-100"
-                          >
-                            Topik Kesehatan
-                          </button>
-                          {popularTopics.map((topic) => (
-                            <button
-                              key={topic.id}
-                              onClick={() => {
-                                setSelectedTopic(topic.text);
-                                setShowTopicDropdown(false);
-                              }}
-                              className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab] capitalize"
-                            >
-                              {topic.text}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Sort */}
-                    <div className="relative">
-                      <div
-                        className="relative rounded-[4px] shrink-0 cursor-pointer hover:border-[#18b3ab]/50 transition-colors"
-                        onClick={() => {
-                          setShowSortDropdown(!showSortDropdown);
-                          setShowLifecycleDropdown(false);
-                          setShowTopicDropdown(false);
-                        }}
-                      >
-                        <div className="box-border flex gap-[10px] items-center px-[8px] py-0 relative rounded-[inherit]">
-                          <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#666666] whitespace-pre">{selectedSort}</p>
-                          <div className="relative shrink-0 size-[24px]">
-                            <svg className="block size-full" fill="none" viewBox="0 0 24 24">
-                              <path d="M7 10L12 15L17 10H7Z" fill="#18B3AB" />
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="absolute border border-[#cccccc] inset-0 pointer-events-none rounded-[4px]" />
-                      </div>
-                      {showSortDropdown && (
-                        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-[4px] shadow-lg z-50 min-w-[140px]">
-                          {sortOptions.map((option) => (
-                            <button
-                              key={option}
-                              onClick={() => {
-                                setSelectedSort(option);
-                                setShowSortDropdown(false);
-                              }}
-                              className="w-full text-left px-3 py-2 font-['Poppins'] text-[12px] text-[#666666] hover:bg-[#18b3ab]/10 hover:text-[#18b3ab]"
-                            >
-                              {option}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Articles */}
-                {currentArticles.map((article, index) => (
-                  <motion.article
-                    key={article.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    className="group relative"
-                  >
-                    <div className="relative w-full rounded-[15px] border border-[lightgrey] hover:border-[#18b3ab]/40 transition-all duration-300 hover:shadow-lg overflow-hidden">
-                      {/* Mobile Layout */}
-                      <div className="flex flex-col lg:hidden">
-                        <div className="w-full h-[200px] sm:h-[240px]">
-                          <img
-                            src={article.image}
-                            alt={article.title}
-                            title={`${article.title} - Ayo Sehat Kemenkes`}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div className="p-4 sm:p-5 flex flex-col gap-2.5 sm:gap-3">
-                          <div className="flex gap-2.5 items-center flex-wrap">
-                            <p className="font-['Poppins'] text-[11px] sm:text-[12px] leading-[18px] text-[#18b3ab]">{article.lifecycleStage}</p>
-                            <div className="w-[4px] h-[4px] rounded-full bg-[#18b3ab] shrink-0" />
-                            <p className="font-['Poppins'] text-[11px] sm:text-[12px] leading-[18px] text-[#18b3ab]">{article.category}</p>
-                          </div>
-                          <div className="font-['Poppins'] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[28px] text-neutral-600">
-                            <button className="text-left hover:text-[#18b3ab] hover:underline transition-all duration-200 line-clamp-2">{article.title}</button>
-                          </div>
-                          <p className="font-['Poppins'] text-[13px] sm:text-[14px] leading-[22px] sm:leading-[24px] text-neutral-600 line-clamp-2">{article.excerpt}</p>
-                          <div className="flex gap-2.5 sm:gap-3 items-center flex-wrap">
-                            <p className="font-['Poppins'] text-[11px] sm:text-[12px] leading-[18px] text-[dimgrey]">{article.date}</p>
-                            <div className="w-[3px] h-[3px] rounded-full bg-[dimgrey]" />
-                            <p className="font-['Poppins'] text-[11px] sm:text-[12px] leading-[18px] text-[dimgrey]">{article.views} views</p>
-                            <div className="w-[3px] h-[3px] rounded-full bg-[dimgrey]" />
-                            <p className="font-['Poppins'] text-[11px] sm:text-[12px] leading-[18px] text-[dimgrey]">{article.readTime} min</p>
-                          </div>
-                        </div>
+                {/* ARTIKEL - MOBILE LAYOUT */}
+                <div className="space-y-5">
+                  {currentArticles.map((article, index) => (
+                    <motion.article
+                      key={article.id}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
+                    >
+                      {/* GAMBAR */}
+                      <div className="h-[180px] xs:h-[200px] sm:h-[220px] overflow-hidden">
+                        <img
+                          src={article.image}
+                          alt={article.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
                       </div>
 
-                      {/* Desktop Layout */}
-                      <div className="hidden lg:block relative h-[192px]">
-                        <div className="absolute left-0 top-0 h-[192px] w-[349px] rounded-l-[15px] overflow-hidden">
-                          <img
-                            src={article.image}
-                            alt={article.title}
-                            title={`${article.title} - Ayo Sehat Kemenkes`}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                          />
+                      {/* KONTEN */}
+                      <div className="p-4 xs:p-5 space-y-3">
+                        <div className="flex items-center gap-2 text-[11px] xs:text-[12px] text-[#18b3ab] flex-wrap">
+                          <span>{article.lifecycleStage}</span>
+                          <span className="w-1 h-1 bg-[#18b3ab] rounded-full" />
+                          <span>{article.category}</span>
                         </div>
-                        <div className="absolute left-[383px] top-[22px] right-[20px] flex flex-col gap-[8px]">
-                          <div className="flex gap-[11px] items-center">
-                            <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#18b3ab] whitespace-nowrap">{article.lifecycleStage}</p>
-                            <div className="w-[4px] h-[4px] rounded-full bg-[#18b3ab] shrink-0" />
-                            <p className="font-['Poppins'] text-[12px] leading-[18px] text-[#18b3ab] whitespace-nowrap">{article.category}</p>
-                          </div>
-                          <div className="font-['Poppins'] text-[18px] sm:text-[20px] lg:text-[22px] leading-[30px] text-neutral-600">
-                            <button className="text-left hover:text-[#18b3ab] hover:underline transition-all duration-200 line-clamp-2">{article.title}</button>
-                          </div>
-                          <p className="font-['Poppins'] text-[14px] sm:text-[16px] lg:text-[18px] leading-[30px] text-neutral-600 line-clamp-1">{article.excerpt}</p>
-                          <div className="flex gap-[14px] items-center flex-wrap">
-                            <p className="font-['Poppins'] text-[12px] leading-[18px] text-[dimgrey]">{article.date}</p>
-                            <div className="w-[4px] h-[4px] rounded-[2px] bg-[dimgrey]" />
-                            <p className="font-['Poppins'] text-[12px] leading-[18px] text-[dimgrey]">Dilihat {article.views} Kali</p>
-                            <div className="w-[4px] h-[4px] rounded-[2px] bg-[dimgrey]" />
-                            <p className="font-['Poppins'] text-[12px] leading-[18px] text-[dimgrey]">Waktu Baca {article.readTime} Menit</p>
-                          </div>
+
+                        <h3 className="text-[15px] xs:text-[16px] sm:text-[17px] font-semibold text-gray-800 line-clamp-2 leading-tight">
+                          {article.title}
+                        </h3>
+
+                        <p className="text-[13px] xs:text-[14px] text-gray-600 line-clamp-2 leading-relaxed">
+                          {article.excerpt}
+                        </p>
+
+                        <div className="flex items-center gap-3 text-[11px] text-gray-500 flex-wrap">
+                          <span>{article.date}</span>
+                          <span>•</span>
+                          <span>{article.views} views</span>
+                          <span>•</span>
+                          <span>{article.readTime} min</span>
                         </div>
                       </div>
-                    </div>
-                  </motion.article>
-                ))}
+                    </motion.article>
+                  ))}
+                </div>
 
-                {/* Pagination */}
-                <div className="flex items-center justify-center gap-2 pt-8">
+                {/* PAGINATION */}
+                <div className="flex items-center justify-center gap-2 pt-6 flex-wrap">
                   <button
                     onClick={() => paginate(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="p-2 rounded-lg border border-gray-300 hover:border-[#18b3ab] hover:bg-[#18b3ab]/5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2.5 rounded-lg border border-gray-300 hover:border-[#18b3ab] disabled:opacity-50"
                   >
-                    <ChevronLeft className="w-5 h-5 text-gray-600" />
+                    <ChevronLeft className="w-4 h-4" />
                   </button>
-
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
                     <button
-                      key={number}
-                      onClick={() => paginate(number)}
-                      className={`px-4 py-2 rounded-lg font-['Poppins'] text-[14px] transition-all duration-200 ${
-                        currentPage === number ? "bg-[#18b3ab] text-white" : "border border-gray-300 text-gray-700 hover:border-[#18b3ab] hover:bg-[#18b3ab]/5"
+                      key={n}
+                      onClick={() => paginate(n)}
+                      className={`px-3.5 py-2 rounded-lg text-[13px] font-medium transition-all ${
+                        currentPage === n ? "bg-[#18b3ab] text-white" : "border border-gray-300 hover:border-[#18b3ab]"
                       }`}
                     >
-                      {number}
+                      {n}
                     </button>
                   ))}
-
                   <button
                     onClick={() => paginate(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="p-2 rounded-lg border border-gray-300 hover:border-[#18b3ab] hover:bg-[#18b3ab]/5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2.5 rounded-lg border border-gray-300 hover:border-[#18b3ab] disabled:opacity-50"
                   >
-                    <ChevronRight className="w-5 h-5 text-gray-600" />
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
-              {/* ===== KANAN: SIDEBAR STICKY ===== */}
+              {/* KANAN: SIDEBAR */}
               <div className="lg:sticky lg:top-6 lg:self-start">
                 <RightSidebar showCalendar={true} showCampaigns={true} showPublications={true} />
               </div>
